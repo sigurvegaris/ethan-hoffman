@@ -2,20 +2,16 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['img.youtube.com', 'i.ytimg.com'],
-  },
-  async headers() {
-    return [
+    remotePatterns: [
       {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
-          },
-        ],
+        protocol: 'https',
+        hostname: 'img.youtube.com',
       },
-    ]
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+      },
+    ],
   },
 }
 
