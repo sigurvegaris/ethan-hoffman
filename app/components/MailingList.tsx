@@ -75,8 +75,7 @@ export default function MailingList() {
                 </p>
               </div>
             ) : (
-              <div style={{ display: 'flex', gap: '0', flexDirection: 'column' as const, gap: '1rem' } as React.CSSProperties}>
-                <div style={{ display: 'flex', gap: '0' }}>
+<div style={{ display: 'flex', flexDirection: 'column' as const, gap: '1rem' }}>                <div style={{ display: 'flex', gap: '0' }}>
                   <input
                     type="email"
                     placeholder="Your email address"
