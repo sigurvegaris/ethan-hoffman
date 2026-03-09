@@ -6,12 +6,12 @@ const services = [
     id: 'weddings',
     label: 'Weddings',
     headline: 'The Soundtrack to Your Most Important Day',
-    description: `Your wedding deserves music that feels as personal as the moment itself. Ethan brings a warm, soulful energy to every part of your celebration — from the ceremony to the last dance. He works closely with each couple to understand the vibe, the story, and the songs that matter most, then delivers a performance that feels completely tailored to you.`,
+    description: `Your wedding deserves music that feels as personal as the moment itself. Ethan brings a warm, soulful energy to every part of your celebration, from the ceremony to the last dance. He works closely with each couple to understand the vibe, the story, and the songs that matter most, then delivers a performance that feels completely tailored to you.`,
     details: [
-      'Wedding ceremonies & processionals',
-      'Cocktail hour & reception',
+      'Wedding ceremonies and processionals',
+      'Cocktail hour and reception',
       'Custom song arrangements',
-      'Background & interactive sets',
+      'Background and interactive sets',
       'Full sound system included',
     ],
     photo: 'Ethan performing at elegant wedding reception',
@@ -19,14 +19,14 @@ const services = [
   {
     id: 'private',
     label: 'Private Events',
-    headline: 'Elevate Any Gathering With Live Music',
-    description: `Whether it's an intimate dinner party, a milestone birthday, or a luxury celebration, Ethan has a rare ability to read a room and match the energy exactly where it needs to be. His improv-heavy style means no two performances are ever the same — and your guests will feel that.`,
+    headline: 'Elevate Your Private Event with Live Music',
+    description: `Whether it's an intimate dinner party, a milestone birthday, or an upscale celebration, Ethan is highly skilled at reading a room and shaping the musical flow to fit the moment perfectly. With an extensive repertoire of well-known cover songs and the ability to create custom pieces on the spot, every performance feels fresh and connected to the occasion.`,
     details: [
-      'Birthday & anniversary parties',
-      'Holiday & seasonal events',
-      'Dinner parties & galas',
-      'Multi-millionaire & luxury events',
-      'Flexible set lengths & styles',
+      'Birthday and anniversary parties',
+      'Holiday and seasonal events',
+      'Dinner parties and galas',
+      'Exclusive and high-end private events',
+      'Flexible set lengths and styles',
     ],
     photo: 'Ethan performing at intimate private party',
   },
@@ -36,11 +36,11 @@ const services = [
     headline: 'Professional Entertainment That Leaves an Impression',
     description: `Ethan has performed for major brands, fundraisers, and corporate functions across Los Angeles. He brings professionalism, polish, and a crowd-connecting energy that transforms a standard corporate event into something people actually talk about afterward.`,
     details: [
-      'Corporate functions & galas',
-      'Brand activations & launches',
-      'Fundraisers & charity events',
-      'University & institutional events',
-      'Networking & cocktail receptions',
+      'Corporate functions and galas',
+      'Brand activations and launches',
+      'Fundraisers and charity events',
+      'University and institutional events',
+      'Networking and cocktail receptions',
     ],
     photo: 'Ethan performing at corporate event',
   },
@@ -48,12 +48,12 @@ const services = [
     id: 'originals',
     label: 'Original Music',
     headline: 'Music Written From Real Life',
-    description: `Beyond covers and events, Ethan is a recording artist with original music on Spotify and all major streaming platforms. His songs pull from real experiences — California living, traveling abroad with nothing but a guitar, the tension between chasing a dream and staying grounded. Soulful, honest, and deeply personal.`,
+    description: `Beyond covers and events, Ethan is a recording artist with original music on Spotify and all major streaming platforms. His songs pull from real experiences: California living, traveling abroad with nothing but a guitar, the tension between chasing a dream and staying grounded. Soulful, honest, and deeply personal.`,
     details: [
-      'Original singles on Spotify',
-      'Songwriter & co-writing sessions',
-      'Sync & licensing opportunities',
-      '70s & 80s-inspired soul sound',
+      'Original singles on Spotify and Apple Music',
+      'Songwriter and co-writing sessions',
+      'Sync and licensing opportunities',
+      '70s and 80s inspired soul sound',
       'Live original music sets',
     ],
     photo: 'Ethan in studio or intimate original performance',
@@ -91,6 +91,7 @@ export default function Services() {
           gap: '0',
           marginBottom: '4rem',
           borderBottom: '1px solid rgba(196,168,130,0.4)',
+          flexWrap: 'wrap',
         }}>
           {services.map((s, i) => (
             <button
@@ -196,17 +197,6 @@ export default function Services() {
 
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .services-grid {
-            grid-template-columns: 1fr !important;
-          }
-          .services-tabs {
-            flex-wrap: wrap;
-          }
-        }
-      `}</style>
     </section>
   )
 }

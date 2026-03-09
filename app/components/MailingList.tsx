@@ -52,7 +52,7 @@ export default function MailingList() {
               color: 'rgba(253,250,245,0.8)',
               lineHeight: '1.8',
             }}>
-              Get new releases, show announcements, and exclusive updates delivered straight to your inbox. No spam — just music.
+              Receive Ethan's new releases, show announcements, and exclusive updates straight to your inbox.
             </p>
           </div>
 

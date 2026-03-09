@@ -216,3 +216,164 @@ img {
     font-size: 2.5rem !important;
   }
 }
+
+/* ========== MOBILE RESPONSIVENESS ========== */
+
+@media (max-width: 1024px) {
+  /* Services and about grids */
+  div[style*="1fr 1.4fr"],
+  div[style*="1.4fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 3rem !important;
+  }
+
+  /* 4 column grids become 2 */
+  div[style*="repeat(4, 1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* About page grid */
+  div[style*="1fr 1.4fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+
+  section {
+    padding: 3rem 0 !important;
+  }
+
+  .container {
+    padding: 0 1.25rem !important;
+  }
+
+  /* All 2-column grids go single */
+  div[style*="grid-template-columns: 1fr 1fr"],
+  div[style*="gridTemplateColumns: '1fr 1fr'"] {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  /* All 3-column grids become 1 */
+  div[style*="repeat(3, 1fr)"] {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  /* All 4-column grids become 1 */
+  div[style*="repeat(4, 1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+
+  /* 6-column grid */
+  div[style*="repeat(6, 1fr)"] {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  /* Hero buttons */
+  div[style*="justifyContent: 'center'"],
+  div[style*="justify-content: center"] {
+    flex-wrap: wrap !important;
+  }
+
+  /* Shows grid */
+  div[style*="grid-template-columns: auto 1fr auto"] {
+    grid-template-columns: 1fr !important;
+    text-align: center !important;
+    gap: 1rem !important;
+  }
+
+  /* Contact form grids */
+  div[style*="1fr 1.4fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  /* Mailing list */
+  div[style*="1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Footer grid */
+  div[style*="repeat(3, 1fr)"] {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  /* Page headers */
+  div[style*="padding: '8rem 0 5rem'"] {
+    padding: 6rem 0 3rem !important;
+  }
+
+  /* Testimonials grid */
+  div[style*="repeat(2, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Services tabs wrap */
+  div[style*="borderBottom: '1px solid rgba(196,168,130,0.4)'"] {
+    overflow-x: auto !important;
+    justify-content: flex-start !important;
+  }
+
+  /* About page two column */
+  div[style*="1fr 1.4fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Mailing list input row */
+  div[style*="display: flex; gap: '0'"] {
+    flex-direction: column !important;
+  }
+
+  .btn-primary, .btn-outline {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 8vw, 3rem) !important;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .container {
+    padding: 0 1rem !important;
+  }
+
+  /* All grids go single column */
+  div[style*="repeat(2, 1fr)"],
+  div[style*="repeat(3, 1fr)"],
+  div[style*="repeat(4, 1fr)"],
+  div[style*="repeat(6, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Stat numbers smaller */
+  div[style*="clamp(2rem, 4vw, 3rem)"] {
+    font-size: 1.8rem !important;
+  }
+
+  /* Contact form full width inputs */
+  div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Navbar logo smaller */
+  a[style*="1.4rem"] {
+    font-size: 1.1rem !important;
+  }
+
+  /* Hero section */
+  section[style*="100vh"] {
+    min-height: 600px !important;
+  }
+
+  .btn-primary, .btn-outline {
+    padding: 0.85rem 1.5rem !important;
+    font-size: 0.75rem !important;
+  }
+}

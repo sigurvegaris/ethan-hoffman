@@ -26,7 +26,7 @@ Event Date: ${formData.date}
 Message:
 ${formData.message}`
 
-    window.location.href = `mailto:ethanhoffmanofficial@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+window.location.href = `mailto:Booking@EthanHoffmanOfficial.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
   }
 
   return (
@@ -56,7 +56,7 @@ ${formData.message}`
             margin: '0 auto',
             lineHeight: '1.8',
           }}>
-            Ethan is known for being reliable, punctual, and deeply curated to every event he performs at. He consistently exceeds expectations — and you can expect a response within 24 hours.
+            Ethan is known for being reliable, punctual, and deeply curated to every event he performs at. You can expect a response from his team or himself within 24 hours.
           </p>
         </div>
 
@@ -71,7 +71,7 @@ ${formData.message}`
           <div>
             <div style={{ marginBottom: '3rem' }}>
               {[
-                { label: 'Email', value: 'ethanhoffmanofficial@gmail.com', icon: '✉', link: 'mailto:ethanhoffmanofficial@gmail.com' },
+                { label: 'Email', value: 'Booking@EthanHoffmanOfficial.com', icon: '✉', link: 'mailto:Booking@EthanHoffmanOfficial.com' },
                 { label: 'Location', value: 'Los Angeles, CA', icon: '◎' },
                 { label: 'Response Time', value: 'Within 24 hours', icon: '◷' },
                 { label: 'Google Business', value: 'Ethan Hoffman Music', icon: '★', link: 'https://share.google/uLKpnc1llmBCJJqVu' },
