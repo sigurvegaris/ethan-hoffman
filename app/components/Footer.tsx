@@ -36,153 +36,172 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer style={{
-      backgroundColor: '#1a1814',
-      padding: '4rem 0 2rem',
-      borderTop: '1px solid rgba(196,168,130,0.15)',
-    }}>
-      <div className="container">
+    <>
+      <style>{`
+        .footer-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 3rem;
+          margin-bottom: 4rem;
+          padding-bottom: 3rem;
+          border-bottom: 1px solid rgba(196,168,130,0.15);
+        }
+        .footer-social {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 0.85rem;
+        }
+        @media (max-width: 768px) {
+          .footer-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
+          .footer-social {
+            flex-direction: row !important;
+            flex-wrap: wrap !important;
+          }
+        }
+      `}</style>
 
-        {/* Top Row */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr 1fr',
-          gap: '3rem',
-          marginBottom: '4rem',
-          paddingBottom: '3rem',
-          borderBottom: '1px solid rgba(196,168,130,0.15)',
-        }}>
+      <footer style={{
+        backgroundColor: '#1a1814',
+        padding: '4rem 0 2rem',
+        borderTop: '1px solid rgba(196,168,130,0.15)',
+      }}>
+        <div className="container">
 
-          {/* Brand */}
-          <div>
-            <p style={{
-              fontFamily: 'Playfair Display, serif',
-              fontSize: '1.4rem', fontWeight: '600',
-              color: '#fdfaf5', marginBottom: '0.75rem',
-            }}>Ethan Hoffman</p>
-            <p style={{
-              fontSize: '0.8rem', color: 'rgba(253,250,245,0.4)',
-              lineHeight: '1.7', marginBottom: '1.5rem',
-            }}>
-              Soulful live music for weddings,<br />
-              private events & corporate functions.<br />
-              Based in Los Angeles, CA.
-            </p>
+          <div className="footer-grid">
 
-            {/* Social Icons */}
-            <div style={{ display: 'flex', gap: '0.85rem', flexWrap: 'wrap' }}>
-              {socialLinks.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title={s.label}
-                  style={{
-                    width: '38px', height: '38px',
-                    border: '1px solid rgba(196,168,130,0.25)',
-                    borderRadius: '50%',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    color: 'rgba(253,250,245,0.45)',
-                    textDecoration: 'none',
-                    transition: 'all 0.3s ease',
-                    flexShrink: 0,
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.borderColor = '#c4622d'
-                    e.currentTarget.style.color = '#c4622d'
-                    e.currentTarget.style.backgroundColor = 'rgba(196,98,45,0.08)'
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.borderColor = 'rgba(196,168,130,0.25)'
-                    e.currentTarget.style.color = 'rgba(253,250,245,0.45)'
-                    e.currentTarget.style.backgroundColor = 'transparent'
-                  }}
-                  dangerouslySetInnerHTML={{ __html: s.icon }}
-                />
+            {/* Brand */}
+            <div>
+              <p style={{
+                fontFamily: 'Playfair Display, serif',
+                fontSize: '1.4rem', fontWeight: '600',
+                color: '#fdfaf5', marginBottom: '0.75rem',
+              }}>Ethan Hoffman</p>
+              <p style={{
+                fontSize: '0.8rem', color: 'rgba(253,250,245,0.4)',
+                lineHeight: '1.7', marginBottom: '1.5rem',
+              }}>
+                Soulful live music for weddings,<br />
+                private events & corporate functions.<br />
+                Based in Los Angeles, CA.
+              </p>
+              <div className="footer-social">
+                {socialLinks.map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={s.label}
+                    style={{
+                      width: '38px', height: '38px',
+                      border: '1px solid rgba(196,168,130,0.25)',
+                      borderRadius: '50%',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      color: 'rgba(253,250,245,0.45)',
+                      textDecoration: 'none',
+                      transition: 'all 0.3s ease',
+                      flexShrink: 0,
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.borderColor = '#c4622d'
+                      e.currentTarget.style.color = '#c4622d'
+                      e.currentTarget.style.backgroundColor = 'rgba(196,98,45,0.08)'
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.borderColor = 'rgba(196,168,130,0.25)'
+                      e.currentTarget.style.color = 'rgba(253,250,245,0.45)'
+                      e.currentTarget.style.backgroundColor = 'transparent'
+                    }}
+                    dangerouslySetInnerHTML={{ __html: s.icon }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <p style={{
+                fontSize: '0.65rem', fontWeight: '600',
+                letterSpacing: '0.2em', textTransform: 'uppercase',
+                color: '#c4622d', marginBottom: '1.2rem',
+              }}>Quick Links</p>
+              {[
+                { label: 'About', href: '/about' },
+                { label: 'Music', href: '/music' },
+                { label: 'Services', href: '/services' },
+                { label: 'Venues', href: '/venues' },
+                { label: 'Testimonials', href: '/testimonials' },
+                { label: 'Shows', href: '/shows' },
+                { label: 'Contact', href: '/contact' },
+              ].map((link) => (
+                <Link key={link.label} href={link.href} style={{
+                  display: 'block', fontSize: '0.85rem',
+                  color: 'rgba(253,250,245,0.5)',
+                  textDecoration: 'none', marginBottom: '0.6rem',
+                  transition: 'color 0.3s ease',
+                }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#fdfaf5')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.5)')}>
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+
+            {/* Contact Info */}
+            <div>
+              <p style={{
+                fontSize: '0.65rem', fontWeight: '600',
+                letterSpacing: '0.2em', textTransform: 'uppercase',
+                color: '#c4622d', marginBottom: '1.2rem',
+              }}>Contact</p>
+              {[
+                { label: 'Email', value: 'Booking@EthanHoffmanOfficial.com', url: 'mailto:Booking@EthanHoffmanOfficial.com' },
+                { label: 'Website', value: 'ethanhoffmanofficial.com', url: 'http://ethanhoffmanofficial.com' },
+                { label: 'Google Business', value: 'Ethan Hoffman Music', url: 'https://share.google/uLKpnc1llmBCJJqVu' },
+                { label: 'Location', value: 'Los Angeles, CA', url: null },
+              ].map((item, i) => (
+                <div key={i} style={{ marginBottom: '1rem' }}>
+                  <p style={{
+                    fontSize: '0.65rem', color: 'rgba(253,250,245,0.3)',
+                    letterSpacing: '0.1em', textTransform: 'uppercase',
+                    marginBottom: '0.2rem',
+                  }}>{item.label}</p>
+                  {item.url ? (
+                    <a href={item.url} target="_blank" rel="noopener noreferrer" style={{
+                      fontSize: '0.82rem', color: 'rgba(253,250,245,0.6)',
+                      textDecoration: 'none', transition: 'color 0.3s ease',
+                    }}
+                    onMouseEnter={e => (e.currentTarget.style.color = '#fdfaf5')}
+                    onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.6)')}>
+                      {item.value}
+                    </a>
+                  ) : (
+                    <p style={{ fontSize: '0.82rem', color: 'rgba(253,250,245,0.6)' }}>{item.value}</p>
+                  )}
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <p style={{
-              fontSize: '0.65rem', fontWeight: '600',
-              letterSpacing: '0.2em', textTransform: 'uppercase',
-              color: '#c4622d', marginBottom: '1.2rem',
-            }}>Quick Links</p>
-            {[
-              { label: 'About', href: '/about' },
-              { label: 'Music', href: '/music' },
-              { label: 'Services', href: '/services' },
-              { label: 'Venues', href: '/venues' },
-              { label: 'Testimonials', href: '/testimonials' },
-              { label: 'Shows', href: '/shows' },
-              { label: 'Contact', href: '/contact' },
-            ].map((link) => (
-              <Link key={link.label} href={link.href} style={{
-                display: 'block', fontSize: '0.85rem',
-                color: 'rgba(253,250,245,0.5)',
-                textDecoration: 'none', marginBottom: '0.6rem',
-                transition: 'color 0.3s ease',
-              }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#fdfaf5')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.5)')}>
-                {link.label}
-              </Link>
-            ))}
+          {/* Bottom Row */}
+          <div style={{
+            display: 'flex', justifyContent: 'space-between',
+            alignItems: 'center', flexWrap: 'wrap', gap: '1rem',
+          }}>
+            <p style={{ fontSize: '0.75rem', color: 'rgba(253,250,245,0.3)' }}>
+              © {new Date().getFullYear()} Ethan Hoffman. All rights reserved.
+            </p>
+            <p style={{ fontSize: '0.75rem', color: 'rgba(253,250,245,0.3)' }}>
+              Los Angeles, CA — Available Nationwide
+            </p>
           </div>
 
-          {/* Contact Info */}
-          <div>
-            <p style={{
-              fontSize: '0.65rem', fontWeight: '600',
-              letterSpacing: '0.2em', textTransform: 'uppercase',
-              color: '#c4622d', marginBottom: '1.2rem',
-            }}>Contact</p>
-            {[
-              { label: 'Email', value: 'Booking@EthanHoffmanOfficial.com', url: 'mailto:Booking@EthanHoffmanOfficial.com' },
-              { label: 'Website', value: 'ethanhoffmanofficial.com', url: 'http://ethanhoffmanofficial.com' },
-              { label: 'Google Business', value: 'Ethan Hoffman Music', url: 'https://share.google/uLKpnc1llmBCJJqVu' },
-              { label: 'Location', value: 'Los Angeles, CA', url: null },
-            ].map((item, i) => (
-              <div key={i} style={{ marginBottom: '1rem' }}>
-                <p style={{
-                  fontSize: '0.65rem', color: 'rgba(253,250,245,0.3)',
-                  letterSpacing: '0.1em', textTransform: 'uppercase',
-                  marginBottom: '0.2rem',
-                }}>{item.label}</p>
-                {item.url ? (
-                  <a href={item.url} target="_blank" rel="noopener noreferrer" style={{
-                    fontSize: '0.82rem', color: 'rgba(253,250,245,0.6)',
-                    textDecoration: 'none', transition: 'color 0.3s ease',
-                  }}
-                  onMouseEnter={e => (e.currentTarget.style.color = '#fdfaf5')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.6)')}>
-                    {item.value}
-                  </a>
-                ) : (
-                  <p style={{ fontSize: '0.82rem', color: 'rgba(253,250,245,0.6)' }}>{item.value}</p>
-                )}
-              </div>
-            ))}
-          </div>
         </div>
-
-        {/* Bottom Row */}
-        <div style={{
-          display: 'flex', justifyContent: 'space-between',
-          alignItems: 'center', flexWrap: 'wrap', gap: '1rem',
-        }}>
-          <p style={{ fontSize: '0.75rem', color: 'rgba(253,250,245,0.3)' }}>
-            © {new Date().getFullYear()} Ethan Hoffman. All rights reserved.
-          </p>
-          <p style={{ fontSize: '0.75rem', color: 'rgba(253,250,245,0.3)' }}>
-            Los Angeles, CA — Available Nationwide
-          </p>
-        </div>
-
-      </div>
-    </footer>
+      </footer>
+    </>
   )
 }

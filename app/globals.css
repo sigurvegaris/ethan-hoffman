@@ -377,3 +377,36 @@ img {
     font-size: 0.75rem !important;
   }
 }
+
+/* Differentiators mobile */
+@media (max-width: 768px) {
+  .differentiators-row {
+    display: block !important;
+  }
+  .differentiators-row > div {
+    text-align: left !important;
+    padding-top: 0 !important;
+    margin-bottom: 2rem;
+  }
+  .differentiators-row > div p[style] {
+    text-align: left !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .differentiators-desktop { display: none !important; }
+  .differentiators-mobile { display: block !important; }
+}
+
+@media (max-width: 768px) {
+  .experience-section {
+    grid-template-columns: 1fr !important;
+  }
+  .experience-photo {
+    min-height: 350px !important;
+    order: -1;
+  }
+  .experience-text {
+    padding: 3rem 1.5rem !important;
+  }
+}

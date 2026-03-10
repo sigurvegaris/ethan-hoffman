@@ -90,60 +90,62 @@ export default function About() {
           </div>
         </div>
 
-        {/* ARTIST COMPARISONS TICKER */}
-        <div style={{
-          backgroundColor: '#1a1814',
-          padding: '5rem 0',
-          overflow: 'hidden',
-          position: 'relative',
+{/* ARTIST COMPARISONS TICKER */}
+<div style={{
+  backgroundColor: '#1a1814',
+  padding: '5rem 0',
+  overflow: 'hidden',
+  position: 'relative',
+}}>
+  <div style={{
+    position: 'absolute', top: 0, left: 0, bottom: 0, width: '150px',
+    background: 'linear-gradient(to right, #1a1814, transparent)',
+    zIndex: 2, pointerEvents: 'none',
+  }} />
+  <div style={{
+    position: 'absolute', top: 0, right: 0, bottom: 0, width: '150px',
+    background: 'linear-gradient(to left, #1a1814, transparent)',
+    zIndex: 2, pointerEvents: 'none',
+  }} />
+
+  <p style={{
+    textAlign: 'center',
+    fontSize: '0.65rem', fontWeight: '600',
+    letterSpacing: '0.3em', textTransform: 'uppercase',
+    color: '#c4622d', marginBottom: '2.5rem',
+  }}>Artists People Compare Him To</p>
+
+  <div style={{ overflow: 'hidden', width: '100%' }}>
+    <div ref={tickerRef} style={{
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'nowrap',
+      whiteSpace: 'nowrap',
+      willChange: 'transform',
+      width: 'max-content',
+    }}>
+      {[...comparisons, ...comparisons, ...comparisons, ...comparisons].map((name, i) => (
+        <div key={i} style={{
+          display: 'inline-flex',
+          flexShrink: 0,
+          alignItems: 'center',
+          gap: '1rem',
+          padding: '0 1.5rem',
         }}>
-          {/* Fade edges */}
-          <div style={{
-            position: 'absolute', top: 0, left: 0, bottom: 0, width: '200px',
-            background: 'linear-gradient(to right, #1a1814, transparent)',
-            zIndex: 2, pointerEvents: 'none',
-          }} />
-          <div style={{
-            position: 'absolute', top: 0, right: 0, bottom: 0, width: '200px',
-            background: 'linear-gradient(to left, #1a1814, transparent)',
-            zIndex: 2, pointerEvents: 'none',
-          }} />
-
-          <p style={{
-            textAlign: 'center',
-            fontSize: '0.65rem', fontWeight: '600',
-            letterSpacing: '0.3em', textTransform: 'uppercase',
-            color: '#c4622d', marginBottom: '2.5rem',
-          }}>Artists People Compare Him To</p>
-
-          <div style={{ overflow: 'hidden' }}>
-            <div ref={tickerRef} style={{
-              display: 'flex',
-              gap: '0',
-              whiteSpace: 'nowrap',
-              willChange: 'transform',
-            }}>
-              {[...comparisons, ...comparisons, ...comparisons, ...comparisons].map((name, i) => (
-                <div key={i} style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '1.5rem',
-                  padding: '0 2rem',
-                }}>
-                  <span style={{
-                    fontFamily: 'Playfair Display, serif',
-                    fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
-                    fontWeight: '400',
-                    color: i % 2 === 0 ? 'rgba(253,250,245,0.15)' : 'rgba(253,250,245,0.6)',
-                    fontStyle: i % 3 === 0 ? 'italic' : 'normal',
-                    transition: 'color 0.3s ease',
-                  }}>{name}</span>
-                  <span style={{ color: '#c4622d', fontSize: '0.6rem' }}>✦</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          <span style={{
+            fontFamily: 'Playfair Display, serif',
+            fontSize: 'clamp(1.2rem, 2.5vw, 2rem)',
+            fontWeight: '400',
+            color: i % 2 === 0 ? 'rgba(253,250,245,0.15)' : 'rgba(253,250,245,0.6)',
+            fontStyle: i % 3 === 0 ? 'italic' : 'normal',
+            whiteSpace: 'nowrap',
+          }}>{name}</span>
+          <span style={{ color: '#c4622d', fontSize: '0.5rem', flexShrink: 0 }}>✦</span>
         </div>
+      ))}
+    </div>
+  </div>
+</div>
 
         {/* STATS — Full Bleed Cinematic */}
         <div style={{
