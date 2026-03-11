@@ -2,7 +2,6 @@
 import { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import Link from 'next/link'
 
 const services = [
   {
@@ -17,7 +16,8 @@ const services = [
       'Background and interactive sets',
       'Full sound system included',
     ],
-    photo: 'Ethan performing at elegant wedding reception',
+    photo: '/images/ethanwithguitar.png',
+    objectPosition: 'center bottom',
   },
   {
     id: 'private',
@@ -31,7 +31,8 @@ const services = [
       'Exclusive and high-end private events',
       'Flexible set lengths and styles',
     ],
-    photo: 'Ethan performing at intimate private party',
+    photo: '/images/ethanthreeguys.png',
+    objectPosition: 'center top',
   },
   {
     id: 'corporate',
@@ -45,7 +46,8 @@ const services = [
       'University and institutional events',
       'Networking and cocktail receptions',
     ],
-    photo: 'Ethan performing at corporate event',
+    photo: '/images/ethanwithcrowd.png',
+    objectPosition: 'center top',
   },
   {
     id: 'originals',
@@ -59,7 +61,8 @@ const services = [
       '70s and 80s inspired soul sound',
       'Live original music sets',
     ],
-    photo: 'Ethan in studio or intimate original performance',
+    photo: '/images/ethansoloshot.png',
+    objectPosition: 'center top',
   },
 ]
 
@@ -71,22 +74,14 @@ export default function Services() {
       <Navbar />
       <main style={{ backgroundColor: '#f5f0e8', minHeight: '100vh' }}>
 
-        {/* Header */}
-        <div style={{ backgroundColor: '#1a1814', padding: '8rem 0 5rem' }}>
+        <div style={{ backgroundColor: '#f5f0e8', padding: '8rem 0 5rem' }}>
           <div className="container">
-            <p style={{
-              fontSize: '0.7rem', fontWeight: '600', letterSpacing: '0.3em',
-              textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem',
-            }}>What Ethan Offers</p>
-            <h1 style={{
-              fontFamily: 'Playfair Display, serif',
-              fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-              fontWeight: '600', color: '#fdfaf5', lineHeight: '1.1',
-            }}>Every Event, Elevated</h1>
+            <p style={{ fontSize: '0.7rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem' }}>What Ethan Offers</p>
+            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: '600', color: '#1a1814', lineHeight: '1.1' }}>Every Event, Elevated</h1>
           </div>
         </div>
 
-        <div className="container" style={{ padding: '5rem 2rem' }}>
+        <div className="container" style={{ padding: '0 2rem 6rem' }}>
 
           {/* Tabs */}
           <div style={{
@@ -117,44 +112,45 @@ export default function Services() {
             gap: '5rem', alignItems: 'center',
           }}>
             <div>
-              <h2 style={{
+              <h3 style={{
                 fontFamily: 'Playfair Display, serif',
                 fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
                 fontWeight: '600', color: '#1a1814',
                 lineHeight: '1.3', marginBottom: '1.5rem',
-              }}>{services[active].headline}</h2>
+              }}>{services[active].headline}</h3>
+
               <p style={{
                 fontSize: '1rem', lineHeight: '1.85',
                 color: '#6b6460', marginBottom: '2rem',
               }}>{services[active].description}</p>
+
               <div style={{ marginBottom: '2.5rem' }}>
                 {services[active].details.map((d, i) => (
-                  <div key={i} style={{
-                    display: 'flex', alignItems: 'center',
-                    gap: '0.75rem', marginBottom: '0.75rem',
-                  }}>
-                    <div style={{
-                      width: '6px', height: '6px', borderRadius: '50%',
-                      backgroundColor: '#c4622d', flexShrink: 0,
-                    }} />
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                    <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#c4622d', flexShrink: 0 }} />
                     <p style={{ fontSize: '0.9rem', color: '#2d2926' }}>{d}</p>
                   </div>
                 ))}
               </div>
-              <Link href="/contact" className="btn-primary">Book Ethan</Link>
+
+              <a href="/contact" className="btn-primary">Book Ethan</a>
             </div>
 
-            <div style={{
-              aspectRatio: '4/3', backgroundColor: '#2d2926',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              flexDirection: 'column', gap: '0.75rem', padding: '2rem',
-            }}>
-              <p style={{ color: 'rgba(253,250,245,0.2)', fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase' }}>Photo Placeholder</p>
-              <p style={{ color: 'rgba(253,250,245,0.4)', fontSize: '0.85rem', textAlign: 'center' }}>{services[active].photo}</p>
+            <div style={{ aspectRatio: '4/3', overflow: 'hidden' }}>
+              <img
+                src={services[active].photo}
+                alt={services[active].label}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: services[active].objectPosition,
+                  transition: 'opacity 0.4s ease',
+                }}
+              />
             </div>
           </div>
         </div>
-
       </main>
       <Footer />
     </>

@@ -1,3 +1,5 @@
+'use client'
+
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
@@ -31,19 +33,19 @@ const venues = [
 ]
 
 const featuredVenues = [
-  { name: 'The Wiltern Theatre', note: 'Logo PNG' },
-  { name: 'The Shade Hotel', note: 'Logo PNG' },
-  { name: 'The Mint', note: 'Logo PNG' },
-  { name: 'The Comedy Store', note: 'Logo PNG' },
-  { name: 'The Hollywood Improv', note: 'Logo PNG' },
-  { name: 'Torrance Memorial', note: 'Logo PNG' },
-  { name: 'USC', note: 'Logo PNG' },
-  { name: 'Thomson by Hyatt', note: 'Logo PNG' },
-  { name: 'Hilton', note: 'Logo PNG' },
-  { name: 'Marriott', note: 'Logo PNG' },
-  { name: 'The Lighthouse Cafe', note: 'Logo PNG' },
-  { name: 'Tower 12', note: 'Logo PNG' },
-]
+    { name: 'The Wiltern Theatre', logo: '/images/wilternlogo.png', color: true },
+    { name: 'The Shade Hotel', logo: null, color: false },
+    { name: 'The Mint', logo: '/images/themintlogo.png', color: true },
+    { name: 'The Comedy Store', logo: '/images/comedystorelogo.png', color: false },
+    { name: 'The Hollywood Improv', logo: '/images/hollywoodimprovlogo.png', color: true },
+    { name: 'Torrance Memorial', logo: '/images/torrancememoriallogo.png', color: false },
+    { name: 'USC', logo: '/images/usclogo.png', color: false },
+    { name: 'Thomson by Hyatt', logo: '/images/hyattlogo.png', color: false },
+    { name: 'Hilton', logo: '/images/hiltonlogo.png', color: false },
+    { name: 'Marriott', logo: '/images/marriotlogo.png', color: false },
+    { name: 'The Lighthouse Cafe', logo: '/images/lighthousecafelogo.png', color: true },
+    { name: 'Tower 12', logo: '/images/tower12logo.png', color: false },
+  ]
 
 export default function Venues() {
   return (
@@ -90,23 +92,35 @@ export default function Venues() {
             {featuredVenues.map((venue, i) => (
               <div key={i} style={{
                 backgroundColor: '#2d2926',
-                padding: '2.5rem 1rem',
+                padding: '2.5rem 1.5rem',
                 display: 'flex', flexDirection: 'column',
                 alignItems: 'center', justifyContent: 'center',
-                gap: '0.5rem', minHeight: '120px',
+                minHeight: '120px',
                 transition: 'background-color 0.3s ease',
               }}>
-                <p style={{
-                  color: 'rgba(253,250,245,0.7)',
-                  fontSize: '0.85rem', fontWeight: '500',
-                  textAlign: 'center',
-                  fontFamily: 'Playfair Display, serif',
-                }}>{venue.name}</p>
-                <p style={{
-                  color: 'rgba(196,98,45,0.6)',
-                  fontSize: '0.6rem', letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                }}>{venue.note}</p>
+                {venue.logo ? (
+                  <img
+                    src={venue.logo}
+                    alt={venue.name}
+                    style={{
+                        maxHeight: '65px',
+                        maxWidth: '100%',
+                        objectFit: 'contain',
+                        filter: venue.color ? 'none' : 'brightness(0) invert(1)',
+                        opacity: 0.75,
+                        transition: 'opacity 0.3s ease',
+                      }}
+                    onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
+                    onMouseLeave={e => (e.currentTarget.style.opacity = '0.55')}
+                  />
+                ) : (
+                  <p style={{
+                    color: 'rgba(253,250,245,0.7)',
+                    fontSize: '0.85rem', fontWeight: '500',
+                    textAlign: 'center',
+                    fontFamily: 'Playfair Display, serif',
+                  }}>{venue.name}</p>
+                )}
               </div>
             ))}
           </div>

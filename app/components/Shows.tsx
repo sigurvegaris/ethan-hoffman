@@ -1,174 +1,75 @@
 'use client'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
 export default function Shows() {
-  const shows = [
-    {
-      date: 'FEB 22',
-      day: 'Sunday',
-      title: 'Live in Hollywood',
-      venue: 'Hollywood, CA',
-      time: '8:15 PM',
-      set: '30-Minute Set',
-      tickets: '#contact',
-    },
-    {
-      date: 'FEB 24',
-      day: 'Tuesday',
-      title: 'Full Original Set, Redondo Beach',
-      venue: 'Redondo Beach, CA',
-      time: 'TBA',
-      set: '90-Minute Original Set',
-      tickets: '#contact',
-    },
-  ]
-
   return (
-    <section id="shows" style={{
-      backgroundColor: '#1a1814',
-      padding: '7rem 0',
-    }}>
-      <div className="container">
+    <>
+      <Navbar />
+      <main style={{ backgroundColor: '#1a1814', minHeight: '100vh' }}>
 
-        {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <p className="section-label" style={{ marginBottom: '1rem' }}>Catch Him Live</p>
-          <h2 style={{
-            fontFamily: 'Playfair Display, serif',
-            fontSize: 'clamp(2rem, 3.5vw, 2.8rem)',
-            fontWeight: '600',
-            color: '#fdfaf5',
-            lineHeight: '1.2',
-            marginBottom: '1rem',
-          }}>
-            Upcoming Shows
-          </h2>
-          <p style={{
-            fontSize: '0.9rem',
-            color: 'rgba(253,250,245,0.5)',
-            maxWidth: '500px',
-            margin: '0 auto',
-          }}>
-            Come and experience it live. No recording can truly capture the depth and energy of Ethan's musicality in the moment.
-          </p>
+        <div style={{ backgroundColor: '#1a1814', padding: '8rem 0 5rem' }}>
+          <div className="container">
+            <p style={{ fontSize: '0.7rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem' }}>Catch Him Live</p>
+            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: '600', color: '#fdfaf5', lineHeight: '1.1' }}>Upcoming Shows</h1>
+          </div>
         </div>
 
-        {/* Shows List */}
-        <div style={{
-          maxWidth: '800px',
-          margin: '0 auto',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1px',
-          backgroundColor: 'rgba(196,168,130,0.15)',
-          border: '1px solid rgba(196,168,130,0.15)',
-          marginBottom: '4rem',
-        }}>
-          {shows.map((show, i) => (
-            <div key={i} style={{
-              backgroundColor: '#1a1814',
-              padding: '2rem 2.5rem',
-              display: 'grid',
-              gridTemplateColumns: 'auto 1fr auto',
-              gap: '2rem',
-              alignItems: 'center',
-              transition: 'background-color 0.3s ease',
-            }}
-            onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#2d2926')}
-            onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#1a1814')}
-            >
-              {/* Date */}
-              <div style={{ textAlign: 'center', minWidth: '70px' }}>
-                <p style={{
-                  fontFamily: 'Playfair Display, serif',
-                  fontSize: '1.8rem',
-                  fontWeight: '600',
-                  color: '#c4622d',
-                  lineHeight: '1',
-                  marginBottom: '0.2rem',
-                }}>{show.date}</p>
-                <p style={{
-                  fontSize: '0.65rem',
-                  color: 'rgba(253,250,245,0.4)',
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                }}>{show.day}</p>
-              </div>
-
-              {/* Info */}
-              <div>
-                <p style={{
-                  fontFamily: 'Playfair Display, serif',
-                  fontSize: '1.1rem',
-                  color: '#fdfaf5',
-                  marginBottom: '0.4rem',
-                }}>{show.title}</p>
-                <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
-                  <p style={{
-                    fontSize: '0.75rem',
-                    color: 'rgba(253,250,245,0.5)',
-                    letterSpacing: '0.05em',
-                  }}>{show.venue}</p>
-                  <p style={{
-                    fontSize: '0.75rem',
-                    color: 'rgba(253,250,245,0.5)',
-                  }}>{show.time}</p>
-                  <p style={{
-                    fontSize: '0.75rem',
-                    color: '#c4622d',
-                    letterSpacing: '0.05em',
-                  }}>{show.set}</p>
-                </div>
-              </div>
-
-              {/* CTA */}
-              <a href={show.tickets} style={{
-                padding: '0.6rem 1.5rem',
-                border: '1px solid rgba(196,98,45,0.5)',
-                color: '#c4622d',
-                textDecoration: 'none',
-                fontSize: '0.7rem',
-                fontWeight: '600',
-                letterSpacing: '0.15em',
-                textTransform: 'uppercase',
+        <div className="container" style={{ padding: '0 2rem 8rem' }}>
+          <div style={{
+            maxWidth: '700px',
+            margin: '0 auto',
+            textAlign: 'center',
+            padding: '5rem 2rem',
+            border: '1px solid rgba(196,168,130,0.15)',
+          }}>
+            <p style={{
+              fontFamily: 'Playfair Display, serif',
+              fontSize: '1.5rem',
+              color: '#fdfaf5',
+              marginBottom: '1rem',
+            }}>No shows currently scheduled</p>
+            <p style={{
+              fontSize: '0.9rem',
+              color: 'rgba(253,250,245,0.4)',
+              lineHeight: '1.8',
+              marginBottom: '2.5rem',
+              maxWidth: '450px',
+              margin: '0 auto 2.5rem',
+            }}>
+              Follow Ethan on Instagram or TikTok to be the first to know about upcoming performances, or get in touch directly.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <a href="https://www.instagram.com/ethanbhoffman/" target="_blank" rel="noopener noreferrer" style={{
+                padding: '0.85rem 2rem',
+                border: '1px solid rgba(196,168,130,0.3)',
+                color: '#fdfaf5', textDecoration: 'none',
+                fontSize: '0.7rem', fontWeight: '600',
+                letterSpacing: '0.15em', textTransform: 'uppercase',
                 transition: 'all 0.3s ease',
-                whiteSpace: 'nowrap',
               }}
-              onMouseEnter={e => {
-                e.currentTarget.style.backgroundColor = '#c4622d'
-                e.currentTarget.style.color = '#fdfaf5'
+              onMouseEnter={e => { e.currentTarget.style.borderColor = '#c4622d'; e.currentTarget.style.color = '#c4622d' }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(196,168,130,0.3)'; e.currentTarget.style.color = '#fdfaf5' }}>
+                Follow on Instagram
+              </a>
+              <a href="/contact" style={{
+                padding: '0.85rem 2rem',
+                backgroundColor: '#c4622d',
+                color: '#fdfaf5', textDecoration: 'none',
+                fontSize: '0.7rem', fontWeight: '600',
+                letterSpacing: '0.15em', textTransform: 'uppercase',
+                transition: 'all 0.3s ease',
               }}
-              onMouseLeave={e => {
-                e.currentTarget.style.backgroundColor = 'transparent'
-                e.currentTarget.style.color = '#c4622d'
-              }}>
-                Get Info
+              onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#a8521f')}
+              onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#c4622d')}>
+                Get in Touch
               </a>
             </div>
-          ))}
+          </div>
         </div>
 
-        {/* Bands in Town Placeholder */}
-        <div style={{
-          maxWidth: '800px',
-          margin: '0 auto',
-          padding: '2rem',
-          border: '1px dashed rgba(196,168,130,0.3)',
-          textAlign: 'center',
-        }}>
-          <p style={{
-            fontSize: '0.65rem',
-            letterSpacing: '0.2em',
-            textTransform: 'uppercase',
-            color: 'rgba(253,250,245,0.3)',
-            marginBottom: '0.5rem',
-          }}>Coming Soon</p>
-          <p style={{
-            fontSize: '0.85rem',
-            color: 'rgba(253,250,245,0.4)',
-          }}>Bands in Town integration for ticket sales coming soon</p>
-        </div>
-
-      </div>
-    </section>
+      </main>
+      <Footer />
+    </>
   )
 }

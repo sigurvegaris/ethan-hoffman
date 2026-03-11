@@ -428,7 +428,7 @@ export default function Home() {
         <div style={{ aspectRatio: '4/3', overflow: 'hidden' }}>
           <img
             src={[
-              '/images/ethansingingblack.png',
+              '/images/ethanwithguitar.png',
               '/images/ethanthreeguys.png',
               '/images/ethanwithcrowd.png',
               '/images/ethansoloshot.png',
@@ -437,7 +437,7 @@ export default function Home() {
             style={{
               width: '100%', height: '100%',
               objectFit: 'cover',
-              objectPosition: 'center 50%',
+              objectPosition: 'center 0%',
               transition: 'opacity 0.4s ease',
             }}
           />
