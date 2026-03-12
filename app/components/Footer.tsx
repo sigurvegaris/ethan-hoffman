@@ -159,7 +159,7 @@ export default function Footer() {
                 color: '#c4622d', marginBottom: '1.2rem',
               }}>Contact</p>
               {[
-                { label: 'Email', value: 'Booking@EthanHoffmanOfficial.com', url: 'mailto:Booking@EthanHoffmanOfficial.com' },
+                { label: 'Email', value: 'booking@ethanhoffmanofficial.com', url: 'mailto:booking@ethanhoffmanofficial.com' },
                 { label: 'Website', value: 'ethanhoffmanofficial.com', url: 'http://ethanhoffmanofficial.com' },
                 { label: 'Google Business', value: 'Ethan Hoffman Music', url: 'https://share.google/uLKpnc1llmBCJJqVu' },
                 { label: 'Location', value: 'Los Angeles, CA', url: null },

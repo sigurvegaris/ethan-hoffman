@@ -53,7 +53,7 @@ const services = [
     id: 'originals',
     label: 'Original Music',
     headline: 'Music Written From Real Life',
-    description: `Beyond covers and events, Ethan is a recording artist with original music on Spotify and all major streaming platforms. His songs pull from real experiences: California living, traveling abroad with nothing but a guitar, the tension between chasing a dream and staying grounded. Soulful, honest, and deeply personal.`,
+    description: `Beyond covers and events, Ethan is a recording artist with original music on Spotify and all major streaming platforms. His songs pull from real experiences: California living, chasing stages across the world, the tension between dreaming big and staying grounded.`,
     details: [
       'Original singles on Spotify and Apple Music',
       'Songwriter and co-writing sessions',

@@ -26,7 +26,7 @@ Event Date: ${formData.date}
 Message:
 ${formData.message}`
 
-window.location.href = `mailto:Booking@EthanHoffmanOfficial.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+window.location.href = `mailto:booking@ethanhoffmanofficial.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
   }
 
   return (
@@ -71,7 +71,7 @@ window.location.href = `mailto:Booking@EthanHoffmanOfficial.com?subject=${encode
           <div>
             <div style={{ marginBottom: '3rem' }}>
               {[
-                { label: 'Email', value: 'Booking@EthanHoffmanOfficial.com', icon: '✉', link: 'mailto:Booking@EthanHoffmanOfficial.com' },
+                { label: 'Email', value: 'booking@ethanhoffmanofficial.com', icon: '✉', link: 'mailto:booking@ethanhoffmanofficial.com' },
                 { label: 'Location', value: 'Los Angeles, CA', icon: '◎' },
                 { label: 'Response Time', value: 'Within 24 hours', icon: '◷' },
                 { label: 'Google Business', value: 'Ethan Hoffman Music', icon: '★', link: 'https://share.google/uLKpnc1llmBCJJqVu' },
