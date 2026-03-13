@@ -115,23 +115,24 @@ export default function Shows() {
           `}</style>
 
           <div id="bit-widget-container">
-            <div
-              className="bit-widget-initializer"
-              data-artist-name="Ethan Hoffman"
-              data-display-local-dates="false"
-              data-display-past-dates="false"
-              data-auto-style="false"
-              data-text-color="#fdfaf5"
-              data-link-color="#c4622d"
-              data-background-color="transparent"
-              data-display-limit="10"
-              data-link-text-color="#ffffff"
-              data-language="en"
-              data-popup-background-color="#1a1814"
-              data-display-lineup="false"
-              data-display-start-time="false"
-              data-share-on-social-media="false"
-            />
+          <div
+  className="bit-widget-initializer"
+  data-artist-name="Ethan Hoffman"
+  data-artist-id="15553686"
+  data-display-local-dates="false"
+  data-display-past-dates="false"
+  data-auto-style="false"
+  data-text-color="#fdfaf5"
+  data-link-color="#c4622d"
+  data-background-color="transparent"
+  data-display-limit="10"
+  data-link-text-color="#ffffff"
+  data-language="en"
+  data-popup-background-color="#1a1814"
+  data-display-lineup="false"
+  data-display-start-time="false"
+  data-share-on-social-media="false"
+/>
           </div>
         </div>
 
@@ -244,6 +245,34 @@ export default function Shows() {
           </div>
         </div>
       </main>
+      {/* Fix Free button redirect */}
+      <Script
+  id="bit-fix"
+  strategy="afterInteractive"
+  dangerouslySetInnerHTML={{
+    __html: `
+      function fixFreeButtons() {
+        const allLinks = document.querySelectorAll('.bit-offers a, .bit-event a, #bit-widget-container a');
+        allLinks.forEach(function(link) {
+          const text = (link.innerText || link.textContent || '').trim().toLowerCase();
+          if (text === 'free' || text === 'free event' || link.className.includes('free')) {
+            link.removeAttribute('href');
+            link.onclick = function(e) {
+              e.preventDefault();
+              e.stopImmediatePropagation();
+              window.open('https://www.bandsintown.com/a/15553686-ethan-hoffman', '_blank');
+              return false;
+            };
+          }
+        });
+      }
+
+      setTimeout(fixFreeButtons, 1500);
+      setTimeout(fixFreeButtons, 3000);
+      setTimeout(fixFreeButtons, 5000);
+    `,
+  }}
+/>
 
       <Footer />
 

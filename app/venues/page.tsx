@@ -5,24 +5,24 @@ import Footer from '../components/Footer'
 
 const featuredVenues = [
   // Row 1 — highest profile
-  { name: 'Magnolia Theater', logo: '/images/themagnolialogo.png', color: true, size: 65 },
-  { name: 'The Shade Hotel', logo: '/images/shadelogo.png', color: true, size: 65 },
-  { name: 'Hollywood Improv', logo: '/images/hollywoodimprovlogo.png', color: true, size: 65 },
   { name: 'The Wiltern', logo: '/images/thewilternlogo.png', color: true, size: 65 },
+  { name: 'Hollywood Improv', logo: '/images/hollywoodimprovlogo.png', color: true, size: 65 },
+  { name: 'Magnolia Theater', logo: '/images/themagnolialogo.png', color: true, size: 65 },
+  { name: 'The Comedy Store', logo: '/images/thecomedystorelogo.png', color: true, size: 65 },
   // Row 2
-  { name: 'The Comedy Store', logo: '/images/comedystorelogo.png', color: true, size: 65 },
-  { name: 'Marriott', logo: '/images/marriotlogo.png', color: true, size: 65 },
   { name: 'Hilton', logo: '/images/hiltonlogo.png', color: true, size: 65 },
-  { name: 'Hyatt', logo: '/images/hyattlogo.png', color: true, size: 65 },
+  { name: 'Marriott', logo: '/images/marriotlogo.png', color: false, size: 65 },
+  { name: 'The Shade Hotel', logo: '/images/shadelogo.png', color: false, size: 65 },
+  { name: 'Hyatt', logo: '/images/hyattlogo.png', color: false, size: 65 },
   // Row 3
+  { name: 'The Mint', logo: '/images/themintlogo.png', color: false, size: 150 },
   { name: 'The Lighthouse Cafe', logo: '/images/lighthousecafelogo.png', color: true, size: 100 },
-  { name: 'Tower 12', logo: '/images/tower12logo.png', color: true, size: 100 },
-  { name: 'Torrance Memorial', logo: '/images/torrancememoriallogo.png', color: true, size: 110 },
-  { name: 'USC', logo: '/images/usclogo.png', color: true, size: 90 },
+  { name: 'Torrance Memorial', logo: '/images/torrancememoriallogo.png', color: false, size: 110 },
+  { name: 'USC', logo: '/images/usclogo.png', color: false, size: 90 },
 ]
 
 const otherVenues = [
-  'The Mint, Hollywood',
+  'Tower 12',
   'Belle Epoque, Redondo Beach',
   'Jamaica Bay Inn, Marina Del Rey',
   'Renaissance LAX Hotel',
@@ -52,7 +52,7 @@ function VenueTile({ venue }: { venue: { name: string; logo: string | null; colo
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        minHeight: '140px',
+        height: '160px',
         position: 'relative',
         overflow: 'hidden',
         transition: 'background-color 0.3s ease',
@@ -144,8 +144,10 @@ export default function Venues() {
         <div className="container" style={{ padding: '5rem 2rem' }}>
 
           {/* Featured Logo Grid */}
-          <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '2rem', textAlign: 'center' }}>Featured Venues</p>
-
+          <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.75rem', textAlign: 'center' }}>Featured Venues</p>
+<p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '1rem', fontStyle: 'italic', color: 'rgba(253,250,245,0.35)', textAlign: 'center', marginBottom: '2rem' }}>
+  Notable stages and events where Ethan has performed across Los Angeles and beyond.
+</p>
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(4, 1fr)',
@@ -161,7 +163,10 @@ export default function Venues() {
 
           {/* Other Venues */}
           <div style={{ borderTop: '1px solid rgba(196,168,130,0.2)', paddingTop: '3rem' }}>
-            <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '2rem', textAlign: 'center' }}>More Venues</p>
+            <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.75rem', textAlign: 'center' }}>More Venues</p>
+            <p style={{ fontSize: '0.8rem', color: 'rgba(253,250,245,0.35)', textAlign: 'center', marginBottom: '2rem', fontStyle: 'italic', fontFamily: 'Cormorant Garamond, serif', fontSize: '1rem' }}>
+              A selection of notable venues where Ethan has performed — many as recurring bookings.
+            </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' }}>
               {otherVenues.map((venue, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -170,6 +175,16 @@ export default function Venues() {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* CTA */}
+          <div style={{ textAlign: 'center', marginTop: '4rem', paddingTop: '3rem', borderTop: '1px solid rgba(196,168,130,0.2)' }}>
+            <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '1.4rem', fontStyle: 'italic', color: 'rgba(253,250,245,0.5)', marginBottom: '1.5rem' }}>
+              Adding a new venue to the list?
+            </p>
+            <a href="/contact" className="btn-primary">
+              Inquire About Your Venue
+            </a>
           </div>
 
         </div>
