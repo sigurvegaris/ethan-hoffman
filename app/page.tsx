@@ -8,11 +8,12 @@ import ScrollReveal from './components/ScrollReveal'
 const svcs = [
   {
     tab: 'Weddings',
-    tag: 'Deserving',
+    tag: 'Most Popular',
     headline: 'The soundtrack to your most important day',
     body: 'Ethan works closely with every couple to understand the vibe, then delivers a performance that feels completely tailored to you.',
     features: ['Ceremony & Reception Coverage', 'Custom Song Requests', 'Live Looping Performance', 'Add-Ons Available'],
     img: '/images/ethanwithguitar.png',
+    position: 'center top',
     href: '/contact',
     cta: 'Book Ethan',
   },
@@ -22,7 +23,8 @@ const svcs = [
     headline: 'The room will feel different when he plays',
     body: 'Whether a dinner party, milestone birthday, or upscale celebration, Ethan reads the room and shapes the energy in real time.',
     features: ['Dinner Parties', 'Birthday Celebrations', 'Upscale Gatherings', 'Fully Customizable'],
-    img: '/images/ethanthreeguys.png',
+    img: '/images/ethanwithcrowd.png',
+    position: 'center bottom',
     href: '/contact',
     cta: 'Book Ethan',
   },
@@ -32,7 +34,7 @@ const svcs = [
     headline: 'Entertainment that leaves an impression',
     body: 'Ethan has performed for major brands and corporate functions across Los Angeles. He transforms a standard event into something people talk about.',
     features: ['Brand Events & Launches', 'Fundraisers & Galas', 'Holiday Parties', 'Networking Events'],
-    img: '/images/ethanwithcrowd.png',
+    img: '/images/ethansoloshot.png',
     position: 'center bottom',
     href: '/contact',
     cta: 'Book Ethan',
@@ -43,8 +45,8 @@ const svcs = [
     headline: 'Music written from real life',
     body: 'Beyond events, Ethan is a recording artist with original music on all major platforms. Soulful, honest, and deeply personal.',
     features: ['Available on Spotify', 'Available on Apple Music', 'Original Compositions', 'Live Originals at Events'],
-    img: '/images/ethansoloshot.png',
-    position: 'center bottom',
+    img: '/images/ethanfighton.png',
+    position: 'center top',
     href: '/music',
     cta: 'Listen Now',
   },
@@ -89,7 +91,7 @@ const venueLogos = [
   { name: 'The Magnolia', file: 'themagnolialogo.png' },
   { name: 'The Shade Hotel', file: 'shadelogo.png' },
   { name: 'Hollywood Improv', file: 'hollywoodimprovlogo.png' },
-  { name: 'The Lighthouse Cafe', file: 'lighthousecafelogo.png' },
+  { name: 'USC', file: 'usclogo.png' },
 ]
 
 function ServicesCarousel() {
@@ -103,181 +105,136 @@ function ServicesCarousel() {
   }, [paused])
 
   return (
-    <section id="services" style={{ backgroundColor: '#1a1814', padding: '4rem 0' }}>
+    <section id="services" style={{ backgroundColor: '#f5f0e8' }}>
       <style>{`
-        .svc-wrap { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-        .svc-header {
-          display: flex; justify-content: space-between;
-          align-items: center; margin-bottom: 1.5rem;
+        .svc2-tabs {
+          display: flex; flex-wrap: wrap;
+          border-bottom: 1px solid rgba(26,24,20,0.1);
         }
-        .svc-header h2 {
-          font-family: 'Playfair Display, serif';
-          font-size: clamp(1.8rem, 3vw, 2.5rem);
-          font-weight: 400; color: #fdfaf5; margin: 0;
-        }
-        .svc-view-btn {
-          padding: 0.75rem 1.75rem; background-color: #c4622d;
-          color: #fdfaf5; text-decoration: none;
-          font-size: 0.68rem; font-weight: 700;
-          letter-spacing: 0.18em; text-transform: uppercase;
-          font-family: Inter, sans-serif; transition: background-color 0.3s ease;
-          white-space: nowrap;
-        }
-        .svc-view-btn:hover { background-color: #a8521f; }
-        .svc-tabs {
-          display: flex; gap: 0;
-          border-bottom: 1px solid rgba(196,168,130,0.15);
-          margin-bottom: 1.5rem; flex-wrap: wrap;
-        }
-        .svc-tab {
+        .svc2-tab {
           background: none; border: none; cursor: pointer;
-          font-family: Inter, sans-serif; font-size: 0.68rem;
-          font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
-          padding: 0.8rem 1.75rem; transition: all 0.3s ease;
-          border-bottom: 2px solid transparent; margin-bottom: -1px;
-          color: rgba(253,250,245,0.35);
+          font-family: Inter, sans-serif; font-size: 0.65rem;
+          font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+          padding: 1.1rem 2rem; transition: all 0.3s ease;
+          color: rgba(26,24,20,0.4);
         }
-        .svc-tab:hover { color: rgba(253,250,245,0.7); }
-        .svc-tab.active {
+        .svc2-tab:hover { color: #1a1814; }
+        .svc2-tab.active {
+          background: #c4622d !important;
           color: #fdfaf5 !important;
-          border-bottom: 2px solid #c4622d !important;
         }
-        .svc-stage {
-          position: relative; width: 100%;
-          height: 68vh; min-height: 520px; overflow: hidden;
+        .svc2-content {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0;
+          padding: 6rem 0 7rem;
+          align-items: start;
         }
-        .svc-photo {
-          position: absolute; inset: 0;
-          width: 100%; height: 100%;
-          object-fit: cover; object-position: center top;
-          transition: opacity 0.5s ease;
+        .svc2-ghost {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(3rem, 6vw, 6rem);
+          font-weight: 600;
+          color: rgba(26,24,20,0.07);
+          line-height: 1.05;
+          letter-spacing: -0.02em;
+          padding-right: 3rem;
         }
-        .svc-dot-track {
-          position: absolute; left: 1.25rem; top: 50%;
-          transform: translateY(-50%);
-          display: flex; flex-direction: column;
-          gap: 0.6rem; z-index: 10;
+        .svc2-right h3 {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+          font-weight: 500;
+          color: #1a1814;
+          line-height: 1.25;
+          margin-bottom: 1.5rem;
+          letter-spacing: -0.01em;
         }
-        .svc-dot {
-          width: 10px; height: 10px; border-radius: 50%;
-          border: none; cursor: pointer; padding: 0;
-          transition: all 0.3s ease;
-          background: rgba(253,250,245,0.35);
+        .svc2-right p {
+          font-size: 0.95rem;
+          line-height: 1.85;
+          color: #6b6460;
+          margin-bottom: 1.25rem;
         }
-        .svc-dot.active { background: #c4622d; transform: scale(1.3); }
-        .svc-card {
-          position: absolute; top: 50%; right: 4%;
-          transform: translateY(-50%);
-          background: #ffffff; width: 310px;
-          padding: 2.25rem 2.25rem 2rem;
-          box-shadow: 0 20px 60px rgba(0,0,0,0.3); z-index: 10;
-        }
-        .svc-pill {
-          display: inline-block; background: #c4622d; color: #fff;
-          font-size: 0.58rem; font-weight: 700;
+        .svc2-learn {
+          display: inline-block;
+          margin-top: 0.5rem;
+          padding: 0.75rem 1.75rem;
+          border: 1px solid rgba(26,24,20,0.25);
+          color: #1a1814;
+          text-decoration: none;
+          font-size: 0.65rem; font-weight: 600;
           letter-spacing: 0.2em; text-transform: uppercase;
           font-family: Inter, sans-serif;
-          padding: 0.38rem 0.9rem; margin-bottom: 1.1rem;
-        }
-        .svc-card h3 {
-          font-family: 'Playfair Display, serif';
-          font-size: 1.35rem; font-weight: 600;
-          color: #1a1814; line-height: 1.3; margin-bottom: 0.85rem;
-        }
-        .svc-card p {
-          font-size: 0.82rem; line-height: 1.75;
-          color: #7a736e; margin-bottom: 1.25rem;
-        }
-        .svc-features {
-          list-style: none; padding: 0; margin: 0 0 1.5rem;
-          border-top: 1px solid rgba(26,24,20,0.08);
-        }
-        .svc-features li {
-          font-size: 0.82rem; color: #4a4440;
-          padding: 0.55rem 0;
-          border-bottom: 1px solid rgba(26,24,20,0.08);
-        }
-        .svc-learn-btn {
-          display: block; text-align: center; padding: 0.85rem;
-          border: 1.5px solid #1a1814; color: #1a1814;
-          text-decoration: none; font-size: 0.68rem; font-weight: 700;
-          letter-spacing: 0.2em; text-transform: uppercase;
-          font-family: Inter, sans-serif; transition: all 0.3s ease;
+          transition: all 0.3s ease;
           background: transparent;
         }
-        .svc-learn-btn:hover {
-          background: #c4622d; border-color: #c4622d; color: #fff;
+        .svc2-learn:hover {
+          background: #c4622d;
+          border-color: #c4622d;
+          color: #fdfaf5;
         }
-        .svc-progress {
-          position: absolute; bottom: 0; left: 0;
-          height: 2px; background: #c4622d;
-          animation: svc-bar 4.5s linear infinite;
-          z-index: 10;
+        .svc2-progress {
+          height: 2px; background: rgba(26,24,20,0.06);
+          position: relative; overflow: hidden;
         }
-        @keyframes svc-bar {
-          from { width: 0%; }
-          to { width: 100%; }
+        .svc2-progress-bar {
+          position: absolute; top: 0; left: 0; height: 100%;
+          background: #c4622d;
+          animation: svc2-fill 4.5s linear infinite;
+        }
+        @keyframes svc2-fill { from { width: 0% } to { width: 100% } }
+        @media (max-width: 768px) {
+          .svc2-content { grid-template-columns: 1fr; gap: 2rem; padding: 4rem 0 5rem; }
+          .svc2-ghost { display: none; }
         }
       `}</style>
 
-      <div
-        className="svc-wrap"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-      >
-        {/* Header */}
-        <div className="svc-header">
-        <div>
-  <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.4rem', fontFamily: 'Inter, sans-serif' }}>What Ethan Offers</p>
-  <h2 style={{ margin: 0 }}>The perfect vibe <em style={{ fontWeight: '400' }}>for every occasion</em></h2>
-</div>
-        </div>
+      <div onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+
+        {/* Progress bar */}
+        {!paused && (
+          <div className="svc2-progress">
+            <div key={active} className="svc2-progress-bar" />
+          </div>
+        )}
 
         {/* Tabs */}
-        <div className="svc-tabs">
+        <div className="svc2-tabs">
           {svcs.map((s, i) => (
             <button
               key={i}
-              className={`svc-tab${i === active ? ' active' : ''}`}
+              className={`svc2-tab${i === active ? ' active' : ''}`}
               onClick={() => { setActive(i); setPaused(true) }}>
               {s.tab}
             </button>
           ))}
         </div>
 
-        {/* Stage */}
-        <div className="svc-stage">
-        <img className="svc-photo" src={svcs[active].img} alt={svcs[active].tab}
-  style={{ objectPosition: svcs[active].position || 'center top' }} />
-          {/* Progress bar at bottom */}
-          {!paused && <div key={active} className="svc-progress" />}
+        {/* Content */}
+        <div className="container">
+          <div className="svc2-content">
 
-          {/* Vertical dots */}
-          <div className="svc-dot-track">
-            {svcs.map((_, i) => (
-              <button
-                key={i}
-                className={`svc-dot${i === active ? ' active' : ''}`}
-                onClick={() => { setActive(i); setPaused(true) }}
-              />
-            ))}
-          </div>
+            {/* Left — ghost heading */}
+            <div className="svc2-ghost">
+              The perfect<br />vibe for<br />every occasion
+            </div>
 
-          {/* White card */}
-          <div className="svc-card">
-            <span className="svc-pill">{svcs[active].tag}</span>
-            <h3>{svcs[active].headline}</h3>
-            <p>{svcs[active].body}</p>
-            <ul className="svc-features">
-              {svcs[active].features?.map((f, i) => (
-                <li key={i}>{f}</li>
-              ))}
-            </ul>
-            <Link href={svcs[active].href} className="svc-learn-btn">
-              {svcs[active].cta}
-            </Link>
+            {/* Right — service detail */}
+            <div className="svc2-right">
+              <h3>{svcs[active].headline}</h3>
+              <p>{svcs[active].body}</p>
+              {svcs[active].features && (
+                <p style={{ fontSize: '0.85rem', color: '#9a9290', lineHeight: '2' }}>
+                  {svcs[active].features.join(' · ')}
+                </p>
+              )}
+              <Link href={svcs[active].href} className="svc2-learn">
+                {svcs[active].cta}
+              </Link>
+            </div>
+
           </div>
         </div>
+
       </div>
     </section>
   )
@@ -290,89 +247,210 @@ export default function Home() {
       <main>
 
         {/* HERO */}
-        <section style={{
-          position: 'relative', height: '100vh', minHeight: '700px',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          overflow: 'hidden', backgroundColor: '#1a1814',
-        }}>
-          <div style={{
-            position: 'absolute', inset: 0, zIndex: 1,
-            backgroundImage: 'url(/images/ethanphotositting.png)',
-            backgroundSize: 'cover', backgroundPosition: 'center top',
-          }} />
-          <div style={{
-            position: 'absolute', inset: 0, zIndex: 2,
-            background: 'linear-gradient(to bottom, rgba(26,24,20,0.5) 0%, rgba(26,24,20,0.45) 50%, rgba(26,24,20,0.92) 100%)',
-          }} />
-          <div style={{ position: 'relative', zIndex: 3, textAlign: 'center', padding: '0 2rem' }}>
-            <h1 style={{
-              fontFamily: 'Playfair Display, serif',
-              fontSize: 'clamp(3rem, 8vw, 7rem)',
-              fontWeight: '600', color: '#fdfaf5',
-              lineHeight: '1.05', marginBottom: '1.2rem',
-              textShadow: '0 2px 20px rgba(0,0,0,0.5)',
-            }}>Ethan Hoffman</h1>
-            <p style={{
-              fontFamily: 'Cormorant Garamond, serif',
-              fontSize: 'clamp(1.1rem, 2.5vw, 1.6rem)',
-              fontWeight: '300', fontStyle: 'italic',
-              color: 'rgba(253,250,245,0.85)', marginBottom: '2.5rem',
-            }}>Soulful Live Music for Weddings and Private Events</p>
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link href="/contact" className="btn-primary">Book Ethan</Link>
-              <Link href="/music" className="btn-outline">Watch Live</Link>
-            </div>
-          </div>
-        </section>
+<section style={{
+  position: 'relative', height: '100vh', minHeight: '700px',
+  overflow: 'hidden', backgroundColor: '#1a1814',
+}}>
+  {/* Background photo */}
+  <div style={{
+    position: 'absolute', inset: 0, zIndex: 1,
+    backgroundImage: 'url(/images/ethanphotositting.png)',
+    backgroundSize: 'cover', backgroundPosition: 'center top',
+  }} />
+  {/* Overlay */}
+  <div style={{
+    position: 'absolute', inset: 0, zIndex: 2,
+    background: 'linear-gradient(to right, rgba(26,24,20,0.85) 0%, rgba(26,24,20,0.4) 60%, rgba(26,24,20,0.1) 100%)',
+  }} />
 
-        {/* WHO IS ETHAN */}
-        <ScrollReveal delay={100}>
-          <section style={{ backgroundColor: '#f5f0e8', padding: '7rem 0' }}>
-            <div className="container">
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }}>
-                <div style={{ position: 'relative' }}>
-                  <div style={{ width: '100%', aspectRatio: '3/4', overflow: 'hidden' }}>
-                    <img src="/images/ethansingingorange.png" alt="Ethan Hoffman"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 50%' }} />
-                  </div>
-                  <div style={{
-                    position: 'absolute', top: '1.5rem', left: '1.5rem',
-                    right: '-1.5rem', bottom: '-1.5rem',
-                    border: '1px solid rgba(196,98,45,0.3)', zIndex: -1,
-                  }} />
-                </div>
-                <div>
-                  <p className="section-label" style={{ marginBottom: '1rem' }}>Who is Ethan</p>
-                  <h2 style={{
-                    fontFamily: 'Playfair Display, serif',
-                    fontSize: 'clamp(2rem, 3.5vw, 2.8rem)',
-                    fontWeight: '600', color: '#1a1814',
-                    lineHeight: '1.2', marginBottom: '1.5rem',
-                  }}>
-                    A vocalist who plays rooms,<br />
-                    <em style={{ fontWeight: '400' }}>not just songs.</em>
-                  </h2>
-                  <p style={{ fontSize: '1rem', lineHeight: '1.85', color: '#6b6460', marginBottom: '1.2rem' }}>
-                    It started with a flyer at Starbucks. Not a grand origin story, just a kid who randomly walked into an audition and realized he was actually pretty good at this. Fast forward to a USC comedy show, a spontaneous performance, and a video that hit 140 million views before he really knew what was happening.
-                  </p>
-                  <p style={{ fontSize: '1rem', lineHeight: '1.85', color: '#6b6460', marginBottom: '2rem' }}>
-                    Since then he has played 300+ gigs across LA and beyond: hotel lobbies, private estates, sold-out nights at The Wiltern. He performs with a live looping station, building full band arrangements on the spot using only his voice. Audiences love it.
-                  </p>
-                  <Link href="/about" style={{
-                    display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                    color: '#c4622d', textDecoration: 'none',
-                    fontSize: '0.8rem', fontWeight: '600',
-                    letterSpacing: '0.1em', textTransform: 'uppercase',
-                  }}
-                  onMouseEnter={e => (e.currentTarget.style.gap = '0.8rem')}
-                  onMouseLeave={e => (e.currentTarget.style.gap = '0.5rem')}>
-                    Full Story <span>→</span>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </section>
-        </ScrollReveal>
+  {/* Content */}
+  <div style={{
+    position: 'relative', zIndex: 3,
+    height: '100%', display: 'flex', flexDirection: 'column',
+    justifyContent: 'center', padding: '0 5rem',
+  }}>
+    {/* Location tag */}
+    <div style={{
+      display: 'flex', alignItems: 'center', gap: '0.75rem',
+      marginBottom: '1.5rem',
+    }}>
+      <div style={{ width: '2rem', height: '1px', backgroundColor: '#c4622d' }} />
+      <p style={{
+        fontSize: '0.65rem', fontWeight: '600',
+        letterSpacing: '0.3em', textTransform: 'uppercase',
+        color: 'rgba(253,250,245,0.7)', fontFamily: 'Inter, sans-serif',
+      }}>Los Angeles · Live Music</p>
+    </div>
+
+    {/* Big name */}
+    <h1 style={{
+      fontFamily: 'Playfair Display, serif',
+      fontSize: 'clamp(5rem, 13vw, 13rem)',
+      fontWeight: '600', color: '#fdfaf5',
+      lineHeight: '0.9', marginBottom: '1.5rem',
+      letterSpacing: '-0.02em',
+      textShadow: '0 2px 40px rgba(0,0,0,0.3)',
+    }}>
+      Ethan<br />Hoffman
+    </h1>
+
+    {/* Italic subtitle */}
+    <p style={{
+      fontFamily: 'Cormorant Garamond, serif',
+      fontSize: 'clamp(1.1rem, 2vw, 1.5rem)',
+      fontWeight: '300', fontStyle: 'italic',
+      color: 'rgba(253,250,245,0.75)', marginBottom: '2.5rem',
+    }}>Soulful live music for weddings &amp; private events</p>
+
+    {/* Buttons */}
+    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+      <Link href="/contact" className="btn-primary">Book Ethan</Link>
+      <Link href="/music" className="btn-outline">Watch Live</Link>
+    </div>
+  </div>
+
+  {/* Bottom-right stat */}
+  <div style={{
+    position: 'absolute', bottom: '3rem', right: '4rem',
+    zIndex: 3, textAlign: 'right',
+  }}>
+    <p style={{
+      fontFamily: 'Playfair Display, serif',
+      fontSize: 'clamp(3rem, 6vw, 5rem)',
+      fontWeight: '600', color: 'rgba(253,250,245,0.15)',
+      lineHeight: '1', letterSpacing: '-0.02em',
+    }}>300+</p>
+    <p style={{
+      fontSize: '0.6rem', fontWeight: '600',
+      letterSpacing: '0.25em', textTransform: 'uppercase',
+      color: 'rgba(253,250,245,0.3)', fontFamily: 'Inter, sans-serif',
+    }}>Events Performed</p>
+  </div>
+</section>
+
+{/* STATS BAR */}
+<div style={{
+  backgroundColor: '#111009',
+  borderBottom: '1px solid rgba(196,168,130,0.08)',
+}}>
+  {/* Numbers row */}
+  <div style={{
+    display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
+    borderBottom: '1px solid rgba(196,168,130,0.08)',
+  }}>
+    {[
+      { number: '300+', label: 'Events Performed' },
+      { number: '140M', label: 'Video Views' },
+      { number: '6+', label: 'Hours of Repertoire' },
+      { number: '24hr', label: 'Response Time' },
+    ].map((s, i) => (
+      <div key={i} style={{
+        padding: '2.5rem 2rem', textAlign: 'center',
+        borderLeft: i > 0 ? '1px solid rgba(196,168,130,0.08)' : 'none',
+      }}>
+        <p style={{
+          fontFamily: 'Playfair Display, serif',
+          fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+          fontWeight: '500', color: '#fdfaf5',
+          lineHeight: '1', marginBottom: '0.5rem',
+          letterSpacing: '-0.02em',
+        }}>{s.number}</p>
+        <p style={{
+          fontSize: '0.6rem', fontWeight: '600',
+          letterSpacing: '0.2em', textTransform: 'uppercase',
+          color: 'rgba(253,250,245,0.35)', fontFamily: 'Inter, sans-serif',
+        }}>{s.label}</p>
+      </div>
+    ))}
+  </div>
+
+  {/* Logos row */}
+  <div style={{
+    display: 'flex', alignItems: 'center',
+    padding: '1.75rem 3rem', gap: '3rem', flexWrap: 'wrap',
+  }}>
+    <p style={{
+      fontSize: '0.55rem', fontWeight: '700',
+      letterSpacing: '0.25em', textTransform: 'uppercase',
+      color: 'rgba(253,250,245,0.25)', fontFamily: 'Inter, sans-serif',
+      whiteSpace: 'nowrap', flexShrink: 0,
+    }}>Trusted By</p>
+    <div style={{
+      display: 'flex', alignItems: 'center',
+      gap: '3rem', flexWrap: 'wrap', flex: 1,
+      justifyContent: 'space-between',
+    }}>
+      {venueLogos.map((v, i) => (
+        <img key={i} src={`/images/${v.file}`} alt={v.name} style={{
+          height: '32px', width: 'auto', objectFit: 'contain',
+          filter: 'brightness(0) invert(1)',
+          opacity: 0.4, transition: 'opacity 0.3s ease',
+        }}
+        onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
+        onMouseLeave={e => (e.currentTarget.style.opacity = '0.4')} />
+      ))}
+    </div>
+  </div>
+</div>
+
+{/* WHO IS ETHAN */}
+<ScrollReveal delay={100}>
+  <section style={{ backgroundColor: '#f5f0e8', padding: '8rem 0' }}>
+    <div className="container">
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }}>
+
+        {/* Left — Photo, no frame */}
+        <div style={{ width: '100%', overflow: 'hidden' }}>
+          <img src="/images/ethansingingorange.png" alt="Ethan Hoffman"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }} />
+        </div>
+
+        {/* Right — Text */}
+        <div>
+          <p style={{
+            fontSize: '0.65rem', fontWeight: '600',
+            letterSpacing: '0.3em', textTransform: 'uppercase',
+            color: '#c4622d', marginBottom: '1.25rem',
+            fontFamily: 'Inter, sans-serif',
+          }}>Who is Ethan</p>
+
+          <h2 style={{
+            fontFamily: 'Playfair Display, serif',
+            fontSize: 'clamp(2.2rem, 4vw, 3.5rem)',
+            fontWeight: '700', color: '#1a1814',
+            lineHeight: '1.1', marginBottom: '2rem',
+            letterSpacing: '-0.02em',
+          }}>
+            A vocalist who plays rooms,<br />
+            <em style={{ fontWeight: '400' }}>not just songs.</em>
+          </h2>
+
+          <p style={{ fontSize: '1.05rem', lineHeight: '1.85', color: '#6b6460', marginBottom: '1.5rem' }}>
+            It started with a flyer at Starbucks. Not a grand origin story, just a kid who randomly walked into an audition and realized he was actually pretty good at this. Fast forward to a USC comedy show, a spontaneous performance, and a video that hit 140 million views before he really knew what was happening.
+          </p>
+
+          <p style={{ fontSize: '1.05rem', lineHeight: '1.85', color: '#6b6460', marginBottom: '2.5rem' }}>
+            Since then he has played 300+ gigs across LA and beyond: hotel lobbies, private estates, sold-out nights at The Wiltern. He performs with a live looping station, building full band arrangements on the spot using only his voice. Audiences love it.
+          </p>
+
+          <Link href="/about" style={{
+            display: 'inline-flex', alignItems: 'center', gap: '0.6rem',
+            color: '#c4622d', textDecoration: 'none',
+            fontSize: '0.72rem', fontWeight: '700',
+            letterSpacing: '0.18em', textTransform: 'uppercase',
+            fontFamily: 'Inter, sans-serif',
+            transition: 'gap 0.3s ease',
+          }}
+          onMouseEnter={e => (e.currentTarget.style.gap = '1rem')}
+          onMouseLeave={e => (e.currentTarget.style.gap = '0.6rem')}>
+            Full Story <span>→</span>
+          </Link>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</ScrollReveal>
 
         {/* WHAT SETS ETHAN APART */}
         <section style={{ backgroundColor: '#1a1814', overflow: 'hidden', position: 'relative' }}>
@@ -386,7 +464,7 @@ export default function Home() {
               pointer-events: none; z-index: 0;
             }
             .wse-marquee-text {
-              font-family: 'Playfair Display, serif';
+              font-family: 'Playfair Display', serif;
               font-size: clamp(8rem, 18vw, 18rem);
               font-weight: 700; color: transparent;
               -webkit-text-stroke: 1px rgba(196,168,130,0.06);
@@ -407,7 +485,7 @@ export default function Home() {
             .wse-item:last-child { border-bottom: 1px solid rgba(196,168,130,0.08); }
             .wse-item:hover { border-color: rgba(196,98,45,0.2); }
             .wse-num {
-              font-family: 'Playfair Display, serif';
+              font-family: 'Playfair Display', serif;
               font-size: 5rem; font-weight: 700;
               color: rgba(196,168,130,0.08); line-height: 1;
               letter-spacing: -0.03em;
@@ -415,7 +493,7 @@ export default function Home() {
             }
             .wse-item:hover .wse-num { color: #c4622d; transform: scale(1.15) translateX(4px); }
             .wse-title {
-              font-family: 'Playfair Display, serif';
+              font-family: 'Playfair Display', serif;
               font-size: clamp(2.5rem, 5vw, 5rem);
               font-weight: 600; line-height: 1.0; letter-spacing: -0.025em;
               background: linear-gradient(135deg, rgba(253,250,245,0.15) 0%, rgba(253,250,245,0.08) 100%);
@@ -430,7 +508,7 @@ export default function Home() {
             .wse-right { display: flex; flex-direction: column; align-items: flex-end; gap: 1rem; }
             .wse-tag {
               font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em;
-              text-transform: uppercase; font-family: 'Inter, sans-serif';
+              text-transform: uppercase; font-family: Inter, sans-serif;
               color: rgba(196,98,45,0); border: 1px solid rgba(196,98,45,0);
               padding: 0.45rem 1.1rem;
               transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -491,40 +569,7 @@ export default function Home() {
           <ServicesCarousel />
         </ScrollReveal>
 
-        {/* VENUE LOGOS */}
-        <ScrollReveal delay={100}>
-          <section style={{ backgroundColor: '#1a1814', padding: '5rem 0' }}>
-            <div className="container">
-              <p style={{
-                textAlign: 'center', fontSize: '0.7rem', fontWeight: '600',
-                letterSpacing: '0.2em', textTransform: 'uppercase',
-                color: 'rgba(253,250,245,0.3)', marginBottom: '3rem',
-              }}>Past clients and venues include</p>
-              <div style={{
-                display: 'flex', alignItems: 'center',
-                justifyContent: 'space-between', flexWrap: 'wrap',
-                gap: '2rem', marginBottom: '3rem', padding: '0 2rem',
-              }}>
-                {venueLogos.map((v, i) => (
-                  <img key={i} src={`/images/${v.file}`} alt={v.name} style={{
-  height: '65px', width: 'auto', objectFit: 'contain',
-  opacity: 0.7, transition: 'opacity 0.3s ease',
-}}
-onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
-onMouseLeave={e => (e.currentTarget.style.opacity = '0.7')} />
-                ))}
-              </div>
-              <div style={{ textAlign: 'center' }}>
-                <Link href="/venues" style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                  color: '#c4622d', textDecoration: 'none',
-                  fontSize: '0.8rem', fontWeight: '600',
-                  letterSpacing: '0.1em', textTransform: 'uppercase',
-                }}>View All Venues →</Link>
-              </div>
-            </div>
-          </section>
-        </ScrollReveal>
+
 
         {/* TESTIMONIALS */}
         <ScrollReveal delay={100}>
