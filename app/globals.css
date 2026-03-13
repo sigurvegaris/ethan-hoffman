@@ -531,3 +531,33 @@ h1, h2, h3, h4 {
 ::-webkit-scrollbar-thumb:hover {
   background: #c4622d;
 }
+.btn-primary {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: #c4622d;
+  color: #fdfaf5;
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: Inter, sans-serif;
+  transition: background-color 0.3s ease;
+}
+.btn-primary:hover { background-color: #a8521f; }
+
+.btn-outline {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: transparent;
+  color: #fdfaf5;
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: Inter, sans-serif;
+  border: 1px solid rgba(253,250,245,0.5);
+  transition: all 0.3s ease;
+}
+.btn-outline:hover { border-color: #fdfaf5; }

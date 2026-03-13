@@ -155,10 +155,10 @@ const disneySongs = [
 
 function SongItem({ song, artist }: { song: string; artist: string }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem', marginBottom: '0.6rem' }}>
-      <span style={{ fontSize: '0.82rem', color: 'rgba(26,24,20,0.4)', lineHeight: '1.5' }}>{song}</span>
-      <span style={{ color: 'rgba(26,24,20,0.2)', fontSize: '0.7rem', flexShrink: 0 }}>|</span>
-      <span style={{ fontSize: '0.82rem', color: '#1a1814', fontWeight: '600', lineHeight: '1.5' }}>{artist}</span>
+    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem', marginBottom: '0.35rem' }}>
+      <span style={{ fontSize: '0.95rem', color: '#1a1814', lineHeight: '1.5' }}>{song}</span>
+      <span style={{ color: 'rgba(26,24,20,0.25)', fontSize: '0.8rem', flexShrink: 0 }}>—</span>
+      <span style={{ fontSize: '0.9rem', color: '#6b6460', lineHeight: '1.5' }}>{artist}</span>
     </div>
   )
 }
@@ -175,19 +175,18 @@ function TwoColSongs({ songs }: { songs: { song: string; artist: string }[] }) {
 }
 
 function GenreSection({ genre, songs }: { genre: string; songs: { song: string; artist: string }[] }) {
-  const half = Math.ceil(songs.length / 2)
   return (
-    <div style={{ marginBottom: '4rem' }}>
+    <div style={{ marginBottom: '2.5rem' }}>
       <p style={{
-        fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.25em',
-        textTransform: 'uppercase', color: '#c4622d', marginBottom: '1.5rem',
+        fontSize: '0.8rem', fontWeight: '700', letterSpacing: '0.2em',
+        textTransform: 'uppercase', color: '#c4622d',
+        marginBottom: '1rem', paddingBottom: '0.5rem',
+        borderBottom: '1px solid rgba(196,98,45,0.2)',
       }}>
         {genre}
       </p>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 3rem' }}>
-        {[songs.slice(0, half), songs.slice(half)].map((col, i) => (
-          <div key={i}>{col.map((s, j) => <SongItem key={j} {...s} />)}</div>
-        ))}
+      <div style={{ columns: 2, columnGap: '3rem' }}>
+        {songs.map((s, i) => <SongItem key={i} {...s} />)}
       </div>
     </div>
   )
@@ -249,21 +248,17 @@ export default function Repertoire() {
             </div>
           </div>
         </div>
-
-        {/* Song Lists */}
-        <div style={{ backgroundColor: '#fdfaf5', padding: '6rem 0' }}>
-          <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}>
-
-            {/* Genre Repertoire */}
-            <div style={{ marginBottom: '5rem' }}>
-              <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.25em', textTransform: 'uppercase', color: '#6b6460', textAlign: 'center', marginBottom: '4rem' }}>Performance Repertoire by Genre</p>
-              {genreRepertoire.map((section, i) => (
-                <div key={i}>
-                  {i > 0 && <div style={{ borderTop: '1px solid rgba(196,168,130,0.2)', marginBottom: '4rem' }} />}
-                  <GenreSection genre={section.genre} songs={section.songs} />
-                </div>
-              ))}
-            </div>
+        
+{/* Song Lists */}
+<div style={{ backgroundColor: '#fdfaf5', padding: '3rem 0 5rem' }}>
+  <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}>
+    {/* Genre Repertoire */}
+    <div style={{ marginBottom: '2rem' }}>
+      <p style={{ fontSize: '0.7rem', fontWeight: '600', letterSpacing: '0.25em', textTransform: 'uppercase', color: '#6b6460', textAlign: 'center', marginBottom: '2.5rem' }}>Performance Repertoire by Genre</p>
+      {genreRepertoire.map((section, i) => (
+        <GenreSection key={i} genre={section.genre} songs={section.songs} />
+      ))}
+    </div>
 
 
             {/* CTA */}

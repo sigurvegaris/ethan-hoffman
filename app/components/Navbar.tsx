@@ -5,17 +5,17 @@ import Link from 'next/link'
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [musicOpen, setMusicOpen] = useState(false)
+  const [experienceOpen, setExperienceOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
-  const musicRef = useRef<HTMLDivElement>(null)
+  const experienceRef = useRef<HTMLDivElement>(null)
   const servicesRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50)
     const handleResize = () => setIsMobile(window.innerWidth <= 1024)
     const handleClick = (e: MouseEvent) => {
-      if (musicRef.current && !musicRef.current.contains(e.target as Node)) setMusicOpen(false)
+      if (experienceRef.current && !experienceRef.current.contains(e.target as Node)) setExperienceOpen(false)
       if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) setServicesOpen(false)
     }
     handleResize()
@@ -52,7 +52,7 @@ export default function Navbar() {
     backgroundColor: 'rgba(26,24,20,0.98)',
     border: '1px solid rgba(196,168,130,0.2)',
     backdropFilter: 'blur(10px)',
-    minWidth: '160px',
+    minWidth: '180px',
     padding: '0.5rem 0',
     zIndex: 100,
   }
@@ -123,40 +123,34 @@ export default function Navbar() {
               Home
             </Link>
 
-            <Link href="/about" style={linkStyle}
-              onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.8)')}>
-              About
-            </Link>
-
-            {/* Music Dropdown */}
-            <div ref={musicRef} style={{ position: 'relative' }}>
+            {/* Experience Dropdown */}
+            <div ref={experienceRef} style={{ position: 'relative' }}>
               <button
                 style={linkStyle}
-                onClick={() => { setMusicOpen(o => !o); setServicesOpen(false) }}
+                onClick={() => { setExperienceOpen(o => !o); setServicesOpen(false) }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
                 onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.8)')}>
-                Music ▾
+                Experience ▾
               </button>
-              {musicOpen && (
+              {experienceOpen && (
                 <div style={dropdownStyle}>
-                  <Link href="/music" style={dropdownLink}
-                    onClick={() => setMusicOpen(false)}
+                  <Link href="/about" style={dropdownLink}
+                    onClick={() => setExperienceOpen(false)}
                     onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
                     onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.7)')}>
-                    Music
+                    About Ethan
+                  </Link>
+                  <Link href="/music" style={dropdownLink}
+                    onClick={() => setExperienceOpen(false)}
+                    onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
+                    onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.7)')}>
+                    Music & Media
                   </Link>
                   <Link href="/shows" style={dropdownLink}
-                    onClick={() => setMusicOpen(false)}
+                    onClick={() => setExperienceOpen(false)}
                     onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
                     onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.7)')}>
-                    Shows
-                  </Link>
-                  <Link href="/repertoire" style={dropdownLink}
-                    onClick={() => setMusicOpen(false)}
-                    onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
-                    onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.7)')}>
-                    Repertoire
+                    Upcoming Shows
                   </Link>
                 </div>
               )}
@@ -166,7 +160,7 @@ export default function Navbar() {
             <div ref={servicesRef} style={{ position: 'relative' }}>
               <button
                 style={linkStyle}
-                onClick={() => { setServicesOpen(o => !o); setMusicOpen(false) }}
+                onClick={() => { setServicesOpen(o => !o); setExperienceOpen(false) }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
                 onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.8)')}>
                 Services ▾
@@ -177,13 +171,25 @@ export default function Navbar() {
                     onClick={() => setServicesOpen(false)}
                     onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
                     onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.7)')}>
-                    Services
+                    Weddings & Events
                   </Link>
                   <Link href="/venues" style={dropdownLink}
                     onClick={() => setServicesOpen(false)}
                     onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
                     onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.7)')}>
                     Venues
+                  </Link>
+                  <Link href="/repertoire" style={dropdownLink}
+                    onClick={() => setServicesOpen(false)}
+                    onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
+                    onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.7)')}>
+                    Repertoire
+                  </Link>
+                  <Link href="/testimonials" style={dropdownLink}
+                    onClick={() => setServicesOpen(false)}
+                    onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
+                    onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.7)')}>
+                    Testimonials
                   </Link>
                 </div>
               )}
@@ -236,19 +242,21 @@ export default function Navbar() {
           </button>
 
           <Link href="/" onClick={() => setMenuOpen(false)} style={mobileLinkStyle}>Home</Link>
-          <Link href="/about" onClick={() => setMenuOpen(false)} style={mobileLinkStyle}>About</Link>
 
-          {/* Music group */}
-          <Link href="/music" onClick={() => setMenuOpen(false)} style={mobileLinkStyle}>Music</Link>
-          <div style={{ display: 'flex', gap: '2rem' }}>
-            <Link href="/shows" onClick={() => setMenuOpen(false)} style={mobileSubLink}>Shows</Link>
-            <Link href="/repertoire" onClick={() => setMenuOpen(false)} style={mobileSubLink}>Repertoire</Link>
+          {/* Experience group */}
+          <Link href="/about" onClick={() => setMenuOpen(false)} style={mobileLinkStyle}>Experience</Link>
+          <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <Link href="/about" onClick={() => setMenuOpen(false)} style={mobileSubLink}>About Ethan</Link>
+            <Link href="/music" onClick={() => setMenuOpen(false)} style={mobileSubLink}>Music & Media</Link>
+            <Link href="/shows" onClick={() => setMenuOpen(false)} style={mobileSubLink}>Upcoming Shows</Link>
           </div>
 
           {/* Services group */}
           <Link href="/services" onClick={() => setMenuOpen(false)} style={mobileLinkStyle}>Services</Link>
-          <div style={{ display: 'flex', gap: '2rem' }}>
+          <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
             <Link href="/venues" onClick={() => setMenuOpen(false)} style={mobileSubLink}>Venues</Link>
+            <Link href="/repertoire" onClick={() => setMenuOpen(false)} style={mobileSubLink}>Repertoire</Link>
+            <Link href="/testimonials" onClick={() => setMenuOpen(false)} style={mobileSubLink}>Testimonials</Link>
           </div>
 
           <Link href="/contact" onClick={() => setMenuOpen(false)} style={mobileLinkStyle}>Contact</Link>
