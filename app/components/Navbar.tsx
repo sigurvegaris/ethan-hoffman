@@ -18,7 +18,8 @@ export default function Navbar() {
     const handleScroll = () => setScrolled(window.scrollY > 24)
     const handleResize = () => setIsMobile(window.innerWidth <= 1024)
 
-    const handleClick = (e) => {
+    const handleClick = (e: MouseEvent) => {
+
       if (experienceRef.current && !experienceRef.current.contains(e.target)) {
         setExperienceOpen(false)
       }
