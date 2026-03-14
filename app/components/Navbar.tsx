@@ -1,5 +1,6 @@
 'use client'
-import { useState, useEffect, useRef } from 'react'
+
+import React, { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 
 export default function Navbar() {
@@ -11,19 +12,21 @@ export default function Navbar() {
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
-  const experienceRef = useRef(null)
-  const servicesRef = useRef(null)
+  const experienceRef = useRef<HTMLDivElement | null>(null)
+  const servicesRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 24)
     const handleResize = () => setIsMobile(window.innerWidth <= 1024)
 
     const handleClick = (e: MouseEvent) => {
+      const target = e.target as Node
 
-      if (experienceRef.current && !experienceRef.current.contains(e.target)) {
+      if (experienceRef.current && !experienceRef.current.contains(target)) {
         setExperienceOpen(false)
       }
-      if (servicesRef.current && !servicesRef.current.contains(e.target)) {
+
+      if (servicesRef.current && !servicesRef.current.contains(target)) {
         setServicesOpen(false)
       }
     }
@@ -44,6 +47,7 @@ export default function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
+
     return () => {
       document.body.style.overflow = ''
     }
@@ -65,11 +69,11 @@ export default function Navbar() {
     setMobileServicesOpen(false)
   }
 
-  const linkStyle = {
+  const linkStyle: React.CSSProperties = {
     color: 'rgba(253,250,245,0.82)',
     textDecoration: 'none',
     fontSize: '0.72rem',
-    fontWeight: '500',
+    fontWeight: 500,
     letterSpacing: '0.15em',
     textTransform: 'uppercase',
     transition: 'color 0.3s ease',
@@ -80,7 +84,7 @@ export default function Navbar() {
     padding: 0,
   }
 
-  const dropdownStyle = {
+  const dropdownStyle: React.CSSProperties = {
     position: 'absolute',
     top: 'calc(100% + 1rem)',
     left: '50%',
@@ -94,13 +98,13 @@ export default function Navbar() {
     boxShadow: '0 10px 30px rgba(0,0,0,0.25)',
   }
 
-  const dropdownLink = {
+  const dropdownLink: React.CSSProperties = {
     display: 'block',
     padding: '0.75rem 1.25rem',
     color: 'rgba(253,250,245,0.72)',
     textDecoration: 'none',
     fontSize: '0.7rem',
-    fontWeight: '500',
+    fontWeight: 500,
     letterSpacing: '0.12em',
     textTransform: 'uppercase',
     transition: 'color 0.2s ease, background-color 0.2s ease',
@@ -317,21 +321,30 @@ export default function Navbar() {
             <Link
               href="/"
               style={linkStyle}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#c4622d')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(253,250,245,0.82)')}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = '#c4622d'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'rgba(253,250,245,0.82)'
+              }}
             >
               Home
             </Link>
 
             <div ref={experienceRef} style={{ position: 'relative' }}>
               <button
+                type="button"
                 style={linkStyle}
                 onClick={() => {
                   setExperienceOpen((o) => !o)
                   setServicesOpen(false)
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#c4622d')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(253,250,245,0.82)')}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = '#c4622d'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'rgba(253,250,245,0.82)'
+                }}
               >
                 Experience ▾
               </button>
@@ -353,6 +366,7 @@ export default function Navbar() {
                   >
                     About Ethan
                   </Link>
+
                   <Link
                     href="/music"
                     style={dropdownLink}
@@ -368,6 +382,7 @@ export default function Navbar() {
                   >
                     Music & Media
                   </Link>
+
                   <Link
                     href="/shows"
                     style={dropdownLink}
@@ -389,13 +404,18 @@ export default function Navbar() {
 
             <div ref={servicesRef} style={{ position: 'relative' }}>
               <button
+                type="button"
                 style={linkStyle}
                 onClick={() => {
                   setServicesOpen((o) => !o)
                   setExperienceOpen(false)
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#c4622d')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(253,250,245,0.82)')}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = '#c4622d'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'rgba(253,250,245,0.82)'
+                }}
               >
                 Services ▾
               </button>
@@ -417,6 +437,7 @@ export default function Navbar() {
                   >
                     Weddings & Events
                   </Link>
+
                   <Link
                     href="/venues"
                     style={dropdownLink}
@@ -432,6 +453,7 @@ export default function Navbar() {
                   >
                     Venues
                   </Link>
+
                   <Link
                     href="/repertoire"
                     style={dropdownLink}
@@ -447,6 +469,7 @@ export default function Navbar() {
                   >
                     Repertoire
                   </Link>
+
                   <Link
                     href="/testimonials"
                     style={dropdownLink}
@@ -469,8 +492,12 @@ export default function Navbar() {
             <Link
               href="/contact"
               style={linkStyle}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#c4622d')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(253,250,245,0.82)')}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = '#c4622d'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'rgba(253,250,245,0.82)'
+              }}
             >
               Contact
             </Link>
@@ -487,6 +514,7 @@ export default function Navbar() {
 
         {isMobile && (
           <button
+            type="button"
             className={`eh-mobile-toggle ${menuOpen ? 'open' : ''}`}
             onClick={() => setMenuOpen((o) => !o)}
             aria-label="Toggle menu"
@@ -512,11 +540,14 @@ export default function Navbar() {
 
             <div className="eh-mobile-section">
               <button
+                type="button"
                 className="eh-mobile-accordion-btn"
                 onClick={() => setMobileExperienceOpen((o) => !o)}
               >
                 <span>Experience</span>
-                <span className={`eh-mobile-chevron ${mobileExperienceOpen ? 'open' : ''}`}>▾</span>
+                <span className={`eh-mobile-chevron ${mobileExperienceOpen ? 'open' : ''}`}>
+                  ▾
+                </span>
               </button>
 
               {mobileExperienceOpen && (
@@ -530,11 +561,14 @@ export default function Navbar() {
 
             <div className="eh-mobile-section">
               <button
+                type="button"
                 className="eh-mobile-accordion-btn"
                 onClick={() => setMobileServicesOpen((o) => !o)}
               >
                 <span>Services</span>
-                <span className={`eh-mobile-chevron ${mobileServicesOpen ? 'open' : ''}`}>▾</span>
+                <span className={`eh-mobile-chevron ${mobileServicesOpen ? 'open' : ''}`}>
+                  ▾
+                </span>
               </button>
 
               {mobileServicesOpen && (
