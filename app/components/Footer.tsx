@@ -34,61 +34,221 @@ const socialLinks = [
   },
 ]
 
+const quickLinks = [
+  { label: 'About', href: '/about' },
+  { label: 'Music', href: '/music' },
+  { label: 'Services', href: '/services' },
+  { label: 'Venues', href: '/venues' },
+  { label: 'Testimonials', href: '/testimonials' },
+  { label: 'Shows', href: '/shows' },
+  { label: 'Contact', href: '/contact' },
+]
+
+const contactItems = [
+  { label: 'Email', value: 'booking@ethanhoffmanofficial.com', url: 'mailto:booking@ethanhoffmanofficial.com' },
+  { label: 'Website', value: 'ethanhoffmanofficial.com', url: 'https://ethanhoffmanofficial.com' },
+  { label: 'Google Business', value: 'Ethan Hoffman Music', url: 'https://share.google/uLKpnc1llmBCJJqVu' },
+  { label: 'Location', value: 'Los Angeles, CA', url: null },
+]
+
 export default function Footer() {
   return (
     <>
       <style>{`
-        .footer-grid {
+        .eh-footer {
+          background-color: #1a1814;
+          padding: 4rem 0 2rem;
+          border-top: 1px solid rgba(196,168,130,0.15);
+          overflow-x: hidden;
+        }
+
+        .eh-footer-container {
+          width: min(1200px, calc(100% - 2.5rem));
+          margin: 0 auto;
+        }
+
+        .eh-footer-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
+          grid-template-columns: 1.2fr 0.8fr 1fr;
           gap: 3rem;
-          margin-bottom: 4rem;
+          margin-bottom: 3rem;
           padding-bottom: 3rem;
           border-bottom: 1px solid rgba(196,168,130,0.15);
         }
-        .footer-social {
+
+        .eh-footer-heading {
+          font-size: 0.65rem;
+          font-weight: 600;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #c4622d;
+          margin: 0 0 1.2rem 0;
+          font-family: Inter, sans-serif;
+        }
+
+        .eh-footer-social {
           display: flex;
-          flex-direction: row;
           flex-wrap: wrap;
           gap: 0.85rem;
+          margin-top: 1.25rem;
         }
-        @media (max-width: 768px) {
-          .footer-grid {
-            grid-template-columns: 1fr !important;
-            gap: 2rem !important;
+
+        .eh-footer-social a {
+          width: 38px;
+          height: 38px;
+          border: 1px solid rgba(196,168,130,0.25);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: rgba(253,250,245,0.45);
+          text-decoration: none;
+          transition: all 0.3s ease;
+          flex-shrink: 0;
+        }
+
+        .eh-footer-social a:hover {
+          border-color: #c4622d;
+          color: #c4622d;
+          background-color: rgba(196,98,45,0.08);
+        }
+
+        .eh-footer-link {
+          display: block;
+          font-size: 0.85rem;
+          color: rgba(253,250,245,0.55);
+          text-decoration: none;
+          margin-bottom: 0.7rem;
+          transition: color 0.3s ease;
+          width: fit-content;
+        }
+
+        .eh-footer-link:hover {
+          color: #fdfaf5;
+        }
+
+        .eh-footer-contact-item {
+          margin-bottom: 1rem;
+        }
+
+        .eh-footer-contact-label {
+          font-size: 0.65rem;
+          color: rgba(253,250,245,0.3);
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          margin: 0 0 0.2rem 0;
+          font-family: Inter, sans-serif;
+        }
+
+        .eh-footer-contact-value,
+        .eh-footer-contact-value a {
+          font-size: 0.82rem;
+          color: rgba(253,250,245,0.62);
+          text-decoration: none;
+          transition: color 0.3s ease;
+          line-height: 1.6;
+          overflow-wrap: anywhere;
+        }
+
+        .eh-footer-contact-value a:hover {
+          color: #fdfaf5;
+        }
+
+        .eh-footer-bottom {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 1rem 2rem;
+          flex-wrap: wrap;
+        }
+
+        .eh-footer-bottom p {
+          margin: 0;
+          font-size: 0.75rem;
+          color: rgba(253,250,245,0.3);
+          line-height: 1.5;
+        }
+
+        @media (max-width: 900px) {
+          .eh-footer-grid {
+            grid-template-columns: 1fr;
+            gap: 2.25rem;
           }
-          .footer-social {
-            flex-direction: row !important;
-            flex-wrap: wrap !important;
+        }
+
+        @media (max-width: 768px) {
+          .eh-footer {
+            padding: 3rem 0 1.75rem;
+          }
+
+          .eh-footer-container {
+            width: min(1200px, calc(100% - 2rem));
+          }
+
+          .eh-footer-grid {
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+          }
+
+          .eh-footer-bottom {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .eh-footer-social {
+            gap: 0.7rem;
+          }
+
+          .eh-footer-social a {
+            width: 36px;
+            height: 36px;
+          }
+
+          .eh-footer-link {
+            font-size: 0.82rem;
+          }
+
+          .eh-footer-bottom p {
+            font-size: 0.72rem;
           }
         }
       `}</style>
 
-      <footer style={{
-        backgroundColor: '#1a1814',
-        padding: '4rem 0 2rem',
-        borderTop: '1px solid rgba(196,168,130,0.15)',
-      }}>
-        <div className="container">
-
-          <div className="footer-grid">
-
-            {/* Brand */}
+      <footer className="eh-footer">
+        <div className="eh-footer-container">
+          <div className="eh-footer-grid">
             <div>
-              <p style={{
-                fontFamily: 'Playfair Display, serif',
-                fontSize: '1.4rem', fontWeight: '600',
-                color: '#fdfaf5', marginBottom: '0.75rem',
-              }}>Ethan Hoffman</p>
-              <p style={{
-                fontSize: '0.8rem', color: 'rgba(253,250,245,0.4)',
-                lineHeight: '1.7', marginBottom: '1.5rem',
-              }}>
-                Soulful live music for weddings,<br />
-                private events & corporate functions.<br />
+              <p
+                style={{
+                  fontFamily: 'Playfair Display, serif',
+                  fontSize: '1.4rem',
+                  fontWeight: '600',
+                  color: '#fdfaf5',
+                  margin: '0 0 0.75rem 0',
+                }}
+              >
+                Ethan Hoffman
+              </p>
+
+              <p
+                style={{
+                  fontSize: '0.8rem',
+                  color: 'rgba(253,250,245,0.42)',
+                  lineHeight: '1.75',
+                  margin: 0,
+                }}
+              >
+                Soulful live music for weddings,
+                <br />
+                private events & corporate functions.
+                <br />
                 Based in Los Angeles, CA.
               </p>
-              <div className="footer-social">
+
+              <div className="eh-footer-social">
                 {socialLinks.map((s) => (
                   <a
                     key={s.label}
@@ -96,110 +256,47 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     title={s.label}
-                    style={{
-                      width: '38px', height: '38px',
-                      border: '1px solid rgba(196,168,130,0.25)',
-                      borderRadius: '50%',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      color: 'rgba(253,250,245,0.45)',
-                      textDecoration: 'none',
-                      transition: 'all 0.3s ease',
-                      flexShrink: 0,
-                    }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.borderColor = '#c4622d'
-                      e.currentTarget.style.color = '#c4622d'
-                      e.currentTarget.style.backgroundColor = 'rgba(196,98,45,0.08)'
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.borderColor = 'rgba(196,168,130,0.25)'
-                      e.currentTarget.style.color = 'rgba(253,250,245,0.45)'
-                      e.currentTarget.style.backgroundColor = 'transparent'
-                    }}
+                    aria-label={s.label}
                     dangerouslySetInnerHTML={{ __html: s.icon }}
                   />
                 ))}
               </div>
             </div>
 
-            {/* Quick Links */}
             <div>
-              <p style={{
-                fontSize: '0.65rem', fontWeight: '600',
-                letterSpacing: '0.2em', textTransform: 'uppercase',
-                color: '#c4622d', marginBottom: '1.2rem',
-              }}>Quick Links</p>
-              {[
-                { label: 'About', href: '/about' },
-                { label: 'Music', href: '/music' },
-                { label: 'Services', href: '/services' },
-                { label: 'Venues', href: '/venues' },
-                { label: 'Testimonials', href: '/testimonials' },
-                { label: 'Shows', href: '/shows' },
-                { label: 'Contact', href: '/contact' },
-              ].map((link) => (
-                <Link key={link.label} href={link.href} style={{
-                  display: 'block', fontSize: '0.85rem',
-                  color: 'rgba(253,250,245,0.5)',
-                  textDecoration: 'none', marginBottom: '0.6rem',
-                  transition: 'color 0.3s ease',
-                }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#fdfaf5')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.5)')}>
+              <p className="eh-footer-heading">Quick Links</p>
+              {quickLinks.map((link) => (
+                <Link key={link.label} href={link.href} className="eh-footer-link">
                   {link.label}
                 </Link>
               ))}
             </div>
 
-            {/* Contact Info */}
             <div>
-              <p style={{
-                fontSize: '0.65rem', fontWeight: '600',
-                letterSpacing: '0.2em', textTransform: 'uppercase',
-                color: '#c4622d', marginBottom: '1.2rem',
-              }}>Contact</p>
-              {[
-                { label: 'Email', value: 'booking@ethanhoffmanofficial.com', url: 'mailto:booking@ethanhoffmanofficial.com' },
-                { label: 'Website', value: 'ethanhoffmanofficial.com', url: 'http://ethanhoffmanofficial.com' },
-                { label: 'Google Business', value: 'Ethan Hoffman Music', url: 'https://share.google/uLKpnc1llmBCJJqVu' },
-                { label: 'Location', value: 'Los Angeles, CA', url: null },
-              ].map((item, i) => (
-                <div key={i} style={{ marginBottom: '1rem' }}>
-                  <p style={{
-                    fontSize: '0.65rem', color: 'rgba(253,250,245,0.3)',
-                    letterSpacing: '0.1em', textTransform: 'uppercase',
-                    marginBottom: '0.2rem',
-                  }}>{item.label}</p>
+              <p className="eh-footer-heading">Contact</p>
+              {contactItems.map((item, i) => (
+                <div key={i} className="eh-footer-contact-item">
+                  <p className="eh-footer-contact-label">{item.label}</p>
                   {item.url ? (
-                    <a href={item.url} target="_blank" rel="noopener noreferrer" style={{
-                      fontSize: '0.82rem', color: 'rgba(253,250,245,0.6)',
-                      textDecoration: 'none', transition: 'color 0.3s ease',
-                    }}
-                    onMouseEnter={e => (e.currentTarget.style.color = '#fdfaf5')}
-                    onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.6)')}>
-                      {item.value}
-                    </a>
+                    <div className="eh-footer-contact-value">
+                      <a href={item.url} target="_blank" rel="noopener noreferrer">
+                        {item.value}
+                      </a>
+                    </div>
                   ) : (
-                    <p style={{ fontSize: '0.82rem', color: 'rgba(253,250,245,0.6)' }}>{item.value}</p>
+                    <p className="eh-footer-contact-value" style={{ margin: 0 }}>
+                      {item.value}
+                    </p>
                   )}
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Bottom Row */}
-          <div style={{
-            display: 'flex', justifyContent: 'space-between',
-            alignItems: 'center', flexWrap: 'wrap', gap: '1rem',
-          }}>
-            <p style={{ fontSize: '0.75rem', color: 'rgba(253,250,245,0.3)' }}>
-              © {new Date().getFullYear()} Ethan Hoffman. All rights reserved.
-            </p>
-            <p style={{ fontSize: '0.75rem', color: 'rgba(253,250,245,0.3)' }}>
-              Los Angeles, CA — Available Nationwide
-            </p>
+          <div className="eh-footer-bottom">
+            <p>© {new Date().getFullYear()} Ethan Hoffman. All rights reserved.</p>
+            <p>Los Angeles, CA — Available Nationwide</p>
           </div>
-
         </div>
       </footer>
     </>

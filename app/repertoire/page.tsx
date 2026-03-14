@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
@@ -52,7 +53,7 @@ const genreRepertoire = [
       { song: 'So Sick', artist: 'Ne-Yo' },
       { song: 'The Way You Make Me Feel', artist: 'Michael Jackson' },
       { song: 'Unaware', artist: 'Allen Stone' },
-      { song: 'What You Won\'t Do for Love', artist: 'Bobby Caldwell' },
+      { song: "What You Won't Do for Love", artist: 'Bobby Caldwell' },
     ],
   },
   {
@@ -68,7 +69,7 @@ const genreRepertoire = [
       { song: "It Ain't Over 'Til It's Over", artist: 'Lenny Kravitz' },
       { song: 'Just the Two of Us', artist: 'Bill Withers' },
       { song: 'Lean on Me', artist: 'Bill Withers' },
-      { song: 'Master Blaster (Jammin\')', artist: 'Stevie Wonder' },
+      { song: "Master Blaster (Jammin')", artist: 'Stevie Wonder' },
       { song: 'September', artist: 'Earth, Wind & Fire' },
       { song: 'Sexual Healing', artist: 'Marvin Gaye' },
       { song: 'Superstition', artist: 'Stevie Wonder' },
@@ -83,7 +84,7 @@ const genreRepertoire = [
     songs: [
       { song: 'At Last', artist: 'Etta James' },
       { song: "Don't Know Why", artist: 'Norah Jones' },
-      { song: 'Don\'t Worry, Be Happy', artist: 'Bobby McFerrin' },
+      { song: "Don't Worry, Be Happy", artist: 'Bobby McFerrin' },
       { song: 'Fly Me to the Moon', artist: 'Frank Sinatra' },
       { song: 'Hallelujah', artist: 'Leonard Cohen' },
       { song: 'Kiss From a Rose', artist: 'Seal' },
@@ -131,31 +132,9 @@ const genreRepertoire = [
   },
 ]
 
-const christmasSongs = [
-  { song: 'All I Want For Christmas Is You', artist: 'Mariah Carey' },
-  { song: "Baby It's Cold Outside", artist: 'Frank Loesser' },
-  { song: 'Carol of the Bells', artist: 'Traditional' },
-  { song: 'O Holy Night', artist: 'Traditional' },
-  { song: 'Santa Tell Me', artist: 'Ariana Grande' },
-]
-
-const disneySongs = [
-  { song: 'A Whole New World', artist: 'Aladdin' },
-  { song: 'Can You Feel the Love Tonight', artist: 'Lion King' },
-  { song: 'Colors of the Wind', artist: 'Pocahontas' },
-  { song: "How Far I'll Go", artist: 'Moana' },
-  { song: 'I Lava You', artist: 'Lava' },
-  { song: 'I See The Light', artist: 'Tangled' },
-  { song: 'Reflection', artist: 'Mulan' },
-  { song: 'Remember Me', artist: 'Coco' },
-  { song: 'Tale as Old as Time', artist: 'Beauty and the Beast' },
-  { song: 'When You Wish Upon A Star', artist: 'Pinocchio' },
-  { song: "You've Got A Friend in Me", artist: 'Toy Story' },
-]
-
-function SongItem({ song, artist }: { song: string; artist: string }) {
+function SongItem({ song, artist }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem', marginBottom: '0.35rem' }}>
+    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem', marginBottom: '0.45rem' }}>
       <span style={{ fontSize: '0.95rem', color: '#1a1814', lineHeight: '1.5' }}>{song}</span>
       <span style={{ color: 'rgba(26,24,20,0.25)', fontSize: '0.8rem', flexShrink: 0 }}>—</span>
       <span style={{ fontSize: '0.9rem', color: '#6b6460', lineHeight: '1.5' }}>{artist}</span>
@@ -163,30 +142,35 @@ function SongItem({ song, artist }: { song: string; artist: string }) {
   )
 }
 
-function TwoColSongs({ songs }: { songs: { song: string; artist: string }[] }) {
+function GenreSection({ genre, songs }) {
   const half = Math.ceil(songs.length / 2)
-  return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 3rem' }}>
-      {[songs.slice(0, half), songs.slice(half)].map((col, i) => (
-        <div key={i}>{col.map((s, j) => <SongItem key={j} {...s} />)}</div>
-      ))}
-    </div>
-  )
-}
+  const columns = [songs.slice(0, half), songs.slice(half)]
 
-function GenreSection({ genre, songs }: { genre: string; songs: { song: string; artist: string }[] }) {
   return (
     <div style={{ marginBottom: '2.5rem' }}>
-      <p style={{
-        fontSize: '0.8rem', fontWeight: '700', letterSpacing: '0.2em',
-        textTransform: 'uppercase', color: '#c4622d',
-        marginBottom: '1rem', paddingBottom: '0.5rem',
-        borderBottom: '1px solid rgba(196,98,45,0.2)',
-      }}>
+      <p
+        style={{
+          fontSize: '0.8rem',
+          fontWeight: '700',
+          letterSpacing: '0.2em',
+          textTransform: 'uppercase',
+          color: '#c4622d',
+          marginBottom: '1rem',
+          paddingBottom: '0.5rem',
+          borderBottom: '1px solid rgba(196,98,45,0.2)',
+        }}
+      >
         {genre}
       </p>
-      <div style={{ columns: 2, columnGap: '3rem' }}>
-        {songs.map((s, i) => <SongItem key={i} {...s} />)}
+
+      <div className="repertoire-song-grid">
+        {columns.map((col, i) => (
+          <div key={i}>
+            {col.map((s, j) => (
+              <SongItem key={j} {...s} />
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   )
@@ -196,50 +180,204 @@ export default function Repertoire() {
   return (
     <>
       <Navbar />
-      <main style={{ backgroundColor: '#f5f0e8', minHeight: '100vh' }}>
 
-        {/* Header */}
-        <div style={{ backgroundColor: '#1a1814', padding: '8rem 0 5rem', textAlign: 'center' }}>
-          <p style={{ fontSize: '0.7rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem' }}>Song List</p>
-          <h1 style={{
-            fontFamily: 'Playfair Display, serif',
-            fontSize: 'clamp(3rem, 7vw, 6rem)',
-            fontWeight: '400', fontStyle: 'italic',
-            color: '#fdfaf5', marginBottom: '1rem',
-          }}>Repertoire</h1>
-          <p style={{ fontSize: '0.9rem', color: 'rgba(253,250,245,0.4)', maxWidth: '480px', margin: '0 auto', lineHeight: '1.8' }}>
-            100+ songs across six genres. Soul, Pop, Classics, Jazz, Rock, and Reggae. Don't see your song? Ethan takes requests and can learn songs for your event.
-          </p>
+      <style>{`
+        .repertoire-page {
+          background-color: #f5f0e8;
+          min-height: 100vh;
+          overflow-x: hidden;
+        }
+
+        .repertoire-hero {
+          background-color: #1a1814;
+          padding: 8rem 0 5rem;
+          text-align: center;
+        }
+
+        .repertoire-intro {
+          background-color: #f5f0e8;
+          padding: 6rem 0;
+        }
+
+        .repertoire-intro-shell {
+          width: min(1100px, calc(100% - 3rem));
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 4rem;
+          align-items: center;
+        }
+
+        .repertoire-list-section {
+          background-color: #fdfaf5;
+          padding: 3rem 0 5rem;
+        }
+
+        .repertoire-list-shell {
+          width: min(1200px, calc(100% - 3rem));
+          margin: 0 auto;
+        }
+
+        .repertoire-song-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0 3rem;
+        }
+
+        .repertoire-cta {
+          text-align: center;
+          padding: 4rem 3rem;
+          background-color: #1a1814;
+        }
+
+        @media (max-width: 900px) {
+          .repertoire-intro-shell {
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+          }
+
+          .repertoire-song-grid {
+            grid-template-columns: 1fr;
+            gap: 0;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .repertoire-hero {
+            padding: 7rem 0 3rem;
+          }
+
+          .repertoire-intro {
+            padding: 4rem 0;
+          }
+
+          .repertoire-intro-shell,
+          .repertoire-list-shell {
+            width: min(1200px, calc(100% - 2rem));
+          }
+
+          .repertoire-list-section {
+            padding: 2.5rem 0 4rem;
+          }
+
+          .repertoire-cta {
+            padding: 2.5rem 1.5rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .repertoire-hero {
+            padding: 6.5rem 0 2.5rem;
+          }
+
+          .repertoire-intro-shell,
+          .repertoire-list-shell {
+            width: min(1200px, calc(100% - 1.5rem));
+          }
+        }
+      `}</style>
+
+      <main className="repertoire-page">
+        <div className="repertoire-hero">
+          <div className="container">
+            <p
+              style={{
+                fontSize: '0.7rem',
+                fontWeight: '600',
+                letterSpacing: '0.3em',
+                textTransform: 'uppercase',
+                color: '#c4622d',
+                marginBottom: '1rem',
+              }}
+            >
+              Song List
+            </p>
+
+            <h1
+              style={{
+                fontFamily: 'Playfair Display, serif',
+                fontSize: 'clamp(3rem, 7vw, 6rem)',
+                fontWeight: '400',
+                fontStyle: 'italic',
+                color: '#fdfaf5',
+                marginBottom: '1rem',
+              }}
+            >
+              Repertoire
+            </h1>
+
+            <p
+              style={{
+                fontSize: '0.9rem',
+                color: 'rgba(253,250,245,0.4)',
+                maxWidth: '480px',
+                margin: '0 auto',
+                lineHeight: '1.8',
+              }}
+            >
+              100+ songs across six genres. Soul, Pop, Classics, Jazz, Rock, and Reggae. Don&apos;t see your song? Ethan takes requests and can learn songs for your event.
+            </p>
+          </div>
         </div>
 
-        {/* Intro Section */}
-        <div style={{ backgroundColor: '#f5f0e8', padding: '6rem 0' }}>
-          <div style={{
-            maxWidth: '1100px', margin: '0 auto', padding: '0 2rem',
-            display: 'grid', gridTemplateColumns: '1fr 1fr',
-            gap: '5rem', alignItems: 'center',
-          }}>
+        <div className="repertoire-intro">
+          <div className="repertoire-intro-shell">
             <div>
-              <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.25em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1.5rem' }}>About the Setlist</p>
-              <h2 style={{
-                fontFamily: 'Playfair Display, serif',
-                fontSize: 'clamp(1.8rem, 3vw, 2.8rem)',
-                fontWeight: '600', color: '#1a1814',
-                lineHeight: '1.2', marginBottom: '1.5rem',
-              }}>Every arrangement is built from scratch</h2>
-              <p style={{ fontSize: '0.95rem', lineHeight: '1.9', color: '#6b6460', marginBottom: '1.5rem' }}>
+              <p
+                style={{
+                  fontSize: '0.65rem',
+                  fontWeight: '600',
+                  letterSpacing: '0.25em',
+                  textTransform: 'uppercase',
+                  color: '#c4622d',
+                  marginBottom: '1.5rem',
+                }}
+              >
+                About the Setlist
+              </p>
+
+              <h2
+                style={{
+                  fontFamily: 'Playfair Display, serif',
+                  fontSize: 'clamp(1.8rem, 3vw, 2.8rem)',
+                  fontWeight: '600',
+                  color: '#1a1814',
+                  lineHeight: '1.2',
+                  marginBottom: '1.5rem',
+                }}
+              >
+                Every arrangement is built from scratch
+              </h2>
+
+              <p
+                style={{
+                  fontSize: '0.95rem',
+                  lineHeight: '1.9',
+                  color: '#6b6460',
+                  marginBottom: '1.5rem',
+                }}
+              >
                 Ethan performs with a live looping station, layering beatbox, bass lines, harmonies, and textures in real time. Each song is arranged specifically for live performance, so what you hear is built on the spot, every single time.
               </p>
-              <p style={{ fontSize: '0.95rem', lineHeight: '1.9', color: '#6b6460' }}>
-                Don't see a song you love? Ethan regularly learns custom songs for weddings and special events. Just ask.
+
+              <p
+                style={{
+                  fontSize: '0.95rem',
+                  lineHeight: '1.9',
+                  color: '#6b6460',
+                }}
+              >
+                Don&apos;t see a song you love? Ethan regularly learns custom songs for weddings and special events. Just ask.
               </p>
             </div>
-            <div style={{ overflow: 'hidden', aspectRatio: '3/4' }}>
+
+            <div style={{ overflow: 'hidden', aspectRatio: '3 / 4' }}>
               <img
                 src="/images/ethanfighton.png"
                 alt="Ethan Hoffman performing"
                 style={{
-                  width: '100%', height: '100%',
+                  width: '100%',
+                  height: '100%',
                   objectFit: 'cover',
                   objectPosition: 'center top',
                   filter: 'grayscale(20%)',
@@ -248,30 +386,59 @@ export default function Repertoire() {
             </div>
           </div>
         </div>
-        
-{/* Song Lists */}
-<div style={{ backgroundColor: '#fdfaf5', padding: '3rem 0 5rem' }}>
-  <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}>
-    {/* Genre Repertoire */}
-    <div style={{ marginBottom: '2rem' }}>
-      <p style={{ fontSize: '0.7rem', fontWeight: '600', letterSpacing: '0.25em', textTransform: 'uppercase', color: '#6b6460', textAlign: 'center', marginBottom: '2.5rem' }}>Performance Repertoire by Genre</p>
-      {genreRepertoire.map((section, i) => (
-        <GenreSection key={i} genre={section.genre} songs={section.songs} />
-      ))}
-    </div>
 
+        <div className="repertoire-list-section">
+          <div className="repertoire-list-shell">
+            <div style={{ marginBottom: '2rem' }}>
+              <p
+                style={{
+                  fontSize: '0.7rem',
+                  fontWeight: '600',
+                  letterSpacing: '0.25em',
+                  textTransform: 'uppercase',
+                  color: '#6b6460',
+                  textAlign: 'center',
+                  marginBottom: '2.5rem',
+                }}
+              >
+                Performance Repertoire by Genre
+              </p>
 
-            {/* CTA */}
-            <div style={{ textAlign: 'center', padding: '4rem 3rem', backgroundColor: '#1a1814' }}>
-              <p style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.6rem', color: '#fdfaf5', marginBottom: '0.75rem' }}>Don't see your song?</p>
-              <p style={{ fontSize: '0.9rem', color: 'rgba(253,250,245,0.5)', marginBottom: '2rem' }}>Ethan learns custom songs for weddings and special events.</p>
-              <a href="/contact" className="btn-primary">Request a Song</a>
+              {genreRepertoire.map((section, i) => (
+                <GenreSection key={i} genre={section.genre} songs={section.songs} />
+              ))}
             </div>
 
+            <div className="repertoire-cta">
+              <p
+                style={{
+                  fontFamily: 'Playfair Display, serif',
+                  fontSize: '1.6rem',
+                  color: '#fdfaf5',
+                  marginBottom: '0.75rem',
+                }}
+              >
+                Don&apos;t see your song?
+              </p>
+
+              <p
+                style={{
+                  fontSize: '0.9rem',
+                  color: 'rgba(253,250,245,0.5)',
+                  marginBottom: '2rem',
+                }}
+              >
+                Ethan learns custom songs for weddings and special events.
+              </p>
+
+              <Link href="/contact" className="btn-primary">
+                Request a Song
+              </Link>
+            </div>
           </div>
         </div>
-
       </main>
+
       <Footer />
     </>
   )

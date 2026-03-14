@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import Link from 'next/link'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
@@ -72,86 +73,276 @@ export default function Services() {
   return (
     <>
       <Navbar />
-      <main style={{ backgroundColor: '#f5f0e8', minHeight: '100vh' }}>
 
-        <div style={{ backgroundColor: '#f5f0e8', padding: '8rem 0 5rem' }}>
+      <style>{`
+        .services-page {
+          background-color: #f5f0e8;
+          min-height: 100vh;
+          overflow-x: hidden;
+        }
+
+        .services-hero {
+          background-color: #f5f0e8;
+          padding: 8rem 0 5rem;
+        }
+
+        .services-shell {
+          width: min(1200px, calc(100% - 3rem));
+          margin: 0 auto;
+          padding-bottom: 6rem;
+        }
+
+        .services-tabs {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 0.5rem;
+          align-items: stretch;
+          margin-bottom: 4rem;
+          border-bottom: 1px solid rgba(196,168,130,0.4);
+          width: 100%;
+        }
+
+        .services-tab {
+          width: 100%;
+          min-width: 0;
+          background: none;
+          border: none;
+          padding: 1rem 0.75rem;
+          font-size: 0.7rem;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          cursor: pointer;
+          color: #6b6460;
+          font-family: Inter, sans-serif;
+          text-align: center;
+          line-height: 1.45;
+          white-space: normal;
+          word-break: keep-all;
+          overflow-wrap: normal;
+          hyphens: none;
+          border-bottom: 2px solid transparent;
+          transition: color 0.25s ease, border-color 0.25s ease;
+        }
+
+        .services-tab:hover {
+          color: #c4622d;
+        }
+
+        .services-tab.active {
+          color: #c4622d;
+          border-bottom: 2px solid #c4622d;
+        }
+
+        .services-content {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 4rem;
+          align-items: center;
+        }
+
+        .services-image-wrap {
+          aspect-ratio: 4 / 3;
+          overflow: hidden;
+          background: #ddd3c8;
+        }
+
+        .services-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: opacity 0.4s ease;
+        }
+
+        .services-details {
+          margin-bottom: 2.5rem;
+        }
+
+        .services-detail-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.75rem;
+          margin-bottom: 0.8rem;
+        }
+
+        @media (max-width: 1024px) {
+          .services-content {
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+          }
+
+          .services-copy {
+            order: 2;
+          }
+
+          .services-media {
+            order: 1;
+          }
+        }
+
+        @media (max-width: 900px) {
+          .services-tabs {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            margin-bottom: 2.5rem;
+          }
+
+          .services-tab {
+            font-size: 0.66rem;
+            letter-spacing: 0.06em;
+            padding: 1rem 0.75rem;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .services-hero {
+            padding: 7rem 0 3rem;
+          }
+
+          .services-shell {
+            width: min(1200px, calc(100% - 2rem));
+            padding-bottom: 4rem;
+          }
+
+          .services-image-wrap {
+            aspect-ratio: 4 / 4.5;
+          }
+
+          .services-details {
+            margin-bottom: 2rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .services-hero {
+            padding: 6.5rem 0 2.5rem;
+          }
+
+          .services-shell {
+            width: min(1200px, calc(100% - 1.5rem));
+          }
+
+          .services-tab {
+            font-size: 0.64rem;
+            letter-spacing: 0.05em;
+            padding: 0.9rem 0.55rem;
+          }
+        }
+      `}</style>
+
+      <main className="services-page">
+        <div className="services-hero">
           <div className="container">
-            <p style={{ fontSize: '0.7rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem' }}>What Ethan Offers</p>
-            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: '600', color: '#1a1814', lineHeight: '1.1' }}>Every Event, Elevated</h1>
+            <p
+              style={{
+                fontSize: '0.7rem',
+                fontWeight: '600',
+                letterSpacing: '0.3em',
+                textTransform: 'uppercase',
+                color: '#c4622d',
+                marginBottom: '1rem',
+              }}
+            >
+              What Ethan Offers
+            </p>
+
+            <h1
+              style={{
+                fontFamily: 'Playfair Display, serif',
+                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                fontWeight: '600',
+                color: '#1a1814',
+                lineHeight: '1.1',
+              }}
+            >
+              Every Event, Elevated
+            </h1>
           </div>
         </div>
 
-        <div className="container" style={{ padding: '0 2rem 6rem' }}>
-
-          {/* Tabs */}
-          <div style={{
-            display: 'flex', justifyContent: 'center',
-            marginBottom: '4rem',
-            borderBottom: '1px solid rgba(196,168,130,0.4)',
-            flexWrap: 'wrap',
-          }}>
+        <div className="services-shell">
+          <div className="services-tabs">
             {services.map((s, i) => (
-              <button key={i} onClick={() => setActive(i)} style={{
-                background: 'none', border: 'none',
-                padding: '1rem 2rem',
-                fontSize: '0.75rem', fontWeight: '600',
-                letterSpacing: '0.15em', textTransform: 'uppercase',
-                cursor: 'pointer',
-                color: active === i ? '#c4622d' : '#6b6460',
-                borderBottom: active === i ? '2px solid #c4622d' : '2px solid transparent',
-                marginBottom: '-1px',
-                transition: 'all 0.3s ease',
-                fontFamily: 'Inter, sans-serif',
-              }}>{s.label}</button>
+              <button
+                key={s.id}
+                onClick={() => setActive(i)}
+                className={`services-tab ${active === i ? 'active' : ''}`}
+              >
+                {s.label}
+              </button>
             ))}
           </div>
 
-          {/* Content */}
-          <div style={{
-            display: 'grid', gridTemplateColumns: '1fr 1fr',
-            gap: '5rem', alignItems: 'center',
-          }}>
-            <div>
-              <h3 style={{
-                fontFamily: 'Playfair Display, serif',
-                fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
-                fontWeight: '600', color: '#1a1814',
-                lineHeight: '1.3', marginBottom: '1.5rem',
-              }}>{services[active].headline}</h3>
+          <div className="services-content">
+            <div className="services-copy">
+              <h3
+                style={{
+                  fontFamily: 'Playfair Display, serif',
+                  fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
+                  fontWeight: '600',
+                  color: '#1a1814',
+                  lineHeight: '1.3',
+                  marginBottom: '1.5rem',
+                }}
+              >
+                {services[active].headline}
+              </h3>
 
-              <p style={{
-                fontSize: '1rem', lineHeight: '1.85',
-                color: '#6b6460', marginBottom: '2rem',
-              }}>{services[active].description}</p>
+              <p
+                style={{
+                  fontSize: '1rem',
+                  lineHeight: '1.85',
+                  color: '#6b6460',
+                  marginBottom: '2rem',
+                }}
+              >
+                {services[active].description}
+              </p>
 
-              <div style={{ marginBottom: '2.5rem' }}>
+              <div className="services-details">
                 {services[active].details.map((d, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
-                    <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#c4622d', flexShrink: 0 }} />
-                    <p style={{ fontSize: '0.9rem', color: '#2d2926' }}>{d}</p>
+                  <div key={i} className="services-detail-item">
+                    <div
+                      style={{
+                        width: '6px',
+                        height: '6px',
+                        borderRadius: '50%',
+                        backgroundColor: '#c4622d',
+                        flexShrink: 0,
+                        marginTop: '0.45rem',
+                      }}
+                    />
+                    <p
+                      style={{
+                        fontSize: '0.9rem',
+                        color: '#2d2926',
+                        lineHeight: '1.55',
+                      }}
+                    >
+                      {d}
+                    </p>
                   </div>
                 ))}
               </div>
 
-              <a href="/contact" className="btn-primary">Book Ethan</a>
+              <Link href="/contact" className="btn-primary">
+                Book Ethan
+              </Link>
             </div>
 
-            <div style={{ aspectRatio: '4/3', overflow: 'hidden' }}>
-              <img
-                src={services[active].photo}
-                alt={services[active].label}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: services[active].objectPosition,
-                  transition: 'opacity 0.4s ease',
-                }}
-              />
+            <div className="services-media">
+              <div className="services-image-wrap">
+                <img
+                  src={services[active].photo}
+                  alt={services[active].label}
+                  className="services-image"
+                  style={{ objectPosition: services[active].objectPosition }}
+                />
+              </div>
             </div>
           </div>
         </div>
       </main>
+
       <Footer />
     </>
   )

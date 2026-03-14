@@ -52,19 +52,6 @@ const svcs = [
   },
 ]
 
-const testimonials = [
-  {
-    quote: "Ethan had the entire room silent within the first thirty seconds. By the end of the night, guests were asking us how we found him. He didn't just perform, he transformed the atmosphere completely.",
-    name: 'Sarah and James K.',
-    event: 'Wedding Reception, The Shade Hotel, Manhattan Beach',
-  },
-  {
-    quote: "We've hired a lot of musicians for our corporate events over the years. Ethan is in a different league. He read the room perfectly, kept the energy exactly where we needed it, and received more compliments than any performer we've ever booked.",
-    name: 'Michelle T.',
-    event: 'Corporate Event, Renaissance LAX Hotel',
-  },
-]
-
 const differentiators = [
   {
     number: '01',
@@ -87,194 +74,380 @@ const differentiators = [
 ]
 
 const venueLogos = [
-  { name: 'The Wiltern', file: 'thewilternlogo.png' },
-  { name: 'Hollywood Improv', file: 'hollywoodimprovlogo.png' },
-  { name: 'The Magnolia', file: 'themagnolialogo.png' },
-  { name: 'The Comedy Store', file: 'thecomedystorelogo.png' },
-  { name: 'USC', file: 'usclogo.png' },
-
+  { name: 'The Wiltern', file: 'thewilternlogo.png', invert: false, scale: 1 },
+  { name: 'Hollywood Improv', file: 'hollywoodimprovlogo.png', invert: false, scale: 1 },
+  { name: 'The Magnolia', file: 'themagnolialogo.png', invert: false, scale: 1 },
+  { name: 'The Mint', file: 'themintlogo.png', invert: false, scale: 1.6 },
+  { name: 'Marriott', file: 'marriotlogo.png', invert: false, scale: 1 },
+  { name: 'USC', file: 'usclogo.png', invert: true, scale: 1 },
 ]
 
 function ServicesCarousel() {
   const [active, setActive] = useState(0)
-  const [prev, setPrev] = useState<number | null>(null)
   const [fading, setFading] = useState(false)
   const [paused, setPaused] = useState(false)
 
-  const switchTo = (i: number) => {
+  const switchTo = (i) => {
     if (i === active) return
-    setPrev(active)
     setFading(true)
     setTimeout(() => {
       setActive(i)
       setFading(false)
-      setPrev(null)
-    }, 350)
+    }, 300)
     setPaused(true)
   }
 
   useEffect(() => {
     if (paused) return
     const t = setInterval(() => {
-      setPrev(active)
       setFading(true)
       setTimeout(() => {
-        setActive(a => {
-          const next = (a + 1) % svcs.length
-          return next
-        })
+        setActive((a) => (a + 1) % svcs.length)
         setFading(false)
-        setPrev(null)
-      }, 350)
+      }, 300)
     }, 4500)
     return () => clearInterval(t)
-  }, [paused, active])
+  }, [paused])
 
   return (
-    <section id="services" style={{ backgroundColor: '#1a1814' }}>
+    <section id="services" className="services-section">
       <style>{`
+        .services-section {
+          background: #1a1814;
+        }
+
+        .svc-shell {
+          padding: 0 0 4rem 0;
+        }
+
         .svc-header {
-          display: flex; align-items: flex-start;
+          display: flex;
           justify-content: space-between;
+          align-items: flex-start;
           padding: 4rem 4rem 0;
         }
+
         .svc-tabs {
-          display: flex; gap: 0;
+          display: flex;
+          gap: 1.25rem;
           border-bottom: 1px solid rgba(255,255,255,0.1);
-          padding: 0 4rem;
+          padding: 0 4rem 1rem;
           margin-top: 2rem;
+          overflow-x: auto;
+          scrollbar-width: none;
+          -webkit-overflow-scrolling: touch;
         }
+
+        .svc-tabs::-webkit-scrollbar { display: none; }
+
         .svc-tab {
-          background: none; border: none; cursor: pointer;
-          font-family: Inter, sans-serif; font-size: 0.62rem;
-          font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
-          padding: 1rem 2rem 1rem 0; margin-right: 2rem;
-          color: rgba(255,255,255,0.3);
+          background: none;
+          border: none;
+          cursor: pointer;
+          white-space: nowrap;
+          font-family: Inter, sans-serif;
+          font-size: 0.62rem;
+          font-weight: 600;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.35);
+          padding: 0 0 0.75rem 0;
           border-bottom: 2px solid transparent;
           transition: all 0.3s ease;
-          position: relative; bottom: -1px;
+          flex-shrink: 0;
+          -webkit-tap-highlight-color: transparent;
         }
-        .svc-tab:hover { color: rgba(255,255,255,0.7); }
+
         .svc-tab.active {
-          color: #fdfaf5 !important;
-          border-bottom: 2px solid #c4622d !important;
-          font-weight: 700;
+          color: #fdfaf5;
+          border-bottom: 2px solid #c4622d;
         }
+
         .svc-image-wrap {
           position: relative;
-          margin: 0 4rem 4rem;
+          margin: 0 4rem;
           height: 580px;
           overflow: hidden;
         }
+
         .svc-img {
-          position: absolute; inset: 0;
-          width: 100%; height: 100%; object-fit: cover;
-          object-position: center;
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
           transition: opacity 0.35s ease;
         }
+
         .svc-img.visible { opacity: 1; }
         .svc-img.hidden { opacity: 0; }
+
         .svc-overlay {
-          position: absolute; inset: 0;
-          background: linear-gradient(to left, rgba(10,8,6,0.85) 0%, rgba(10,8,6,0.3) 50%, rgba(10,8,6,0.0) 100%);
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to left, rgba(10,8,6,0.88) 0%, rgba(10,8,6,0.38) 52%, rgba(10,8,6,0.08) 100%);
         }
+
         .svc-card {
-          position: absolute; right: 3rem; top: 50%;
+          position: absolute;
+          right: 3rem;
+          top: 50%;
           transform: translateY(-50%);
-          width: 320px;
+          width: min(320px, calc(100% - 3rem));
+          z-index: 3;
           transition: opacity 0.35s ease;
         }
+
         .svc-card.visible { opacity: 1; }
         .svc-card.hidden { opacity: 0; }
+
+        /* Desktop card (inside image-wrap overlay) always shown on desktop, hidden on mobile */
+        .svc-card-desktop { display: block; }
+        /* Mobile card (below image) hidden on desktop, shown on mobile */
+        .svc-card-mobile { display: none; }
+
         .svc-tag {
           display: inline-block;
-          background: #c4622d; color: #fdfaf5;
-          font-size: 0.55rem; font-weight: 700;
-          letter-spacing: 0.18em; text-transform: uppercase;
+          background: #c4622d;
+          color: #fdfaf5;
+          font-size: 0.55rem;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
           font-family: Inter, sans-serif;
           padding: 0.35rem 0.75rem;
           margin-bottom: 1.25rem;
         }
+
         .svc-card h3 {
           font-family: 'Playfair Display', serif;
-          font-size: 1.6rem; font-weight: 600;
-          color: #fdfaf5; line-height: 1.2;
+          font-size: 1.6rem;
+          font-weight: 600;
+          color: #fdfaf5;
+          line-height: 1.2;
           margin: 0 0 1rem 0;
         }
+
         .svc-card p {
-          font-size: 0.875rem; line-height: 1.75;
-          color: rgba(253,250,245,0.65);
+          font-size: 0.9rem;
+          line-height: 1.75;
+          color: rgba(253,250,245,0.7);
           margin: 0 0 1.5rem 0;
         }
+
         .svc-features {
-          list-style: none; padding: 0; margin: 0 0 1.75rem 0;
+          list-style: none;
+          padding: 0;
+          margin: 0 0 1.75rem 0;
           border-top: 1px solid rgba(255,255,255,0.1);
         }
+
         .svc-features li {
-          font-size: 0.8rem; color: rgba(253,250,245,0.7);
+          font-size: 0.8rem;
+          color: rgba(253,250,245,0.75);
           font-family: Inter, sans-serif;
-          padding: 0.6rem 0;
+          padding: 0.7rem 0;
           border-bottom: 1px solid rgba(255,255,255,0.1);
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
         }
-        .svc-cta {
+
+        .svc-features li::before {
+          content: '';
           display: inline-block;
-          color: #fdfaf5; text-decoration: none;
-          font-size: 0.62rem; font-weight: 700;
-          letter-spacing: 0.2em; text-transform: uppercase;
-          font-family: Inter, sans-serif;
-          display: flex; align-items: center; gap: 0.5rem;
-          transition: gap 0.3s ease;
+          width: 4px;
+          height: 4px;
+          border-radius: 50%;
+          background: #c4622d;
+          flex-shrink: 0;
         }
+
+        .svc-cta {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          color: #fdfaf5;
+          text-decoration: none;
+          font-size: 0.62rem;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          font-family: Inter, sans-serif;
+          transition: gap 0.3s ease, color 0.3s ease;
+        }
+
         .svc-cta:hover { gap: 0.9rem; color: #c4622d; }
+
+        /* ── Tablet ── */
+        @media (max-width: 900px) {
+          .svc-header { padding: 3rem 1.5rem 0; }
+          .svc-tabs { padding: 0 1.5rem 1rem; margin-top: 1.5rem; }
+
+          .svc-image-wrap {
+            margin: 0 1.5rem;
+            height: auto;
+            min-height: 620px;
+          }
+
+          .svc-overlay {
+            background: linear-gradient(to top, rgba(10,8,6,0.97) 0%, rgba(10,8,6,0.75) 42%, rgba(10,8,6,0.15) 100%);
+          }
+
+          .svc-card {
+            left: 1.5rem;
+            right: 1.5rem;
+            bottom: 1.5rem;
+            top: auto;
+            width: auto;
+            transform: none;
+          }
+
+          .svc-card h3 { font-size: 1.45rem; }
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 640px) {
+          .svc-shell { padding: 0 0 3rem 0; }
+
+          .svc-header { padding: 2.5rem 1.25rem 0; }
+
+          .svc-tabs {
+            padding: 0 1.25rem 0;
+            gap: 0;
+            margin-top: 1.25rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: none;
+            overflow: visible;
+          }
+
+          .svc-tab {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            font-size: 0.6rem;
+          }
+
+          .svc-tab:nth-child(odd) {
+            border-right: 1px solid rgba(255,255,255,0.1);
+          }
+
+          .svc-tab.active {
+            border-bottom: 1px solid #c4622d;
+          }
+
+          /* On mobile, stack the image + card vertically instead of overlay */
+          .svc-image-wrap {
+            margin: 0;
+            height: 52vw;
+            min-height: 220px;
+            max-height: 320px;
+          }
+
+          .svc-overlay {
+            background: linear-gradient(to bottom, rgba(10,8,6,0.05) 0%, rgba(10,8,6,0.55) 100%);
+          }
+
+          /* Card becomes a separate block below the image */
+          .svc-card {
+            position: static;
+            transform: none;
+            width: auto;
+            padding: 1.5rem 1.25rem;
+            background: rgba(26,24,20,0.98);
+            border-top: 2px solid #c4622d;
+          }
+
+          .svc-card h3 { font-size: 1.3rem; }
+
+          .svc-card p {
+            font-size: 0.88rem;
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+          }
+
+          .svc-features li {
+            font-size: 0.78rem;
+            padding: 0.6rem 0;
+          }
+
+          .svc-tag { margin-bottom: 0.9rem; }
+
+          /* Swap cards on mobile */
+          .svc-card-desktop { display: none; }
+          .svc-card-mobile {
+            display: block;
+            padding: 1.5rem 1.25rem;
+            background: #131210;
+            border-top: 2px solid #c4622d;
+          }
+        }
+
+        @media (max-width: 400px) {
+          .svc-image-wrap {
+            min-height: 200px;
+          }
+        }
       `}</style>
 
-      <div onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-
-        {/* Header */}
+      <div
+        className="svc-shell"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
         <div className="svc-header">
           <div>
             <p style={{
-              fontSize: '0.6rem', fontWeight: '600',
-              letterSpacing: '0.25em', textTransform: 'uppercase',
-              color: '#c4622d', fontFamily: 'Inter, sans-serif', margin: '0 0 0.75rem 0',
-            }}>What Ethan Offers</p>
+              fontSize: '0.6rem', fontWeight: '600', letterSpacing: '0.25em',
+              textTransform: 'uppercase', color: '#c4622d', fontFamily: 'Inter, sans-serif',
+              margin: '0 0 0.75rem 0',
+            }}>
+              What Ethan Offers
+            </p>
             <h2 style={{
               fontFamily: 'Playfair Display, serif',
               fontSize: 'clamp(1.8rem, 3vw, 2.8rem)',
-              fontWeight: '400', color: '#fdfaf5',
-              lineHeight: '1.15', margin: 0,
+              fontWeight: '400', color: '#fdfaf5', lineHeight: '1.15', margin: 0,
             }}>
               The perfect vibe <em>for every occasion</em>
             </h2>
           </div>
         </div>
 
-        {/* Tabs */}
         <div className="svc-tabs">
           {svcs.map((s, i) => (
-            <button key={i}
-              className={`svc-tab${i === active ? ' active' : ''}`}
-              onClick={() => switchTo(i)}>
+            <button
+              key={i}
+              className={`svc-tab ${i === active ? 'active' : ''}`}
+              onClick={() => switchTo(i)}
+            >
               {s.tab}
             </button>
           ))}
         </div>
 
-        {/* Image + overlay card */}
         <div className="svc-image-wrap">
-        {svcs.map((s, i) => (
-  <img key={i} src={s.img} alt={s.tab}
-    style={{ objectPosition: s.position }}
-    className={`svc-img ${i === active ? 'visible' : 'hidden'}`} />
-))}
+          {svcs.map((s, i) => (
+            <img
+              key={i}
+              src={s.img}
+              alt={s.tab}
+              style={{ objectPosition: s.position }}
+              className={`svc-img ${i === active ? 'visible' : 'hidden'}`}
+            />
+          ))}
           <div className="svc-overlay" />
 
-          <div className={`svc-card ${fading ? 'hidden' : 'visible'}`}>
+          {/* Desktop only: card overlaid on image */}
+          <div className={`svc-card svc-card-desktop ${fading ? 'hidden' : 'visible'}`}>
             {svcs[active].tag && <span className="svc-tag">{svcs[active].tag}</span>}
             <h3>{svcs[active].headline}</h3>
             <p>{svcs[active].body}</p>
             <ul className="svc-features">
-              {svcs[active].features.map((f, i) => <li key={i}>{f}</li>)}
+              {svcs[active].features.map((f, j) => (
+                <li key={j}>{f}</li>
+              ))}
             </ul>
             <Link href={svcs[active].href} className="svc-cta">
               {svcs[active].cta} <span>→</span>
@@ -282,6 +455,20 @@ function ServicesCarousel() {
           </div>
         </div>
 
+        {/* Mobile only: card below the image */}
+        <div className={`svc-card svc-card-mobile ${fading ? 'hidden' : 'visible'}`}>
+          {svcs[active].tag && <span className="svc-tag">{svcs[active].tag}</span>}
+          <h3>{svcs[active].headline}</h3>
+          <p>{svcs[active].body}</p>
+          <ul className="svc-features">
+            {svcs[active].features.map((f, j) => (
+              <li key={j}>{f}</li>
+            ))}
+          </ul>
+          <Link href={svcs[active].href} className="svc-cta">
+            {svcs[active].cta} <span>→</span>
+          </Link>
+        </div>
       </div>
     </section>
   )
@@ -291,177 +478,526 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main>
 
- {/* HERO */}
-<section style={{
-  position: 'relative', height: '100vh', minHeight: '700px',
-  overflow: 'hidden', backgroundColor: '#1a1814',
-}}>
-  <div style={{
-    position: 'absolute', inset: 0, zIndex: 1,
-    backgroundImage: 'url(/images/ethanphotositting.png)',
-    backgroundSize: 'cover', backgroundPosition: 'center top',
-  }} />
-  <div style={{
-    position: 'absolute', inset: 0, zIndex: 2,
-    background: 'linear-gradient(to right, rgba(26,24,20,0.88) 0%, rgba(26,24,20,0.5) 60%, rgba(26,24,20,0.15) 100%)',
-  }} />
+      <style>{`
+        *, *::before, *::after { box-sizing: border-box; }
 
-  <div style={{
-    position: 'relative', zIndex: 3,
-    height: '100%', display: 'flex', flexDirection: 'column',
-    justifyContent: 'center', padding: '0 4rem',
-    paddingTop: '8rem',
-  }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
-      <div style={{ width: '2rem', height: '1px', backgroundColor: '#c4622d' }} />
-      <p style={{
-        fontSize: '0.6rem', fontWeight: '600',
-        letterSpacing: '0.3em', textTransform: 'uppercase',
-        color: 'rgba(253,250,245,0.65)', fontFamily: 'Inter, sans-serif', margin: 0,
-      }}>Los Angeles · Live Music</p>
-    </div>
+        img { display: block; max-width: 100%; }
 
-    <h1 style={{
-      fontFamily: 'Playfair Display, serif',
-      fontSize: 'clamp(4.5rem, 10vw, 10rem)',
-      fontWeight: '700', color: '#fdfaf5',
-      lineHeight: '0.95', marginBottom: '1.5rem',
-      letterSpacing: '-0.02em',
-    }}>
-      Ethan<br />Hoffman
-    </h1>
+        .page-container {
+          overflow-x: hidden;
+          background: #1a1814;
+        }
 
-    <p style={{
-      fontFamily: 'Cormorant Garamond, serif',
-      fontSize: 'clamp(1rem, 1.5vw, 1.3rem)',
-      fontWeight: '300', fontStyle: 'italic',
-      color: 'rgba(253,250,245,0.7)', margin: '0 0 2rem 0',
-    }}>Soulful live music for weddings &amp; private events</p>
+        /* ─── HERO ─────────────────────────────────── */
+        .hero-section {
+          position: relative;
+          min-height: 100svh;
+          background: #1a1814;
+          overflow: hidden;
+        }
 
-    <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-      <Link href="/contact" style={{
-        display: 'inline-block', padding: '0.75rem 1.75rem',
-        backgroundColor: '#c4622d', color: '#fdfaf5',
-        textDecoration: 'none', fontSize: '0.65rem', fontWeight: '700',
-        letterSpacing: '0.2em', textTransform: 'uppercase',
-        fontFamily: 'Inter, sans-serif',
-      }}>Book Ethan</Link>
-      <Link href="/music" style={{
-        display: 'inline-block', padding: '0.75rem 1.75rem',
-        backgroundColor: 'transparent', color: '#fdfaf5',
-        textDecoration: 'none', fontSize: '0.65rem', fontWeight: '700',
-        letterSpacing: '0.2em', textTransform: 'uppercase',
-        fontFamily: 'Inter, sans-serif',
-        border: '1px solid rgba(253,250,245,0.45)',
-      }}>Watch Live</Link>
-    </div>
-  </div>
+        .hero-bg {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+          background-image: url('/images/ethanphotositting.png');
+          background-size: cover;
+          background-position: center top;
+        }
 
-  <div style={{
-    position: 'absolute', bottom: '2.5rem', right: '3.5rem',
-    zIndex: 3, textAlign: 'right',
-  }}>
-    <p style={{
-      fontFamily: 'Playfair Display, serif',
-      fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-      fontWeight: '600', color: 'rgba(253,250,245,0.08)',
-      lineHeight: '1', letterSpacing: '-0.02em', margin: 0,
-    }}>300+</p>
-    <p style={{
-      fontSize: '0.55rem', fontWeight: '600',
-      letterSpacing: '0.25em', textTransform: 'uppercase',
-      color: 'rgba(253,250,245,0.2)', fontFamily: 'Inter, sans-serif', margin: 0,
-    }}>Events Performed</p>
-  </div>
-</section>
+        .hero-overlay {
+          position: absolute;
+          inset: 0;
+          z-index: 2;
+          background: linear-gradient(to right, rgba(26,24,20,0.9) 0%, rgba(26,24,20,0.55) 58%, rgba(26,24,20,0.18) 100%);
+        }
 
-{/* STATS BAR */}
-<div style={{ backgroundColor: '#111009' }}>
+        .hero-content {
+          position: relative;
+          z-index: 3;
+          min-height: 100svh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 8rem 4rem 4rem;
+          max-width: 760px;
+        }
 
-  {/* Numbers row */}
-  <div style={{
-    display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
-    borderBottom: '1px solid rgba(255,255,255,0.06)',
-  }}>
-    {[
-      { number: '300+', label: 'Events Performed' },
-      { number: '140M', label: 'Video Views' },
-      { number: '6+', label: 'Hours of Repertoire' },
-      { number: '24hr', label: 'Response Time' },
-    ].map((s, i) => (
-      <div key={i} style={{
-        padding: '3rem 2rem', textAlign: 'center',
-        borderRight: i < 3 ? '1px solid rgba(255,255,255,0.06)' : 'none',
-      }}>
-        <p style={{
-          fontFamily: 'Playfair Display, serif',
-          fontSize: 'clamp(2.5rem, 4vw, 4rem)',
-          fontWeight: '400', color: '#fdfaf5',
-          lineHeight: '1', margin: '0 0 0.6rem 0',
-          letterSpacing: '-0.02em',
-        }}>{s.number}</p>
-        <p style={{
-          fontSize: '0.55rem', fontWeight: '600',
-          letterSpacing: '0.22em', textTransform: 'uppercase',
-          color: 'rgba(255,255,255,0.3)', fontFamily: 'Inter, sans-serif', margin: 0,
-        }}>{s.label}</p>
-      </div>
-    ))}
-  </div>
+        .hero-topline {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          margin-bottom: 1rem;
+          flex-wrap: wrap;
+        }
 
-  {/* Trusted By logos row */}
-  <div style={{
-    display: 'flex', alignItems: 'center',
-    padding: '2rem 3rem', gap: '0',
-    borderTop: '1px solid rgba(255,255,255,0.06)',
-  }}>
-    <p style={{
-      fontSize: '0.55rem', fontWeight: '700',
-      letterSpacing: '0.22em', textTransform: 'uppercase',
-      color: 'rgba(255,255,255,0.25)', fontFamily: 'Inter, sans-serif',
-      whiteSpace: 'nowrap', flexShrink: 0, margin: '0 4rem 0 0',
-    }}>Trusted By</p>
-    <div style={{
-      display: 'flex', alignItems: 'center',
-      justifyContent: 'space-between', flex: 1, flexWrap: 'wrap', gap: '2rem',
-    }}>
-      {venueLogos.map((v, i) => (
-        <img key={i} src={`/images/${v.file}`} alt={v.name} style={{
-          height: '60px', width: 'auto', objectFit: 'contain',
-          filter: i === 4 ? 'brightness(0) invert(1)' : 'none',
-          opacity: 0.85, transition: 'opacity 0.3s ease',
-        }}
-        onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
-        onMouseLeave={e => (e.currentTarget.style.opacity = '0.85')} />
-      ))}
-    </div>
-  </div>
+        .hero-actions {
+          display: flex;
+          gap: 0.75rem;
+          flex-wrap: wrap;
+          width: 100%;
+          max-width: 360px;
+        }
 
-</div>
+        /* ─── STATS ────────────────────────────────── */
+        .stats-wrap { background: #111009; }
 
-        {/* WHO IS ETHAN */}
+        .stats-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .stats-item {
+          padding: 3rem 2rem;
+          text-align: center;
+          border-right: 1px solid rgba(255,255,255,0.06);
+        }
+        .stats-item:last-child { border-right: none; }
+
+        /* ─── TRUSTED ROW ──────────────────────────── */
+        .trusted-row {
+          padding: 2.5rem 3rem 3rem;
+          border-top: 1px solid rgba(255,255,255,0.06);
+          text-align: center;
+        }
+
+        .trusted-logos {
+          display: grid;
+          grid-template-columns: repeat(6, minmax(0, 1fr));
+          align-items: center;
+          justify-items: center;
+          gap: 1rem 2rem;
+          width: 100%;
+          max-width: 1100px;
+          margin: 0 auto;
+        }
+
+        .trusted-logo-cell {
+          width: 100%;
+          min-height: 70px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0 0.5rem;
+        }
+
+        .trusted-logo {
+          width: 100%;
+          height: auto;
+          max-height: 90px;
+          max-width: 220px;
+          object-fit: contain;
+          opacity: 0.55;
+          transition: opacity 0.3s ease, transform 0.3s ease;
+          filter: brightness(0) invert(1);
+        }
+        .trusted-logo:hover { opacity: 0.85; transform: translateY(-1px); }
+
+        /* ─── ABOUT / TESTIMONIAL / CTA GRIDS ─────── */
+        .about-grid, .testimonial-grid, .cta-grid { display: grid; gap: 3rem; }
+        .about-grid   { grid-template-columns: 1fr 1fr; align-items: center; }
+        .testimonial-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
+        .cta-grid     { grid-template-columns: 1fr 1fr; min-height: 600px; }
+
+        .cta-copy {
+          padding: 6rem 4rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        .cta-image {
+          min-height: 420px;
+          background-image: url('/images/ethanincar.png');
+          background-size: cover;
+          background-position: center 60%;
+        }
+
+        /* ─── WSE (WHAT SETS ETHAN) ────────────────── */
+        .wse-section { padding: 10rem 0; position: relative; }
+
+        .wse-marquee-track {
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+          white-space: nowrap;
+          animation: wse-scroll 25s linear infinite;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .wse-marquee-text {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(8rem, 18vw, 18rem);
+          font-weight: 700;
+          color: transparent;
+          -webkit-text-stroke: 1px rgba(196,168,130,0.06);
+          letter-spacing: -0.02em;
+          line-height: 1;
+          display: inline-block;
+          padding-right: 4rem;
+        }
+
+        @keyframes wse-scroll {
+          from { transform: translateY(-50%) translateX(0); }
+          to   { transform: translateY(-50%) translateX(-50%); }
+        }
+
+        .wse-item {
+          position: relative;
+          z-index: 2;
+          display: grid;
+          grid-template-columns: 80px 1fr 1fr;
+          align-items: center;
+          gap: 3rem;
+          padding: 3.5rem 0;
+          border-top: 1px solid rgba(196,168,130,0.08);
+          transition: border-color 0.5s ease;
+        }
+        .wse-item:last-child { border-bottom: 1px solid rgba(196,168,130,0.08); }
+        .wse-item:hover { border-color: rgba(196,98,45,0.2); }
+
+        .wse-num {
+          font-family: 'Playfair Display', serif;
+          font-size: 5rem;
+          font-weight: 700;
+          color: rgba(196,168,130,0.08);
+          line-height: 1;
+          letter-spacing: -0.03em;
+          transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .wse-item:hover .wse-num { color: #c4622d; transform: scale(1.15) translateX(4px); }
+
+        .wse-title {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(2.5rem, 5vw, 5rem);
+          font-weight: 600;
+          line-height: 1;
+          letter-spacing: -0.025em;
+          background: linear-gradient(135deg, rgba(253,250,245,0.15) 0%, rgba(253,250,245,0.08) 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .wse-item:hover .wse-title {
+          background: linear-gradient(135deg, #fdfaf5 0%, rgba(253,250,245,0.75) 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .wse-right {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 1rem;
+        }
+
+        .wse-tag {
+          font-size: 0.6rem;
+          font-weight: 700;
+          letter-spacing: 0.3em;
+          text-transform: uppercase;
+          font-family: Inter, sans-serif;
+          color: rgba(196,98,45,0);
+          border: 1px solid rgba(196,98,45,0);
+          padding: 0.45rem 1.1rem;
+          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+          transform: translateY(8px);
+        }
+        .wse-item:hover .wse-tag { color: #c4622d; border-color: rgba(196,98,45,0.35); transform: translateY(0); }
+
+        .wse-body {
+          font-size: 0.82rem;
+          line-height: 1.9;
+          color: rgba(253,250,245,0);
+          text-align: right;
+          max-width: 340px;
+          transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+          transform: translateY(12px);
+        }
+        .wse-item:hover .wse-body { color: rgba(253,250,245,0.45); transform: translateY(0); }
+
+        .wse-line {
+          position: absolute;
+          left: 0; bottom: -1px;
+          height: 1px; width: 0;
+          background: linear-gradient(to right, #c4622d, rgba(196,98,45,0));
+          transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+          z-index: 3;
+        }
+        .wse-item:hover .wse-line { width: 100%; }
+
+        /* ─── TABLET (≤1024px) ─────────────────────── */
+        @media (max-width: 1024px) {
+          .hero-content { padding: 7rem 2rem 3rem; max-width: 620px; }
+
+          .stats-grid { grid-template-columns: repeat(2, 1fr); }
+          .stats-item:nth-child(2) { border-right: none; }
+          .stats-item:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,0.06); }
+
+          .trusted-row { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 1.5rem; }
+          .trusted-logos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+          .about-grid, .testimonial-grid, .cta-grid { grid-template-columns: 1fr; }
+          .cta-copy { padding: 4rem 2rem; }
+
+          .wse-item { grid-template-columns: 56px 1fr; gap: 1.25rem; align-items: start; }
+          .wse-right { grid-column: 2 / 3; align-items: flex-start; margin-top: 0.75rem; }
+          .wse-tag { color: #c4622d; border-color: rgba(196,98,45,0.3); transform: none; }
+          .wse-body { color: rgba(253,250,245,0.55); text-align: left; transform: none; max-width: none; }
+        }
+
+        /* ─── MOBILE (≤768px) ──────────────────────── */
+        @media (max-width: 768px) {
+          /* Hero */
+          .hero-bg { background-position: 50% top; }
+          .hero-overlay {
+            background: linear-gradient(
+              to top,
+              rgba(26,24,20,0.97) 0%,
+              rgba(26,24,20,0.75) 38%,
+              rgba(26,24,20,0.35) 65%,
+              rgba(26,24,20,0.08) 100%
+            );
+          }
+          .hero-content {
+            min-height: 100svh;
+            padding: 0 1.25rem 3rem;
+            max-width: none;
+            justify-content: flex-end;
+          }
+          .hero-topline { gap: 0.5rem; margin-bottom: 0.75rem; }
+          .hero-actions { max-width: none; flex-direction: column; }
+          .hero-actions a { width: 100%; text-align: center; padding: 1rem 1.5rem; }
+
+          /* Stats */
+          .stats-grid { grid-template-columns: repeat(2, 1fr); }
+          .stats-item {
+            padding: 2rem 1.25rem;
+            border-right: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+          }
+          .stats-item:nth-child(2n) { border-right: none; }
+          .stats-item:nth-last-child(-n+2) { border-bottom: none; }
+
+          /* Trusted */
+          .trusted-row { padding: 2rem 1.25rem 2.5rem; }
+          .trusted-logos {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.25rem 1rem;
+            max-width: 480px;
+          }
+          .trusted-logo-cell { min-height: 56px; }
+          .trusted-logo { max-height: 52px; }
+
+          /* About */
+          .about-grid { gap: 2rem; }
+
+          /* Testimonials */
+          .testimonial-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+
+          /* CTA */
+          .cta-grid { grid-template-columns: 1fr; min-height: auto; }
+          .cta-copy { padding: 3.5rem 1.25rem; }
+          .cta-image { min-height: 300px; order: -1; }
+
+          /* WSE */
+          .wse-section { padding: 5rem 0; }
+          .wse-num { font-size: 2.75rem; }
+          .wse-title { font-size: clamp(1.8rem, 8vw, 2.7rem); line-height: 1.05; }
+          .wse-marquee-track { display: none; }
+          .wse-item { padding: 2rem 0; gap: 1rem; }
+        }
+
+        /* ─── SMALL MOBILE (≤480px) ────────────────── */
+        @media (max-width: 480px) {
+          .hero-content { padding: 0 1rem 2.5rem; }
+
+          .stats-item { padding: 1.75rem 1rem; }
+
+          .trusted-logos { gap: 0.75rem; }
+          .trusted-logo { max-height: 34px; max-width: 110px; }
+
+          .cta-copy { padding: 2.75rem 1rem; }
+          .cta-image { min-height: 240px; }
+
+          .about-grid { gap: 1.5rem; }
+          .testimonial-grid { gap: 1rem; }
+        }
+
+        /* ─── VERY SMALL (≤360px) ──────────────────── */
+        @media (max-width: 360px) {
+          .stats-grid { grid-template-columns: 1fr; }
+          .stats-item {
+            border-right: none;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+          }
+          .stats-item:last-child { border-bottom: none; }
+
+          .trusted-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+      `}</style>
+
+      <main className="page-container">
+
+        {/* ── HERO ── */}
+        <section className="hero-section">
+          <div className="hero-bg" />
+          <div className="hero-overlay" />
+
+          <div className="hero-content">
+            <div className="hero-topline">
+              <div style={{ width: '2rem', height: '1px', backgroundColor: '#c4622d' }} />
+              <p style={{
+                fontSize: '0.6rem', fontWeight: '600', letterSpacing: '0.3em',
+                textTransform: 'uppercase', color: 'rgba(253,250,245,0.65)',
+                fontFamily: 'Inter, sans-serif', margin: 0,
+              }}>
+                Los Angeles · Live Music
+              </p>
+            </div>
+
+            <h1 style={{
+              fontFamily: 'Playfair Display, serif',
+              fontSize: 'clamp(3.2rem, 16vw, 10rem)',
+              fontWeight: '700', color: '#fdfaf5',
+              lineHeight: '0.95', marginBottom: '1rem',
+              letterSpacing: '-0.02em',
+            }}>
+              Ethan<br />Hoffman
+            </h1>
+
+            <p style={{
+              fontFamily: 'Cormorant Garamond, serif',
+              fontSize: 'clamp(1rem, 4vw, 1.3rem)',
+              fontWeight: '300', fontStyle: 'italic',
+              color: 'rgba(253,250,245,0.72)',
+              margin: '0 0 2rem 0',
+            }}>
+              Soulful live music for weddings &amp; private events
+            </p>
+
+            <div className="hero-actions">
+              <Link href="/contact" style={{
+                display: 'inline-block', padding: '0.9rem 1.5rem',
+                backgroundColor: '#c4622d', color: '#fdfaf5', textDecoration: 'none',
+                fontSize: '0.65rem', fontWeight: '700', letterSpacing: '0.2em',
+                textTransform: 'uppercase', fontFamily: 'Inter, sans-serif',
+              }}>
+                Book Ethan
+              </Link>
+              <Link href="/music" style={{
+                display: 'inline-block', padding: '0.9rem 1.5rem',
+                backgroundColor: 'transparent', color: '#fdfaf5', textDecoration: 'none',
+                fontSize: '0.65rem', fontWeight: '700', letterSpacing: '0.2em',
+                textTransform: 'uppercase', fontFamily: 'Inter, sans-serif',
+                border: '1px solid rgba(253,250,245,0.45)',
+              }}>
+                Watch Live
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ── STATS + TRUSTED ── */}
+        <div className="stats-wrap">
+          <div className="stats-grid">
+            {[
+              { number: '300+', label: 'Events Performed' },
+              { number: '140M', label: 'Video Views' },
+              { number: '6+',   label: 'Hours of Repertoire' },
+              { number: '24hr', label: 'Response Time' },
+            ].map((s, i) => (
+              <div key={i} className="stats-item">
+                <p style={{
+                  fontFamily: 'Playfair Display, serif',
+                  fontSize: 'clamp(2rem, 5vw, 4rem)',
+                  fontWeight: '400', color: '#fdfaf5',
+                  lineHeight: '1', margin: '0 0 0.5rem 0',
+                  letterSpacing: '-0.02em',
+                }}>
+                  {s.number}
+                </p>
+                <p style={{
+                  fontSize: '0.55rem', fontWeight: '600',
+                  letterSpacing: '0.22em', textTransform: 'uppercase',
+                  color: 'rgba(255,255,255,0.3)', fontFamily: 'Inter, sans-serif', margin: 0,
+                }}>
+                  {s.label}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="trusted-row">
+            <h3 style={{
+              fontFamily: 'Playfair Display, serif',
+              fontSize: 'clamp(1.4rem, 3vw, 2rem)',
+              fontWeight: '400',
+              color: 'rgba(255,255,255,0.15)',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              textAlign: 'center',
+              margin: '0 0 1.25rem 0',
+              lineHeight: 1.2,
+            }}>
+              Past clients &amp; venues include
+            </h3>
+            <div style={{
+              width: '4rem',
+              height: '1px',
+              background: 'rgba(255,255,255,0.12)',
+              margin: '0 auto 2rem',
+            }} />
+            <div className="trusted-logos">
+              {venueLogos.map((v, i) => (
+                <div key={i} className="trusted-logo-cell">
+                  <img
+                    src={`/images/${v.file}`}
+                    alt={v.name}
+                    className="trusted-logo"
+                    style={{
+                      filter: 'brightness(0) invert(1)',
+                      transform: `scale(${v.scale})`,
+                      transformOrigin: 'center',
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── ABOUT ── */}
         <ScrollReveal delay={100}>
-          <section style={{ backgroundColor: '#f5f0e8', padding: '7rem 0' }}>
+          <section className="site-section" style={{ backgroundColor: '#f5f0e8', padding: '7rem 0' }}>
             <div className="container">
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }}>
+              <div className="about-grid">
                 <div style={{ position: 'relative' }}>
-                  <div style={{ width: '100%', aspectRatio: '3/4', overflow: 'hidden' }}>
-                    <img src="/images/ethansingingorange.png" alt="Ethan Hoffman"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 50%' }} />
+                  <div style={{ width: '100%', aspectRatio: '3 / 4', overflow: 'hidden' }}>
+                    <img
+                      src="/images/ethansingingorange.png"
+                      alt="Ethan Hoffman"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 50%' }}
+                    />
                   </div>
                   <div style={{
-                    position: 'absolute', top: '1.5rem', left: '1.5rem',
-                    right: '-1.5rem', bottom: '-1.5rem',
+                    position: 'absolute', top: '1rem', left: '1rem',
+                    right: '-0.5rem', bottom: '-0.5rem',
                     border: '1px solid rgba(196,98,45,0.3)', zIndex: -1,
                   }} />
                 </div>
+
                 <div>
                   <p className="section-label" style={{ marginBottom: '1rem' }}>Who is Ethan</p>
                   <h2 style={{
                     fontFamily: 'Playfair Display, serif',
-                    fontSize: 'clamp(2rem, 3.5vw, 2.8rem)',
+                    fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
                     fontWeight: '600', color: '#1a1814',
                     lineHeight: '1.2', marginBottom: '1.5rem',
                   }}>
@@ -479,9 +1015,7 @@ export default function Home() {
                     color: '#c4622d', textDecoration: 'none',
                     fontSize: '0.8rem', fontWeight: '600',
                     letterSpacing: '0.1em', textTransform: 'uppercase',
-                  }}
-                  onMouseEnter={e => (e.currentTarget.style.gap = '0.8rem')}
-                  onMouseLeave={e => (e.currentTarget.style.gap = '0.5rem')}>
+                  }}>
                     Full Story <span>→</span>
                   </Link>
                 </div>
@@ -490,90 +1024,8 @@ export default function Home() {
           </section>
         </ScrollReveal>
 
-        {/* WHAT SETS ETHAN APART */}
+        {/* ── WHAT SETS ETHAN APART ── */}
         <section style={{ backgroundColor: '#1a1814', overflow: 'hidden', position: 'relative' }}>
-          <style>{`
-            .wse-section { padding: 10rem 0; position: relative; }
-            .wse-marquee-track {
-              position: absolute; top: 50%; left: 0;
-              transform: translateY(-50%);
-              white-space: nowrap;
-              animation: wse-scroll 25s linear infinite;
-              pointer-events: none; z-index: 0;
-            }
-            .wse-marquee-text {
-              font-family: 'Playfair Display', serif;
-              font-size: clamp(8rem, 18vw, 18rem);
-              font-weight: 700; color: transparent;
-              -webkit-text-stroke: 1px rgba(196,168,130,0.06);
-              letter-spacing: -0.02em; line-height: 1;
-              display: inline-block; padding-right: 4rem;
-            }
-            @keyframes wse-scroll {
-              from { transform: translateY(-50%) translateX(0); }
-              to { transform: translateY(-50%) translateX(-50%); }
-            }
-            .wse-item {
-              position: relative; z-index: 2;
-              display: grid; grid-template-columns: 80px 1fr 1fr;
-              align-items: center; gap: 3rem; padding: 3.5rem 0;
-              border-top: 1px solid rgba(196,168,130,0.08);
-              cursor: default; transition: border-color 0.5s ease;
-            }
-            .wse-item:last-child { border-bottom: 1px solid rgba(196,168,130,0.08); }
-            .wse-item:hover { border-color: rgba(196,98,45,0.2); }
-            .wse-num {
-              font-family: 'Playfair Display', serif;
-              font-size: 5rem; font-weight: 700;
-              color: rgba(196,168,130,0.08); line-height: 1;
-              letter-spacing: -0.03em;
-              transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); display: block;
-            }
-            .wse-item:hover .wse-num { color: #c4622d; transform: scale(1.15) translateX(4px); }
-            .wse-title {
-              font-family: 'Playfair Display', serif;
-              font-size: clamp(2.5rem, 5vw, 5rem);
-              font-weight: 600; line-height: 1.0; letter-spacing: -0.025em;
-              background: linear-gradient(135deg, rgba(253,250,245,0.15) 0%, rgba(253,250,245,0.08) 100%);
-              -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-              transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            }
-            .wse-item:hover .wse-title {
-              background: linear-gradient(135deg, #fdfaf5 0%, rgba(253,250,245,0.75) 100%);
-              -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-              letter-spacing: -0.02em;
-            }
-            .wse-right { display: flex; flex-direction: column; align-items: flex-end; gap: 1rem; }
-            .wse-tag {
-              font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em;
-              text-transform: uppercase; font-family: Inter, sans-serif;
-              color: rgba(196,98,45,0); border: 1px solid rgba(196,98,45,0);
-              padding: 0.45rem 1.1rem;
-              transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-              transform: translateY(8px);
-            }
-            .wse-item:hover .wse-tag { color: #c4622d; border-color: rgba(196,98,45,0.35); transform: translateY(0); }
-            .wse-body {
-              font-size: 0.82rem; line-height: 1.9;
-              color: rgba(253,250,245,0); text-align: right; max-width: 340px;
-              transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); transform: translateY(12px);
-            }
-            .wse-item:hover .wse-body { color: rgba(253,250,245,0.45); transform: translateY(0); }
-            .wse-line {
-              position: absolute; left: 0; bottom: -1px;
-              height: 1px; width: 0;
-              background: linear-gradient(to right, #c4622d, rgba(196,98,45,0));
-              transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1); z-index: 3;
-            }
-            .wse-item:hover .wse-line { width: 100%; }
-            @media (max-width: 768px) {
-              .wse-item { grid-template-columns: 50px 1fr; gap: 1.5rem; }
-              .wse-right { display: none; }
-              .wse-num { font-size: 3rem; }
-              .wse-title { font-size: clamp(2rem, 8vw, 3rem); }
-            }
-          `}</style>
-
           <div className="wse-marquee-track">
             {['ETHAN HOFFMAN ', 'ETHAN HOFFMAN ', 'ETHAN HOFFMAN ', 'ETHAN HOFFMAN '].map((t, i) => (
               <span key={i} className="wse-marquee-text">{t}</span>
@@ -582,11 +1034,15 @@ export default function Home() {
 
           <div className="wse-section">
             <div className="container">
-              <div style={{ marginBottom: '5rem', position: 'relative', zIndex: 2 }}>
-                <p style={{ fontSize: '0.62rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d' }}>
+              <div style={{ marginBottom: '4rem', position: 'relative', zIndex: 2 }}>
+                <p style={{
+                  fontSize: '0.62rem', fontWeight: '600',
+                  letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d',
+                }}>
                   What Sets Ethan Apart
                 </p>
               </div>
+
               {differentiators.map((item, i) => (
                 <div key={i} className="wse-item">
                   <span className="wse-num">{item.number}</span>
@@ -602,136 +1058,128 @@ export default function Home() {
           </div>
         </section>
 
-        {/* SERVICES CAROUSEL */}
+        {/* ── SERVICES CAROUSEL ── */}
         <ScrollReveal delay={100}>
           <ServicesCarousel />
         </ScrollReveal>
 
-       {/* TESTIMONIALS */}
-<ScrollReveal delay={100}>
-  <section style={{ backgroundColor: '#1a1814', padding: '8rem 0', overflow: 'hidden' }}>
-    <div className="container">
-
-      {/* Header */}
-      <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-        <p style={{
-          fontSize: '0.6rem', fontWeight: '600', letterSpacing: '0.3em',
-          textTransform: 'uppercase', color: '#c4622d',
-          fontFamily: 'Inter, sans-serif', margin: '0 0 1rem 0',
-        }}>Testimonials</p>
-        <h2 style={{
-          fontFamily: 'Playfair Display, serif',
-          fontSize: 'clamp(2rem, 4vw, 3.2rem)',
-          fontWeight: '600', color: '#fdfaf5',
-          lineHeight: '1.15', margin: 0, letterSpacing: '-0.02em',
-        }}>What people are saying</h2>
-      </div>
-
-      {/* Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px' }}>
-        {[
-          {
-            quote: "Ethan had the entire room silent within the first thirty seconds. By the end of the night, guests were asking us how we found him. He didn't just perform, he transformed the atmosphere completely.",
-            name: 'Sarah and James K.',
-            event: 'Wedding Reception',
-            venue: 'The Shade Hotel, Manhattan Beach',
-          },
-          {
-            quote: "We've hired a lot of musicians for our corporate events over the years. Ethan is in a different league. He read the room perfectly, kept the energy exactly where we needed it, and received more compliments than any performer we've ever booked.",
-            name: 'Michelle T.',
-            event: 'Corporate Event',
-            venue: 'Renaissance LAX Hotel',
-          },
-        ].map((t, i) => (
-<div key={i} style={{
-  padding: '3.5rem',
-  backgroundColor: i === 0 ? 'rgba(196,168,130,0.06)' : 'rgba(196,98,45,0.06)',
-  borderTop: `2px solid ${i === 0 ? 'rgba(196,168,130,0.2)' : '#c4622d'}`,
-  position: 'relative',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-}}>
-            {/* Big quote mark */}
-            <div style={{
-              fontFamily: 'Playfair Display, serif',
-              fontSize: '8rem', lineHeight: '0.5',
-              color: i === 0 ? 'rgba(196,168,130,0.15)' : 'rgba(196,98,45,0.2)',
-              marginBottom: '1.5rem', userSelect: 'none',
-            }}>"</div>
-
-            <p style={{
-              fontFamily: 'Cormorant Garamond, serif',
-              fontSize: 'clamp(1.1rem, 1.5vw, 1.3rem)',
-              fontStyle: 'italic', fontWeight: '400',
-              color: 'rgba(253,250,245,0.8)',
-              lineHeight: '1.8', margin: '0 0 2.5rem 0',
-            }}>{t.quote}</p>
-
-            <div style={{
-              display: 'flex', alignItems: 'center', gap: '1rem',
-              paddingTop: '1.5rem',
-              borderTop: '1px solid rgba(255,255,255,0.08)',
-            }}>
-              <div style={{
-                width: '2.5rem', height: '2.5rem', borderRadius: '50%',
-                backgroundColor: i === 0 ? 'rgba(196,168,130,0.2)' : 'rgba(196,98,45,0.25)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                flexShrink: 0,
-              }}>
-                <span style={{
+        {/* ── TESTIMONIALS ── */}
+        <ScrollReveal delay={100}>
+          <section style={{ backgroundColor: '#1a1814', padding: '8rem 0', overflow: 'hidden' }}>
+            <div className="container">
+              <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+                <p style={{
+                  fontSize: '0.6rem', fontWeight: '600', letterSpacing: '0.3em',
+                  textTransform: 'uppercase', color: '#c4622d',
+                  fontFamily: 'Inter, sans-serif', margin: '0 0 1rem 0',
+                }}>
+                  Testimonials
+                </p>
+                <h2 style={{
                   fontFamily: 'Playfair Display, serif',
-                  fontSize: '1rem', color: i === 0 ? '#c4a882' : '#c4622d',
-                }}>{t.name[0]}</span>
+                  fontSize: 'clamp(1.9rem, 4vw, 3.2rem)',
+                  fontWeight: '600', color: '#fdfaf5',
+                  lineHeight: '1.15', margin: 0, letterSpacing: '-0.02em',
+                }}>
+                  What people are saying
+                </h2>
               </div>
-              <div>
-                <p style={{
-                  fontFamily: 'Inter, sans-serif', fontSize: '0.8rem',
-                  fontWeight: '700', color: '#fdfaf5', margin: '0 0 0.2rem 0',
-                }}>{t.name}</p>
-                <p style={{
-                  fontFamily: 'Inter, sans-serif', fontSize: '0.65rem',
-                  color: '#c4622d', margin: 0, letterSpacing: '0.05em',
-                }}>{t.event} · {t.venue}</p>
+
+              <div className="testimonial-grid">
+                {[
+                  {
+                    quote: "Ethan had the entire room silent within the first thirty seconds. By the end of the night, guests were asking us how we found him. He didn't just perform, he transformed the atmosphere completely.",
+                    name: 'Sarah and James K.', event: 'Wedding Reception', venue: 'The Shade Hotel, Manhattan Beach',
+                  },
+                  {
+                    quote: "We've hired a lot of musicians for our corporate events over the years. Ethan is in a different league. He read the room perfectly, kept the energy exactly where we needed it, and received more compliments than any performer we've ever booked.",
+                    name: 'Michelle T.', event: 'Corporate Event', venue: 'Renaissance LAX Hotel',
+                  },
+                ].map((t, i) => (
+                  <div key={i} style={{
+                    padding: '2.25rem',
+                    backgroundColor: i === 0 ? 'rgba(196,168,130,0.06)' : 'rgba(196,98,45,0.06)',
+                    borderTop: `2px solid ${i === 0 ? 'rgba(196,168,130,0.2)' : '#c4622d'}`,
+                    display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+                  }}>
+                    <div style={{
+                      fontFamily: 'Playfair Display, serif', fontSize: '5rem',
+                      lineHeight: '0.5',
+                      color: i === 0 ? 'rgba(196,168,130,0.15)' : 'rgba(196,98,45,0.2)',
+                      marginBottom: '1rem', userSelect: 'none',
+                    }}>"</div>
+
+                    <p style={{
+                      fontFamily: 'Cormorant Garamond, serif',
+                      fontSize: 'clamp(1rem, 1.5vw, 1.3rem)',
+                      fontStyle: 'italic', fontWeight: '400',
+                      color: 'rgba(253,250,245,0.8)',
+                      lineHeight: '1.8', margin: '0 0 2rem 0',
+                    }}>
+                      {t.quote}
+                    </p>
+
+                    <div style={{
+                      display: 'flex', alignItems: 'center', gap: '1rem',
+                      paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.08)',
+                    }}>
+                      <div style={{
+                        width: '2.5rem', height: '2.5rem', borderRadius: '50%',
+                        backgroundColor: i === 0 ? 'rgba(196,168,130,0.2)' : 'rgba(196,98,45,0.25)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        flexShrink: 0,
+                      }}>
+                        <span style={{
+                          fontFamily: 'Playfair Display, serif', fontSize: '1rem',
+                          color: i === 0 ? '#c4a882' : '#c4622d',
+                        }}>
+                          {t.name[0]}
+                        </span>
+                      </div>
+                      <div>
+                        <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8rem', fontWeight: '700', color: '#fdfaf5', margin: '0 0 0.2rem 0' }}>{t.name}</p>
+                        <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.65rem', color: '#c4622d', margin: 0, letterSpacing: '0.05em' }}>
+                          {t.event} · {t.venue}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ textAlign: 'center', marginTop: '3.5rem' }}>
+                <Link href="/testimonials" style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '0.6rem',
+                  color: '#c4622d', textDecoration: 'none',
+                  fontSize: '0.65rem', fontWeight: '700',
+                  letterSpacing: '0.2em', textTransform: 'uppercase', fontFamily: 'Inter, sans-serif',
+                }}>
+                  Read More Reviews <span>→</span>
+                </Link>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          </section>
+        </ScrollReveal>
 
-      {/* CTA */}
-      <div style={{ textAlign: 'center', marginTop: '4rem' }}>
-        <Link href="/testimonials" style={{
-          display: 'inline-flex', alignItems: 'center', gap: '0.6rem',
-          color: '#c4622d', textDecoration: 'none',
-          fontSize: '0.65rem', fontWeight: '700',
-          letterSpacing: '0.2em', textTransform: 'uppercase',
-          fontFamily: 'Inter, sans-serif', transition: 'gap 0.3s ease',
-        }}
-        onMouseEnter={e => (e.currentTarget.style.gap = '1rem')}
-        onMouseLeave={e => (e.currentTarget.style.gap = '0.6rem')}>
-          Read More Reviews <span>→</span>
-        </Link>
-      </div>
-
-    </div>
-  </section>
-</ScrollReveal>
-
-        {/* WE MAKE IT UNFORGETTABLE */}
+        {/* ── CTA ── */}
         <ScrollReveal delay={100}>
           <section style={{ backgroundColor: '#1a1814' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: '600px' }}>
-              <div style={{ padding: '6rem 4rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem' }}>
+            <div className="cta-grid">
+              <div className="cta-copy">
+                <p style={{
+                  fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.3em',
+                  textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem',
+                }}>
                   What do you say
                 </p>
                 <h2 style={{
                   fontFamily: 'Playfair Display, serif',
-                  fontSize: 'clamp(2.5rem, 4vw, 4rem)',
+                  fontSize: 'clamp(2rem, 5vw, 4rem)',
                   fontWeight: '400', fontStyle: 'italic',
                   color: '#fdfaf5', lineHeight: '1.1', marginBottom: '2rem',
-                }}>We make it unforgettable</h2>
+                }}>
+                  We make it unforgettable
+                </h2>
                 <p style={{ fontSize: '1rem', lineHeight: '1.85', color: 'rgba(253,250,245,0.6)', marginBottom: '1.5rem' }}>
                   Your guests will remember the food, the flowers, the venue. But what they will truly never forget is how the room felt when Ethan started playing. That stillness. That electricity. That moment when everyone collectively stops and just listens.
                 </p>
@@ -742,10 +1190,7 @@ export default function Home() {
                   Let's Connect
                 </Link>
               </div>
-              <div style={{
-                backgroundImage: 'url(/images/ethanincar.png)',
-                backgroundSize: 'cover', backgroundPosition: 'center 60%',
-              }} />
+              <div className="cta-image" />
             </div>
           </section>
         </ScrollReveal>
