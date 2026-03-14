@@ -15,7 +15,7 @@ export default function Contact() {
     message: '',
   })
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
@@ -125,8 +125,6 @@ ${formData.message}
         background:#c4622d;
       }
 
-      /* MOBILE HEADER */
-
       .mobile-contact-header{
         display:none;
         margin-bottom:2rem;
@@ -146,16 +144,13 @@ ${formData.message}
       }
 
       @media(max-width:1024px){
-
         .contact-grid{
           grid-template-columns:1fr;
           gap:3rem;
         }
-
       }
 
       @media(max-width:768px){
-
         .mobile-contact-header{
           display:block;
         }
@@ -176,14 +171,11 @@ ${formData.message}
         .submit-btn{
           width:100%;
         }
-
       }
 
       `}</style>
 
       <main className="contact-page">
-
-        {/* HERO */}
 
         <div className="contact-hero">
           <div className="container">
@@ -223,26 +215,15 @@ ${formData.message}
         </div>
 
         <div className="contact-shell">
-
           <div className="contact-grid">
-
-        
-
-            {/* FORM */}
-
             <div className="contact-form">
 
-              {/* MOBILE HEADER */}
-
               <div className="mobile-contact-header">
-                <p>Let's Talk</p>
+                <p>Let&apos;s Talk</p>
                 <span>Tell Ethan about your event</span>
               </div>
 
-              {/* DESKTOP INTRO */}
-
               <div className="contact-form-intro" style={{marginBottom:'3rem'}}>
-
                 <h2 style={{
                   fontFamily:'Playfair Display,serif',
                   fontSize:'clamp(1.5rem,2.5vw,2rem)',
@@ -253,15 +234,9 @@ ${formData.message}
                 }}>
                   Tell me about your event
                 </h2>
-
-                <p style={{
-                  fontSize:'.85rem',
-                  color:'#6b6460',
-                  lineHeight:'1.7'
-                }}>
+                <p style={{fontSize:'.85rem',color:'#6b6460',lineHeight:'1.7'}}>
                   Fill out the form below and Ethan or his team will be in touch shortly.
                 </p>
-
               </div>
 
               <div className="contact-form-grid">
@@ -315,11 +290,8 @@ ${formData.message}
                 </div>
 
               </div>
-
             </div>
-
           </div>
-
         </div>
 
       </main>
