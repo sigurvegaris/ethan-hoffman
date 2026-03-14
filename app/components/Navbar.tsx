@@ -47,7 +47,6 @@ export default function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
-
     return () => {
       document.body.style.overflow = ''
     }
@@ -321,12 +320,8 @@ export default function Navbar() {
             <Link
               href="/"
               style={linkStyle}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = '#c4622d'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'rgba(253,250,245,0.82)'
-              }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#c4622d' }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(253,250,245,0.82)' }}
             >
               Home
             </Link>
@@ -335,69 +330,31 @@ export default function Navbar() {
               <button
                 type="button"
                 style={linkStyle}
-                onClick={() => {
-                  setExperienceOpen((o) => !o)
-                  setServicesOpen(false)
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = '#c4622d'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'rgba(253,250,245,0.82)'
-                }}
+                onClick={() => { setExperienceOpen((o) => !o); setServicesOpen(false) }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#c4622d' }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(253,250,245,0.82)' }}
               >
                 Experience ▾
               </button>
 
               {experienceOpen && (
                 <div style={dropdownStyle}>
-                  <Link
-                    href="/about"
-                    style={dropdownLink}
-                    onClick={closeAllMenus}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = '#c4622d'
-                      e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.02)'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = 'rgba(253,250,245,0.72)'
-                      e.currentTarget.style.backgroundColor = 'transparent'
-                    }}
-                  >
-                    About Ethan
-                  </Link>
-
-                  <Link
-                    href="/music"
-                    style={dropdownLink}
-                    onClick={closeAllMenus}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = '#c4622d'
-                      e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.02)'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = 'rgba(253,250,245,0.72)'
-                      e.currentTarget.style.backgroundColor = 'transparent'
-                    }}
-                  >
-                    Music & Media
-                  </Link>
-
-                  <Link
-                    href="/shows"
-                    style={dropdownLink}
-                    onClick={closeAllMenus}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = '#c4622d'
-                      e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.02)'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = 'rgba(253,250,245,0.72)'
-                      e.currentTarget.style.backgroundColor = 'transparent'
-                    }}
-                  >
-                    Upcoming Shows
-                  </Link>
+                  {[
+                    { href: '/about', label: 'About Ethan' },
+                    { href: '/music', label: 'Music & Media' },
+                    { href: '/shows', label: 'Upcoming Shows' },
+                  ].map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      style={dropdownLink}
+                      onClick={closeAllMenus}
+                      onMouseEnter={(e) => { e.currentTarget.style.color = '#c4622d'; e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.02)' }}
+                      onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(253,250,245,0.72)'; e.currentTarget.style.backgroundColor = 'transparent' }}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
                 </div>
               )}
             </div>
@@ -406,85 +363,32 @@ export default function Navbar() {
               <button
                 type="button"
                 style={linkStyle}
-                onClick={() => {
-                  setServicesOpen((o) => !o)
-                  setExperienceOpen(false)
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = '#c4622d'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'rgba(253,250,245,0.82)'
-                }}
+                onClick={() => { setServicesOpen((o) => !o); setExperienceOpen(false) }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#c4622d' }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(253,250,245,0.82)' }}
               >
                 Services ▾
               </button>
 
               {servicesOpen && (
                 <div style={dropdownStyle}>
-                  <Link
-                    href="/services"
-                    style={dropdownLink}
-                    onClick={closeAllMenus}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = '#c4622d'
-                      e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.02)'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = 'rgba(253,250,245,0.72)'
-                      e.currentTarget.style.backgroundColor = 'transparent'
-                    }}
-                  >
-                    Weddings & Events
-                  </Link>
-
-                  <Link
-                    href="/venues"
-                    style={dropdownLink}
-                    onClick={closeAllMenus}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = '#c4622d'
-                      e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.02)'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = 'rgba(253,250,245,0.72)'
-                      e.currentTarget.style.backgroundColor = 'transparent'
-                    }}
-                  >
-                    Venues
-                  </Link>
-
-                  <Link
-                    href="/repertoire"
-                    style={dropdownLink}
-                    onClick={closeAllMenus}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = '#c4622d'
-                      e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.02)'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = 'rgba(253,250,245,0.72)'
-                      e.currentTarget.style.backgroundColor = 'transparent'
-                    }}
-                  >
-                    Repertoire
-                  </Link>
-
-                  <Link
-                    href="/testimonials"
-                    style={dropdownLink}
-                    onClick={closeAllMenus}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = '#c4622d'
-                      e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.02)'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = 'rgba(253,250,245,0.72)'
-                      e.currentTarget.style.backgroundColor = 'transparent'
-                    }}
-                  >
-                    Testimonials
-                  </Link>
+                  {[
+                    { href: '/services', label: 'Weddings & Events' },
+                    { href: '/venues', label: 'Venues' },
+                    { href: '/repertoire', label: 'Repertoire' },
+                    { href: '/testimonials', label: 'Testimonials' },
+                  ].map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      style={dropdownLink}
+                      onClick={closeAllMenus}
+                      onMouseEnter={(e) => { e.currentTarget.style.color = '#c4622d'; e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.02)' }}
+                      onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(253,250,245,0.72)'; e.currentTarget.style.backgroundColor = 'transparent' }}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
                 </div>
               )}
             </div>
@@ -492,12 +396,8 @@ export default function Navbar() {
             <Link
               href="/contact"
               style={linkStyle}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = '#c4622d'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'rgba(253,250,245,0.82)'
-              }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#c4622d' }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(253,250,245,0.82)' }}
             >
               Contact
             </Link>
@@ -545,11 +445,8 @@ export default function Navbar() {
                 onClick={() => setMobileExperienceOpen((o) => !o)}
               >
                 <span>Experience</span>
-                <span className={`eh-mobile-chevron ${mobileExperienceOpen ? 'open' : ''}`}>
-                  ▾
-                </span>
+                <span className={`eh-mobile-chevron ${mobileExperienceOpen ? 'open' : ''}`}>▾</span>
               </button>
-
               {mobileExperienceOpen && (
                 <div className="eh-mobile-submenu">
                   <Link href="/about" onClick={closeAllMenus}>About Ethan</Link>
@@ -566,11 +463,8 @@ export default function Navbar() {
                 onClick={() => setMobileServicesOpen((o) => !o)}
               >
                 <span>Services</span>
-                <span className={`eh-mobile-chevron ${mobileServicesOpen ? 'open' : ''}`}>
-                  ▾
-                </span>
+                <span className={`eh-mobile-chevron ${mobileServicesOpen ? 'open' : ''}`}>▾</span>
               </button>
-
               {mobileServicesOpen && (
                 <div className="eh-mobile-submenu">
                   <Link href="/services" onClick={closeAllMenus}>Weddings & Events</Link>
@@ -588,11 +482,7 @@ export default function Navbar() {
             </div>
 
             <div className="eh-mobile-cta-wrap">
-              <Link
-                href="/contact"
-                onClick={closeAllMenus}
-                className="btn-primary eh-mobile-cta"
-              >
+              <Link href="/contact" onClick={closeAllMenus} className="btn-primary eh-mobile-cta">
                 Book Ethan
               </Link>
             </div>
