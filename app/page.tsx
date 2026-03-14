@@ -87,8 +87,7 @@ function ServicesCarousel() {
   const [fading, setFading] = useState(false)
   const [paused, setPaused] = useState(false)
 
-  const switchTo = (i) => {
-    if (i === active) return
+  const switchTo = (i: number) => {    if (i === active) return
     setFading(true)
     setTimeout(() => {
       setActive(i)
