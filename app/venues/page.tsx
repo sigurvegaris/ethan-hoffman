@@ -36,7 +36,14 @@ const otherVenues = [
   'Quatsch Comedy Club, Berlin',
 ]
 
-function VenueTile({ venue }) {
+interface Venue {
+  name: string
+  logo: string
+  color: boolean
+  size: number
+}
+
+function VenueTile({ venue }: { venue: Venue }) {
   const [hovered, setHovered] = useState(false)
 
   return (
@@ -44,9 +51,7 @@ function VenueTile({ venue }) {
       className="venue-tile"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{
-        backgroundColor: hovered ? '#3a3530' : '#2d2926',
-      }}
+      style={{ backgroundColor: hovered ? '#3a3530' : '#2d2926' }}
     >
       <div
         className="venue-logo-wrap"
@@ -88,14 +93,7 @@ function VenueTile({ venue }) {
           transform: hovered ? 'translateY(0)' : 'translateY(6px)',
         }}
       >
-        <div
-          style={{
-            width: '20px',
-            height: '1px',
-            backgroundColor: '#c4622d',
-            marginBottom: '0.4rem',
-          }}
-        />
+        <div style={{ width: '20px', height: '1px', backgroundColor: '#c4622d', marginBottom: '0.4rem' }} />
         <p
           style={{
             color: '#fdfaf5',
@@ -275,68 +273,40 @@ export default function Venues() {
       <main className="venues-page">
         <div style={{ backgroundColor: '#1a1814', padding: '8rem 0 5rem' }}>
           <div className="container">
-            <p
-              style={{
-                fontSize: '0.7rem',
-                fontWeight: '600',
-                letterSpacing: '0.3em',
-                textTransform: 'uppercase',
-                color: '#c4622d',
-                marginBottom: '1rem',
-              }}
-            >
+            <p style={{
+              fontSize: '0.7rem', fontWeight: '600', letterSpacing: '0.3em',
+              textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem',
+            }}>
               Credibility
             </p>
-            <h1
-              style={{
-                fontFamily: 'Playfair Display, serif',
-                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-                fontWeight: '600',
-                color: '#fdfaf5',
-                lineHeight: '1.1',
-                marginBottom: '1rem',
-              }}
-            >
+            <h1 style={{
+              fontFamily: 'Playfair Display, serif',
+              fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+              fontWeight: '600', color: '#fdfaf5', lineHeight: '1.1', marginBottom: '1rem',
+            }}>
               Past Clients & Venues
             </h1>
-            <p
-              style={{
-                fontSize: '0.95rem',
-                color: 'rgba(253,250,245,0.5)',
-                maxWidth: '500px',
-                lineHeight: '1.8',
-              }}
-            >
+            <p style={{
+              fontSize: '0.95rem', color: 'rgba(253,250,245,0.5)',
+              maxWidth: '500px', lineHeight: '1.8',
+            }}>
               Over 300 performances across Los Angeles and beyond. Many of these venues were recurring bookings, some as many as 15 times.
             </p>
           </div>
         </div>
 
         <div className="venues-shell">
-          <p
-            style={{
-              fontSize: '0.65rem',
-              fontWeight: '600',
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              color: '#c4622d',
-              marginBottom: '0.75rem',
-              textAlign: 'center',
-            }}
-          >
+          <p style={{
+            fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.2em',
+            textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.75rem', textAlign: 'center',
+          }}>
             Featured Venues
           </p>
 
-          <p
-            style={{
-              fontFamily: 'Cormorant Garamond, serif',
-              fontSize: '1rem',
-              fontStyle: 'italic',
-              color: 'rgba(253,250,245,0.35)',
-              textAlign: 'center',
-              marginBottom: '2rem',
-            }}
-          >
+          <p style={{
+            fontFamily: 'Cormorant Garamond, serif', fontSize: '1rem', fontStyle: 'italic',
+            color: 'rgba(253,250,245,0.35)', textAlign: 'center', marginBottom: '2rem',
+          }}>
             Notable stages and events where Ethan has performed across Los Angeles and beyond.
           </p>
 
@@ -346,59 +316,29 @@ export default function Venues() {
             ))}
           </div>
 
-          <div
-            style={{
-              borderTop: '1px solid rgba(196,168,130,0.2)',
-              paddingTop: '3rem',
-            }}
-          >
-            <p
-              style={{
-                fontSize: '0.65rem',
-                fontWeight: '600',
-                letterSpacing: '0.2em',
-                textTransform: 'uppercase',
-                color: '#c4622d',
-                marginBottom: '0.75rem',
-                textAlign: 'center',
-              }}
-            >
+          <div style={{ borderTop: '1px solid rgba(196,168,130,0.2)', paddingTop: '3rem' }}>
+            <p style={{
+              fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.2em',
+              textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.75rem', textAlign: 'center',
+            }}>
               More Venues
             </p>
 
-            <p
-              style={{
-                color: 'rgba(253,250,245,0.35)',
-                textAlign: 'center',
-                marginBottom: '2rem',
-                fontStyle: 'italic',
-                fontFamily: 'Cormorant Garamond, serif',
-                fontSize: '1rem',
-              }}
-            >
+            <p style={{
+              color: 'rgba(253,250,245,0.35)', textAlign: 'center', marginBottom: '2rem',
+              fontStyle: 'italic', fontFamily: 'Cormorant Garamond, serif', fontSize: '1rem',
+            }}>
               A selection of notable venues where Ethan has performed — many as recurring bookings.
             </p>
 
             <div className="other-venues-grid">
               {otherVenues.map((venue, i) => (
                 <div key={i} className="other-venue-item">
-                  <div
-                    style={{
-                      width: '4px',
-                      height: '4px',
-                      borderRadius: '50%',
-                      backgroundColor: '#c4622d',
-                      flexShrink: 0,
-                      marginTop: '0.45rem',
-                    }}
-                  />
-                  <p
-                    style={{
-                      fontSize: '0.82rem',
-                      color: 'rgba(253,250,245,0.6)',
-                      lineHeight: '1.5',
-                    }}
-                  >
+                  <div style={{
+                    width: '4px', height: '4px', borderRadius: '50%',
+                    backgroundColor: '#c4622d', flexShrink: 0, marginTop: '0.45rem',
+                  }} />
+                  <p style={{ fontSize: '0.82rem', color: 'rgba(253,250,245,0.6)', lineHeight: '1.5' }}>
                     {venue}
                   </p>
                 </div>
@@ -406,26 +346,16 @@ export default function Venues() {
             </div>
           </div>
 
-          <div
-            style={{
-              textAlign: 'center',
-              marginTop: '4rem',
-              paddingTop: '3rem',
-              borderTop: '1px solid rgba(196,168,130,0.2)',
-            }}
-          >
-            <p
-              style={{
-                fontFamily: 'Cormorant Garamond, serif',
-                fontSize: '1.4rem',
-                fontStyle: 'italic',
-                color: 'rgba(253,250,245,0.5)',
-                marginBottom: '1.5rem',
-              }}
-            >
+          <div style={{
+            textAlign: 'center', marginTop: '4rem',
+            paddingTop: '3rem', borderTop: '1px solid rgba(196,168,130,0.2)',
+          }}>
+            <p style={{
+              fontFamily: 'Cormorant Garamond, serif', fontSize: '1.4rem',
+              fontStyle: 'italic', color: 'rgba(253,250,245,0.5)', marginBottom: '1.5rem',
+            }}>
               Adding a new venue to the list?
             </p>
-
             <Link href="/contact" className="btn-primary">
               Inquire About Your Venue
             </Link>

@@ -132,7 +132,17 @@ const genreRepertoire = [
   },
 ]
 
-function SongItem({ song, artist }) {
+interface SongItemProps {
+  song: string
+  artist: string
+}
+
+interface GenreSectionProps {
+  genre: string
+  songs: SongItemProps[]
+}
+
+function SongItem({ song, artist }: SongItemProps) {
   return (
     <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem', marginBottom: '0.45rem' }}>
       <span style={{ fontSize: '0.95rem', color: '#1a1814', lineHeight: '1.5' }}>{song}</span>
@@ -142,7 +152,7 @@ function SongItem({ song, artist }) {
   )
 }
 
-function GenreSection({ genre, songs }) {
+function GenreSection({ genre, songs }: GenreSectionProps) {
   const half = Math.ceil(songs.length / 2)
   const columns = [songs.slice(0, half), songs.slice(half)]
 
@@ -349,24 +359,11 @@ export default function Repertoire() {
                 Every arrangement is built from scratch
               </h2>
 
-              <p
-                style={{
-                  fontSize: '0.95rem',
-                  lineHeight: '1.9',
-                  color: '#6b6460',
-                  marginBottom: '1.5rem',
-                }}
-              >
+              <p style={{ fontSize: '0.95rem', lineHeight: '1.9', color: '#6b6460', marginBottom: '1.5rem' }}>
                 Ethan performs with a live looping station, layering beatbox, bass lines, harmonies, and textures in real time. Each song is arranged specifically for live performance, so what you hear is built on the spot, every single time.
               </p>
 
-              <p
-                style={{
-                  fontSize: '0.95rem',
-                  lineHeight: '1.9',
-                  color: '#6b6460',
-                }}
-              >
+              <p style={{ fontSize: '0.95rem', lineHeight: '1.9', color: '#6b6460' }}>
                 Don&apos;t see a song you love? Ethan regularly learns custom songs for weddings and special events. Just ask.
               </p>
             </div>
@@ -421,13 +418,7 @@ export default function Repertoire() {
                 Don&apos;t see your song?
               </p>
 
-              <p
-                style={{
-                  fontSize: '0.9rem',
-                  color: 'rgba(253,250,245,0.5)',
-                  marginBottom: '2rem',
-                }}
-              >
+              <p style={{ fontSize: '0.9rem', color: 'rgba(253,250,245,0.5)', marginBottom: '2rem' }}>
                 Ethan learns custom songs for weddings and special events.
               </p>
 
