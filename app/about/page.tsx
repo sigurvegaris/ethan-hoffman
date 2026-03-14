@@ -16,14 +16,14 @@ export default function About() {
     'Stevie Wonder',
   ]
 
-  const tickerRef = useRef(null)
+  const tickerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const ticker = tickerRef.current
     if (!ticker) return
   
     let pos = 0
-    let frameId = null
+    let frameId: number | null = null
     const speed = 0.4
   
     const step = () => {
