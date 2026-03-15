@@ -17,7 +17,7 @@ const services = [
       'Background and interactive sets',
       'Full sound system included',
     ],
-    photo: '/images/ethanwithguitar.png',
+    photo: '/images/ethanwithguitar.jpg',
     objectPosition: 'center bottom',
   },
   {
@@ -32,7 +32,7 @@ const services = [
       'Exclusive and high-end private events',
       'Flexible set lengths and styles',
     ],
-    photo: '/images/ethanthreeguys.png',
+    photo: '/images/ethanthreeguys.jpg',
     objectPosition: 'center top',
   },
   {
@@ -47,7 +47,7 @@ const services = [
       'University and institutional events',
       'Networking and cocktail receptions',
     ],
-    photo: '/images/ethanwithcrowd.png',
+    photo: '/images/ethanwithcrowd.jpg',
     objectPosition: 'center top',
   },
   {
@@ -62,7 +62,7 @@ const services = [
       '70s and 80s inspired soul sound',
       'Live original music sets',
     ],
-    photo: '/images/ethansoloshot.png',
+    photo: '/images/ethansoloshot.jpg',
     objectPosition: 'center top',
   },
 ]
@@ -125,14 +125,8 @@ export default function Services() {
           transition: color 0.25s ease, border-color 0.25s ease;
         }
 
-        .services-tab:hover {
-          color: #c4622d;
-        }
-
-        .services-tab.active {
-          color: #c4622d;
-          border-bottom: 2px solid #c4622d;
-        }
+        .services-tab:hover { color: #c4622d; }
+        .services-tab.active { color: #c4622d; border-bottom: 2px solid #c4622d; }
 
         .services-content {
           display: grid;
@@ -154,9 +148,7 @@ export default function Services() {
           transition: opacity 0.4s ease;
         }
 
-        .services-details {
-          margin-bottom: 2.5rem;
-        }
+        .services-details { margin-bottom: 2.5rem; }
 
         .services-detail-item {
           display: flex;
@@ -166,18 +158,9 @@ export default function Services() {
         }
 
         @media (max-width: 1024px) {
-          .services-content {
-            grid-template-columns: 1fr;
-            gap: 2.5rem;
-          }
-
-          .services-copy {
-            order: 2;
-          }
-
-          .services-media {
-            order: 1;
-          }
+          .services-content { grid-template-columns: 1fr; gap: 2.5rem; }
+          .services-copy { order: 2; }
+          .services-media { order: 1; }
         }
 
         @media (max-width: 900px) {
@@ -185,75 +168,43 @@ export default function Services() {
             grid-template-columns: repeat(2, minmax(0, 1fr));
             margin-bottom: 2.5rem;
           }
-
-          .services-tab {
-            font-size: 0.66rem;
-            letter-spacing: 0.06em;
-            padding: 1rem 0.75rem;
-          }
+          .services-tab { font-size: 0.66rem; letter-spacing: 0.06em; padding: 1rem 0.75rem; }
         }
 
         @media (max-width: 768px) {
-          .services-hero {
-            padding: 7rem 0 3rem;
-          }
-
-          .services-shell {
-            width: min(1200px, calc(100% - 2rem));
-            padding-bottom: 4rem;
-          }
-
-          .services-image-wrap {
-            aspect-ratio: 4 / 4.5;
-          }
-
-          .services-details {
-            margin-bottom: 2rem;
-          }
+          .services-hero { padding: 7rem 0 3rem; }
+          .services-shell { width: min(1200px, calc(100% - 2rem)); padding-bottom: 4rem; }
+          .services-image-wrap { aspect-ratio: 4 / 4.5; }
+          .services-details { margin-bottom: 2rem; }
         }
 
         @media (max-width: 480px) {
-          .services-hero {
-            padding: 6.5rem 0 2.5rem;
-          }
-
-          .services-shell {
-            width: min(1200px, calc(100% - 1.5rem));
-          }
-
-          .services-tab {
-            font-size: 0.64rem;
-            letter-spacing: 0.05em;
-            padding: 0.9rem 0.55rem;
-          }
+          .services-hero { padding: 6.5rem 0 2.5rem; }
+          .services-shell { width: min(1200px, calc(100% - 1.5rem)); }
+          .services-tab { font-size: 0.64rem; letter-spacing: 0.05em; padding: 0.9rem 0.55rem; }
         }
       `}</style>
 
       <main className="services-page">
         <div className="services-hero">
           <div className="container">
-            <p
-              style={{
-                fontSize: '0.7rem',
-                fontWeight: '600',
-                letterSpacing: '0.3em',
-                textTransform: 'uppercase',
-                color: '#c4622d',
-                marginBottom: '1rem',
-              }}
-            >
+            <p style={{
+              fontSize: '0.7rem',
+              fontWeight: '600',
+              letterSpacing: '0.3em',
+              textTransform: 'uppercase',
+              color: '#c4622d',
+              marginBottom: '1rem',
+            }}>
               What Ethan Offers
             </p>
-
-            <h1
-              style={{
-                fontFamily: 'Playfair Display, serif',
-                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-                fontWeight: '600',
-                color: '#1a1814',
-                lineHeight: '1.1',
-              }}
-            >
+            <h1 style={{
+              fontFamily: 'Playfair Display, serif',
+              fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+              fontWeight: '600',
+              color: '#1a1814',
+              lineHeight: '1.1',
+            }}>
               Every Event, Elevated
             </h1>
           </div>
@@ -274,50 +225,38 @@ export default function Services() {
 
           <div className="services-content">
             <div className="services-copy">
-              <h3
-                style={{
-                  fontFamily: 'Playfair Display, serif',
-                  fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
-                  fontWeight: '600',
-                  color: '#1a1814',
-                  lineHeight: '1.3',
-                  marginBottom: '1.5rem',
-                }}
-              >
+              <h3 style={{
+                fontFamily: 'Playfair Display, serif',
+                fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
+                fontWeight: '600',
+                color: '#1a1814',
+                lineHeight: '1.3',
+                marginBottom: '1.5rem',
+              }}>
                 {services[active].headline}
               </h3>
 
-              <p
-                style={{
-                  fontSize: '1rem',
-                  lineHeight: '1.85',
-                  color: '#6b6460',
-                  marginBottom: '2rem',
-                }}
-              >
+              <p style={{
+                fontSize: '1rem',
+                lineHeight: '1.85',
+                color: '#6b6460',
+                marginBottom: '2rem',
+              }}>
                 {services[active].description}
               </p>
 
               <div className="services-details">
                 {services[active].details.map((d, i) => (
                   <div key={i} className="services-detail-item">
-                    <div
-                      style={{
-                        width: '6px',
-                        height: '6px',
-                        borderRadius: '50%',
-                        backgroundColor: '#c4622d',
-                        flexShrink: 0,
-                        marginTop: '0.45rem',
-                      }}
-                    />
-                    <p
-                      style={{
-                        fontSize: '0.9rem',
-                        color: '#2d2926',
-                        lineHeight: '1.55',
-                      }}
-                    >
+                    <div style={{
+                      width: '6px',
+                      height: '6px',
+                      borderRadius: '50%',
+                      backgroundColor: '#c4622d',
+                      flexShrink: 0,
+                      marginTop: '0.45rem',
+                    }} />
+                    <p style={{ fontSize: '0.9rem', color: '#2d2926', lineHeight: '1.55' }}>
                       {d}
                     </p>
                   </div>

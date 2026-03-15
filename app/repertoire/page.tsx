@@ -206,15 +206,15 @@ export default function Repertoire() {
 
         .repertoire-intro {
           background-color: #f5f0e8;
-          padding: 6rem 0;
+          padding: 2.5rem 0;
         }
 
         .repertoire-intro-shell {
           width: min(1100px, calc(100% - 3rem));
           margin: 0 auto;
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 4rem;
+          grid-template-columns: 1fr 1.6fr;
+          gap: 3rem;
           align-items: center;
         }
 
@@ -258,7 +258,7 @@ export default function Repertoire() {
           }
 
           .repertoire-intro {
-            padding: 4rem 0;
+            padding: 2rem 0;
           }
 
           .repertoire-intro-shell,
@@ -333,52 +333,25 @@ export default function Repertoire() {
         <div className="repertoire-intro">
           <div className="repertoire-intro-shell">
             <div>
-              <p
-                style={{
-                  fontSize: '0.65rem',
-                  fontWeight: '600',
-                  letterSpacing: '0.25em',
-                  textTransform: 'uppercase',
-                  color: '#c4622d',
-                  marginBottom: '1.5rem',
-                }}
-              >
+              <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.25em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.75rem' }}>
                 About the Setlist
               </p>
-
-              <h2
-                style={{
-                  fontFamily: 'Playfair Display, serif',
-                  fontSize: 'clamp(1.8rem, 3vw, 2.8rem)',
-                  fontWeight: '600',
-                  color: '#1a1814',
-                  lineHeight: '1.2',
-                  marginBottom: '1.5rem',
-                }}
-              >
+              <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', fontWeight: '600', color: '#1a1814', lineHeight: '1.2', marginBottom: '0.75rem' }}>
                 Every arrangement is built from scratch
               </h2>
-
-              <p style={{ fontSize: '0.95rem', lineHeight: '1.9', color: '#6b6460', marginBottom: '1.5rem' }}>
-                Ethan performs with a live looping station, layering beatbox, bass lines, harmonies, and textures in real time. Each song is arranged specifically for live performance, so what you hear is built on the spot, every single time.
+              <p style={{ fontSize: '0.9rem', lineHeight: '1.8', color: '#6b6460', marginBottom: '0.5rem' }}>
+                Ethan performs with a live looping station, layering beatbox, bass lines, harmonies, and textures in real time — built on the spot, every single time.
               </p>
-
-              <p style={{ fontSize: '0.95rem', lineHeight: '1.9', color: '#6b6460' }}>
-                Don&apos;t see a song you love? Ethan regularly learns custom songs for weddings and special events. Just ask.
+              <p style={{ fontSize: '0.9rem', lineHeight: '1.8', color: '#6b6460' }}>
+                Don&apos;t see a song you love? Ethan regularly learns custom songs for events. Just ask.
               </p>
             </div>
 
-            <div style={{ overflow: 'hidden', aspectRatio: '3 / 4' }}>
+            <div style={{ overflow: 'hidden', aspectRatio: '16 / 7', borderRadius: '2px' }}>
               <img
-                src="/images/ethanfighton.png"
+                src="/images/ethanfighton.jpg"
                 alt="Ethan Hoffman performing"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'center top',
-                  filter: 'grayscale(20%)',
-                }}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', filter: 'grayscale(20%)' }}
               />
             </div>
           </div>

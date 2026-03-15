@@ -374,7 +374,7 @@ export default function Navbar() {
                 <div style={dropdownStyle}>
                   {[
                     { href: '/services', label: 'Weddings & Events' },
-                    { href: '/venues', label: 'Venues' },
+                    { href: '/venues', label: 'Past Venues' },
                     { href: '/repertoire', label: 'Repertoire' },
                     { href: '/testimonials', label: 'Testimonials' },
                   ].map((item) => (
@@ -468,7 +468,7 @@ export default function Navbar() {
               {mobileServicesOpen && (
                 <div className="eh-mobile-submenu">
                   <Link href="/services" onClick={closeAllMenus}>Weddings & Events</Link>
-                  <Link href="/venues" onClick={closeAllMenus}>Venues</Link>
+                  <Link href="/venues" onClick={closeAllMenus}>Past Venues</Link>
                   <Link href="/repertoire" onClick={closeAllMenus}>Repertoire</Link>
                   <Link href="/testimonials" onClick={closeAllMenus}>Testimonials</Link>
                 </div>

@@ -8,7 +8,7 @@ const featuredVenues = [
   { name: 'The Wiltern', logo: '/images/thewilternlogo.png', color: true, size: 65 },
   { name: 'Hollywood Improv', logo: '/images/hollywoodimprovlogo.png', color: true, size: 65 },
   { name: 'Magnolia Theater', logo: '/images/themagnolialogo.png', color: true, size: 65 },
-  { name: 'The Comedy Store', logo: '/images/thecomedystorelogo.png', color: true, size: 65 },
+  { name: 'The Comedy Store', logo: '/images/comedystorelogo.png', color: true, size: 65 },
   { name: 'Hilton', logo: '/images/hiltonlogo.png', color: true, size: 65 },
   { name: 'Marriott', logo: '/images/marriotlogo.png', color: false, size: 65 },
   { name: 'The Shade Hotel', logo: '/images/shadelogo.png', color: false, size: 65 },
@@ -67,7 +67,7 @@ function VenueTile({ venue }: { venue: Venue }) {
             className="venue-logo"
             style={{
               maxHeight: `${venue.size}px`,
-              filter: venue.color ? 'none' : 'brightness(0) invert(1)',
+              filter: 'none',
             }}
           />
         ) : (
