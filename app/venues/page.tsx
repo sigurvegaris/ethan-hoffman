@@ -328,7 +328,7 @@ export default function Venues() {
               color: 'rgba(253,250,245,0.35)', textAlign: 'center', marginBottom: '2rem',
               fontStyle: 'italic', fontFamily: 'Cormorant Garamond, serif', fontSize: '1rem',
             }}>
-              A selection of notable venues where Ethan has performed — many as recurring bookings.
+              A selection of other venues where Ethan has performed. There are many more not listed here.
             </p>
 
             <div className="other-venues-grid">

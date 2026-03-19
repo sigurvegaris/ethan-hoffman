@@ -325,7 +325,7 @@ export default function Repertoire() {
                 lineHeight: '1.8',
               }}
             >
-              100+ songs across six genres. Soul, Pop, Classics, Jazz, Rock, and Reggae. Don&apos;t see your song? Ethan takes requests and can learn songs for your event.
+              Over 8 hours of repertoire across soul, pop, classics, jazz, rock, reggae, and more. Don’t see your song? Ethan takes requests and can learn songs for your event.
             </p>
           </div>
         </div>
@@ -336,9 +336,6 @@ export default function Repertoire() {
               <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.25em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.75rem' }}>
                 About the Setlist
               </p>
-              <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', fontWeight: '600', color: '#1a1814', lineHeight: '1.2', marginBottom: '0.75rem' }}>
-                Every arrangement is built from scratch
-              </h2>
               <p style={{ fontSize: '0.9rem', lineHeight: '1.8', color: '#6b6460', marginBottom: '0.5rem' }}>
                 Ethan performs with a live looping station, layering beatbox, bass lines, harmonies, and textures in real time — built on the spot, every single time.
               </p>

@@ -320,10 +320,8 @@ export default function About() {
 
                 <div className="about-facts-grid">
                   {[
-                    { label: 'Hometown', value: 'Palos Verdes, CA' },
                     { label: 'Based In', value: 'Los Angeles, CA' },
-                    { label: 'Education', value: 'USC Graduate' },
-                    { label: 'Speciality', value: 'Live Looping' },
+                    { label: 'Graduated From', value: 'USC Marshall School of Business' },
                   ].map((f, i) => (
                     <div key={i}>
                       <p
