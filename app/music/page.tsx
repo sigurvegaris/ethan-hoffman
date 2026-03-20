@@ -43,7 +43,7 @@ export default function Music() {
         .music-sidebar {
           display: flex;
           flex-direction: column;
-          gap: 2rem;
+          gap: 1rem;
         }
 
         .music-video-frame {
@@ -178,6 +178,60 @@ export default function Music() {
                     {video.label}
                   </p>
                 </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Press & Articles ── */}
+        <div style={{ backgroundColor: '#1a1814', padding: '5rem 0', borderTop: '1px solid rgba(196,168,130,0.1)' }}>
+          <div className="music-shell">
+            <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.75rem', textAlign: 'center' }}>
+              Press
+            </p>
+            <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: '400', fontStyle: 'italic', color: '#fdfaf5', textAlign: 'center', marginBottom: '3rem' }}>
+              As seen in
+            </h2>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+              {[
+                { publication: 'Canvas Rebel', title: 'Meet Ethan Hoffman', href: 'https://canvasrebel.com/meet-ethan-hoffman/' },
+                { publication: 'Gut Instinct Media', title: 'Unveiling the Soul of Ethan Hoffman: Beyond the Viral Fame', href: 'https://medium.com/@gutinstinctmedia/unveiling-the-soul-of-ethan-hoffman-beyond-the-viral-fame-a6ab70904fb3' },
+                { publication: 'Voyage LA', title: 'Daily Inspiration: Meet Ethan Hoffman', href: 'https://voyagela.com/interview/daily-inspiration-meet-ethan-hoffman' },
+              ].map((article, i) => (
+                <a
+                  key={i}
+                  href={article.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: 'none', display: 'block' }}
+                >
+                  <div style={{
+                    padding: '2rem',
+                    border: '1px solid rgba(196,168,130,0.3)',
+                    backgroundColor: 'rgba(253,250,245,0.04)',
+                    transition: 'border-color 0.3s ease, background 0.3s ease',
+                  }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLElement).style.borderColor = '#c4622d'
+                    ;(e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(196,98,45,0.08)'
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLElement).style.borderColor = 'rgba(196,168,130,0.3)'
+                    ;(e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(253,250,245,0.04)'
+                  }}
+                  >
+                    <p style={{ fontSize: '0.6rem', fontWeight: '700', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.75rem' }}>
+                      {article.publication}
+                    </p>
+                    <p style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.05rem', fontWeight: '400', color: 'rgba(253,250,245,0.9)', lineHeight: '1.5', marginBottom: '1.5rem' }}>
+                      {article.title}
+                    </p>
+                    <p style={{ fontSize: '0.65rem', fontWeight: '700', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(253,250,245,0.55)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                      Read Article <span>→</span>
+                    </p>
+                  </div>
+                </a>
               ))}
             </div>
           </div>
