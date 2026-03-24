@@ -290,67 +290,15 @@ export default function Repertoire() {
       <main className="repertoire-page">
         <div className="repertoire-hero">
           <div className="container">
-            <p
-              style={{
-                fontSize: '0.7rem',
-                fontWeight: '600',
-                letterSpacing: '0.3em',
-                textTransform: 'uppercase',
-                color: '#c4622d',
-                marginBottom: '1rem',
-              }}
-            >
+            <p style={{ fontSize: '0.7rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem' }}>
               Song List
             </p>
-
-            <h1
-              style={{
-                fontFamily: 'Playfair Display, serif',
-                fontSize: 'clamp(3rem, 7vw, 6rem)',
-                fontWeight: '400',
-                fontStyle: 'italic',
-                color: '#fdfaf5',
-                marginBottom: '1rem',
-              }}
-            >
+            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(3rem, 7vw, 6rem)', fontWeight: '400', fontStyle: 'italic', color: '#fdfaf5', marginBottom: '1rem' }}>
               Repertoire
             </h1>
-
-            <p
-              style={{
-                fontSize: '0.9rem',
-                color: 'rgba(253,250,245,0.4)',
-                maxWidth: '480px',
-                margin: '0 auto',
-                lineHeight: '1.8',
-              }}
-            >
-              Over 8 hours of repertoire across soul, pop, classics, jazz, rock, reggae, and more. Don’t see your song? Ethan takes requests and can learn songs for your event.
+            <p style={{ fontSize: '0.9rem', color: 'rgba(253,250,245,0.6)', maxWidth: '560px', margin: '0 auto', lineHeight: '1.8' }}>
+              Over 8 hours of repertoire across soul, pop, classics, jazz, rock, reggae, and more. Don&apos;t see your song? Ethan takes requests and can learn songs for your event.
             </p>
-          </div>
-        </div>
-
-        <div className="repertoire-intro">
-          <div className="repertoire-intro-shell">
-            <div>
-              <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.25em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.75rem' }}>
-                About the Setlist
-              </p>
-              <p style={{ fontSize: '0.9rem', lineHeight: '1.8', color: '#6b6460', marginBottom: '0.5rem' }}>
-                Ethan performs with a live looping station, layering beatbox, bass lines, harmonies, and textures in real time — built on the spot, every single time.
-              </p>
-              <p style={{ fontSize: '0.9rem', lineHeight: '1.8', color: '#6b6460' }}>
-                Don&apos;t see a song you love? Ethan regularly learns custom songs for events. Just ask.
-              </p>
-            </div>
-
-            <div style={{ overflow: 'hidden', aspectRatio: '16 / 7', borderRadius: '2px' }}>
-              <img
-                src="/images/ethanfighton.jpg"
-                alt="Ethan Hoffman performing"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', filter: 'grayscale(20%)' }}
-              />
-            </div>
           </div>
         </div>
 

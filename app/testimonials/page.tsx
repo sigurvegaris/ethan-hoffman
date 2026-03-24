@@ -1,38 +1,38 @@
 'use client'
+import Link from 'next/link'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import Link from 'next/link'
 
 const testimonials = [
   {
-    quote: "Ethan had the entire room silent within the first thirty seconds. By the end of the night, guests were asking us how we found him. He didn't just perform, he transformed the atmosphere completely.",
+    quote: "Ethan had the entire room silent within the first thirty seconds. By the end of the night, guests were asking us how we found him. He didn't just perform — he transformed the atmosphere completely.",
     name: 'Sarah and James K.',
-    event: 'Wedding Reception, The Shade Hotel, Manhattan Beach',
+    role: 'Wedding Reception',
+    venue: 'The Shade Hotel, Manhattan Beach',
+  },
+  {
+    quote: "Ethan Hoffman has been a joy to work with. He is truly a professional artist — prompt, polite, talented, entertaining, and most importantly, has great character and integrity.",
+    name: 'Tony Nguyen',
+    role: 'Talent Booker',
+    venue: '',
   },
   {
     quote: "We've hired a lot of musicians for our corporate events over the years. Ethan is in a different league. He read the room perfectly, kept the energy exactly where we needed it, and received more compliments than any performer we've ever booked.",
     name: 'Michelle T.',
-    event: 'Corporate Event, Renaissance LAX Hotel',
+    role: 'Corporate Event',
+    venue: 'Renaissance LAX Hotel',
   },
   {
-    quote: "I booked Ethan for my husband's surprise 50th birthday and he absolutely delivered. He learned a few of our favorite songs specifically for the night, improvised with guests, and had everyone on their feet. It was magical.",
-    name: 'Diana R.',
-    event: 'Private Party, Marina Del Rey',
+    quote: "Incredible music, great vibe, added energy to the atmosphere and made everyone feel good… his music makes me happy and I love singing along! He is kind and relates to his audience. He adds a great deal to any event!",
+    name: 'Laura Schenasi',
+    role: 'Executive VP',
+    venue: 'TMMC',
   },
   {
-    quote: "What sets Ethan apart is how present he is. He's not just playing songs, he's genuinely connecting with every person in the room. Our cocktail hour felt like a private concert. Our guests are still talking about it.",
-    name: 'Lauren and Chris M.',
-    event: 'Wedding Cocktail Hour, Torrance Marriott',
-  },
-  {
-    quote: 'Ethan performed at our fundraiser and elevated the entire evening. He was professional, punctual, and incredibly warm with our guests. We will absolutely be booking him again for future events.',
-    name: 'Dr. Amanda S.',
-    event: 'Private Fundraiser, Torrance Memorial Medical Center',
-  },
-  {
-    quote: "I've seen a lot of live performers in this city. Ethan is the real deal. His voice gives you chills and his stage presence is completely natural. Booking him was the best decision we made for our event.",
-    name: 'Cory L.',
-    event: 'Private Event, Hollywood, CA',
+    quote: "Ethan Hoffman truly elevated our fundraising reception! His soulful melodies and upbeat tunes brought such a warm and joyful atmosphere to the event. Ethan brings an infectious energy to his set — he literally had me from the first notes he strummed! You couldn't wipe the smile from my face!",
+    name: 'Lisa Takata',
+    role: 'Special Events Manager',
+    venue: '',
   },
 ]
 
@@ -42,230 +42,272 @@ export default function Testimonials() {
       <Navbar />
 
       <style>{`
-        .testimonials-page {
-          background-color: #f5f0e8;
-          min-height: 100vh;
-          overflow-x: hidden;
-        }
+        .t-page { background: #1a1814; min-height: 100vh; overflow-x: hidden; }
 
-        .testimonials-hero {
-          background-color: #1a1814;
+        .t-hero {
           padding: 8rem 0 5rem;
+          background: #1a1814;
         }
 
-        .testimonials-shell {
+        .t-shell {
           width: min(1200px, calc(100% - 3rem));
           margin: 0 auto;
-          padding: 5rem 0;
         }
 
-        .testimonials-grid {
+        /* ── Bento-style grid ── */
+        .t-grid {
           display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 2rem;
-          margin-bottom: 5rem;
+          grid-template-columns: 1fr 1fr;
+          gap: 2px;
+          background: rgba(255,255,255,0.04);
+          margin-bottom: 2px;
         }
 
-        .testimonial-card {
-          padding: 2.25rem;
-          background-color: #fff;
-          box-shadow: 0 2px 20px rgba(0,0,0,0.05);
-          height: 100%;
+        .t-card {
+          background: #1f1c18;
+          padding: 3rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          min-height: 320px;
         }
 
-        .pull-quote {
+        .t-card.featured {
+          background: #c4622d;
+          grid-column: 1 / -1;
+          min-height: 280px;
           padding: 4rem;
-          background-color: #1a1814;
-          text-align: center;
-          margin-bottom: 4rem;
         }
 
-        @media (max-width: 900px) {
-          .testimonials-grid {
-            grid-template-columns: 1fr;
-          }
+        .t-card.photo {
+          background: #0d0b09;
+          padding: 0;
+          overflow: hidden;
+          position: relative;
+        }
+
+        .t-card.photo img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center top;
+          display: block;
+          opacity: 0.75;
+          transition: opacity 0.4s ease;
+        }
+
+        .t-card.photo:hover img { opacity: 0.9; }
+
+        .t-card.photo .photo-label {
+          position: absolute;
+          bottom: 1.5rem;
+          left: 1.5rem;
+          font-size: 0.6rem;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: rgba(253,250,245,0.6);
+          font-family: Inter, sans-serif;
+        }
+
+        .t-quote-mark {
+          font-family: 'Playfair Display', serif;
+          font-size: 4rem;
+          line-height: 0.5;
+          color: rgba(253,250,245,0.15);
+          margin-bottom: 1.5rem;
+          user-select: none;
+        }
+
+        .t-card.featured .t-quote-mark {
+          color: rgba(253,250,245,0.3);
+        }
+
+        .t-quote {
+          font-family: 'Cormorant Garamond', serif;
+          font-size: clamp(1rem, 1.4vw, 1.25rem);
+          font-style: italic;
+          font-weight: 400;
+          color: rgba(253,250,245,0.85);
+          line-height: 1.8;
+          margin: 0 0 2rem 0;
+          flex: 1;
+        }
+
+        .t-card.featured .t-quote {
+          font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+          color: #fdfaf5;
+        }
+
+        .t-attribution {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          padding-top: 1.5rem;
+          border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .t-card.featured .t-attribution {
+          border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .t-avatar {
+          width: 2.5rem;
+          height: 2.5rem;
+          border-radius: 50%;
+          background: rgba(196,98,45,0.25);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          font-family: 'Playfair Display', serif;
+          font-size: 1rem;
+          color: #c4622d;
+        }
+
+        .t-card.featured .t-avatar {
+          background: rgba(255,255,255,0.2);
+          color: #fdfaf5;
+        }
+
+        .t-name {
+          font-family: Inter, sans-serif;
+          font-size: 0.82rem;
+          font-weight: 700;
+          color: #fdfaf5;
+          margin: 0 0 0.2rem 0;
+        }
+
+        .t-role {
+          font-family: Inter, sans-serif;
+          font-size: 0.65rem;
+          color: rgba(253,250,245,0.5);
+          margin: 0;
+          letter-spacing: 0.04em;
+        }
+
+        .t-card.featured .t-role { color: rgba(255,255,255,0.7); }
+
+        /* ── CTA ── */
+        .t-cta {
+          text-align: center;
+          padding: 6rem 2rem;
+          background: #111009;
         }
 
         @media (max-width: 768px) {
-          .testimonials-hero {
-            padding: 7rem 0 3rem;
-          }
-
-          .testimonials-shell {
-            width: min(1200px, calc(100% - 2rem));
-            padding: 4rem 0;
-          }
-
-          .testimonial-card {
-            padding: 1.5rem;
-          }
-
-          .pull-quote {
-            padding: 2.25rem 1.5rem;
-            margin-bottom: 3rem;
-          }
+          .t-hero { padding: 7rem 0 3rem; }
+          .t-grid { grid-template-columns: 1fr; }
+          .t-card.featured { padding: 2.5rem; }
+          .t-card { padding: 2rem; min-height: 260px; }
+          .t-card.photo { min-height: 300px; }
         }
 
         @media (max-width: 480px) {
-          .testimonials-hero {
-            padding: 6.5rem 0 2.5rem;
-          }
-
-          .testimonials-shell {
-            width: min(1200px, calc(100% - 1.5rem));
-          }
-
-          .testimonial-card {
-            padding: 1.25rem;
-          }
-
-          .pull-quote {
-            padding: 2rem 1.1rem;
-          }
+          .t-hero { padding: 6.5rem 0 2.5rem; }
+          .t-shell { width: min(1200px, calc(100% - 1.5rem)); }
         }
       `}</style>
 
-      <main className="testimonials-page">
-        <div className="testimonials-hero">
-          <div className="container">
-            <p
-              style={{
-                fontSize: '0.7rem',
-                fontWeight: '600',
-                letterSpacing: '0.3em',
-                textTransform: 'uppercase',
-                color: '#c4622d',
-                marginBottom: '1rem',
-              }}
-            >
-              Kind Words
-            </p>
+      <main className="t-page">
 
-            <h1
-              style={{
-                fontFamily: 'Playfair Display, serif',
-                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-                fontWeight: '600',
-                color: '#fdfaf5',
-                lineHeight: '1.1',
-              }}
-            >
-              People who have trusted the work
+        {/* ── HERO ── */}
+        <div className="t-hero">
+          <div className="t-shell">
+            <p style={{ fontSize: '0.7rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem', fontFamily: 'Inter, sans-serif' }}>
+              What People Say
+            </p>
+            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: '600', color: '#fdfaf5', lineHeight: '1.1', marginBottom: '1rem' }}>
+              Testimonials
             </h1>
+            <p style={{ fontSize: '0.95rem', color: 'rgba(253,250,245,0.45)', maxWidth: '480px', lineHeight: '1.8', fontFamily: 'Inter, sans-serif' }}>
+              From weddings and galas to corporate events and ticketed shows — here&apos;s what clients and bookers have to say.
+            </p>
           </div>
         </div>
 
-        <div className="testimonials-shell">
-          <div className="testimonials-grid">
-            {testimonials.map((t, i) => (
-              <div key={i} className="testimonial-card">
-                <p
-                  style={{
-                    fontSize: '2rem',
-                    color: '#c4622d',
-                    fontFamily: 'Playfair Display, serif',
-                    opacity: 0.4,
-                    lineHeight: '1',
-                    marginBottom: '1rem',
-                  }}
-                >
-                  "
-                </p>
+        {/* ── GRID ── */}
+        <div className="t-shell" style={{ paddingBottom: '0' }}>
 
-                <p
-                  style={{
-                    fontFamily: 'Playfair Display, serif',
-                    fontSize: '1rem',
-                    fontStyle: 'italic',
-                    color: '#2d2926',
-                    lineHeight: '1.8',
-                    marginBottom: '1.5rem',
-                  }}
-                >
-                  {t.quote}
-                </p>
-
-                <p
-                  style={{
-                    fontSize: '0.85rem',
-                    fontWeight: '600',
-                    color: '#1a1814',
-                    marginBottom: '0.2rem',
-                  }}
-                >
-                  {t.name}
-                </p>
-
-                <p
-                  style={{
-                    fontSize: '0.75rem',
-                    color: '#c4622d',
-                    letterSpacing: '0.05em',
-                    lineHeight: '1.5',
-                  }}
-                >
-                  {t.event}
-                </p>
+          {/* Row 1: Featured wide quote */}
+          <div className="t-grid">
+            <div className="t-card featured">
+              <div className="t-quote-mark">"</div>
+              <p className="t-quote">{testimonials[0].quote}</p>
+              <div className="t-attribution">
+                <div className="t-avatar">{testimonials[0].name[0]}</div>
+                <div>
+                  <p className="t-name">{testimonials[0].name}</p>
+                  <p className="t-role">{testimonials[0].role}{testimonials[0].venue ? ` · ${testimonials[0].venue}` : ''}</p>
+                </div>
               </div>
-            ))}
+            </div>
           </div>
 
-          <div className="pull-quote">
-            <p
-              style={{
-                fontFamily: 'Playfair Display, serif',
-                fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)',
-                fontStyle: 'italic',
-                color: '#fdfaf5',
-                lineHeight: '1.6',
-                fontWeight: '400',
-              }}
-            >
-              "Ethan had the entire room silent within seconds."
-            </p>
-
-            <p
-              style={{
-                marginTop: '1rem',
-                fontSize: '0.7rem',
-                letterSpacing: '0.2em',
-                textTransform: 'uppercase',
-                color: '#c4622d',
-                lineHeight: '1.5',
-              }}
-            >
-              Venue Manager, The Wiltern Theatre
-            </p>
+          {/* Row 2: Two quotes */}
+          <div className="t-grid">
+            <div className="t-card">
+              <div className="t-quote-mark">"</div>
+              <p className="t-quote">{testimonials[1].quote}</p>
+              <div className="t-attribution">
+                <div className="t-avatar">{testimonials[1].name[0]}</div>
+                <div>
+                  <p className="t-name">{testimonials[1].name}</p>
+                  <p className="t-role">{testimonials[1].role}</p>
+                </div>
+              </div>
+            </div>
+            <div className="t-card">
+              <div className="t-quote-mark">"</div>
+              <p className="t-quote">{testimonials[2].quote}</p>
+              <div className="t-attribution">
+                <div className="t-avatar">{testimonials[2].name[0]}</div>
+                <div>
+                  <p className="t-name">{testimonials[2].name}</p>
+                  <p className="t-role">{testimonials[2].role}{testimonials[2].venue ? ` · ${testimonials[2].venue}` : ''}</p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div style={{ textAlign: 'center' }}>
-            <p
-              style={{
-                fontFamily: 'Playfair Display, serif',
-                fontSize: '1.5rem',
-                color: '#1a1814',
-                marginBottom: '1rem',
-              }}
-            >
-              Ready to create your own experience?
-            </p>
-
-            <p
-              style={{
-                fontSize: '0.9rem',
-                color: '#6b6460',
-                marginBottom: '2rem',
-                lineHeight: '1.7',
-              }}
-            >
-              Ethan responds to every inquiry within 24 hours.
-            </p>
-
-            <Link href="/contact" className="btn-primary">
-              Book Ethan
-            </Link>
+          {/* Row 3: Two quotes */}
+          <div className="t-grid">
+            <div className="t-card">
+              <div className="t-quote-mark">"</div>
+              <p className="t-quote">{testimonials[3].quote}</p>
+              <div className="t-attribution">
+                <div className="t-avatar">{testimonials[3].name[0]}</div>
+                <div>
+                  <p className="t-name">{testimonials[3].name}</p>
+                  <p className="t-role">{testimonials[3].role}{testimonials[3].venue ? ` · ${testimonials[3].venue}` : ''}</p>
+                </div>
+              </div>
+            </div>
+            <div className="t-card">
+              <div className="t-quote-mark">"</div>
+              <p className="t-quote">{testimonials[4].quote}</p>
+              <div className="t-attribution">
+                <div className="t-avatar">{testimonials[4].name[0]}</div>
+                <div>
+                  <p className="t-name">{testimonials[4].name}</p>
+                  <p className="t-role">{testimonials[4].role}</p>
+                </div>
+              </div>
+            </div>
           </div>
+
         </div>
+
+        {/* ── CTA ── */}
+        <div className="t-cta">
+          <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', fontStyle: 'italic', color: 'rgba(253,250,245,0.6)', marginBottom: '1.5rem' }}>
+            Ready to create your own moment?
+          </p>
+          <Link href="/contact" className="btn-primary">
+            Book Ethan
+          </Link>
+        </div>
+
       </main>
 
       <Footer />

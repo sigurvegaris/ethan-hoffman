@@ -12,42 +12,42 @@ const svcs = [
     tag: 'Most Popular',
     headline: 'The soundtrack to your most important day',
     body: 'Ethan works closely with every couple to understand the vibe, then delivers a performance that feels completely tailored to you.',
-    features: ['Ceremony & Reception Coverage', 'Custom Song Requests', 'Cocktail Hours', 'Add-Ons Available'],
-    img: '/images/ethanwearinggreen.png',
-    position: 'center 33%',
-    href: '/services',
-    cta: 'Learn More',
-  },
-  {
-    tab: 'Private Events',
-    tag: 'Intimate Settings',
-    headline: 'The room will feel different when he plays',
-    body: 'Whether a dinner party, milestone birthday, or upscale celebration, Ethan reads the room and shapes the energy in real time.',
-    features: ['Bar & Bat Mitzvahs', 'Birthday Celebrations', 'Upscale Gatherings', 'Anniversary & Engagement Parties', 'Holiday Soirees'],
-    img: '/images/ethanblackandwhite.jpg',
+    features: ['Cocktail Hours', 'Ceremony & Reception Coverage', 'Rehearsal Dinners & Welcome Parties', 'Custom Song Requests'],
+    img: '/images/ethanwithguitar.jpg',
     position: 'center 15%',
     href: '/services',
     cta: 'Learn More',
   },
   {
+    tab: 'Private Events',
+    tag: '',
+    headline: 'The room will feel different when he plays',
+    body: 'Whether a dinner party, milestone birthday, or upscale celebration, Ethan reads the room and shapes the energy in real time.',
+    features: ['Upscale Gatherings', 'Holiday Parties', 'Anniversary & Engagement Parties', 'Birthday Celebrations'],
+    img: '/images/ethanthreeguys.jpg',
+    position: 'center 25%',
+    href: '/services',
+    cta: 'Learn More',
+  },
+  {
     tab: 'Corporate Events',
-    tag: 'Professional',
+    tag: '',
     headline: 'Entertainment that leaves an impression',
     body: 'Ethan has performed for major brands and corporate functions across Los Angeles. He transforms a standard event into something people talk about.',
     features: ['Brand Events & Launches', 'Fundraisers & Galas', 'Holiday Parties', 'Networking Events'],
-    img: '/images/ethanpinkbackground.jpg',
-    position: 'center 5%',
+    img: '/images/ethanwithcrowd.jpg',
+    position: 'center 65%',
     href: '/services',
     cta: 'Learn More',
   },
   {
     tab: 'Original Music',
-    tag: 'Recording Artist',
+    tag: '',
     headline: 'Music written from real life',
     body: 'Beyond events, Ethan is a recording artist with original music on all major platforms. Soulful, honest, and deeply personal.',
     features: ['Available on Spotify', 'Available on Apple Music', 'Original Compositions', 'Live Originals at Events'],
-    img: '/images/ethanwithcrowd.jpg',
-    position: 'center 65%',
+    img: '/images/ethanmustang.jpg',
+    position: 'center 85%',
     href: '/music',
     cta: 'Listen Now',
   },
@@ -56,31 +56,30 @@ const svcs = [
 const differentiators = [
   {
     number: '01',
-    title: 'The Classics\nReimagined',
+    title: 'The Classics,\nReimagined.',
     tag: 'Live Looping',
-    body: 'Ethan breathes new life into the hits you love, reimagining classics through a soulful, pop-crooner lens. These effortless acoustic arrangements feel like a warm, sophisticated breeze, blending pure soul with intricate vocal complexities that captivate every ear in the room.    ',
+    body: 'Ethan breathes new life into the hits you love, reimagining classics through a soulful, pop-crooner lens. These effortless arrangements blend pure retro soul with modern pop, captivating every ear in the room.',
   },
   {
     number: '02',
     title: 'Reads Every\nRoom.',
     tag: 'Adaptability',
-    body: 'From candlelit speakeasies to massive stages, Ethan manages every crowd with professional poise and sharp humor. He is quick on his feet and stays highly improvisational, ensuring the performance feels free and loose while remaining musically flawless and perfectly tuned to the energy of the moment.    ',
+    body: 'From chic cocktail hours to massive stages, Ethan manages every crowd with poise and humor. He is quick on his feet and stays highly improvisational, ensuring the performance feels free and loose while remaining musically polished and perfectly tuned to the energy of the moment.',
   },
   {
     number: '03',
-    title: 'Built for\nthe Moment.',
+    title: 'Exceeds All\nExpectations.',
     tag: 'Experience',
-    body: 'Luxury is the moment your guests realize the live vocalist is of a caliber they never anticipated, instantly creating an elevated vibe. Ethan delivers a premium experience that transcends the typical, making every event feel high-end and unforgettable.    ',
+    body: 'Luxury is the moment your guests realize the live vocalist is of a caliber they never anticipated. Ethan delivers a premium experience that transcends the typical, making every event feel high-end and unforgettable.',
   },
 ]
 
 const venueLogos = [
   { name: 'The Wiltern', file: 'thewilternlogo.png', nudge: -6 },
   { name: 'Hollywood Improv', file: 'hollywoodimprovlogo.png', nudge: 0 },
-  { name: 'The Magnolia', file: 'themagnolialogo.png', nudge: 0 },
   { name: 'Marriott', file: 'marriotlogo.png', nudge: 0 },
   { name: 'The Shade Hotel', file: 'shadelogo.png', nudge: 0 },
-  { name: 'The Comedy Store', file: 'comedystorelogo.png', nudge: 0 },
+  { name: 'The Magnolia', file: 'themagnolialogo.png', nudge: 0 },
   { name: 'USC', file: 'usclogo.png', nudge: 0 },
 ]
 
@@ -271,7 +270,7 @@ export default function Home() {
         .stats-item:last-child { border-right: none; }
 
         .trusted-row { padding: 2.5rem 3rem 3.5rem; background: #c4622d; text-align: center; }
-        .trusted-logos { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); align-items: center; justify-items: center; gap: 1.5rem 1rem; width: 100%; max-width: 1100px; margin: 0 auto; }
+        .trusted-logos { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); align-items: center; justify-items: center; gap: 1.5rem 1rem; width: 100%; max-width: 1100px; margin: 0 auto; }
         .trusted-logo-cell { width: 100%; display: flex; align-items: center; justify-content: center; padding: 0.75rem 1.25rem; }
         .trusted-logo { display: block; width: auto; object-fit: contain; opacity: 0.9; transition: opacity 0.3s ease, transform 0.3s ease; filter: brightness(0) invert(1); }
         .trusted-logo:hover { opacity: 1; transform: translateY(-1px); }
@@ -279,9 +278,9 @@ export default function Home() {
         .about-grid, .testimonial-grid, .cta-grid { display: grid; gap: 3rem; }
         .about-grid { grid-template-columns: 1fr 1fr; align-items: center; }
         .testimonial-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
-        .cta-grid { grid-template-columns: 1fr 1fr; min-height: 600px; }
+        .cta-grid { grid-template-columns: 1fr 1fr; min-height: 600px; align-items: stretch; }
         .cta-copy { padding: 6rem 4rem; display: flex; flex-direction: column; justify-content: center; }
-        .cta-image { position: relative; min-height: 420px; overflow: hidden; }
+        .cta-image { position: relative; min-height: 420px; overflow: hidden; align-self: stretch; }
 
         .wse-section { padding: 10rem 0; position: relative; }
         .wse-marquee-track { position: absolute; top: 50%; left: 0; transform: translateY(-50%); white-space: nowrap; animation: wse-scroll 25s linear infinite; pointer-events: none; z-index: 0; }
@@ -462,18 +461,18 @@ export default function Home() {
                   <div style={{ position: 'absolute', top: '1rem', left: '1rem', right: '-0.5rem', bottom: '-0.5rem', border: '1px solid rgba(196,98,45,0.3)', zIndex: -1 }} />
                 </div>
                 <div>
-                  <p className="section-label" style={{ marginBottom: '1rem' }}>Who is Ethan</p>
+                  <p className="section-label" style={{ marginBottom: '1rem' }}>Who is Ethan?</p>
                   <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', fontWeight: '600', color: '#1a1814', lineHeight: '1.2', marginBottom: '1.5rem' }}>
                     A vocalist who plays rooms,<br /><em style={{ fontWeight: '400' }}>not just songs.</em>
                   </h2>
                   <p style={{ fontSize: '1rem', lineHeight: '1.85', color: '#6b6460', marginBottom: '1.2rem' }}>
-                  It all started with a musical theater audition at 12 years old. Not a grand origin story, but a kid who walked in and realized others saw a potential he was yet to fully embrace. It wasn't until he was performing at a university festival, 2,000-plus capacity theaters, and singing in a video that hit 140 million views before he really knew what others meant. 
+                    It all started with a musical theater audition at 12 years old. Ethan&apos;s performance that day revealed a massive musical potential he was only beginning to recognize. It wasn&apos;t until he was performing at a university festival, 2,000-plus capacity theaters, and singing in a video that hit 140 million views before he really knew what others meant.
                   </p>
                   <p style={{ fontSize: '1rem', lineHeight: '1.85', color: '#6b6460', marginBottom: '2rem' }}>
-                  Ethan has played over 300 gigs across Los Angeles and beyond at luxury hotels, private estates, hospital galas, corporate events, restaurant residencies, and sold-out shows at landmark venues like the Wiltern and Magnolia Theater. Whether he’s putting a Pop-Soul spin on Stevie Wonder’s “Superstition” or Bill Withers’ “Lovely Day,” or completely improvising with a live loop station to build full band arrangements on the spot, audiences find themselves leaving the event with a spark of nostalgia and a new tune humming in their soul.
+                    Ethan has played over 300 gigs across Los Angeles and beyond at luxury hotels, private estates, hospital galas, corporate events, restaurant residencies, and opening at landmark venues like the Wiltern and Magnolia Theater. Whether he&apos;s putting a Pop-Soul spin on Stevie Wonder&apos;s &ldquo;Superstition&rdquo; or Bill Withers&apos; &ldquo;Lovely Day,&rdquo; audiences leave wanting more of a sound that feels brand new yet completely timeless, and curious to know the person behind the performance.
                   </p>
                   <Link href="/about" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#c4622d', textDecoration: 'none', fontSize: '0.8rem', fontWeight: '600', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                    Full Story <span>→</span>
+                    Meet Ethan <span>→</span>
                   </Link>
                 </div>
               </div>
@@ -552,23 +551,23 @@ export default function Home() {
 
         {/* ── CTA ── */}
         <ScrollReveal delay={100}>
-          <section style={{ backgroundColor: '#1a1814' }}>
-            <div className="cta-grid">
+          <section style={{ backgroundColor: '#1a1814', overflow: 'hidden' }}>
+            <div className="cta-grid" style={{ gap: 0 }}>
               <div className="cta-copy">
-                <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem' }}>Connect with Ethan</p>
-                <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 5vw, 4rem)', fontWeight: '400', fontStyle: 'italic', color: '#fdfaf5', lineHeight: '1.1', marginBottom: '2rem' }}>A sound you can count on</h2>
+                <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem' }}>connect with ethan</p>
+                <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 5vw, 4rem)', fontWeight: '400', fontStyle: 'italic', color: '#fdfaf5', lineHeight: '1.1', marginBottom: '2rem' }}>We make it unforgettable</h2>
                 <p style={{ fontSize: '1rem', lineHeight: '1.85', color: 'rgba(253,250,245,0.6)', marginBottom: '1.5rem' }}>
-                Ethan’s voice carries the acoustic textures of Jason Mraz, the prolific storytelling of John Lennon, and the timeless warmth and soul of Bill Withers, blending into an entirely original sound and artistry. Ethan’s sound carries a coastal ease, with the depth and detail of someone who has spent years refining every note.
+                  Ethan&apos;s voice carries the acoustic textures of Jason Mraz, the prolific storytelling of John Lennon, and the timeless warmth and soul of Bill Withers, blending into an entirely original artistry. This versatile mix of genres is reliable and appreciated across all demographics.
+                </p>
+                <p style={{ fontSize: '1rem', lineHeight: '1.85', color: 'rgba(253,250,245,0.6)', marginBottom: '1.5rem' }}>
+                  Each set is curated to the venue, the audience, and whatever the moment calls for. The entire performance is shaped to hold attention from start to finish.
                 </p>
                 <p style={{ fontSize: '1rem', lineHeight: '1.85', color: 'rgba(253,250,245,0.6)', marginBottom: '2.5rem' }}>
-                Each set is curated to the venue, the space, the audience, and whatever the moment calls for. The entire performance is shaped to hold attention from start to finish.
-                </p>
-                <p style={{ fontSize: '1rem', lineHeight: '1.85', color: 'rgba(253,250,245,0.6)', marginBottom: '2.5rem' }}>
-                Ethan is currently taking on new clients in 2026. To connect with him about your event and discuss availability, please click below.
+                  Ethan is currently taking on new clients in 2026. To connect with him about your event and discuss availability, please click below.
                 </p>
                 <Link href="/contact" className="btn-primary" style={{ alignSelf: 'flex-start' }}>Let&apos;s Connect</Link>
               </div>
-              <div className="cta-image">
+              <div style={{ position: 'relative', marginTop: '6rem', flex: 1, minHeight: '400px' }}>
                 <Image
                   src="/images/ethanincar.jpg"
                   alt="Ethan Hoffman"
