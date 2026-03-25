@@ -312,7 +312,7 @@ export default function Navbar() {
 
       <nav className={`eh-nav ${scrolled ? 'scrolled' : ''}`}>
         <Link href="/" className="eh-logo" onClick={closeAllMenus}>
-          Ethan Hoffman
+          <img src="/images/EH.png" alt="Ethan Hoffman" style={{ height: '40px', width: 'auto', display: 'block' }} />
         </Link>
 
         {!isMobile && (

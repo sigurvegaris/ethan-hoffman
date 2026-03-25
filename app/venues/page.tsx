@@ -5,18 +5,18 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
 const featuredVenues = [
-  { name: 'The Wiltern', logo: '/images/thewilternlogo.png', color: true, size: 65 },
-  { name: 'Hollywood Improv', logo: '/images/hollywoodimprovlogo.png', color: true, size: 65 },
-  { name: 'Magnolia Theater', logo: '/images/themagnolialogo.png', color: true, size: 65 },
-  { name: 'The Comedy Store', logo: '/images/comedystorelogo.png', color: true, size: 65 },
-  { name: 'Hilton', logo: '/images/hiltonlogo.png', color: true, size: 65 },
-  { name: 'Marriott', logo: '/images/marriotlogo.png', color: false, size: 65 },
-  { name: 'The Shade Hotel', logo: '/images/shadelogo.png', color: false, size: 65 },
-  { name: 'Hyatt', logo: '/images/hyattlogo.png', color: false, size: 65 },
-  { name: 'The Mint', logo: '/images/themintlogo.png', color: false, size: 150 },
-  { name: 'The Lighthouse Cafe', logo: '/images/lighthousecafelogo.png', color: true, size: 100 },
-  { name: 'Torrance Memorial', logo: '/images/torrancememoriallogo.png', color: false, size: 110 },
-  { name: 'USC', logo: '/images/usclogo.png', color: false, size: 90 },
+  { name: 'The Wiltern', logo: '/images/thewilternlogo.png', size: 85, white: false },
+  { name: 'Hollywood Improv', logo: '/images/hollywoodimprovlogo.png', size: 85, white: false },
+  { name: 'Magnolia Theater', logo: '/images/themagnolialogo.png', size: 85, white: false },
+  { name: 'The Comedy Store', logo: '/images/comedystorelogo.png', size: 85, white: false },
+  { name: 'Hilton', logo: '/images/hiltonlogo.png', size: 85, white: false },
+  { name: 'Marriott', logo: '/images/marriotlogo.png', size: 85, white: true },
+  { name: 'The Shade Hotel', logo: '/images/shadelogo.png', size: 85, white: false },
+  { name: 'Hyatt', logo: '/images/hyattlogo.png', size: 85, white: false },
+  { name: 'The Mint', logo: '/images/themintlogo.png', size: 170, white: false },
+  { name: 'The Lighthouse Cafe', logo: '/images/lighthousecafelogo.png', size: 120, white: false },
+  { name: 'Torrance Memorial', logo: '/images/torrancememoriallogo.png', size: 130, white: false },
+  { name: 'USC', logo: '/images/usclogo.png', size: 110, white: false },
 ]
 
 const otherVenues = [
@@ -39,8 +39,8 @@ const otherVenues = [
 interface Venue {
   name: string
   logo: string
-  color: boolean
   size: number
+  white: boolean
 }
 
 function VenueTile({ venue }: { venue: Venue }) {
@@ -67,20 +67,18 @@ function VenueTile({ venue }: { venue: Venue }) {
             className="venue-logo"
             style={{
               maxHeight: `${venue.size}px`,
-              filter: 'none',
+              filter: venue.white ? 'brightness(0) invert(1)' : 'brightness(1.4) contrast(1.1)',
             }}
           />
         ) : (
-          <p
-            style={{
-              color: 'rgba(253,250,245,0.65)',
-              fontSize: '0.9rem',
-              fontWeight: '500',
-              textAlign: 'center',
-              fontFamily: 'Playfair Display, serif',
-              letterSpacing: '0.03em',
-            }}
-          >
+          <p style={{
+            color: 'rgba(253,250,245,0.65)',
+            fontSize: '0.9rem',
+            fontWeight: '500',
+            textAlign: 'center',
+            fontFamily: 'Playfair Display, serif',
+            letterSpacing: '0.03em',
+          }}>
             {venue.name}
           </p>
         )}
@@ -94,18 +92,16 @@ function VenueTile({ venue }: { venue: Venue }) {
         }}
       >
         <div style={{ width: '20px', height: '1px', backgroundColor: '#c4622d', marginBottom: '0.4rem' }} />
-        <p
-          style={{
-            color: '#fdfaf5',
-            fontSize: '0.78rem',
-            fontWeight: '600',
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
-            textAlign: 'center',
-            fontFamily: 'Inter, sans-serif',
-            lineHeight: '1.4',
-          }}
-        >
+        <p style={{
+          color: '#fdfaf5',
+          fontSize: '0.78rem',
+          fontWeight: '600',
+          letterSpacing: '0.12em',
+          textTransform: 'uppercase',
+          textAlign: 'center',
+          fontFamily: 'Inter, sans-serif',
+          lineHeight: '1.4',
+        }}>
           {venue.name}
         </p>
       </div>
@@ -196,117 +192,53 @@ export default function Venues() {
         }
 
         @media (max-width: 1024px) {
-          .featured-grid {
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-          }
-
-          .other-venues-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-          }
+          .featured-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+          .other-venues-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
 
         @media (max-width: 768px) {
-          .venues-shell {
-            width: min(1200px, calc(100% - 2rem));
-            padding: 4rem 0;
-          }
-
-          .featured-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            margin-bottom: 3.5rem;
-          }
-
-          .venue-tile {
-            min-height: 120px;
-            padding: 0.75rem;
-          }
-
-          .venue-logo-wrap {
-            height: 54px;
-          }
-
-          .venue-logo {
-            max-width: 76%;
-          }
-
-          .other-venues-grid {
-            grid-template-columns: 1fr;
-          }
+          .venues-shell { width: min(1200px, calc(100% - 2rem)); padding: 4rem 0; }
+          .featured-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 3.5rem; }
+          .venue-tile { min-height: 120px; padding: 0.75rem; }
+          .venue-logo-wrap { height: 54px; }
+          .venue-logo { max-width: 76%; }
+          .other-venues-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 480px) {
-          .venues-shell {
-            width: min(1200px, calc(100% - 1.5rem));
-          }
-
-          .venue-tile {
-            min-height: 104px;
-            padding: 0.6rem;
-          }
-
-          .venue-logo-wrap {
-            height: 42px;
-          }
-
-          .venue-logo {
-            max-width: 72%;
-          }
-
-          .venue-hover-overlay p {
-            font-size: 0.68rem !important;
-            letter-spacing: 0.08em !important;
-          }
+          .venues-shell { width: min(1200px, calc(100% - 1.5rem)); }
+          .venue-tile { min-height: 104px; padding: 0.6rem; }
+          .venue-logo-wrap { height: 42px; }
+          .venue-logo { max-width: 72%; }
+          .venue-hover-overlay p { font-size: 0.68rem !important; letter-spacing: 0.08em !important; }
         }
 
         @media (hover: none) and (pointer: coarse) {
-          .venue-hover-overlay {
-            display: none;
-          }
-
-          .venue-logo-wrap {
-            opacity: 1 !important;
-            transform: none !important;
-          }
+          .venue-hover-overlay { display: none; }
+          .venue-logo-wrap { opacity: 1 !important; transform: none !important; }
         }
       `}</style>
 
       <main className="venues-page">
         <div style={{ backgroundColor: '#1a1814', padding: '8rem 0 5rem' }}>
           <div className="container">
-            <p style={{
-              fontSize: '0.7rem', fontWeight: '600', letterSpacing: '0.3em',
-              textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem',
-            }}>
+            <p style={{ fontSize: '0.7rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem' }}>
               Credibility
             </p>
-            <h1 style={{
-              fontFamily: 'Playfair Display, serif',
-              fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-              fontWeight: '600', color: '#fdfaf5', lineHeight: '1.1', marginBottom: '1rem',
-            }}>
+            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: '600', color: '#fdfaf5', lineHeight: '1.1', marginBottom: '1rem' }}>
               Past Clients & Venues
             </h1>
-            <p style={{
-              fontSize: '0.95rem', color: 'rgba(253,250,245,0.5)',
-              maxWidth: '500px', lineHeight: '1.8',
-            }}>
+            <p style={{ fontSize: '0.95rem', color: 'rgba(253,250,245,0.5)', maxWidth: '500px', lineHeight: '1.8' }}>
               Over 300 performances across Los Angeles and beyond. Many of these venues were recurring bookings, some as many as 15 times.
             </p>
           </div>
         </div>
 
         <div className="venues-shell">
-          <p style={{
-            fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.2em',
-            textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.75rem', textAlign: 'center',
-          }}>
+          <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.75rem', textAlign: 'center' }}>
             Featured Venues
           </p>
-
-          <p style={{
-            fontFamily: 'Cormorant Garamond, serif', fontSize: '1rem', fontStyle: 'italic',
-            color: 'rgba(253,250,245,0.35)', textAlign: 'center', marginBottom: '2rem',
-          }}>
+          <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '1rem', fontStyle: 'italic', color: 'rgba(253,250,245,0.35)', textAlign: 'center', marginBottom: '2rem' }}>
             Notable stages and events where Ethan has performed across Los Angeles and beyond.
           </p>
 
@@ -317,43 +249,25 @@ export default function Venues() {
           </div>
 
           <div style={{ borderTop: '1px solid rgba(196,168,130,0.2)', paddingTop: '3rem' }}>
-            <p style={{
-              fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.2em',
-              textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.75rem', textAlign: 'center',
-            }}>
+            <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.75rem', textAlign: 'center' }}>
               More Venues
             </p>
-
-            <p style={{
-              color: 'rgba(253,250,245,0.35)', textAlign: 'center', marginBottom: '2rem',
-              fontStyle: 'italic', fontFamily: 'Cormorant Garamond, serif', fontSize: '1rem',
-            }}>
+            <p style={{ color: 'rgba(253,250,245,0.35)', textAlign: 'center', marginBottom: '2rem', fontStyle: 'italic', fontFamily: 'Cormorant Garamond, serif', fontSize: '1rem' }}>
               A selection of other venues where Ethan has performed. There are many more not listed here.
             </p>
 
             <div className="other-venues-grid">
               {otherVenues.map((venue, i) => (
                 <div key={i} className="other-venue-item">
-                  <div style={{
-                    width: '4px', height: '4px', borderRadius: '50%',
-                    backgroundColor: '#c4622d', flexShrink: 0, marginTop: '0.45rem',
-                  }} />
-                  <p style={{ fontSize: '0.82rem', color: 'rgba(253,250,245,0.6)', lineHeight: '1.5' }}>
-                    {venue}
-                  </p>
+                  <div style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#c4622d', flexShrink: 0, marginTop: '0.45rem' }} />
+                  <p style={{ fontSize: '0.82rem', color: 'rgba(253,250,245,0.6)', lineHeight: '1.5' }}>{venue}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div style={{
-            textAlign: 'center', marginTop: '4rem',
-            paddingTop: '3rem', borderTop: '1px solid rgba(196,168,130,0.2)',
-          }}>
-            <p style={{
-              fontFamily: 'Cormorant Garamond, serif', fontSize: '1.4rem',
-              fontStyle: 'italic', color: 'rgba(253,250,245,0.5)', marginBottom: '1.5rem',
-            }}>
+          <div style={{ textAlign: 'center', marginTop: '4rem', paddingTop: '3rem', borderTop: '1px solid rgba(196,168,130,0.2)' }}>
+            <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '1.4rem', fontStyle: 'italic', color: 'rgba(253,250,245,0.5)', marginBottom: '1.5rem' }}>
               Adding a new venue to the list?
             </p>
             <Link href="/contact" className="btn-primary">

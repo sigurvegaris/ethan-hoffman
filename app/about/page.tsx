@@ -18,6 +18,8 @@ export default function About() {
       photo: '/images/ethanincar.jpg',
       photoPosition: 'center 60%',
       photoCaption: null,
+      photo2: null,
+      photo2Caption: null,
       content: (
         <>
           <p style={{ fontSize: '1rem', lineHeight: '1.85', color: '#6b6460', marginBottom: '1.25rem' }}>
@@ -33,7 +35,9 @@ export default function About() {
       label: 'Musical Journey',
       photo: '/images/ethanhandshakingguy.png',
       photoPosition: 'center center',
-      photoCaption: 'Ethan (right) with Morgan (left) backstage at the Wiltern Theater before a sold-out show.',
+      photoCaption: 'Ethan (right) with Morgan (left) backstage at the Wiltern Theater before a sold-out night at the Wiltern Theater.',
+      photo2: '/images/ethanthreeguys.jpg',
+      photo2Caption: 'Ethan (left), with Morgan Jay (center) and Tofer (right), the lead keyboardist for Morgan.',
       content: (
         <>
           <p style={{ fontSize: '1rem', lineHeight: '1.85', color: '#6b6460', marginBottom: '1.25rem' }}>
@@ -57,8 +61,10 @@ export default function About() {
     {
       label: 'Original Artistry',
       photo: '/images/ethanpinkbackground.jpg',
-      photoPosition: 'center 50%',
+      photoPosition: 'center 10%',
       photoCaption: null,
+      photo2: null,
+      photo2Caption: null,
       content: (
         <>
           <p style={{ fontSize: '1rem', lineHeight: '1.85', color: '#6b6460', marginBottom: '1.25rem' }}>
@@ -104,22 +110,18 @@ export default function About() {
 
         /* ── Big bold tabs ── */
         .about-tabs {
-          display: flex;
-          gap: 0;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
           border-bottom: 2px solid rgba(26,24,20,0.1);
           margin-bottom: 4rem;
-          overflow-x: auto;
-          scrollbar-width: none;
-          -webkit-overflow-scrolling: touch;
         }
-        .about-tabs::-webkit-scrollbar { display: none; }
 
         .about-tab {
           background: none;
           border: none;
-          padding: 0.75rem 2.5rem 0.75rem 0;
+          padding: 0.75rem 0.5rem;
           font-family: 'Playfair Display', serif;
-          font-size: clamp(1.4rem, 2.5vw, 2rem);
+          font-size: clamp(0.9rem, 2vw, 2rem);
           font-weight: 700;
           font-style: italic;
           color: rgba(26,24,20,0.2);
@@ -127,8 +129,7 @@ export default function About() {
           border-bottom: 3px solid transparent;
           margin-bottom: -2px;
           transition: color 0.25s ease, border-color 0.25s ease;
-          white-space: nowrap;
-          flex-shrink: 0;
+          text-align: center;
         }
         .about-tab:hover { color: rgba(196,98,45,0.5); }
         .about-tab.active { color: #c4622d; border-bottom: 3px solid #c4622d; }
@@ -148,7 +149,7 @@ export default function About() {
 
         .about-tab-photo {
           width: 100%;
-          aspect-ratio: 3 / 4;
+          aspect-ratio: 4 / 3;
           overflow: hidden;
         }
         .about-tab-photo img {
@@ -192,7 +193,7 @@ export default function About() {
         /* ── Responsive ── */
         @media (max-width: 1024px) {
           .about-tab-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-          .about-tab-photo { aspect-ratio: 4/3; max-width: 520px; }
+          .about-tab-photo { aspect-ratio: 4/3; max-width: 560px; }
         }
 
         @media (max-width: 768px) {
@@ -249,7 +250,7 @@ export default function About() {
 
             {/* Photo */}
             <div>
-              <div className="about-tab-photo">
+              <div className="about-tab-photo" style={{ aspectRatio: '4/3' }}>
                 <img
                   src={tabs[activeTab].photo}
                   alt={tabs[activeTab].label}
@@ -258,6 +259,20 @@ export default function About() {
               </div>
               {tabs[activeTab].photoCaption && (
                 <p className="about-photo-caption">{tabs[activeTab].photoCaption}</p>
+              )}
+              {tabs[activeTab].photo2 && (
+                <>
+                  <div className="about-tab-photo" style={{ marginTop: '1.25rem', aspectRatio: '4/3' }}>
+                    <img
+                      src={tabs[activeTab].photo2!}
+                      alt={tabs[activeTab].label}
+                      style={{ objectPosition: 'center center' }}
+                    />
+                  </div>
+                  {tabs[activeTab].photo2Caption && (
+                    <p className="about-photo-caption">{tabs[activeTab].photo2Caption}</p>
+                  )}
+                </>
               )}
             </div>
 

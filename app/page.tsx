@@ -75,12 +75,12 @@ const differentiators = [
 ]
 
 const venueLogos = [
-  { name: 'The Wiltern', file: 'thewilternlogo.png', nudge: -6 },
-  { name: 'Hollywood Improv', file: 'hollywoodimprovlogo.png', nudge: 0 },
-  { name: 'Marriott', file: 'marriotlogo.png', nudge: 0 },
-  { name: 'The Shade Hotel', file: 'shadelogo.png', nudge: 0 },
-  { name: 'The Magnolia', file: 'themagnolialogo.png', nudge: 0 },
-  { name: 'USC', file: 'usclogo.png', nudge: 0 },
+  { name: 'The Wiltern', file: 'thewilternlogo.png', nudge: -6, height: 58 },
+  { name: 'Hollywood Improv', file: 'hollywoodimprovlogo.png', nudge: 0, height: 58 },
+  { name: 'Marriott', file: 'marriotlogo.png', nudge: 0, height: 58 },
+  { name: 'The Shade Hotel', file: 'shadelogo.png', nudge: 0, height: 80 },
+  { name: 'The Magnolia', file: 'themagnolialogo.png', nudge: 0, height: 100 },
+  { name: 'USC', file: 'usclogo.png', nudge: 0, height: 72 },
 ]
 
 function ServicesCarousel() {
@@ -256,10 +256,10 @@ export default function Home() {
       <style>{`
         *, *::before, *::after { box-sizing: border-box; }
         img { display: block; max-width: 100%; }
-        .page-container { overflow-x: hidden; background: #1a1814; }
+        .page-container { background: #1a1814; touch-action: pan-y; }
 
-        .hero-section { position: relative; min-height: 100svh; background: #1a1814; overflow: hidden; }
-        .hero-overlay { position: absolute; inset: 0; z-index: 2; background: linear-gradient(to right, rgba(26,24,20,0.9) 0%, rgba(26,24,20,0.55) 58%, rgba(26,24,20,0.18) 100%); }
+        .hero-section { position: relative; min-height: 100svh; background: #1a1814; }
+        .hero-overlay { position: absolute; inset: 0; z-index: 2; background: linear-gradient(to right, rgba(26,24,20,0.9) 0%, rgba(26,24,20,0.55) 58%, rgba(26,24,20,0.18) 100%); pointer-events: none; }
         .hero-content { position: relative; z-index: 3; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: 8rem 4rem 4rem; max-width: 760px; }
         .hero-topline { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap; }
         .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; width: 100%; max-width: 360px; }
@@ -280,7 +280,7 @@ export default function Home() {
         .testimonial-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
         .cta-grid { grid-template-columns: 1fr 1fr; min-height: 600px; align-items: stretch; }
         .cta-copy { padding: 6rem 4rem; display: flex; flex-direction: column; justify-content: center; }
-        .cta-image { position: relative; min-height: 420px; overflow: hidden; align-self: stretch; }
+        .cta-image { position: relative; min-height: 420px; overflow: hidden; align-self: stretch; margin-top: 7.5rem; }
 
         .wse-section { padding: 10rem 0; position: relative; }
         .wse-marquee-track { position: absolute; top: 50%; left: 0; transform: translateY(-50%); white-space: nowrap; animation: wse-scroll 25s linear infinite; pointer-events: none; z-index: 0; }
@@ -328,10 +328,10 @@ export default function Home() {
           .stats-item:nth-child(2n) { border-right: none; }
           .stats-item:nth-last-child(-n+2) { border-bottom: none; }
           .trusted-row { padding: 2rem 1.25rem 2.5rem; }
-          .trusted-logos { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem 1rem; max-width: 480px; }
-          .trusted-logo-cell { height: 60px; }
-          .trusted-logo { height: 36px; }
-          .trusted-logo-cell:last-child { grid-column: 1 / -1; justify-self: center; }
+          .trusted-logos { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 1.75rem 1rem; max-width: 100%; }
+          .trusted-logo-cell { height: 56px; }
+          .trusted-logo-cell:last-child { grid-column: auto !important; justify-self: center; }
+          .trusted-logo { height: 34px !important; }
           .about-grid { gap: 2rem; }
           .testimonial-grid { grid-template-columns: 1fr; gap: 1.5rem; }
           .cta-grid { grid-template-columns: 1fr; min-height: auto; }
@@ -430,7 +430,7 @@ export default function Home() {
                     className="trusted-logo"
                     loading="lazy"
                     style={{
-                      height: '44px',
+                      height: `${v.height}px`,
                       width: 'auto',
                       filter: 'brightness(0) invert(1)',
                       transform: v.nudge ? `translateY(${v.nudge}px)` : undefined,
@@ -554,7 +554,7 @@ export default function Home() {
           <section style={{ backgroundColor: '#1a1814', overflow: 'hidden' }}>
             <div className="cta-grid" style={{ gap: 0 }}>
               <div className="cta-copy">
-                <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem' }}>connect with ethan</p>
+                <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem' }}>What do you say</p>
                 <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 5vw, 4rem)', fontWeight: '400', fontStyle: 'italic', color: '#fdfaf5', lineHeight: '1.1', marginBottom: '2rem' }}>We make it unforgettable</h2>
                 <p style={{ fontSize: '1rem', lineHeight: '1.85', color: 'rgba(253,250,245,0.6)', marginBottom: '1.5rem' }}>
                   Ethan&apos;s voice carries the acoustic textures of Jason Mraz, the prolific storytelling of John Lennon, and the timeless warmth and soul of Bill Withers, blending into an entirely original artistry. This versatile mix of genres is reliable and appreciated across all demographics.
@@ -567,7 +567,7 @@ export default function Home() {
                 </p>
                 <Link href="/contact" className="btn-primary" style={{ alignSelf: 'flex-start' }}>Let&apos;s Connect</Link>
               </div>
-              <div style={{ position: 'relative', marginTop: '6rem', flex: 1, minHeight: '400px' }}>
+              <div className="cta-image">
                 <Image
                   src="/images/ethanincar.jpg"
                   alt="Ethan Hoffman"
