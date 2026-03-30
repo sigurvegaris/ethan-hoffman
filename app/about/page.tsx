@@ -3,6 +3,36 @@ import { useState, useEffect, useRef } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
+const galleryImages = [
+  { src: '/images/ethanpinkbackground.jpg', alt: 'Ethan performing', position: 'center 5%' },
+  { src: '/images/ethansingingblack.jpg', alt: 'Ethan singing black', position: 'center center' },
+  { src: '/images/ethansingingorange.jpg', alt: 'Ethan singing', position: 'center 15%' },
+  { src: '/images/ethanfighton.jpg', alt: 'Ethan at venue', position: 'center 30%' },
+]
+
+function OriginalArtistryGallery({ selected, setSelected }: { selected: number, setSelected: (i: number) => void }) {
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 160px))', gap: '0.5rem', justifyContent: 'center', marginTop: '1.5rem' }}>
+      {galleryImages.map((img, i) => (
+        <div
+          key={i}
+          onClick={() => setSelected(i)}
+          style={{
+            aspectRatio: '4/3',
+            overflow: 'hidden',
+            cursor: 'pointer',
+            opacity: selected === i ? 1 : 0.45,
+            border: selected === i ? '2px solid #c4622d' : '2px solid transparent',
+            transition: 'opacity 0.2s ease, border-color 0.2s ease',
+          }}
+        >
+          <img src={img.src} alt={img.alt} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        </div>
+      ))}
+    </div>
+  )
+}
+
 export default function About() {
   const comparisons = [
     'Billy Joel', 'Ed Sheeran', 'Frank Sinatra', 'Jack Johnson',
@@ -11,6 +41,7 @@ export default function About() {
 
   const tickerRef = useRef<HTMLDivElement>(null)
   const [activeTab, setActiveTab] = useState(0)
+  const [gallerySelected, setGallerySelected] = useState(0)
 
   const tabs = [
     {
@@ -100,12 +131,12 @@ export default function About() {
 
       <style>{`
         .about-page { background-color: #f5f0e8; min-height: 100vh; overflow-x: hidden; }
-        .about-hero { background-color: #1a1814; padding: 8rem 0 5rem; }
+        .about-hero { background-color: #1a1814; padding: 5rem 0 2.5rem; }
 
         .about-shell {
           width: min(1200px, calc(100% - 3rem));
           margin: 0 auto;
-          padding: 5rem 0 7rem;
+          padding: 2.5rem 0 3rem;
         }
 
         /* ── Big bold tabs ── */
@@ -113,13 +144,13 @@ export default function About() {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           border-bottom: 2px solid rgba(26,24,20,0.1);
-          margin-bottom: 4rem;
+          margin-bottom: 2rem;
         }
 
         .about-tab {
           background: none;
           border: none;
-          padding: 0.75rem 0.5rem;
+          padding: 0.6rem 0.5rem;
           font-family: 'Cormorant Garamond', serif;
           font-size: clamp(1.1rem, 2.5vw, 1.6rem);
           font-weight: 700;
@@ -140,7 +171,7 @@ export default function About() {
         .about-tab-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 4rem;
+          gap: 2.5rem;
           align-items: start;
           animation: fadeInUp 0.3s ease;
         }
@@ -209,6 +240,7 @@ export default function About() {
           .about-stats-grid { grid-template-columns: 1fr; }
           .about-stat-card { padding: 2rem 1rem; }
           .about-stat-card + .about-stat-card { border-left: none; border-top: 1px solid rgba(196,168,130,0.3); }
+          .press-grid { grid-template-columns: 1fr !important; }
         }
 
         @media (max-width: 480px) {
@@ -216,18 +248,26 @@ export default function About() {
           .about-shell { width: min(1200px, calc(100% - 1.5rem)); }
           .about-tab { font-size: 1rem; padding-right: 1.25rem; }
         }
+
+        .gallery-main { width: 100%; aspect-ratio: 4/3; overflow: hidden; margin-top: 1.25rem; position: relative; }
+        .gallery-main img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.3s ease; }
+        .gallery-thumbs { display: flex; gap: 0.5rem; margin-top: 0.5rem; justify-content: center; }
+        .gallery-thumb { width: 22%; aspect-ratio: 4/3; overflow: hidden; cursor: pointer; opacity: 0.5; transition: opacity 0.2s ease; border: 2px solid transparent; flex-shrink: 0; }
+        .gallery-thumb.active { opacity: 1; border-color: #c4622d; }
+        .gallery-thumb:hover { opacity: 0.85; }
+        .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .gallery-full { grid-column: 1 / -1; max-width: 600px; margin: 0 auto; width: 100%; }
       `}</style>
 
       <main className="about-page">
 
         <div className="about-hero">
           <div className="container">
-            <p style={{ fontSize: '0.7rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem' }}>
+            <p style={{ fontSize: '0.7rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.75rem' }}>
               About Ethan
             </p>
-            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: '600', color: '#fdfaf5', lineHeight: '1.1' }}>
-              A Voice Built on Truth,<br />
-              <em style={{ fontWeight: '400' }}>A Career Built on Stage</em>
+            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 4vw, 3.2rem)', fontWeight: '600', color: '#fdfaf5', lineHeight: '1.15' }}>
+              Soul. Stage. Stories. Sound. <em style={{ fontWeight: '400' }}>Live.</em>
             </h1>
           </div>
         </div>
@@ -250,13 +290,13 @@ export default function About() {
           {/* ── Tab content ── */}
           <div key={activeTab} className="about-tab-grid">
 
-            {/* Photo */}
+            {/* Photo column */}
             <div>
               <div className="about-tab-photo" style={{ aspectRatio: '4/3' }}>
                 <img
-                  src={tabs[activeTab].photo}
+                  src={activeTab === 2 ? galleryImages[gallerySelected].src : tabs[activeTab].photo!}
                   alt={tabs[activeTab].label}
-                  style={{ objectPosition: tabs[activeTab].photoPosition }}
+                  style={{ objectPosition: activeTab === 2 ? galleryImages[gallerySelected].position : tabs[activeTab].photoPosition, width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'opacity 0.3s ease' }}
                 />
               </div>
               {tabs[activeTab].photoCaption && (
@@ -278,55 +318,95 @@ export default function About() {
               )}
             </div>
 
-            {/* Text */}
+            {/* Text column */}
             <div>
               {tabs[activeTab].content}
-
-              {/* Quick facts only on Meet Ethan */}
-              {activeTab === 0 && (
-                <div className="about-facts">
-                  <p style={{ gridColumn: '1/-1', fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.5rem' }}>
-                    Quick Facts
-                  </p>
-                  {[
-                    { label: 'Based In', value: 'Los Angeles, CA' },
-                    { label: 'Graduated From', value: 'USC Marshall School of Business' },
-                  ].map((f, i) => (
-                    <div key={i}>
-                      <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#1a1814', marginBottom: '0.2rem' }}>{f.label}</p>
-                      <p style={{ fontSize: '0.9rem', color: '#6b6460' }}>{f.value}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
 
           </div>
+
+          {/* Thumbnails centered below both columns — only on Original Artistry */}
+          {activeTab === 2 && (
+            <OriginalArtistryGallery selected={gallerySelected} setSelected={setGallerySelected} />
+          )}
+
+          {/* ── Ticker — moved up, right below tab content ── */}
+          <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid rgba(196,168,130,0.2)', position: 'relative', overflow: 'hidden' }}>
+            <p style={{ textAlign: 'center', fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1.25rem' }}>
+              Artists People Compare Him To
+            </p>
+            <div style={{ overflow: 'hidden', width: '100%' }}>
+              <div ref={tickerRef} style={{ display: 'flex', flexWrap: 'nowrap', whiteSpace: 'nowrap', willChange: 'transform', width: 'max-content' }}>
+                {[...comparisons, ...comparisons, ...comparisons, ...comparisons].map((name, i) => (
+                  <div key={i} style={{ display: 'inline-flex', flexShrink: 0, alignItems: 'center', gap: '1rem', padding: '0 1.5rem' }}>
+                    <span style={{
+                      fontFamily: 'Playfair Display, serif',
+                      fontSize: 'clamp(1rem, 2vw, 1.6rem)',
+                      fontWeight: '400',
+                      color: i % 2 === 0 ? 'rgba(26,24,20,0.2)' : 'rgba(26,24,20,0.6)',
+                      fontStyle: i % 3 === 0 ? 'italic' : 'normal',
+                      whiteSpace: 'nowrap',
+                    }}>
+                      {name}
+                    </span>
+                    <span style={{ color: '#c4622d', fontSize: '0.5rem', flexShrink: 0 }}>✦</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        {/* ── Ticker ── */}
-        <div className="about-ticker-section">
-          <div className="about-ticker-fade-left" />
-          <div className="about-ticker-fade-right" />
-          <p style={{ textAlign: 'center', fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1.5rem' }}>
-            Artists People Compare Him To
-          </p>
-          <div className="about-ticker-outer">
-            <div ref={tickerRef} className="about-ticker-track">
-              {[...comparisons, ...comparisons, ...comparisons, ...comparisons].map((name, i) => (
-                <div key={i} style={{ display: 'inline-flex', flexShrink: 0, alignItems: 'center', gap: '1rem', padding: '0 1.5rem' }}>
-                  <span style={{
-                    fontFamily: 'Playfair Display, serif',
-                    fontSize: 'clamp(1.2rem, 2.5vw, 2rem)',
-                    fontWeight: '400',
-                    color: i % 2 === 0 ? 'rgba(26,24,20,0.2)' : 'rgba(26,24,20,0.6)',
-                    fontStyle: i % 3 === 0 ? 'italic' : 'normal',
-                    whiteSpace: 'nowrap',
-                  }}>
-                    {name}
-                  </span>
-                  <span style={{ color: '#c4622d', fontSize: '0.5rem', flexShrink: 0 }}>✦</span>
-                </div>
+        {/* ── Press Section ── */}
+        <div style={{ backgroundColor: '#f5f0e8', padding: '2.5rem 0 5rem', borderTop: '1px solid rgba(196,168,130,0.2)' }}>
+          <div style={{ width: 'min(1200px, calc(100% - 3rem))', margin: '0 auto' }}>
+            <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.75rem', textAlign: 'center' }}>
+              Press
+            </p>
+            <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: '400', fontStyle: 'italic', color: '#1a1814', textAlign: 'center', marginBottom: '3rem' }}>
+              As seen in
+            </h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
+              {[
+                { publication: 'Canvas Rebel', title: 'Meet Ethan Hoffman', href: 'https://canvasrebel.com/meet-ethan-hoffman/' },
+                { publication: 'Gut Instinct Media', title: 'Unveiling the Soul of Ethan Hoffman: Beyond the Viral Fame', href: 'https://medium.com/@gutinstinctmedia/unveiling-the-soul-of-ethan-hoffman-beyond-the-viral-fame-a6ab70904fb3' },
+                { publication: 'Voyage LA', title: 'Daily Inspiration: Meet Ethan Hoffman', href: 'https://voyagela.com/interview/daily-inspiration-meet-ethan-hoffman' },
+              ].map((article, i) => (
+                <a key={i} href={article.href} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', display: 'block' }}>
+                  <div style={{
+                    padding: '2rem',
+                    border: '1px solid rgba(196,168,130,0.3)',
+                    backgroundColor: 'rgba(26,24,20,0.03)',
+                    transition: 'border-color 0.3s ease, background 0.3s ease',
+                    height: '100%',
+                    boxSizing: 'border-box',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                  }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLElement).style.borderColor = '#c4622d'
+                    ;(e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(196,98,45,0.04)'
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLElement).style.borderColor = 'rgba(196,168,130,0.3)'
+                    ;(e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(26,24,20,0.03)'
+                  }}
+                  >
+                    <div>
+                      <p style={{ fontSize: '0.6rem', fontWeight: '700', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.75rem' }}>
+                        {article.publication}
+                      </p>
+                      <p style={{ fontFamily: 'Playfair Display, serif', fontSize: '1rem', fontWeight: '400', color: '#1a1814', lineHeight: '1.5', marginBottom: '1.5rem' }}>
+                        {article.title}
+                      </p>
+                    </div>
+                    <p style={{ fontSize: '0.65rem', fontWeight: '700', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(26,24,20,0.4)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                      Read Article <span>→</span>
+                    </p>
+                  </div>
+                </a>
               ))}
             </div>
           </div>

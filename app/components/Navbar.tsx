@@ -450,7 +450,7 @@ export default function Navbar() {
               {mobileExperienceOpen && (
                 <div className="eh-mobile-submenu">
                   <Link href="/about" onClick={closeAllMenus}>About Ethan</Link>
-                  <Link href="/music" onClick={closeAllMenus}>Music & Media</Link>
+                  <Link href="/music" onClick={closeAllMenus}>Music & Performance</Link>
                   <Link href="/shows" onClick={closeAllMenus}>Upcoming Shows</Link>
                 </div>
               )}

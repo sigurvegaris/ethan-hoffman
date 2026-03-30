@@ -13,8 +13,8 @@ const svcs = [
     headline: 'The soundtrack to your most important day',
     body: 'Ethan works closely with every couple to understand the vibe, then delivers a performance that feels completely tailored to you.',
     features: ['Cocktail Hours', 'Ceremony & Reception Coverage', 'Rehearsal Dinners & Welcome Parties', 'Custom Song Requests'],
-    img: '/images/ethanwithguitar.jpg',
-    position: 'center 15%',
+    img: '/images/ethanwearinggreen.png',
+    position: 'center 25%',
     href: '/services',
     cta: 'Learn More',
   },
@@ -24,8 +24,8 @@ const svcs = [
     headline: 'The room will feel different when he plays',
     body: 'Whether a dinner party, milestone birthday, or upscale celebration, Ethan reads the room and shapes the energy in real time.',
     features: ['Upscale Gatherings', 'Holiday Parties', 'Anniversary & Engagement Parties', 'Birthday Celebrations'],
-    img: '/images/ethanthreeguys.jpg',
-    position: 'center 25%',
+    img: '/images/ethanblackandwhite.jpg',
+    position: 'center 12%',
     href: '/services',
     cta: 'Learn More',
   },
@@ -35,8 +35,8 @@ const svcs = [
     headline: 'Entertainment that leaves an impression',
     body: 'Ethan has performed for major brands and corporate functions across Los Angeles. He transforms a standard event into something people talk about.',
     features: ['Brand Events & Launches', 'Fundraisers & Galas', 'Holiday Parties', 'Networking Events'],
-    img: '/images/ethanwithcrowd.jpg',
-    position: 'center 65%',
+    img: '/images/ethanpinkbackground.jpg',
+    position: 'center 7%',
     href: '/services',
     cta: 'Learn More',
   },
@@ -46,8 +46,8 @@ const svcs = [
     headline: 'Music written from real life',
     body: 'Beyond events, Ethan is a recording artist with original music on all major platforms. Soulful, honest, and deeply personal.',
     features: ['Available on Spotify', 'Available on Apple Music', 'Original Compositions', 'Live Originals at Events'],
-    img: '/images/ethanmustang.jpg',
-    position: 'center 85%',
+    img: '/images/ethanwithcrowd.jpg',
+    position: 'center 50%',
     href: '/music',
     cta: 'Listen Now',
   },
@@ -68,8 +68,8 @@ const differentiators = [
   },
   {
     number: '03',
-    title: 'Exceeds All\nExpectations.',
-    tag: 'High Quality',
+    title: 'Exceeds The\nExpectations.',
+    tag: 'Premium Sound',
     body: 'Luxury is the moment your guests realize the live vocalist is of a caliber they never anticipated. Ethan delivers a premium experience that transcends the typical, making every event feel high-end and unforgettable.',
   },
 ]
@@ -114,12 +114,12 @@ function ServicesCarousel() {
     <section id="services" className="services-section">
       <style>{`
         .services-section { background: #1a1814; }
-        .svc-shell { padding: 0 0 4rem 0; }
-        .svc-header { display: flex; justify-content: space-between; align-items: flex-start; padding: 4rem 4rem 0; }
+        .svc-shell { padding: 0 0 2rem 0; }
+        .svc-header { display: flex; justify-content: space-between; align-items: flex-start; padding: 2.5rem 4rem 0; }
         .svc-tabs {
           display: flex; gap: 1.25rem;
           border-bottom: 1px solid rgba(255,255,255,0.1);
-          padding: 0 4rem 1rem; margin-top: 2rem;
+          padding: 0 4rem 1rem; margin-top: 1.5rem;
           overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
         }
         .svc-tabs::-webkit-scrollbar { display: none; }
@@ -131,7 +131,7 @@ function ServicesCarousel() {
           transition: all 0.3s ease; flex-shrink: 0; -webkit-tap-highlight-color: transparent;
         }
         .svc-tab.active { color: #fdfaf5; border-bottom: 2px solid #c4622d; }
-        .svc-image-wrap { position: relative; margin: 0 4rem; height: 580px; overflow: hidden; }
+        .svc-image-wrap { position: relative; margin: 0 4rem; height: 460px; overflow: hidden; }
         .svc-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.35s ease; }
         .svc-img.visible { opacity: 1; }
         .svc-img.hidden { opacity: 0; }
@@ -386,7 +386,7 @@ export default function Home() {
               Ethan<br />Hoffman
             </h1>
             <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(1rem, 4vw, 1.3rem)', fontWeight: '300', fontStyle: 'italic', color: 'rgba(253,250,245,0.72)', margin: '0 0 2rem 0' }}>
-              Soulful Live Music for Private and Corporate Events.
+              Soulful Live Music for Private and Corporate Events
             </p>
             <div className="hero-actions">
               <Link href="/contact" style={{ display: 'inline-block', padding: '0.9rem 1.5rem', backgroundColor: '#c4622d', color: '#fdfaf5', textDecoration: 'none', fontSize: '0.65rem', fontWeight: '700', letterSpacing: '0.2em', textTransform: 'uppercase', fontFamily: 'Inter, sans-serif' }}>

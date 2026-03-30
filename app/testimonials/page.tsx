@@ -5,12 +5,6 @@ import Footer from '../components/Footer'
 
 const testimonials = [
   {
-    quote: "Ethan had the entire room silent within the first thirty seconds. By the end of the night, guests were asking us how we found him. He didn't just perform. He transformed the atmosphere completely.",
-    name: 'Sarah and James K.',
-    role: 'Wedding Reception',
-    venue: 'The Shade Hotel, Manhattan Beach',
-  },
-  {
     quote: "Ethan Hoffman has been a joy to work with. He is truly a professional artist: prompt, polite, talented, entertaining, and most importantly, has great character and integrity.",
     name: 'Tony Nguyen',
     role: 'Talent Booker',
@@ -221,7 +215,7 @@ export default function Testimonials() {
               Testimonials
             </h1>
             <p style={{ fontSize: '0.95rem', color: 'rgba(253,250,245,0.45)', maxWidth: '480px', lineHeight: '1.8', fontFamily: 'Inter, sans-serif' }}>
-              From weddings and galas to corporate events and ticketed shows — here&apos;s what clients and bookers have to say.
+              From weddings and galas to corporate events and ticketed shows. Here's what clients and bookers have to say.
             </p>
           </div>
         </div>
@@ -229,7 +223,7 @@ export default function Testimonials() {
         {/* ── GRID ── */}
         <div className="t-shell" style={{ paddingBottom: '0' }}>
 
-          {/* Row 1: Featured wide quote */}
+          {/* Row 1: Tony featured full width */}
           <div className="t-grid">
             <div className="t-card featured">
               <div className="t-quote-mark">"</div>
@@ -238,7 +232,7 @@ export default function Testimonials() {
                 <div className="t-avatar">{testimonials[0].name[0]}</div>
                 <div>
                   <p className="t-name">{testimonials[0].name}</p>
-                  <p className="t-role">{testimonials[0].role}{testimonials[0].venue ? ` · ${testimonials[0].venue}` : ''}</p>
+                  <p className="t-role">{testimonials[0].role}</p>
                 </div>
               </div>
             </div>
@@ -253,7 +247,7 @@ export default function Testimonials() {
                 <div className="t-avatar">{testimonials[1].name[0]}</div>
                 <div>
                   <p className="t-name">{testimonials[1].name}</p>
-                  <p className="t-role">{testimonials[1].role}</p>
+                  <p className="t-role">{testimonials[1].role}{testimonials[1].venue ? ` · ${testimonials[1].venue}` : ''}</p>
                 </div>
               </div>
             </div>
@@ -270,27 +264,16 @@ export default function Testimonials() {
             </div>
           </div>
 
-          {/* Row 3: Two quotes */}
+          {/* Row 3: One full width */}
           <div className="t-grid">
-            <div className="t-card">
+            <div className="t-card" style={{ gridColumn: '1 / -1' }}>
               <div className="t-quote-mark">"</div>
               <p className="t-quote">{testimonials[3].quote}</p>
               <div className="t-attribution">
                 <div className="t-avatar">{testimonials[3].name[0]}</div>
                 <div>
                   <p className="t-name">{testimonials[3].name}</p>
-                  <p className="t-role">{testimonials[3].role}{testimonials[3].venue ? ` · ${testimonials[3].venue}` : ''}</p>
-                </div>
-              </div>
-            </div>
-            <div className="t-card">
-              <div className="t-quote-mark">"</div>
-              <p className="t-quote">{testimonials[4].quote}</p>
-              <div className="t-attribution">
-                <div className="t-avatar">{testimonials[4].name[0]}</div>
-                <div>
-                  <p className="t-name">{testimonials[4].name}</p>
-                  <p className="t-role">{testimonials[4].role}</p>
+                  <p className="t-role">{testimonials[3].role}</p>
                 </div>
               </div>
             </div>

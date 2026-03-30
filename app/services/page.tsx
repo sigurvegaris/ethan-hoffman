@@ -17,7 +17,7 @@ const services = [
       'Background and interactive sets',
       'Full sound system included',
     ],
-    photo: '/images/ethanwithguitar.jpg',
+    photo: '/images/ethanwearinggreen.png',
     objectPosition: 'center bottom',
   },
   {
@@ -32,7 +32,7 @@ const services = [
       'Exclusive and high-end private events',
       'Flexible set lengths and styles',
     ],
-    photo: '/images/ethanthreeguys.jpg',
+    photo: '/images/ethanblackandwhite.jpg',
     objectPosition: 'center top',
   },
   {
@@ -47,7 +47,7 @@ const services = [
       'University and institutional events',
       'Networking and cocktail receptions',
     ],
-    photo: '/images/ethanwithcrowd.jpg',
+    photo: '/images/ethanpinkbackground.jpg',
     objectPosition: 'center top',
   },
   {
@@ -62,7 +62,7 @@ const services = [
       '70s and 80s inspired soul sound',
       'Live original music sets',
     ],
-    photo: '/images/ethansoloshot.jpg',
+    photo: '/images/ethanwithcrowd.jpg',
     objectPosition: 'center top',
   },
 ]
@@ -136,9 +136,11 @@ export default function Services() {
         }
 
         .services-image-wrap {
-          aspect-ratio: 4 / 3;
+          width: 100%;
+          height: 480px;
           overflow: hidden;
           background: #ddd3c8;
+          flex-shrink: 0;
         }
 
         .services-image {
@@ -174,7 +176,7 @@ export default function Services() {
         @media (max-width: 768px) {
           .services-hero { padding: 7rem 0 3rem; }
           .services-shell { width: min(1200px, calc(100% - 2rem)); padding-bottom: 4rem; }
-          .services-image-wrap { aspect-ratio: 4 / 4.5; }
+          .services-image-wrap { height: 320px; }
           .services-details { margin-bottom: 2rem; }
         }
 
