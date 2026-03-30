@@ -57,7 +57,7 @@ const differentiators = [
   {
     number: '01',
     title: 'The Classics,\nReimagined.',
-    tag: 'Live Looping',
+    tag: 'Multi-Genre',
     body: 'Ethan breathes new life into the hits you love, reimagining classics through a soulful, pop-crooner lens. These effortless arrangements blend pure retro soul with modern pop, captivating every ear in the room.',
   },
   {
@@ -69,7 +69,7 @@ const differentiators = [
   {
     number: '03',
     title: 'Exceeds All\nExpectations.',
-    tag: 'Experience',
+    tag: 'High Quality',
     body: 'Luxury is the moment your guests realize the live vocalist is of a caliber they never anticipated. Ethan delivers a premium experience that transcends the typical, making every event feel high-end and unforgettable.',
   },
 ]
@@ -79,7 +79,7 @@ const venueLogos = [
   { name: 'Hollywood Improv', file: 'hollywoodimprovlogo.png', nudge: 0, height: 58 },
   { name: 'Marriott', file: 'marriotlogo.png', nudge: 0, height: 58 },
   { name: 'The Shade Hotel', file: 'shadelogo.png', nudge: 0, height: 80 },
-  { name: 'The Magnolia', file: 'themagnolialogo.png', nudge: 0, height: 100 },
+  { name: 'The Magnolia', file: 'themagnolialogo.png', nudge: 0, height: 64 },
   { name: 'USC', file: 'usclogo.png', nudge: 0, height: 72 },
 ]
 
@@ -274,7 +274,6 @@ export default function Home() {
         .trusted-logo-cell { width: 100%; display: flex; align-items: center; justify-content: center; padding: 0.75rem 1.25rem; }
         .trusted-logo { display: block; width: auto; object-fit: contain; opacity: 0.9; transition: opacity 0.3s ease, transform 0.3s ease; filter: brightness(0) invert(1); }
         .trusted-logo:hover { opacity: 1; transform: translateY(-1px); }
-
         .about-grid, .testimonial-grid, .cta-grid { display: grid; gap: 3rem; }
         .about-grid { grid-template-columns: 1fr 1fr; align-items: center; }
         .testimonial-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
@@ -331,7 +330,7 @@ export default function Home() {
           .trusted-logos { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 1.75rem 1rem; max-width: 100%; }
           .trusted-logo-cell { height: 56px; }
           .trusted-logo-cell:last-child { grid-column: auto !important; justify-self: center; }
-          .trusted-logo { height: 34px !important; }
+          .trusted-logo { height: 34px; }
           .about-grid { gap: 2rem; }
           .testimonial-grid { grid-template-columns: 1fr; gap: 1.5rem; }
           .cta-grid { grid-template-columns: 1fr; min-height: auto; }
@@ -387,7 +386,7 @@ export default function Home() {
               Ethan<br />Hoffman
             </h1>
             <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(1rem, 4vw, 1.3rem)', fontWeight: '300', fontStyle: 'italic', color: 'rgba(253,250,245,0.72)', margin: '0 0 2rem 0' }}>
-              Soulful live music for weddings &amp; private events
+              Soulful Live Music for Private and Corporate Events.
             </p>
             <div className="hero-actions">
               <Link href="/contact" style={{ display: 'inline-block', padding: '0.9rem 1.5rem', backgroundColor: '#c4622d', color: '#fdfaf5', textDecoration: 'none', fontSize: '0.65rem', fontWeight: '700', letterSpacing: '0.2em', textTransform: 'uppercase', fontFamily: 'Inter, sans-serif' }}>
@@ -554,8 +553,8 @@ export default function Home() {
           <section style={{ backgroundColor: '#1a1814', overflow: 'hidden' }}>
             <div className="cta-grid" style={{ gap: 0 }}>
               <div className="cta-copy">
-                <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem' }}>What do you say</p>
-                <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 5vw, 4rem)', fontWeight: '400', fontStyle: 'italic', color: '#fdfaf5', lineHeight: '1.1', marginBottom: '2rem' }}>We make it unforgettable</h2>
+                <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem' }}>What Do You Say?</p>
+                <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2rem, 5vw, 4rem)', fontWeight: '400', fontStyle: 'italic', color: '#fdfaf5', lineHeight: '1.1', marginBottom: '2rem' }}>A Sound You Can Count On</h2>
                 <p style={{ fontSize: '1rem', lineHeight: '1.85', color: 'rgba(253,250,245,0.6)', marginBottom: '1.5rem' }}>
                   Ethan&apos;s voice carries the acoustic textures of Jason Mraz, the prolific storytelling of John Lennon, and the timeless warmth and soul of Bill Withers, blending into an entirely original artistry. This versatile mix of genres is reliable and appreciated across all demographics.
                 </p>

@@ -5,13 +5,13 @@ import Footer from '../components/Footer'
 
 const testimonials = [
   {
-    quote: "Ethan had the entire room silent within the first thirty seconds. By the end of the night, guests were asking us how we found him. He didn't just perform — he transformed the atmosphere completely.",
+    quote: "Ethan had the entire room silent within the first thirty seconds. By the end of the night, guests were asking us how we found him. He didn't just perform. He transformed the atmosphere completely.",
     name: 'Sarah and James K.',
     role: 'Wedding Reception',
     venue: 'The Shade Hotel, Manhattan Beach',
   },
   {
-    quote: "Ethan Hoffman has been a joy to work with. He is truly a professional artist — prompt, polite, talented, entertaining, and most importantly, has great character and integrity.",
+    quote: "Ethan Hoffman has been a joy to work with. He is truly a professional artist: prompt, polite, talented, entertaining, and most importantly, has great character and integrity.",
     name: 'Tony Nguyen',
     role: 'Talent Booker',
     venue: '',
@@ -29,7 +29,7 @@ const testimonials = [
     venue: 'TMMC',
   },
   {
-    quote: "Ethan Hoffman truly elevated our fundraising reception! His soulful melodies and upbeat tunes brought such a warm and joyful atmosphere to the event. Ethan brings an infectious energy to his set — he literally had me from the first notes he strummed! You couldn't wipe the smile from my face!",
+    quote: "Ethan Hoffman truly elevated our fundraising reception! His soulful melodies and upbeat tunes brought such a warm and joyful atmosphere to the event. Ethan brings an infectious energy to his set. He literally had me from the first notes he strummed! You couldn't wipe the smile from my face!",
     name: 'Lisa Takata',
     role: 'Special Events Manager',
     venue: '',

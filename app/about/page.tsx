@@ -120,10 +120,12 @@ export default function About() {
           background: none;
           border: none;
           padding: 0.75rem 0.5rem;
-          font-family: 'Playfair Display', serif;
-          font-size: clamp(0.9rem, 2vw, 2rem);
+          font-family: 'Cormorant Garamond', serif;
+          font-size: clamp(1.1rem, 2.5vw, 1.6rem);
           font-weight: 700;
-          font-style: italic;
+          font-style: normal;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
           color: rgba(26,24,20,0.2);
           cursor: pointer;
           border-bottom: 3px solid transparent;
@@ -177,10 +179,10 @@ export default function About() {
         }
 
         /* ── Ticker ── */
-        .about-ticker-section { background-color: #1a1814; padding: 5rem 0; overflow: hidden; position: relative; }
+        .about-ticker-section { background-color: #f5f0e8; padding: 3rem 0 2rem; overflow: hidden; position: relative; }
         .about-ticker-fade-left, .about-ticker-fade-right { position: absolute; top: 0; bottom: 0; width: 150px; z-index: 2; pointer-events: none; }
-        .about-ticker-fade-left { left: 0; background: linear-gradient(to right, #1a1814, transparent); }
-        .about-ticker-fade-right { right: 0; background: linear-gradient(to left, #1a1814, transparent); }
+        .about-ticker-fade-left { left: 0; background: linear-gradient(to right, #f5f0e8, transparent); }
+        .about-ticker-fade-right { right: 0; background: linear-gradient(to left, #f5f0e8, transparent); }
         .about-ticker-outer { overflow: hidden; width: 100%; }
         .about-ticker-track { display: flex; flex-wrap: nowrap; white-space: nowrap; will-change: transform; width: max-content; }
 
@@ -306,7 +308,7 @@ export default function About() {
         <div className="about-ticker-section">
           <div className="about-ticker-fade-left" />
           <div className="about-ticker-fade-right" />
-          <p style={{ textAlign: 'center', fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '2.5rem' }}>
+          <p style={{ textAlign: 'center', fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1.5rem' }}>
             Artists People Compare Him To
           </p>
           <div className="about-ticker-outer">
@@ -317,38 +319,13 @@ export default function About() {
                     fontFamily: 'Playfair Display, serif',
                     fontSize: 'clamp(1.2rem, 2.5vw, 2rem)',
                     fontWeight: '400',
-                    color: i % 2 === 0 ? 'rgba(253,250,245,0.15)' : 'rgba(253,250,245,0.6)',
+                    color: i % 2 === 0 ? 'rgba(26,24,20,0.2)' : 'rgba(26,24,20,0.6)',
                     fontStyle: i % 3 === 0 ? 'italic' : 'normal',
                     whiteSpace: 'nowrap',
                   }}>
                     {name}
                   </span>
                   <span style={{ color: '#c4622d', fontSize: '0.5rem', flexShrink: 0 }}>✦</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* ── Stats ── */}
-        <div className="about-stat-section">
-          <div className="container">
-            <div className="about-stats-grid">
-              {[
-                { number: '300+', label: 'Performances', sub: 'across LA and beyond' },
-                { number: '180M+', label: 'Video Views', sub: 'and counting' },
-                { number: '8+', label: 'Hours of Repertoire', sub: 'soul, pop, jazz, rock & more' },
-              ].map((stat, i) => (
-                <div key={i} className="about-stat-card">
-                  <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(3rem, 6vw, 5rem)', fontWeight: '600', color: '#c4622d', lineHeight: '1', marginBottom: '0.5rem' }}>
-                    {stat.number}
-                  </p>
-                  <p style={{ fontSize: '0.75rem', fontWeight: '600', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#1a1814', marginBottom: '0.4rem' }}>
-                    {stat.label}
-                  </p>
-                  <p style={{ fontSize: '0.8rem', color: '#6b6460', fontStyle: 'italic', fontFamily: 'Cormorant Garamond, serif' }}>
-                    {stat.sub}
-                  </p>
                 </div>
               ))}
             </div>
