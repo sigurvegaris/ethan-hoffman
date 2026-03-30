@@ -341,7 +341,7 @@ export default function Navbar() {
                 <div style={dropdownStyle}>
                   {[
                     { href: '/about', label: 'About Ethan' },
-                    { href: '/music', label: 'Music & Media' },
+                    { href: '/music', label: 'Music & Performance' },
                     { href: '/shows', label: 'Upcoming Shows' },
                   ].map((item) => (
                     <Link

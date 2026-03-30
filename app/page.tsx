@@ -281,12 +281,12 @@ export default function Home() {
         .cta-copy { padding: 6rem 4rem; display: flex; flex-direction: column; justify-content: center; }
         .cta-image { position: relative; min-height: 420px; overflow: hidden; align-self: stretch; margin-top: 7.5rem; }
 
-        .wse-section { padding: 10rem 0; position: relative; }
+        .wse-section { padding: 5rem 0; position: relative; }
         .wse-marquee-track { position: absolute; top: 50%; left: 0; transform: translateY(-50%); white-space: nowrap; animation: wse-scroll 25s linear infinite; pointer-events: none; z-index: 0; }
         .wse-marquee-text { font-family: 'Playfair Display', serif; font-size: clamp(8rem, 18vw, 18rem); font-weight: 700; color: transparent; -webkit-text-stroke: 1px rgba(196,168,130,0.06); letter-spacing: -0.02em; line-height: 1; display: inline-block; padding-right: 4rem; }
         @keyframes wse-scroll { from { transform: translateY(-50%) translateX(0); } to { transform: translateY(-50%) translateX(-50%); } }
 
-        .wse-item { position: relative; z-index: 2; display: grid; grid-template-columns: 80px 1fr 1fr; align-items: center; gap: 3rem; padding: 3.5rem 0; border-top: 1px solid rgba(196,168,130,0.08); transition: border-color 0.5s ease; }
+        .wse-item { position: relative; z-index: 2; display: grid; grid-template-columns: 80px 1fr 1fr; align-items: center; gap: 3rem; padding: 2rem 0; border-top: 1px solid rgba(196,168,130,0.08); transition: border-color 0.5s ease; }
         .wse-item:last-child { border-bottom: 1px solid rgba(196,168,130,0.08); }
         .wse-item:hover { border-color: rgba(196,98,45,0.2); }
         .wse-num { font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 700; color: rgba(196,168,130,0.08); line-height: 1; letter-spacing: -0.03em; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
