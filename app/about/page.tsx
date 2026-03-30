@@ -5,14 +5,14 @@ import Footer from '../components/Footer'
 
 const galleryImages = [
   { src: '/images/ethanpinkbackground.jpg', alt: 'Ethan performing', position: 'center 5%' },
-  { src: '/images/ethansingingblack.jpg', alt: 'Ethan singing black', position: 'center center' },
-  { src: '/images/ethansingingorange.jpg', alt: 'Ethan singing', position: 'center 15%' },
+  { src: '/images/ethansingingblack.jpg', alt: 'Ethan singing', position: 'center center' },
+  { src: '/images/ethansingingorange.jpg', alt: 'Ethan singing orange', position: 'center 15%' },
   { src: '/images/ethanfighton.jpg', alt: 'Ethan at venue', position: 'center 30%' },
 ]
 
-function OriginalArtistryGallery({ selected, setSelected }: { selected: number, setSelected: (i: number) => void }) {
+function GalleryThumbs({ selected, setSelected }: { selected: number, setSelected: (i: number) => void }) {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 160px))', gap: '0.5rem', justifyContent: 'center', marginTop: '1.5rem' }}>
+    <>
       {galleryImages.map((img, i) => (
         <div
           key={i}
@@ -23,13 +23,13 @@ function OriginalArtistryGallery({ selected, setSelected }: { selected: number, 
             cursor: 'pointer',
             opacity: selected === i ? 1 : 0.45,
             border: selected === i ? '2px solid #c4622d' : '2px solid transparent',
-            transition: 'opacity 0.2s ease, border-color 0.2s ease',
+            transition: 'opacity 0.2s ease',
           }}
         >
           <img src={img.src} alt={img.alt} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
         </div>
       ))}
-    </div>
+    </>
   )
 }
 
@@ -92,7 +92,7 @@ export default function About() {
     {
       label: 'Original Artistry',
       photo: '/images/ethanpinkbackground.jpg',
-      photoPosition: 'center 10%',
+      photoPosition: 'center 5%',
       photoCaption: null,
       photo2: null,
       photo2Caption: null,
@@ -139,7 +139,6 @@ export default function About() {
           padding: 2.5rem 0 3rem;
         }
 
-        /* ── Big bold tabs ── */
         .about-tabs {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -167,7 +166,6 @@ export default function About() {
         .about-tab:hover { color: rgba(196,98,45,0.5); }
         .about-tab.active { color: #c4622d; border-bottom: 3px solid #c4622d; }
 
-        /* ── Content grid: photo left, text right ── */
         .about-tab-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -200,63 +198,33 @@ export default function About() {
           line-height: 1.5;
         }
 
-        .about-facts {
-          margin-top: 2rem;
-          padding-top: 2rem;
-          border-top: 1px solid rgba(196,168,130,0.3);
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 1rem;
-        }
-
-        /* ── Ticker ── */
         .about-ticker-section { background-color: #f5f0e8; padding: 3rem 0 2rem; overflow: hidden; position: relative; }
-        .about-ticker-fade-left, .about-ticker-fade-right { position: absolute; top: 0; bottom: 0; width: 150px; z-index: 2; pointer-events: none; }
-        .about-ticker-fade-left { left: 0; background: linear-gradient(to right, #f5f0e8, transparent); }
-        .about-ticker-fade-right { right: 0; background: linear-gradient(to left, #f5f0e8, transparent); }
         .about-ticker-outer { overflow: hidden; width: 100%; }
         .about-ticker-track { display: flex; flex-wrap: nowrap; white-space: nowrap; will-change: transform; width: max-content; }
 
-        /* ── Stats ── */
-        .about-stat-section { background-color: #f5f0e8; padding: 6rem 0; }
-        .about-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
-        .about-stat-card { text-align: center; padding: 3rem 2rem; }
-        .about-stat-card + .about-stat-card { border-left: 1px solid rgba(196,168,130,0.3); }
+        /* Desktop: thumbnails centered below both columns */
+        .gallery-below { display: grid; grid-template-columns: repeat(4, minmax(0, 200px)); gap: 0.6rem; justify-content: center; margin-top: 1.5rem; }
+        /* Mobile: thumbnails hidden in below position */
+        .gallery-inline { display: none; }
 
-        /* ── Responsive ── */
         @media (max-width: 1024px) {
-          .about-tab-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+          .about-tab-grid { grid-template-columns: 1fr; gap: 2rem; }
           .about-tab-photo { aspect-ratio: 4/3; max-width: 560px; }
+          /* On mobile show inline centered, hide below */
+          .gallery-below { display: none; }
+          .gallery-inline { display: grid; grid-template-columns: repeat(4, minmax(0, 140px)); gap: 0.5rem; margin-top: 0.5rem; justify-content: center; }
         }
 
         @media (max-width: 768px) {
-          .about-hero { padding: 7rem 0 3rem; }
-          .about-shell { width: min(1200px, calc(100% - 2rem)); padding: 3.5rem 0 5rem; }
-          .about-tab { font-size: 1.2rem; padding-right: 1.5rem; }
-          .about-facts { grid-template-columns: 1fr; }
-          .about-ticker-section { padding: 4rem 0; }
-          .about-ticker-fade-left, .about-ticker-fade-right { width: 56px; }
-          .about-stat-section { padding: 4rem 0; }
-          .about-stats-grid { grid-template-columns: 1fr; }
-          .about-stat-card { padding: 2rem 1rem; }
-          .about-stat-card + .about-stat-card { border-left: none; border-top: 1px solid rgba(196,168,130,0.3); }
-          .press-grid { grid-template-columns: 1fr !important; }
+          .about-hero { padding: 7rem 0 2rem; }
+          .about-shell { width: min(1200px, calc(100% - 2rem)); padding: 2rem 0 3rem; }
         }
 
         @media (max-width: 480px) {
-          .about-hero { padding: 6.5rem 0 2.5rem; }
+          .about-hero { padding: 6.5rem 0 2rem; }
           .about-shell { width: min(1200px, calc(100% - 1.5rem)); }
-          .about-tab { font-size: 1rem; padding-right: 1.25rem; }
+          .about-tab { font-size: 1rem; }
         }
-
-        .gallery-main { width: 100%; aspect-ratio: 4/3; overflow: hidden; margin-top: 1.25rem; position: relative; }
-        .gallery-main img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.3s ease; }
-        .gallery-thumbs { display: flex; gap: 0.5rem; margin-top: 0.5rem; justify-content: center; }
-        .gallery-thumb { width: 22%; aspect-ratio: 4/3; overflow: hidden; cursor: pointer; opacity: 0.5; transition: opacity 0.2s ease; border: 2px solid transparent; flex-shrink: 0; }
-        .gallery-thumb.active { opacity: 1; border-color: #c4622d; }
-        .gallery-thumb:hover { opacity: 0.85; }
-        .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .gallery-full { grid-column: 1 / -1; max-width: 600px; margin: 0 auto; width: 100%; }
       `}</style>
 
       <main className="about-page">
@@ -274,7 +242,7 @@ export default function About() {
 
         <div className="about-shell">
 
-          {/* ── Big bold tabs ── */}
+          {/* Tabs */}
           <div className="about-tabs">
             {tabs.map((tab, i) => (
               <button
@@ -287,16 +255,16 @@ export default function About() {
             ))}
           </div>
 
-          {/* ── Tab content ── */}
+          {/* Tab content */}
           <div key={activeTab} className="about-tab-grid">
 
             {/* Photo column */}
             <div>
-              <div className="about-tab-photo" style={{ aspectRatio: '4/3' }}>
+              <div className="about-tab-photo">
                 <img
                   src={activeTab === 2 ? galleryImages[gallerySelected].src : tabs[activeTab].photo!}
                   alt={tabs[activeTab].label}
-                  style={{ objectPosition: activeTab === 2 ? galleryImages[gallerySelected].position : tabs[activeTab].photoPosition, width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'opacity 0.3s ease' }}
+                  style={{ objectPosition: activeTab === 2 ? galleryImages[gallerySelected].position : tabs[activeTab].photoPosition }}
                 />
               </div>
               {tabs[activeTab].photoCaption && (
@@ -304,17 +272,19 @@ export default function About() {
               )}
               {tabs[activeTab].photo2 && (
                 <>
-                  <div className="about-tab-photo" style={{ marginTop: '1.25rem', aspectRatio: '4/3' }}>
-                    <img
-                      src={tabs[activeTab].photo2!}
-                      alt={tabs[activeTab].label}
-                      style={{ objectPosition: 'center center' }}
-                    />
+                  <div className="about-tab-photo" style={{ marginTop: '1.25rem' }}>
+                    <img src={tabs[activeTab].photo2!} alt={tabs[activeTab].label} style={{ objectPosition: 'center center' }} />
                   </div>
                   {tabs[activeTab].photo2Caption && (
                     <p className="about-photo-caption">{tabs[activeTab].photo2Caption}</p>
                   )}
                 </>
+              )}
+              {/* Inline thumbnails — mobile only */}
+              {activeTab === 2 && (
+                <div className="gallery-inline">
+                  <GalleryThumbs selected={gallerySelected} setSelected={setGallerySelected} />
+                </div>
               )}
             </div>
 
@@ -325,13 +295,15 @@ export default function About() {
 
           </div>
 
-          {/* Thumbnails centered below both columns — only on Original Artistry */}
+          {/* Thumbnails centered below — desktop only */}
           {activeTab === 2 && (
-            <OriginalArtistryGallery selected={gallerySelected} setSelected={setGallerySelected} />
+            <div className="gallery-below">
+              <GalleryThumbs selected={gallerySelected} setSelected={setGallerySelected} />
+            </div>
           )}
 
-          {/* ── Ticker — moved up, right below tab content ── */}
-          <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid rgba(196,168,130,0.2)', position: 'relative', overflow: 'hidden' }}>
+          {/* Ticker */}
+          <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid rgba(196,168,130,0.2)', overflow: 'hidden' }}>
             <p style={{ textAlign: 'center', fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1.25rem' }}>
               Artists People Compare Him To
             </p>
@@ -358,7 +330,7 @@ export default function About() {
 
         </div>
 
-        {/* ── Press Section ── */}
+        {/* Press Section */}
         <div style={{ backgroundColor: '#f5f0e8', padding: '2.5rem 0 5rem', borderTop: '1px solid rgba(196,168,130,0.2)' }}>
           <div style={{ width: 'min(1200px, calc(100% - 3rem))', margin: '0 auto' }}>
             <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.75rem', textAlign: 'center' }}>
@@ -378,21 +350,15 @@ export default function About() {
                     padding: '2rem',
                     border: '1px solid rgba(196,168,130,0.3)',
                     backgroundColor: 'rgba(26,24,20,0.03)',
-                    transition: 'border-color 0.3s ease, background 0.3s ease',
                     height: '100%',
                     boxSizing: 'border-box',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
+                    transition: 'border-color 0.3s ease',
                   }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLElement).style.borderColor = '#c4622d'
-                    ;(e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(196,98,45,0.04)'
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLElement).style.borderColor = 'rgba(196,168,130,0.3)'
-                    ;(e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(26,24,20,0.03)'
-                  }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = '#c4622d' }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(196,168,130,0.3)' }}
                   >
                     <div>
                       <p style={{ fontSize: '0.6rem', fontWeight: '700', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.75rem' }}>
