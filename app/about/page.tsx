@@ -218,6 +218,7 @@ export default function About() {
         @media (max-width: 768px) {
           .about-hero { padding: 7rem 0 2rem; }
           .about-shell { width: min(1200px, calc(100% - 2rem)); padding: 2rem 0 3rem; }
+          .press-grid { grid-template-columns: 1fr !important; }
         }
 
         @media (max-width: 480px) {
@@ -339,7 +340,7 @@ export default function About() {
             <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: '400', fontStyle: 'italic', color: '#1a1814', textAlign: 'center', marginBottom: '3rem' }}>
               As seen in
             </h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
+            <div className="press-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
               {[
                 { publication: 'Canvas Rebel', title: 'Meet Ethan Hoffman', href: 'https://canvasrebel.com/meet-ethan-hoffman/' },
                 { publication: 'Gut Instinct Media', title: 'Unveiling the Soul of Ethan Hoffman: Beyond the Viral Fame', href: 'https://medium.com/@gutinstinctmedia/unveiling-the-soul-of-ethan-hoffman-beyond-the-viral-fame-a6ab70904fb3' },

@@ -9,7 +9,7 @@ import ScrollReveal from './components/ScrollReveal'
 const svcs = [
   {
     tab: 'Weddings',
-    tag: 'Most Popular',
+    tag: '',
     headline: 'The soundtrack to your most important day',
     body: 'Ethan works closely with every couple to understand the vibe, then delivers a performance that feels completely tailored to you.',
     features: ['Cocktail Hours', 'Ceremony & Reception Coverage', 'Rehearsal Dinners & Welcome Parties', 'Custom Song Requests'],
@@ -20,7 +20,7 @@ const svcs = [
   },
   {
     tab: 'Private Events',
-    tag: '',
+    tag: 'Most Popular',
     headline: 'The room will feel different when he plays',
     body: 'Whether a dinner party, milestone birthday, or upscale celebration, Ethan reads the room and shapes the energy in real time.',
     features: ['Upscale Gatherings', 'Holiday Parties', 'Anniversary & Engagement Parties', 'Birthday Celebrations'],
@@ -68,7 +68,7 @@ const differentiators = [
   },
   {
     number: '03',
-    title: 'Exceeds The\nExpectations.',
+    title: 'Exceeds All\nExpectations.',
     tag: 'Premium Sound',
     body: 'Luxury is the moment your guests realize the live vocalist is of a caliber they never anticipated. Ethan delivers a premium experience that transcends the typical, making every event feel high-end and unforgettable.',
   },
@@ -131,7 +131,7 @@ function ServicesCarousel() {
           transition: all 0.3s ease; flex-shrink: 0; -webkit-tap-highlight-color: transparent;
         }
         .svc-tab.active { color: #fdfaf5; border-bottom: 2px solid #c4622d; }
-        .svc-image-wrap { position: relative; margin: 0 4rem; height: 460px; overflow: hidden; }
+        .svc-image-wrap { position: relative; margin: 0 4rem; height: 680px; overflow: hidden; }
         .svc-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.35s ease; }
         .svc-img.visible { opacity: 1; }
         .svc-img.hidden { opacity: 0; }
@@ -141,7 +141,7 @@ function ServicesCarousel() {
           background: linear-gradient(to left, rgba(10,8,6,0.96) 0%, rgba(10,8,6,0.55) 52%, rgba(10,8,6,0.12) 100%);
           z-index: 1;
         }
-        .svc-card { position: absolute; right: 3rem; top: 50%; transform: translateY(-50%); width: min(320px, calc(100% - 3rem)); z-index: 3; transition: opacity 0.35s ease; }
+        .svc-card { position: absolute; right: 3rem; top: 50%; transform: translateY(-50%); width: min(340px, calc(100% - 3rem)); z-index: 3; transition: opacity 0.35s ease; overflow-y: auto; max-height: 90%; }
         .svc-card.visible { opacity: 1; }
         .svc-card.hidden { opacity: 0; }
         .svc-card-desktop { display: block; }
@@ -341,6 +341,7 @@ export default function Home() {
           .wse-title { font-size: clamp(1.8rem, 8vw, 2.7rem); line-height: 1.05; }
           .wse-marquee-track { display: none; }
           .wse-item { padding: 2rem 0; gap: 1rem; }
+          .site-section { padding: 3.5rem 0 !important; }
         }
 
         @media (max-width: 480px) {
@@ -521,8 +522,8 @@ export default function Home() {
               </div>
               <div className="testimonial-grid">
                 {[
-                  { quote: "Ethan had the entire room silent within the first thirty seconds. By the end of the night, guests were asking us how we found him. He didn't just perform, he transformed the atmosphere completely.", name: 'Sarah and James K.', event: 'Wedding Reception', venue: 'The Shade Hotel, Manhattan Beach' },
-                  { quote: "We've hired a lot of musicians for our corporate events over the years. Ethan is in a different league. He read the room perfectly, kept the energy exactly where we needed it, and received more compliments than any performer we've ever booked.", name: 'Michelle T.', event: 'Corporate Event', venue: 'Renaissance LAX Hotel' },
+                  { quote: "Ethan Hoffman has been a joy to work with. He is truly a professional artist: prompt, polite, talented, entertaining, and most importantly, has great character and integrity.", name: 'Tony Nguyen', event: 'Talent Booker', venue: '' },
+                  { quote: "Incredible music, great vibe, added energy to the atmosphere and made everyone feel good… his music makes me happy and I love singing along! He is kind and relates to his audience. He adds a great deal to any event!", name: 'Laura Schenasi', event: 'Executive VP', venue: 'TMMC' },
                 ].map((t, i) => (
                   <div key={i} style={{ padding: '2.25rem', backgroundColor: i === 0 ? 'rgba(196,168,130,0.06)' : 'rgba(196,98,45,0.06)', borderTop: `2px solid ${i === 0 ? 'rgba(196,168,130,0.2)' : '#c4622d'}`, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                     <div style={{ fontFamily: 'Playfair Display, serif', fontSize: '5rem', lineHeight: '0.5', color: i === 0 ? 'rgba(196,168,130,0.15)' : 'rgba(196,98,45,0.2)', marginBottom: '1rem', userSelect: 'none' }}>"</div>
@@ -533,7 +534,7 @@ export default function Home() {
                       </div>
                       <div>
                         <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8rem', fontWeight: '700', color: '#fdfaf5', margin: '0 0 0.2rem 0' }}>{t.name}</p>
-                        <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.65rem', color: '#c4622d', margin: 0, letterSpacing: '0.05em' }}>{t.event} · {t.venue}</p>
+                        <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.65rem', color: '#c4622d', margin: 0, letterSpacing: '0.05em' }}>{t.event}{t.venue ? ` · ${t.venue}` : ''}</p>
                       </div>
                     </div>
                   </div>
