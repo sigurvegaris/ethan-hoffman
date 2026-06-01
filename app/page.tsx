@@ -368,7 +368,7 @@ export default function Home() {
         {/* ── HERO ── */}
         <section className="hero-section">
           <Image
-            src="/images/ethanphotositting.jpg"
+            src="/images/ethanphotositting.webp"
             alt="Ethan Hoffman performing live"
             fill
             priority
