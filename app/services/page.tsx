@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import Image from 'next/image'
 
 const services = [
   {
@@ -17,7 +18,7 @@ const services = [
       'Background and interactive sets',
       'Full sound system included',
     ],
-    photo: '/images/ethanwearinggreen.png',
+    photo: '/images/ethanwearinggreen.webp',
     objectPosition: 'center bottom',
   },
   {
@@ -32,7 +33,7 @@ const services = [
       'Exclusive and high-end private events',
       'Flexible set lengths and styles',
     ],
-    photo: '/images/ethanblackandwhite.jpg',
+    photo: '/images/ethanblackandwhite.webp',
     objectPosition: 'center top',
   },
   {
@@ -47,7 +48,7 @@ const services = [
       'University and institutional events',
       'Networking and cocktail receptions',
     ],
-    photo: '/images/ethanpinkbackground.jpg',
+    photo: '/images/ethanpinkbackground.webp',
     objectPosition: 'center top',
   },
   {
@@ -62,7 +63,7 @@ const services = [
       '70s and 80s inspired soul sound',
       'Live original music sets',
     ],
-    photo: '/images/ethanwithcrowd.jpg',
+    photo: '/images/ethanwithcrowd.webp',
     objectPosition: 'center top',
   },
 ]
@@ -271,14 +272,24 @@ export default function Services() {
             </div>
 
             <div className="services-media">
-              <div className="services-image-wrap">
-                <img
-                  src={services[active].photo}
-                  alt={services[active].label}
-                  className="services-image"
-                  style={{ objectPosition: services[active].objectPosition }}
-                />
-              </div>
+            <div className="services-image-wrap" style={{ position: 'relative' }}>
+  {services.map((s, i) => (
+    <Image
+      key={s.id}
+      src={s.photo}
+      alt={s.label}
+      fill
+      sizes="(max-width: 1024px) 100vw, 50vw"
+      priority={i === 0}
+      style={{
+        objectFit: 'cover',
+        objectPosition: s.objectPosition,
+        opacity: i === active ? 1 : 0,
+        transition: 'opacity 0.4s ease',
+      }}
+    />
+  ))}
+</div>
             </div>
           </div>
         </div>
