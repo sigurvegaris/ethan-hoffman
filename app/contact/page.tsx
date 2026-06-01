@@ -4,9 +4,9 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import emailjs from '@emailjs/browser'
 
-const EMAILJS_SERVICE_ID  = 'service_lyv95pi'
-const EMAILJS_TEMPLATE_ID = 'template_ju1hwpq'
-const EMAILJS_PUBLIC_KEY  = 'CWiWuWYTSB04n1ev2'
+const EMAILJS_SERVICE_ID  = 'service_jkskb25'
+const EMAILJS_TEMPLATE_ID = 'template_fqosxmp'
+const EMAILJS_PUBLIC_KEY  = 'iloAULJ2uMQUWoHTi'
 
 export default function Contact() {
   const formRef = useRef<HTMLFormElement>(null)
