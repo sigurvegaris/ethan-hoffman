@@ -2,12 +2,13 @@
 import { useState, useEffect, useRef } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import Image from 'next/image'
 
 const galleryImages = [
-  { src: '/images/ethanpinkbackground.jpg', alt: 'Ethan performing', position: 'center 5%' },
-  { src: '/images/ethansingingblack.jpg', alt: 'Ethan singing', position: 'center center' },
-  { src: '/images/ethansingingorange.jpg', alt: 'Ethan singing orange', position: 'center 15%' },
-  { src: '/images/ethanfighton.jpg', alt: 'Ethan at venue', position: 'center 30%' },
+  { src: '/images/ethanpinkbackground.webp', alt: 'Ethan performing', position: 'center 5%' },
+  { src: '/images/ethansingingblack.webp', alt: 'Ethan singing', position: 'center center' },
+  { src: '/images/ethansingingorange.webp', alt: 'Ethan singing orange', position: 'center 15%' },
+  { src: '/images/ethanfighton.webp', alt: 'Ethan at venue', position: 'center 30%' },
 ]
 
 function GalleryThumbs({ selected, setSelected }: { selected: number, setSelected: (i: number) => void }) {
@@ -19,6 +20,7 @@ function GalleryThumbs({ selected, setSelected }: { selected: number, setSelecte
           onClick={() => setSelected(i)}
           style={{
             aspectRatio: '4/3',
+            position: 'relative',
             overflow: 'hidden',
             cursor: 'pointer',
             opacity: selected === i ? 1 : 0.45,
@@ -26,7 +28,7 @@ function GalleryThumbs({ selected, setSelected }: { selected: number, setSelecte
             transition: 'opacity 0.2s ease',
           }}
         >
-          <img src={img.src} alt={img.alt} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          <Image src={img.src} alt={img.alt} fill style={{ objectFit: 'cover' }} sizes="200px" />
         </div>
       ))}
     </>
@@ -46,7 +48,7 @@ export default function About() {
   const tabs = [
     {
       label: 'Meet Ethan',
-      photo: '/images/ethanincar.jpg',
+      photo: '/images/ethanincar.webp',
       photoPosition: 'center 60%',
       photoCaption: null,
       photo2: null,
@@ -64,10 +66,10 @@ export default function About() {
     },
     {
       label: 'Musical Journey',
-      photo: '/images/ethanhandshakingguy.png',
+      photo: '/images/ethanhandshakingguy.webp',
       photoPosition: 'center center',
       photoCaption: 'Ethan (right) with Morgan (left) backstage at the Wiltern Theater before a sold-out night at the Wiltern Theater.',
-      photo2: '/images/ethanthreeguys.jpg',
+      photo2: '/images/ethanthreeguys.webp',
       photo2Caption: 'Ethan (left), with Morgan Jay (center) and Tofer (right), the lead keyboardist for Morgan.',
       content: (
         <>
@@ -91,7 +93,7 @@ export default function About() {
     },
     {
       label: 'Original Artistry',
-      photo: '/images/ethanpinkbackground.jpg',
+      photo: '/images/ethanpinkbackground.webp',
       photoPosition: 'center 5%',
       photoCaption: null,
       photo2: null,
@@ -261,21 +263,33 @@ export default function About() {
 
             {/* Photo column */}
             <div>
-              <div className="about-tab-photo">
-                <img
-                  src={activeTab === 2 ? galleryImages[gallerySelected].src : tabs[activeTab].photo!}
-                  alt={tabs[activeTab].label}
-                  style={{ objectPosition: activeTab === 2 ? galleryImages[gallerySelected].position : tabs[activeTab].photoPosition }}
-                />
-              </div>
+            <div className="about-tab-photo" style={{ position: 'relative' }}>
+  <Image
+    src={activeTab === 2 ? galleryImages[gallerySelected].src : tabs[activeTab].photo!}
+    alt={tabs[activeTab].label}
+    fill
+    sizes="(max-width: 1024px) 100vw, 50vw"
+    priority={activeTab === 0}
+    style={{
+      objectFit: 'cover',
+      objectPosition: activeTab === 2 ? galleryImages[gallerySelected].position : tabs[activeTab].photoPosition,
+    }}
+  />
+</div>
               {tabs[activeTab].photoCaption && (
                 <p className="about-photo-caption">{tabs[activeTab].photoCaption}</p>
               )}
               {tabs[activeTab].photo2 && (
                 <>
-                  <div className="about-tab-photo" style={{ marginTop: '1.25rem' }}>
-                    <img src={tabs[activeTab].photo2!} alt={tabs[activeTab].label} style={{ objectPosition: 'center center' }} />
-                  </div>
+<div className="about-tab-photo" style={{ marginTop: '1.25rem', position: 'relative' }}>
+  <Image
+    src={tabs[activeTab].photo2!}
+    alt={tabs[activeTab].label}
+    fill
+    sizes="(max-width: 1024px) 100vw, 50vw"
+    style={{ objectFit: 'cover', objectPosition: 'center center' }}
+  />
+</div>
                   {tabs[activeTab].photo2Caption && (
                     <p className="about-photo-caption">{tabs[activeTab].photo2Caption}</p>
                   )}
