@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
 <head>
-  <link rel="preload" as="image" href="/images/ethanphotositting.webp" />
+<link rel="preload" as="image" href="/images/ethanphotositting.webp" />
 </head>
     <body>
         <AnimatePresence mode="wait" initial={false}>

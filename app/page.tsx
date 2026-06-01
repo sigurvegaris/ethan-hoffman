@@ -450,7 +450,7 @@ export default function Home() {
                 <div style={{ position: 'relative' }}>
                   <div style={{ width: '100%', aspectRatio: '3 / 4', overflow: 'hidden', position: 'relative' }}>
                     <Image
-                      src="/images/ethansingingorange.jpg"
+                      src="/images/ethansingingorange.webp"
                       alt="Ethan Hoffman"
                       fill
                       sizes="(max-width: 1024px) 100vw, 50vw"
@@ -569,7 +569,7 @@ export default function Home() {
               </div>
               <div className="cta-image">
                 <Image
-                  src="/images/ethanincar.jpg"
+                  src="/images/ethanincar.webp"
                   alt="Ethan Hoffman"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
