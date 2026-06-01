@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import Image from 'next/image'
 
 const services = [
   {
@@ -136,19 +137,24 @@ export default function Services() {
               <a href="/contact" className="btn-primary">Book Ethan</a>
             </div>
 
-            <div style={{ aspectRatio: '4/3', overflow: 'hidden' }}>
-              <img
-                src={services[active].photo}
-                alt={services[active].label}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: services[active].objectPosition,
-                  transition: 'opacity 0.4s ease',
-                }}
-              />
-            </div>
+            <div style={{ position: 'relative', aspectRatio: '4/3', overflow: 'hidden' }}>
+  {services.map((s, i) => (
+    <Image
+      key={s.id}
+      src={s.photo}
+      alt={s.label}
+      fill
+      sizes="(max-width: 768px) 100vw, 50vw"
+      priority={i === 0}
+      style={{
+        objectFit: 'cover',
+        objectPosition: s.objectPosition,
+        opacity: i === active ? 1 : 0,
+        transition: 'opacity 0.4s ease',
+      }}
+    />
+  ))}
+</div>
           </div>
         </div>
       </main>

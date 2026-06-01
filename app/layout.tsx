@@ -24,9 +24,12 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-    <head>
-      <link rel="preload" as="image" href="/images/ethanwithguitar.webp" />
-    </head>
+<head>
+  <link rel="preload" as="image" href="/images/ethanwithguitar.webp" />
+  <link rel="preload" as="image" href="/images/ethanthreeguys.webp" />
+  <link rel="preload" as="image" href="/images/ethanwithcrowd.webp" />
+  <link rel="preload" as="image" href="/images/ethansoloshot.webp" />
+</head>
     <body>
         <AnimatePresence mode="wait" initial={false}>
           {children}
