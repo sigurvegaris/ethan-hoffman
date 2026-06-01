@@ -17,18 +17,13 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
 <head>
-  <link rel="preload" as="image" href="/images/ethanwithguitar.webp" />
-  <link rel="preload" as="image" href="/images/ethanthreeguys.webp" />
-  <link rel="preload" as="image" href="/images/ethanwithcrowd.webp" />
-  <link rel="preload" as="image" href="/images/ethansoloshot.webp" />
+  <link rel="preload" as="image" href="/images/ethanphotositting.webp" />
 </head>
     <body>
         <AnimatePresence mode="wait" initial={false}>
