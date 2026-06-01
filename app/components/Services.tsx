@@ -16,7 +16,7 @@ const services = [
       'Background and interactive sets',
       'Full sound system included',
     ],
-    photo: '/images/ethanwithguitar.png',
+    photo: '/images/ethanwithguitar.webp',
     objectPosition: 'center bottom',
   },
   {
@@ -31,7 +31,7 @@ const services = [
       'Exclusive and high-end private events',
       'Flexible set lengths and styles',
     ],
-    photo: '/images/ethanthreeguys.png',
+    photo: '/images/ethanthreeguys.webp',
     objectPosition: 'center top',
   },
   {
@@ -46,7 +46,7 @@ const services = [
       'University and institutional events',
       'Networking and cocktail receptions',
     ],
-    photo: '/images/ethanwithcrowd.png',
+    photo: '/images/ethanwithcrowd.webp',
     objectPosition: 'center top',
   },
   {
@@ -61,7 +61,7 @@ const services = [
       '70s and 80s inspired soul sound',
       'Live original music sets',
     ],
-    photo: '/images/ethansoloshot.png',
+    photo: '/images/ethansoloshot.webp',
     objectPosition: 'center top',
   },
 ]

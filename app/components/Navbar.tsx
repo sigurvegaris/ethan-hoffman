@@ -334,7 +334,7 @@ export default function Navbar() {
                 onMouseEnter={(e) => { e.currentTarget.style.color = '#c4622d' }}
                 onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(253,250,245,0.82)' }}
               >
-                Experience ▾
+                About ▾
               </button>
 
               {experienceOpen && (
@@ -342,7 +342,6 @@ export default function Navbar() {
                   {[
                     { href: '/about', label: 'About Ethan' },
                     { href: '/music', label: 'Music & Performance' },
-                    { href: '/shows', label: 'Upcoming Shows' },
                   ].map((item) => (
                     <Link
                       key={item.href}
@@ -393,14 +392,17 @@ export default function Navbar() {
               )}
             </div>
 
-            <Link
-              href="/contact"
-              style={linkStyle}
-              onMouseEnter={(e) => { e.currentTarget.style.color = '#c4622d' }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(253,250,245,0.82)' }}
-            >
-              Contact
-            </Link>
+            <Link href="/shows" style={linkStyle}
+  onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
+  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.8)')}>
+  Shows
+</Link>
+
+<Link href="/contact" style={linkStyle}
+  onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
+  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.8)')}>
+  Contact
+</Link>
 
             <Link
               href="/contact"
@@ -439,23 +441,26 @@ export default function Navbar() {
             </div>
 
             <div className="eh-mobile-section">
-              <button
-                type="button"
-                className="eh-mobile-accordion-btn"
-                onClick={() => setMobileExperienceOpen((o) => !o)}
-              >
-                <span>Experience</span>
-                <span className={`eh-mobile-chevron ${mobileExperienceOpen ? 'open' : ''}`}>▾</span>
-              </button>
-              {mobileExperienceOpen && (
-                <div className="eh-mobile-submenu">
-                  <Link href="/about" onClick={closeAllMenus}>About Ethan</Link>
-                  <Link href="/music" onClick={closeAllMenus}>Music & Performance</Link>
-                  <Link href="/shows" onClick={closeAllMenus}>Upcoming Shows</Link>
-                </div>
-              )}
+            <button
+  type="button"
+  className="eh-mobile-accordion-btn"
+  onClick={() => setMobileExperienceOpen((o) => !o)}
+>
+  <span>About</span>
+  <span className={`eh-mobile-chevron ${mobileExperienceOpen ? 'open' : ''}`}>▾</span>
+</button>
+{mobileExperienceOpen && (
+  <div className="eh-mobile-submenu">
+    <Link href="/about" onClick={closeAllMenus}>About Ethan</Link>
+    <Link href="/music" onClick={closeAllMenus}>Music & Performance</Link>
+  </div>
+)}
             </div>
-
+            <div className="eh-mobile-section">
+  <Link href="/shows" className="eh-mobile-top-link" onClick={closeAllMenus}>
+    <span>Shows</span>
+  </Link>
+</div>
             <div className="eh-mobile-section">
               <button
                 type="button"
