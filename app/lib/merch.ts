@@ -8,7 +8,7 @@ export type MerchItem = {
   description: string
   image?: string
   mock: 'tee-light' | 'tee-dark' | 'cd' | 'bracelet' // drawn stand-in until a rendering is added
-  tile: string // torn-paper backdrop colour
+  tile: string // tile colour, blended into the forest greens
   price?: string
   buyUrl?: string
 }
