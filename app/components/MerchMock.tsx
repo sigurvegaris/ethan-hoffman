@@ -19,7 +19,8 @@ export default function MerchMock({ mock }: { mock: MerchItem['mock'] }) {
             <text x="120" y="148" textAnchor="middle" fill="#f4efe4" fontFamily="Nanum Pen Script, cursive" fontSize="13">Ethan</text>
           </g>
         ) : (
-          <g fill="#3a3a3a" fontFamily="Nanum Pen Script, cursive" fontSize="6.5" opacity="0.85">
+          <g fill="#3a3a3a" fontFamily="Nanum Pen Script, cursive" fontSize="6.5" opacity="0.85" clipPath="url(#teeLightClip)">
+            <defs><clipPath id="teeLightClip"><path d="M76 40 L164 40 L164 210 L76 210 Z" /></clipPath></defs>
             <text x="120" y="56" textAnchor="middle" fontFamily="Times New Roman, serif" fontSize="8">thanks to my day one fans</text>
             {Array.from({ length: 12 }, (_, row) => (
               <text key={row} x="120" y={70 + row * 10} textAnchor="middle">
