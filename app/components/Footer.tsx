@@ -1,5 +1,7 @@
 'use client'
+import { useState } from 'react'
 import Link from 'next/link'
+import { sendFanNote } from '../lib/notify'
 
 const socialLinks = [
   {
@@ -34,16 +36,6 @@ const socialLinks = [
   },
 ]
 
-const quickLinks = [
-  { label: 'About', href: '/about' },
-  { label: 'Music', href: '/music' },
-  { label: 'Services', href: '/services' },
-  { label: 'Venues', href: '/venues' },
-  { label: 'Testimonials', href: '/testimonials' },
-  { label: 'Shows', href: '/shows' },
-  { label: 'Contact', href: '/contact' },
-]
-
 const contactItems = [
   { label: 'Email', value: 'booking@ethanhoffmanofficial.com', url: 'mailto:booking@ethanhoffmanofficial.com' },
   { label: 'Website', value: 'ethanhoffmanofficial.com', url: 'https://ethanhoffmanofficial.com' },
@@ -51,254 +43,107 @@ const contactItems = [
   { label: 'Location', value: 'Los Angeles, CA', url: null },
 ]
 
+const quickLinks = [
+  { label: 'music', href: '/music' },
+  { label: 'shows', href: '/shows' },
+  { label: 'merch', href: '/merch' },
+  { label: 'about', href: '/about' },
+  { label: 'book live', href: '/services' },
+  { label: 'repertoire', href: '/repertoire' },
+  { label: 'past venues', href: '/venues' },
+  { label: 'testimonials', href: '/testimonials' },
+  { label: 'contact', href: '/contact' },
+]
+
 export default function Footer() {
+  const [email, setEmail] = useState('')
+  const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
+
+  const subscribe = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email) return
+    setStatus('sending')
+    try {
+      await sendFanNote('Mailing list', { email, message: `${email} signed up for the mailing list.` })
+      setStatus('done')
+    } catch {
+      setStatus('error')
+    }
+  }
+
   return (
-    <>
+    <footer className="eh-foot">
       <style>{`
-        .eh-footer {
-          background-color: #1a1814;
-          padding: 4rem 0 2rem;
-          border-top: 1px solid rgba(196,168,130,0.15);
-          overflow-x: hidden;
-        }
-
-        .eh-footer-container {
-          width: min(1200px, calc(100% - 2.5rem));
-          margin: 0 auto;
-        }
-
-        .eh-footer-grid {
-          display: grid;
-          grid-template-columns: 1.2fr 0.8fr 1fr;
-          gap: 3rem;
-          margin-bottom: 3rem;
-          padding-bottom: 3rem;
-          border-bottom: 1px solid rgba(196,168,130,0.15);
-        }
-
-        .eh-footer-heading {
-          font-size: 0.65rem;
-          font-weight: 600;
-          letter-spacing: 0.2em;
-          text-transform: uppercase;
-          color: #c4622d;
-          margin: 0 0 1.2rem 0;
-          font-family: Inter, sans-serif;
-        }
-
-        .eh-footer-social {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.85rem;
-          margin-top: 1.25rem;
-        }
-
-        .eh-footer-social a {
-          width: 38px;
-          height: 38px;
-          border: 1px solid rgba(196,168,130,0.25);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: rgba(253,250,245,0.45);
-          text-decoration: none;
-          transition: all 0.3s ease;
-          flex-shrink: 0;
-        }
-
-        .eh-footer-social a:hover {
-          border-color: #c4622d;
-          color: #c4622d;
-          background-color: rgba(196,98,45,0.08);
-        }
-
-        .eh-footer-link {
-          display: block;
-          font-size: 0.85rem;
-          color: rgba(253,250,245,0.55);
-          text-decoration: none;
-          margin-bottom: 0.7rem;
-          transition: color 0.3s ease;
-          width: fit-content;
-        }
-
-        .eh-footer-link:hover {
-          color: #fdfaf5;
-        }
-
-        .eh-footer-contact-item {
-          margin-bottom: 1rem;
-        }
-
-        .eh-footer-contact-label {
-          font-size: 0.65rem;
-          color: rgba(253,250,245,0.3);
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          margin: 0 0 0.2rem 0;
-          font-family: Inter, sans-serif;
-        }
-
-        .eh-footer-contact-value,
-        .eh-footer-contact-value a {
-          font-size: 0.82rem;
-          color: rgba(253,250,245,0.62);
-          text-decoration: none;
-          transition: color 0.3s ease;
-          line-height: 1.6;
-          overflow-wrap: anywhere;
-        }
-
-        .eh-footer-contact-value a:hover {
-          color: #fdfaf5;
-        }
-
-        .eh-footer-bottom {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 1rem 2rem;
-          flex-wrap: wrap;
-        }
-
-        .eh-footer-bottom p {
-          margin: 0;
-          font-size: 0.75rem;
-          color: rgba(253,250,245,0.3);
-          line-height: 1.5;
-        }
-
+        .eh-foot { background: #1f261c; color: #f2ecdf; padding: 5.5rem 0 2rem; font-family: 'Jost', 'Inter', sans-serif; position: relative; overflow: hidden; }
+        .eh-foot-wrap { width: min(1180px, calc(100% - 3rem)); margin: 0 auto; }
+        .eh-foot-top { display: grid; grid-template-columns: 1.3fr 1fr; gap: 4rem; align-items: start; }
+        .eh-foot-mark { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(3.4rem, 9vw, 7.5rem); line-height: 0.85; letter-spacing: -0.03em; margin: 0; }
+        .eh-foot-mark em { font-style: italic; color: #e2a75a; }
+        .eh-foot-tag { font-family: 'Caveat', cursive; font-size: 1.6rem; color: rgba(242,236,223,0.75); margin: 1rem 0 0; }
+        .eh-foot-label { font-size: 1rem; font-weight: 500; margin: 0 0 0.9rem; }
+        .eh-foot-form { display: flex; gap: 0.5rem; }
+        .eh-foot-input { flex: 1; min-width: 0; background: transparent; border: 1px solid rgba(242,236,223,0.7); color: #f2ecdf; padding: 0.95rem 1.1rem; font-family: inherit; font-size: 0.95rem; letter-spacing: 0.08em; }
+        .eh-foot-input::placeholder { color: rgba(242,236,223,0.5); }
+        .eh-foot-btn { background: #f2ecdf; color: #1c1a15; border: none; padding: 0 1.6rem; font-family: inherit; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; }
+        .eh-foot-btn:hover { background: #e2a75a; }
+        .eh-foot-fine { font-size: 0.78rem; letter-spacing: 0.06em; line-height: 1.7; color: rgba(242,236,223,0.55); margin: 0.9rem 0 0; }
+        .eh-foot-links { display: flex; flex-wrap: wrap; gap: 0.6rem 1.75rem; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(242,236,223,0.12); }
+        .eh-foot-links a { color: rgba(242,236,223,0.8); text-decoration: none; font-size: 1rem; }
+        .eh-foot-links a:hover { color: #e2a75a; }
+        .eh-foot-bottom { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 2.5rem; font-size: 0.78rem; letter-spacing: 0.18em; color: rgba(242,236,223,0.5); }
+        .eh-foot-bottom a { color: inherit; text-decoration: none; }
+        .eh-foot-bottom a:hover { color: #f2ecdf; }
+        .eh-foot-contact { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+        .eh-foot-social { display: flex; gap: 1rem; }
+        .eh-foot-social a { color: rgba(242,236,223,0.8); display: flex; }
+        .eh-foot-social a:hover { color: #e2a75a; }
         @media (max-width: 900px) {
-          .eh-footer-grid {
-            grid-template-columns: 1fr;
-            gap: 2.25rem;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .eh-footer {
-            padding: 3rem 0 1.75rem;
-          }
-
-          .eh-footer-container {
-            width: min(1200px, calc(100% - 2rem));
-          }
-
-          .eh-footer-grid {
-            gap: 2rem;
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-          }
-
-          .eh-footer-bottom {
-            flex-direction: column;
-            align-items: flex-start;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .eh-footer-social {
-            gap: 0.7rem;
-          }
-
-          .eh-footer-social a {
-            width: 36px;
-            height: 36px;
-          }
-
-          .eh-footer-link {
-            font-size: 0.82rem;
-          }
-
-          .eh-footer-bottom p {
-            font-size: 0.72rem;
-          }
+          .eh-foot { padding-top: 4rem; }
+          .eh-foot-wrap { width: calc(100% - 2.5rem); }
+          .eh-foot-top { grid-template-columns: 1fr; gap: 2.5rem; }
+          .eh-foot-form { flex-direction: column; }
+          .eh-foot-btn { padding: 0.95rem 1.6rem; }
+          .eh-foot-links { margin-top: 3rem; }
         }
       `}</style>
-
-      <footer className="eh-footer">
-        <div className="eh-footer-container">
-          <div className="eh-footer-grid">
-            <div>
-              <p
-                style={{
-                  fontFamily: 'Playfair Display, serif',
-                  fontSize: '1.4rem',
-                  fontWeight: '600',
-                  color: '#fdfaf5',
-                  margin: '0 0 0.75rem 0',
-                }}
-              >
-                Ethan Hoffman
-              </p>
-
-              <p
-                style={{
-                  fontSize: '0.8rem',
-                  color: 'rgba(253,250,245,0.42)',
-                  lineHeight: '1.75',
-                  margin: 0,
-                }}
-              >
-                Singer-songwriter from Los Angeles.
-                <br />
-                Also playing weddings, private
-                <br />
-                & corporate events.
-              </p>
-
-              <div className="eh-footer-social">
-                {socialLinks.map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title={s.label}
-                    aria-label={s.label}
-                    dangerouslySetInnerHTML={{ __html: s.icon }}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <p className="eh-footer-heading">Quick Links</p>
-              {quickLinks.map((link) => (
-                <Link key={link.label} href={link.href} className="eh-footer-link">
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-
-            <div>
-              <p className="eh-footer-heading">Contact</p>
-              {contactItems.map((item, i) => (
-                <div key={i} className="eh-footer-contact-item">
-                  <p className="eh-footer-contact-label">{item.label}</p>
-                  {item.url ? (
-                    <div className="eh-footer-contact-value">
-                      <a href={item.url} target="_blank" rel="noopener noreferrer">
-                        {item.value}
-                      </a>
-                    </div>
-                  ) : (
-                    <p className="eh-footer-contact-value" style={{ margin: 0 }}>
-                      {item.value}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
+      <div className="eh-foot-wrap">
+        <div className="eh-foot-top">
+          <div>
+            <p className="eh-foot-mark">Ethan<br /><em>Hoffman</em></p>
+            <p className="eh-foot-tag">thanks for being here. — e</p>
           </div>
-
-          <div className="eh-footer-bottom">
-            <p>© {new Date().getFullYear()} Ethan Hoffman. All rights reserved.</p>
-            <p>Los Angeles, CA — Available Nationwide</p>
+          <div>
+            <p className="eh-foot-label">sign up for the mailing list</p>
+            {status === 'done' ? (
+              <p className="eh-foot-tag" style={{ marginTop: 0 }}>you&apos;re on the list ♡</p>
+            ) : (
+              <form className="eh-foot-form" onSubmit={subscribe}>
+                <input className="eh-foot-input" type="email" required placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} aria-label="Email address" />
+                <button className="eh-foot-btn" type="submit" disabled={status === 'sending'}>{status === 'sending' ? '…' : 'Subscribe'}</button>
+              </form>
+            )}
+            <p className="eh-foot-fine">
+              {status === 'error' ? 'That didn’t go through. Try again?' : 'New music, show dates and the occasional note from Ethan. Nothing else.'}
+            </p>
           </div>
         </div>
-      </footer>
-    </>
+
+        <nav className="eh-foot-links" aria-label="Footer">
+          {quickLinks.map((l) => <Link key={l.href} href={l.href}>{l.label}</Link>)}
+        </nav>
+
+        <div className="eh-foot-bottom">
+          <span>© {new Date().getFullYear()} ethan hoffman · los angeles</span>
+          <span className="eh-foot-contact">
+            {contactItems.filter((c) => c.url && c.label === 'Email').map((c) => <a key={c.label} href={c.url!}>{c.value}</a>)}
+          </span>
+          <span className="eh-foot-social">
+            {socialLinks.map((s) => (
+              <a key={s.label} href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.label} dangerouslySetInnerHTML={{ __html: s.icon }} />
+            ))}
+          </span>
+        </div>
+      </div>
+    </footer>
   )
 }

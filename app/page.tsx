@@ -4,9 +4,11 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ScrollReveal from './components/ScrollReveal'
 import Press from './components/Press'
-import IndiaChapter from './components/home/IndiaChapter'
+import HeroRelease from './components/home/HeroRelease'
+import Releases from './components/home/Releases'
+import BirthdayNudge from './components/home/BirthdayNudge'
 import FanNotebook from './components/home/FanNotebook'
-import { featuredSingle, singles, ep, formatReleaseDate } from './lib/release'
+import { singles, ep, formatReleaseDate } from './lib/release'
 import './home.css'
 
 const shortDate = (iso: string) => formatReleaseDate(iso).replace(/, \d{4}$/, '').replace('November', 'Nov').replace('December', 'Dec').replace('January', 'Jan')
@@ -47,44 +49,11 @@ export default function Home() {
       <Navbar />
       <main className="nb">
 
-        {/* ── HERO ── */}
-        <section className="nb-hero nb-grain">
-          <div className="nb-hero-media">
-            <Image
-              src="/images/malibu/oak-walk.webp"
-              alt="Ethan Hoffman walking under an oak tree in Malibu"
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 60vw"
-              style={{ objectFit: 'cover', objectPosition: 'center 40%' }}
-            />
-          </div>
-          <div className="nb-hero-shade" />
+        {/* ── HERO: the current release ── */}
+        <HeroRelease />
 
-          <a href="#india" className="nb-note">
-            <span className="nb-note-text">new song “{featuredSingle.title}”</span>
-            <span className="nb-note-sub">{shortDate(featuredSingle.releaseDate)} ✷</span>
-            <svg viewBox="0 0 110 70" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
-              <path d="M100 6 C 92 40, 60 58, 14 56" />
-              <path d="M26 46 L 13 56 L 27 64" />
-            </svg>
-          </a>
-
-          <div className="nb-hero-inner">
-            <p className="nb-label nb-hero-kicker">Singer-songwriter · Los Angeles</p>
-            <h1 className="nb-hero-name">Ethan<br /><em>Hoffman</em></h1>
-            <div className="nb-hero-row">
-              <p className="nb-hero-line">Soulful, honest songs, written down one name at a time.</p>
-              <div className="nb-actions">
-                <a href="#india" className="nb-btn nb-btn-light">Listen</a>
-                <a href="#notebook" className="nb-btn nb-btn-ghost">Sign the notebook</a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── INDIA ── */}
-        <IndiaChapter />
+        {/* ── MUSIC: singles + EP as records ── */}
+        <Releases />
 
         {/* ── THE EP ── */}
         <section className="nb-ep">
@@ -119,7 +88,7 @@ export default function Home() {
         </section>
 
         {/* ── SESSIONS ── */}
-        <section className="nb-sessions">
+        <section className="nb-sessions nb-dust">
           <div className="nb-wrap nb-sessions-head">
             <h2 className="nb-sessions-title">Eight session videos.<br />Two nights. <em>One room in Malibu.</em></h2>
             <p className="nb-label" style={{ color: 'var(--amber)' }}>Arriving with every song</p>
@@ -200,6 +169,7 @@ export default function Home() {
         </section>
 
       </main>
+      <BirthdayNudge />
       <Footer />
     </>
   )

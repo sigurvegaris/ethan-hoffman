@@ -1,6 +1,6 @@
 /* Homepage: "Ethan's notebook". Paper, ink, handwriting and film photos. */
 
-.nb {
+.nb, .bd {
   --paper: #f2ecdf;
   --paper-deep: #e7dfcc;
   --ink: #1c1a15;
@@ -22,23 +22,7 @@
 .nb-hand { font-family: var(--hand); }
 .nb-label { font-family: var(--sans); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; }
 
-/* Film grain laid over photos and paper */
-.nb-grain { position: relative; }
-.nb-grain::after {
-  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.22; mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* ── Hero ───────────────────────────────────────────── */
-.nb-hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; color: var(--paper); background: var(--moss); }
-.nb-hero-media { position: absolute; inset: 0; z-index: 0; }
-.nb-hero-shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(16,18,12,0.92) 0%, rgba(16,18,12,0.35) 45%, rgba(16,18,12,0.15) 70%, rgba(16,18,12,0.45) 100%); }
-.nb-hero-inner { position: relative; z-index: 2; width: min(1180px, calc(100% - 3rem)); margin: 0 auto; padding: 0 0 3.5rem; }
-.nb-hero-kicker { color: rgba(242,236,223,0.75); margin-bottom: 1rem; }
-.nb-hero-name { font-family: var(--serif); font-weight: 400; font-size: clamp(4.2rem, 15vw, 13.5rem); line-height: 0.82; letter-spacing: -0.035em; margin: 0; }
-.nb-hero-name em { font-style: italic; }
-.nb-hero-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
-.nb-hero-line { font-family: var(--serif); font-style: italic; font-size: clamp(1.25rem, 2.4vw, 1.75rem); color: rgba(242,236,223,0.85); max-width: 28ch; margin: 0; }
+/* Buttons */
 .nb-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 .nb-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.95rem 1.5rem; font-family: var(--sans); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease; border: 1px solid transparent; cursor: pointer; }
 .nb-btn:hover { transform: translateY(-2px); }
@@ -48,35 +32,18 @@
 .nb-btn-ink { background: var(--ink); color: var(--paper); }
 .nb-btn-rust { background: var(--rust); color: var(--paper); }
 
-.nb-note { text-shadow: 0 2px 14px rgba(0,0,0,0.55); position: absolute; z-index: 3; top: 22%; right: 6%; transform: rotate(-6deg); color: var(--paper); text-decoration: none; text-align: right; }
-.nb-note-text { font-family: var(--hand); font-size: clamp(1.7rem, 3vw, 2.6rem); line-height: 1; display: block; }
-.nb-note-sub { font-family: var(--hand); font-size: clamp(1.2rem, 2vw, 1.6rem); color: var(--amber); display: block; margin-top: 0.3rem; }
-.nb-note svg { width: 110px; height: 70px; margin: 0.35rem 0 0 auto; display: block; }
-.nb-note:hover .nb-note-text { text-decoration: underline wavy rgba(226,167,90,0.8); text-underline-offset: 6px; }
+/* Film grain laid over photos and paper */
+.nb-grain { position: relative; }
+.nb-grain::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.22; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
 /* ── Polaroids + tape ───────────────────────────────── */
 .nb-polaroid { background: #fbf8f1; padding: 0.8rem 0.8rem 0; box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 18px 40px rgba(28,26,21,0.18); position: relative; }
 .nb-polaroid img { display: block; width: 100%; height: auto; }
 .nb-polaroid figcaption { font-family: var(--hand); font-size: 1.45rem; color: var(--ink-soft); padding: 0.55rem 0.2rem 0.75rem; line-height: 1.1; }
 .nb-tape::before { content: ''; position: absolute; top: -14px; left: 50%; width: 96px; height: 28px; transform: translateX(-50%) rotate(-3deg); background: rgba(233, 222, 190, 0.78); box-shadow: 0 1px 2px rgba(0,0,0,0.08); z-index: 2; }
-
-/* ── India / chapter one ────────────────────────────── */
-.nb-india { padding: 8rem 0 7rem; }
-.nb-india-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 5rem; align-items: center; }
-.nb-india-photo { transform: rotate(-2.5deg); max-width: 520px; }
-.nb-chapter { color: var(--rust); margin-bottom: 1.25rem; }
-.nb-big { font-family: var(--serif); font-weight: 400; font-size: clamp(4.5rem, 11vw, 9rem); line-height: 0.85; letter-spacing: -0.03em; margin: 0 0 1.5rem; }
-.nb-big em { font-style: italic; }
-.nb-lede { font-size: 1.05rem; line-height: 1.8; color: var(--ink-soft); max-width: 46ch; margin: 0 0 2rem; }
-.nb-count { display: flex; gap: 1.75rem; margin: 0 0 2.25rem; }
-.nb-count-cell { min-width: 3.5rem; }
-.nb-count-num { font-family: var(--serif); font-size: clamp(2.6rem, 5vw, 3.6rem); line-height: 1; font-variant-numeric: tabular-nums; }
-.nb-count-unit { font-family: var(--hand); font-size: 1.3rem; color: var(--ink-soft); }
-.nb-out { font-family: var(--hand); font-size: 2.4rem; color: var(--rust); margin: 0 0 1.5rem; transform: rotate(-2deg); display: inline-block; }
-.nb-links { display: flex; flex-wrap: wrap; gap: 0.6rem 1.6rem; align-items: center; }
-.nb-link { font-family: var(--serif); font-size: 1.45rem; color: var(--ink); text-decoration: none; background-image: linear-gradient(var(--rust), var(--rust)); background-size: 0% 2px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size 0.3s ease; padding-bottom: 2px; }
-.nb-link:hover { background-size: 100% 2px; }
-.nb-link-merch { font-style: italic; color: var(--rust); }
 
 /* ── EP page (ruled paper) ──────────────────────────── */
 .nb-ep { padding: 2rem 0 8rem; }
@@ -162,31 +129,97 @@
 .nb-venues { display: flex; flex-wrap: wrap; gap: 1.5rem 2.25rem; align-items: center; margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(242,236,223,0.12); }
 .nb-venues img { height: 34px; width: auto; filter: brightness(0) invert(1); opacity: 0.55; }
 
+
+/* ── Film dust (Jacob Collier-style specks) ─────────── */
+.nb-dust { position: relative; }
+.nb-dust::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 4; opacity: 0.5;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 18%, rgba(255,255,255,0.8), transparent 60%),
+    radial-gradient(1px 2.5px at 34% 72%, rgba(255,255,255,0.7), transparent 60%),
+    radial-gradient(2px 2px at 58% 30%, rgba(255,255,255,0.6), transparent 60%),
+    radial-gradient(1px 1px at 76% 84%, rgba(255,255,255,0.8), transparent 60%),
+    radial-gradient(1.5px 3px at 88% 12%, rgba(255,255,255,0.6), transparent 60%),
+    radial-gradient(1px 1px at 46% 52%, rgba(255,255,255,0.7), transparent 60%),
+    radial-gradient(2.5px 1.5px at 22% 90%, rgba(255,255,255,0.5), transparent 60%),
+    radial-gradient(1px 1.5px at 66% 6%, rgba(255,255,255,0.7), transparent 60%);
+}
+
+/* ── Release hero (Benson Boone-style lockup) ───────── */
+.hr { --gold: #c9a26a; position: relative; min-height: 100svh; background: #1b1d18; color: var(--paper); display: flex; align-items: center; overflow: hidden; }
+.hr-photo { position: absolute; inset: 0 auto 0 0; width: 58%; z-index: 0; }
+.hr-photo img { filter: grayscale(1) contrast(1.12) brightness(0.95); }
+.hr-leak { position: absolute; inset: 0; mix-blend-mode: screen; pointer-events: none; background: radial-gradient(60% 45% at 0% 100%, rgba(226,120,50,0.45), transparent 70%), radial-gradient(30% 25% at 8% 8%, rgba(255,190,120,0.22), transparent 70%); }
+.hr-shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to right, rgba(27,29,24,0) 30%, rgba(27,29,24,0.75) 52%, #1b1d18 62%); }
+.hr-lockup { position: relative; z-index: 5; margin-left: auto; width: 48%; padding: 7rem 5vw 4rem 0; text-align: center; }
+.hr-script { font-family: 'Pinyon Script', var(--hand); font-size: clamp(2.2rem, 3.6vw, 3.4rem); color: var(--gold); margin: 0 0 -0.6rem; line-height: 1; }
+.hr-title { font-family: 'Abril Fatface', var(--serif); font-weight: 400; font-size: clamp(6rem, 14vw, 13rem); line-height: 0.9; color: var(--gold); margin: 0; letter-spacing: -0.01em; }
+.hr-when { font-family: 'Pinyon Script', var(--hand); font-size: clamp(2rem, 3.2vw, 3rem); color: var(--gold); margin: 0.25rem 0 1.5rem; }
+.hr-when span { font-family: 'Abril Fatface', var(--serif); font-size: 0.7em; letter-spacing: 0.02em; margin-left: 0.35rem; }
+.hr-count { display: flex; justify-content: center; gap: 1.5rem; font-family: 'Jost', var(--sans); font-size: 0.8rem; letter-spacing: 0.18em; color: rgba(242,236,223,0.6); margin-bottom: 2.25rem; }
+.hr-count b { display: block; font-family: var(--serif); font-weight: 400; font-size: 2.2rem; letter-spacing: 0; color: var(--paper); font-variant-numeric: tabular-nums; }
+.hr-buttons { display: flex; justify-content: center; gap: 0.9rem; flex-wrap: wrap; }
+.hr-btn { font-family: 'Jost', var(--sans); font-size: 1.15rem; font-weight: 500; background: var(--paper); color: #26304a; text-decoration: none; padding: 0.75rem 2.2rem; min-width: 210px; text-align: center; transition: background 0.2s ease, transform 0.2s ease; }
+.hr-btn:hover { background: var(--gold); color: var(--ink); transform: translateY(-2px); }
+
+/* ── Releases as records (Benson Boone vinyl cards) ─── */
+.rl { padding: 7rem 0 6rem; }
+.rl-head { display: flex; align-items: baseline; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
+.rl-heading { font-family: 'Jost', var(--sans); font-weight: 600; font-size: clamp(2.8rem, 6vw, 4.2rem); color: #26304a; margin: 0; line-height: 1; }
+.rl-script { font-family: var(--hand); font-size: 1.7rem; color: var(--rust); margin: 0; transform: rotate(-2deg); }
+.rl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+.rl-art { position: relative; aspect-ratio: 1.32 / 1; margin-bottom: 1.75rem; }
+.rl-sleeve { position: absolute; top: 0; left: 0; bottom: 0; aspect-ratio: 1; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 22px 40px rgba(28,26,21,0.22); z-index: 2; background: #222; }
+.rl-sleeve-title { position: absolute; left: 0; right: 0; bottom: 8%; text-align: center; font-family: 'Abril Fatface', var(--serif); font-size: clamp(1.8rem, 3vw, 2.6rem); color: #f2ecdf; text-shadow: 0 2px 18px rgba(0,0,0,0.5); z-index: 2; line-height: 1; padding: 0 0.5rem; }
+.rl-disc { position: absolute; top: 4%; bottom: 4%; right: 0; aspect-ratio: 1; border-radius: 50%; z-index: 1; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  background: radial-gradient(circle, var(--label) 0 16%, #111 16.5% 18%, transparent 18.5%), repeating-radial-gradient(circle, #141414 0 1.5px, #1d1d1d 1.5px 3px); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+.rl-disc span { position: absolute; inset: 47.5%; border-radius: 50%; background: var(--paper); }
+.rl-item:hover .rl-disc { transform: translateX(8%) rotate(40deg); }
+.rl-name { font-family: 'Jost', var(--sans); font-size: 1.05rem; font-weight: 500; color: #26304a; margin: 0 0 0.3rem; }
+.rl-date { font-family: 'Jost', var(--sans); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.22em; color: #26304a; opacity: 0.8; margin: 0; }
+.rl-listen { display: inline-block; margin-top: 0.6rem; font-family: var(--hand); font-size: 1.5rem; color: var(--rust); text-decoration: none; }
+
+/* ── Birthday card (Laufey-style) ───────────────────── */
+.bd { position: fixed; right: 1.5rem; bottom: 1.5rem; z-index: 900; width: min(360px, calc(100vw - 2rem)); background: #ece5d8; color: var(--ink); padding: 2rem 1.75rem 1.6rem; box-shadow: 0 24px 60px rgba(0,0,0,0.3); transform: translateY(130%); opacity: 0; transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease; text-align: center; }
+.bd.is-open { transform: translateY(0); opacity: 1; }
+.bd-x { position: absolute; top: 0.6rem; right: 0.6rem; width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid #2a3f6b; background: transparent; color: #2a3f6b; font-size: 1.3rem; line-height: 1; cursor: pointer; }
+.bd-script { font-family: 'Pinyon Script', var(--hand); font-size: 2.1rem; line-height: 1.15; margin: 0 0 0.4rem; }
+.bd-sub { font-family: var(--serif); font-size: 1.2rem; margin: 0 0 1.1rem; color: var(--ink-soft); }
+.bd-form { display: flex; flex-direction: column; gap: 0.6rem; }
+.bd-row { display: grid; grid-template-columns: 1.6fr 1fr; gap: 0.6rem; }
+.bd-input { width: 100%; border: 1.5px solid var(--ink); background: transparent; padding: 0.75rem 0.9rem; font-family: var(--serif); font-size: 1.05rem; color: var(--ink); border-radius: 0; appearance: none; }
+.bd-btn { margin-top: 0.3rem; border: none; border-radius: 999px; background: #0d0d0d; color: #f2ecdf; padding: 0.85rem 1rem; font-family: 'Pinyon Script', var(--hand); font-size: 1.7rem; cursor: pointer; }
+.bd-btn:hover { background: var(--rust); }
+
+@media (max-width: 1024px) {
+  .hr { align-items: flex-end; }
+  .hr-photo { width: 100%; }
+  .hr-shade { background: linear-gradient(to top, #1b1d18 0%, rgba(27,29,24,0.85) 38%, rgba(27,29,24,0.15) 70%, rgba(27,29,24,0.35) 100%); }
+  .hr-lockup { width: 100%; padding: 0 1.25rem 3rem; }
+  .rl-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .hr-title { font-size: clamp(5.2rem, 26vw, 8rem); }
+  .hr-buttons { flex-direction: column; align-items: stretch; }
+  .hr-btn { min-width: 0; }
+  .rl { padding: 4.5rem 0 4rem; }
+  .rl-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .rl-art { max-width: 380px; }
+  .bd { right: 0.75rem; left: 0.75rem; bottom: 0.75rem; width: auto; }
+}
+
 /* ── Responsive ─────────────────────────────────────── */
 @media (min-width: 1025px) {
-  .nb-hero-media { left: auto; width: 60%; }
-  .nb-hero-shade { background: linear-gradient(to right, var(--moss) 0%, var(--moss) 38%, rgba(31,38,28,0.55) 52%, rgba(31,38,28,0) 70%), linear-gradient(to top, rgba(16,18,12,0.6) 0%, rgba(16,18,12,0) 35%); }
-  .nb-hero-inner { padding-bottom: 5rem; }
-  .nb-hero-row { flex-direction: column; align-items: flex-start; gap: 2rem; }
 }
 @media (max-width: 1024px) {
-  .nb-india-grid, .nb-fans-grid, .nb-live-grid { grid-template-columns: 1fr; gap: 3.5rem; }
-  .nb-india-photo { max-width: 440px; margin: 0 auto; }
   .nb-ep-grid { grid-template-columns: 1fr; }
   .nb-ep-photo { max-width: 360px; }
   .nb-scrap-grid { grid-template-columns: repeat(2, 1fr); }
-  .nb-note { top: 16%; right: 5%; }
 }
 @media (max-width: 768px) {
-  .nb-wrap, .nb-hero-inner { width: calc(100% - 2.5rem); }
-  .nb-hero-inner { padding-bottom: 2.5rem; }
-  .nb-hero-row { flex-direction: column; align-items: flex-start; gap: 1.5rem; margin-top: 1.5rem; }
+  .nb-wrap { width: calc(100% - 2.5rem); }
   .nb-actions { width: 100%; }
   .nb-actions .nb-btn { flex: 1 1 0; justify-content: center; }
-  .nb-note { top: 13%; right: 1.25rem; }
-  .nb-note svg { width: 80px; height: 50px; }
-  .nb-india { padding: 5rem 0 4.5rem; }
-  .nb-count { gap: 1.1rem; }
   .nb-ep { padding-bottom: 5rem; }
   .nb-page { padding: 2.5rem 1.25rem 2rem 3.25rem; background-image: linear-gradient(to right, transparent 2.25rem, rgba(196,98,45,0.35) 2.25rem, rgba(196,98,45,0.35) calc(2.25rem + 1px), transparent calc(2.25rem + 1px)), repeating-linear-gradient(to bottom, transparent 0, transparent 2.55rem, var(--line) 2.55rem, var(--line) calc(2.55rem + 1px)); }
   .nb-track { flex-wrap: wrap; gap: 0 0.75rem; }

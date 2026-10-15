@@ -1,521 +1,109 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+
+const mainLinks = [
+  { href: '/music', label: 'music' },
+  { href: '/shows', label: 'shows' },
+  { href: '/merch', label: 'merch' },
+  { href: '/about', label: 'about' },
+  { href: '/services', label: 'book live' },
+]
+
+const moreLinks = [
+  { href: '/repertoire', label: 'repertoire' },
+  { href: '/venues', label: 'past venues' },
+  { href: '/testimonials', label: 'testimonials' },
+  { href: '/contact', label: 'contact' },
+]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [experienceOpen, setExperienceOpen] = useState(false)
-  const [servicesOpen, setServicesOpen] = useState(false)
-  const [mobileExperienceOpen, setMobileExperienceOpen] = useState(false)
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-
-  const experienceRef = useRef<HTMLDivElement | null>(null)
-  const servicesRef = useRef<HTMLDivElement | null>(null)
+  const [open, setOpen] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 24)
-    const handleResize = () => setIsMobile(window.innerWidth <= 1024)
-
-    const handleClick = (e: MouseEvent) => {
-      const target = e.target as Node
-
-      if (experienceRef.current && !experienceRef.current.contains(target)) {
-        setExperienceOpen(false)
-      }
-
-      if (servicesRef.current && !servicesRef.current.contains(target)) {
-        setServicesOpen(false)
-      }
-    }
-
-    handleResize()
-    handleScroll()
-
-    window.addEventListener('scroll', handleScroll)
-    window.addEventListener('resize', handleResize)
-    document.addEventListener('mousedown', handleClick)
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', handleResize)
-      document.removeEventListener('mousedown', handleClick)
-    }
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [menuOpen])
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [open])
 
-  useEffect(() => {
-    if (!isMobile) {
-      setMenuOpen(false)
-      setMobileExperienceOpen(false)
-      setMobileServicesOpen(false)
-    }
-  }, [isMobile])
-
-  const closeAllMenus = () => {
-    setMenuOpen(false)
-    setExperienceOpen(false)
-    setServicesOpen(false)
-    setMobileExperienceOpen(false)
-    setMobileServicesOpen(false)
-  }
-
-  const linkStyle: React.CSSProperties = {
-    color: 'rgba(253,250,245,0.82)',
-    textDecoration: 'none',
-    fontSize: '0.72rem',
-    fontWeight: 500,
-    letterSpacing: '0.15em',
-    textTransform: 'uppercase',
-    transition: 'color 0.3s ease',
-    cursor: 'pointer',
-    background: 'none',
-    border: 'none',
-    fontFamily: 'Inter, sans-serif',
-    padding: 0,
-  }
-
-  const dropdownStyle: React.CSSProperties = {
-    position: 'absolute',
-    top: 'calc(100% + 1rem)',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    backgroundColor: 'rgba(26,24,20,0.98)',
-    border: '1px solid rgba(196,168,130,0.2)',
-    backdropFilter: 'blur(10px)',
-    minWidth: '210px',
-    padding: '0.5rem 0',
-    zIndex: 100,
-    boxShadow: '0 10px 30px rgba(0,0,0,0.25)',
-  }
-
-  const dropdownLink: React.CSSProperties = {
-    display: 'block',
-    padding: '0.75rem 1.25rem',
-    color: 'rgba(253,250,245,0.72)',
-    textDecoration: 'none',
-    fontSize: '0.7rem',
-    fontWeight: 500,
-    letterSpacing: '0.12em',
-    textTransform: 'uppercase',
-    transition: 'color 0.2s ease, background-color 0.2s ease',
-    whiteSpace: 'nowrap',
-    fontFamily: 'Inter, sans-serif',
-  }
+  const close = () => setOpen(false)
 
   return (
     <>
       <style>{`
-        .eh-nav {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          z-index: 1000;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 1.25rem 2rem;
-          background: rgba(26,24,20,0.9);
-          backdrop-filter: blur(10px);
-          transition: all 0.35s ease;
-        }
+        .eh-nav { position: fixed; inset: 0 0 auto 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1.25rem 2.5rem; transition: background 0.35s ease, padding 0.35s ease, backdrop-filter 0.35s ease; background: linear-gradient(to bottom, rgba(16,18,12,0.55), rgba(16,18,12,0)); }
+        .eh-nav.scrolled { background: rgba(24,26,20,0.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding-top: 0.85rem; padding-bottom: 0.85rem; }
+        .eh-wordmark { font-family: 'Instrument Serif', 'Playfair Display', Georgia, serif; font-size: 1.75rem; line-height: 1; color: #f2ecdf; text-decoration: none; letter-spacing: -0.01em; white-space: nowrap; }
+        .eh-wordmark em { font-style: italic; }
+        .eh-links { display: flex; align-items: center; gap: 2rem; }
+        .eh-link { font-family: 'Jost', 'Inter', sans-serif; font-size: 1.05rem; font-weight: 500; color: #f2ecdf; text-decoration: none; position: relative; padding: 0.2rem 0; }
+        .eh-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 1.5px; background: #e2a75a; transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease; }
+        .eh-link:hover::after, .eh-link.active::after { transform: scaleX(1); }
+        .eh-signup { font-family: 'Jost', 'Inter', sans-serif; font-size: 1rem; font-weight: 500; background: #f2ecdf; color: #1c1a15; text-decoration: none; padding: 0.5rem 1.6rem; transition: background 0.2s ease; }
+        .eh-signup:hover { background: #e2a75a; }
+        .eh-burger { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; }
+        .eh-burger span { width: 26px; height: 1.5px; background: #f2ecdf; transition: transform 0.3s ease, opacity 0.3s ease; }
+        .eh-burger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+        .eh-burger.open span:nth-child(2) { opacity: 0; }
+        .eh-burger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
-        .eh-nav.scrolled {
-          padding: 0.95rem 1.5rem;
-          border-bottom: 1px solid rgba(196,168,130,0.18);
-          background: rgba(26,24,20,0.94);
-        }
-
-        .eh-logo {
-          font-family: 'Playfair Display', serif;
-          font-size: 1.35rem;
-          font-weight: 600;
-          color: #fdfaf5;
-          text-decoration: none;
-          letter-spacing: 0.04em;
-          flex-shrink: 0;
-          position: relative;
-          z-index: 1002;
-        }
-
-        .eh-desktop-nav {
-          display: flex;
-          align-items: center;
-          gap: 1.75rem;
-        }
-
-        .eh-mobile-toggle {
-          display: none;
-          width: 44px;
-          height: 44px;
-          border: none;
-          background: transparent;
-          cursor: pointer;
-          align-items: center;
-          justify-content: center;
-          padding: 0;
-          position: relative;
-          z-index: 10002;
-        }
-
-        .eh-mobile-lines {
-          position: relative;
-          width: 24px;
-          height: 18px;
-        }
-
-        .eh-mobile-lines span {
-          position: absolute;
-          left: 0;
-          width: 24px;
-          height: 2px;
-          background: #fdfaf5;
-          transition: transform 0.28s ease, opacity 0.28s ease, top 0.28s ease;
-        }
-
-        .eh-mobile-lines span:nth-child(1) { top: 0; }
-        .eh-mobile-lines span:nth-child(2) { top: 8px; }
-        .eh-mobile-lines span:nth-child(3) { top: 16px; }
-
-        .eh-mobile-toggle.open .eh-mobile-lines span:nth-child(1) {
-          top: 8px;
-          transform: rotate(45deg);
-        }
-
-        .eh-mobile-toggle.open .eh-mobile-lines span:nth-child(2) {
-          opacity: 0;
-        }
-
-        .eh-mobile-toggle.open .eh-mobile-lines span:nth-child(3) {
-          top: 8px;
-          transform: rotate(-45deg);
-        }
-
-        .eh-mobile-menu {
-          position: fixed;
-          inset: 0;
-          z-index: 9999;
-          background: rgba(26,24,20,0.985);
-          backdrop-filter: blur(10px);
-          overflow-y: auto;
-          padding: 6.5rem 1.25rem 2rem;
-        }
-
-        .eh-mobile-inner {
-          width: min(720px, 100%);
-          margin: 0 auto;
-        }
-
-        .eh-mobile-section {
-          border-bottom: 1px solid rgba(255,255,255,0.08);
-          padding: 1rem 0;
-        }
-
-        .eh-mobile-top-link,
-        .eh-mobile-accordion-btn {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 1rem;
-          background: none;
-          border: none;
-          padding: 0;
-          text-decoration: none;
-          cursor: pointer;
-          text-align: left;
-          color: #fdfaf5;
-          font-family: 'Playfair Display', serif;
-          font-size: clamp(1.35rem, 6vw, 2rem);
-          font-weight: 400;
-        }
-
-        .eh-mobile-chevron {
-          font-size: 0.95rem;
-          color: rgba(253,250,245,0.6);
-          transition: transform 0.25s ease;
-          flex-shrink: 0;
-        }
-
-        .eh-mobile-chevron.open {
-          transform: rotate(180deg);
-        }
-
-        .eh-mobile-submenu {
-          display: flex;
-          flex-direction: column;
-          gap: 0.9rem;
-          padding: 1rem 0 0.25rem;
-        }
-
-        .eh-mobile-submenu a {
-          color: rgba(253,250,245,0.62);
-          text-decoration: none;
-          font-size: 0.82rem;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          font-family: 'Inter', sans-serif;
-        }
-
-        .eh-mobile-cta-wrap {
-          padding-top: 1.5rem;
-        }
-
-        .eh-mobile-cta {
-          width: 100%;
-          display: inline-flex;
-          justify-content: center;
-          align-items: center;
-          padding: 0.95rem 1.25rem;
-          text-decoration: none;
-        }
+        .eh-sheet { position: fixed; inset: 0; z-index: 999; background: #1f261c; color: #f2ecdf; display: flex; flex-direction: column; justify-content: center; padding: 6rem 2rem 3rem; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .eh-sheet.open { opacity: 1; pointer-events: auto; }
+        .eh-sheet-main { display: flex; flex-direction: column; gap: 0.35rem; }
+        .eh-sheet-main a { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(2.8rem, 12vw, 4rem); line-height: 1.05; color: #f2ecdf; text-decoration: none; }
+        .eh-sheet-main a:hover, .eh-sheet-main a.active { font-style: italic; color: #e2a75a; }
+        .eh-sheet-more { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; margin-top: 2.5rem; }
+        .eh-sheet-more a { font-family: 'Jost', 'Inter', sans-serif; font-size: 1rem; color: rgba(242,236,223,0.7); text-decoration: none; }
+        .eh-sheet-note { font-family: 'Caveat', cursive; font-size: 1.6rem; color: #e2a75a; margin-top: 2.5rem; text-decoration: none; transform: rotate(-2deg); display: inline-block; }
 
         @media (max-width: 1024px) {
-          .eh-nav {
-            padding: 1rem 1.25rem;
-          }
-
-          .eh-nav.scrolled {
-            padding: 0.9rem 1.25rem;
-          }
-
-          .eh-desktop-nav {
-            display: none;
-          }
-
-          .eh-mobile-toggle {
-            display: inline-flex;
-          }
-
-          .eh-logo {
-            font-size: 1.1rem;
-            max-width: calc(100% - 64px);
-          }
-        }
-
-        @media (max-width: 480px) {
-          .eh-logo {
-            font-size: 1rem;
-            letter-spacing: 0.03em;
-          }
+          .eh-nav { padding: 1rem 1.25rem; }
+          .eh-nav.scrolled { padding-top: 0.7rem; padding-bottom: 0.7rem; }
+          .eh-links { display: none; }
+          .eh-burger { display: flex; }
+          .eh-wordmark { font-size: 1.5rem; }
         }
       `}</style>
 
-      <nav className={`eh-nav ${scrolled ? 'scrolled' : ''}`}>
-        <Link href="/" className="eh-logo" onClick={closeAllMenus}>
-          <img src="/images/EH.png" alt="Ethan Hoffman" style={{ height: '40px', width: 'auto', display: 'block' }} />
-        </Link>
+      <nav className={`eh-nav ${scrolled || open ? 'scrolled' : ''}`} aria-label="Main">
+        <Link href="/" className="eh-wordmark" onClick={close}>Ethan <em>Hoffman</em></Link>
 
-        {!isMobile && (
-          <div className="eh-desktop-nav">
-            <Link
-              href="/"
-              style={linkStyle}
-              onMouseEnter={(e) => { e.currentTarget.style.color = '#c4622d' }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(253,250,245,0.82)' }}
-            >
-              Home
-            </Link>
+        <div className="eh-links">
+          {mainLinks.map((l) => (
+            <Link key={l.href} href={l.href} className={`eh-link ${pathname === l.href ? 'active' : ''}`}>{l.label}</Link>
+          ))}
+          <Link href="/#notebook" className="eh-signup">sign up</Link>
+        </div>
 
-            <div ref={experienceRef} style={{ position: 'relative' }}>
-              <button
-                type="button"
-                style={linkStyle}
-                onClick={() => { setExperienceOpen((o) => !o); setServicesOpen(false) }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = '#c4622d' }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(253,250,245,0.82)' }}
-              >
-                About ▾
-              </button>
-
-              {experienceOpen && (
-                <div style={dropdownStyle}>
-                  {[
-                    { href: '/about', label: 'About Ethan' },
-                    { href: '/music', label: 'Music & Performance' },
-                  ].map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      style={dropdownLink}
-                      onClick={closeAllMenus}
-                      onMouseEnter={(e) => { e.currentTarget.style.color = '#c4622d'; e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.02)' }}
-                      onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(253,250,245,0.72)'; e.currentTarget.style.backgroundColor = 'transparent' }}
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <div ref={servicesRef} style={{ position: 'relative' }}>
-              <button
-                type="button"
-                style={linkStyle}
-                onClick={() => { setServicesOpen((o) => !o); setExperienceOpen(false) }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = '#c4622d' }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(253,250,245,0.82)' }}
-              >
-                Services ▾
-              </button>
-
-              {servicesOpen && (
-                <div style={dropdownStyle}>
-                  {[
-                    { href: '/services', label: 'What Ethan Offers' },
-                    { href: '/venues', label: 'Past Venues' },
-                    { href: '/repertoire', label: 'Repertoire' },
-                    { href: '/testimonials', label: 'Testimonials' },
-                  ].map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      style={dropdownLink}
-                      onClick={closeAllMenus}
-                      onMouseEnter={(e) => { e.currentTarget.style.color = '#c4622d'; e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.02)' }}
-                      onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(253,250,245,0.72)'; e.currentTarget.style.backgroundColor = 'transparent' }}
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <Link href="/music" style={linkStyle}
-  onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
-  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.8)')}>
-  Music
-</Link>
-
-<Link href="/merch" style={linkStyle}
-  onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
-  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.8)')}>
-  Merch
-</Link>
-
-            <Link href="/shows" style={linkStyle}
-  onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
-  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.8)')}>
-  Shows
-</Link>
-
-<Link href="/contact" style={linkStyle}
-  onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
-  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.8)')}>
-  Contact
-</Link>
-
-            <Link
-              href="/contact"
-              className="btn-primary"
-              style={{ padding: '0.6rem 1.3rem', fontSize: '0.7rem' }}
-            >
-              Book Ethan
-            </Link>
-          </div>
-        )}
-
-        {isMobile && (
-          <button
-            type="button"
-            className={`eh-mobile-toggle ${menuOpen ? 'open' : ''}`}
-            onClick={() => setMenuOpen((o) => !o)}
-            aria-label="Toggle menu"
-            aria-expanded={menuOpen}
-          >
-            <div className="eh-mobile-lines">
-              <span />
-              <span />
-              <span />
-            </div>
-          </button>
-        )}
+        <button type="button" className={`eh-burger ${open ? 'open' : ''}`} aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+          <span /><span /><span />
+        </button>
       </nav>
 
-      {menuOpen && isMobile && (
-        <div className="eh-mobile-menu">
-          <div className="eh-mobile-inner">
-            <div className="eh-mobile-section">
-              <Link href="/" className="eh-mobile-top-link" onClick={closeAllMenus}>
-                <span>Home</span>
-              </Link>
-            </div>
-
-            <div className="eh-mobile-section">
-            <button
-  type="button"
-  className="eh-mobile-accordion-btn"
-  onClick={() => setMobileExperienceOpen((o) => !o)}
->
-  <span>About</span>
-  <span className={`eh-mobile-chevron ${mobileExperienceOpen ? 'open' : ''}`}>▾</span>
-</button>
-{mobileExperienceOpen && (
-  <div className="eh-mobile-submenu">
-    <Link href="/about" onClick={closeAllMenus}>About Ethan</Link>
-    <Link href="/music" onClick={closeAllMenus}>Music & Performance</Link>
-  </div>
-)}
-            </div>
-            <div className="eh-mobile-section">
-  <Link href="/music" className="eh-mobile-top-link" onClick={closeAllMenus}>
-    <span>Music</span>
-  </Link>
-</div>
-            <div className="eh-mobile-section">
-  <Link href="/merch" className="eh-mobile-top-link" onClick={closeAllMenus}>
-    <span>Merch</span>
-  </Link>
-</div>
-            <div className="eh-mobile-section">
-  <Link href="/shows" className="eh-mobile-top-link" onClick={closeAllMenus}>
-    <span>Shows</span>
-  </Link>
-</div>
-            <div className="eh-mobile-section">
-              <button
-                type="button"
-                className="eh-mobile-accordion-btn"
-                onClick={() => setMobileServicesOpen((o) => !o)}
-              >
-                <span>Services</span>
-                <span className={`eh-mobile-chevron ${mobileServicesOpen ? 'open' : ''}`}>▾</span>
-              </button>
-              {mobileServicesOpen && (
-                <div className="eh-mobile-submenu">
-                  <Link href="/services" onClick={closeAllMenus}>What Ethan Offers</Link>
-                  <Link href="/venues" onClick={closeAllMenus}>Past Venues</Link>
-                  <Link href="/repertoire" onClick={closeAllMenus}>Repertoire</Link>
-                  <Link href="/testimonials" onClick={closeAllMenus}>Testimonials</Link>
-                </div>
-              )}
-            </div>
-
-            <div className="eh-mobile-section">
-              <Link href="/contact" className="eh-mobile-top-link" onClick={closeAllMenus}>
-                <span>Contact</span>
-              </Link>
-            </div>
-
-            <div className="eh-mobile-cta-wrap">
-              <Link href="/contact" onClick={closeAllMenus} className="btn-primary eh-mobile-cta">
-                Book Ethan
-              </Link>
-            </div>
-          </div>
+      <div className={`eh-sheet ${open ? 'open' : ''}`} aria-hidden={!open}>
+        <div className="eh-sheet-main">
+          <Link href="/" onClick={close} className={pathname === '/' ? 'active' : ''} tabIndex={open ? 0 : -1}>home</Link>
+          {mainLinks.map((l) => (
+            <Link key={l.href} href={l.href} onClick={close} className={pathname === l.href ? 'active' : ''} tabIndex={open ? 0 : -1}>{l.label}</Link>
+          ))}
         </div>
-      )}
+        <div className="eh-sheet-more">
+          {moreLinks.map((l) => (
+            <Link key={l.href} href={l.href} onClick={close} tabIndex={open ? 0 : -1}>{l.label}</Link>
+          ))}
+        </div>
+        <Link href="/#notebook" onClick={close} className="eh-sheet-note" tabIndex={open ? 0 : -1}>sign the notebook →</Link>
+      </div>
     </>
   )
 }

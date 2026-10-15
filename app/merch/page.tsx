@@ -3,33 +3,27 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import MerchMock from '../components/MerchMock'
 import { merch, type MerchItem } from '../lib/merch'
 import { sendFanNote } from '../lib/notify'
 
-function MerchCard({ item }: { item: MerchItem }) {
+function MerchCard({ item, i }: { item: MerchItem; i: number }) {
   const available = Boolean(item.buyUrl)
   return (
-    <div className="merch-card">
-      <div className="merch-visual">
+    <article className="mc">
+      <div className="mc-tile" style={{ background: item.tile, ['--tilt' as string]: `${i % 2 ? 1.2 : -1.2}deg` }}>
         {item.image ? (
-          <Image src={item.image} alt={item.name} fill sizes="(max-width: 768px) 100vw, 25vw" style={{ objectFit: 'cover' }} />
+          <Image src={item.image} alt={item.name} fill sizes="(max-width: 768px) 90vw, 30vw" style={{ objectFit: 'contain', padding: '8%' }} />
         ) : (
-          <div className="merch-placeholder">
-            <span className="merch-placeholder-kind">{item.kind}</span>
-            <span className="merch-placeholder-name">{item.name}</span>
-          </div>
+          <div className="mc-mock"><MerchMock mock={item.mock} /></div>
         )}
-        {!available && <span className="merch-badge">Coming Soon</span>}
+        {!available && <span className="mc-soon">coming soon</span>}
       </div>
-      <p className="merch-kind">{item.kind}{item.price ? ` · ${item.price}` : ''}</p>
-      <h3 className="merch-name">{item.name}</h3>
-      <p className="merch-desc">{item.description}</p>
-      {available && (
-        <a href={item.buyUrl} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ marginTop: '1rem', alignSelf: 'flex-start' }}>
-          Buy Now
-        </a>
-      )}
-    </div>
+      <h3 className="mc-name">{item.name.toLowerCase()}</h3>
+      <p className="mc-meta">{item.price ?? item.kind.toLowerCase()}</p>
+      <p className="mc-desc">{item.description}</p>
+      {available && <a className="mc-buy" href={item.buyUrl} target="_blank" rel="noopener noreferrer">buy now</a>}
+    </article>
   )
 }
 
@@ -54,80 +48,70 @@ export default function Merch() {
     <>
       <Navbar />
       <style>{`
-        .merch-page { background: #1a1814; min-height: 100vh; }
-        .merch-hero { padding: 8rem 0 4rem; border-bottom: 1px solid rgba(196,168,130,0.1); }
-        .merch-shell { width: min(1200px, calc(100% - 3rem)); margin: 0 auto; padding: 4rem 0 6rem; }
-        .merch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
-        .merch-card { display: flex; flex-direction: column; }
-        .merch-visual { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: #2d2926; margin-bottom: 1.25rem; }
-        .merch-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; background: linear-gradient(160deg, #2d2926 0%, #1a1814 65%, #3a1f12 100%); border: 1px solid rgba(196,168,130,0.15); }
-        .merch-placeholder-kind { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: #c4622d; margin-bottom: 0.5rem; }
-        .merch-placeholder-name { font-family: 'Playfair Display', serif; font-size: 1.6rem; line-height: 1.1; color: rgba(253,250,245,0.85); }
-        .merch-badge { position: absolute; top: 1rem; left: 1rem; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #fdfaf5; background: #c4622d; padding: 0.4rem 0.7rem; }
-        .merch-kind { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(253,250,245,0.45); margin: 0 0 0.4rem; }
-        .merch-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #fdfaf5; margin: 0 0 0.5rem; }
-        .merch-desc { font-size: 0.85rem; line-height: 1.65; color: rgba(253,250,245,0.6); margin: 0; }
-        .merch-notify { margin-top: 5rem; padding: 3rem; border: 1px solid rgba(196,168,130,0.2); display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
-        .merch-form { display: flex; gap: 0.5rem; }
-        .merch-input { flex: 1; min-width: 0; padding: 0.9rem 1rem; background: transparent; border: 1px solid rgba(253,250,245,0.25); color: #fdfaf5; font-size: 0.9rem; }
-        .merch-input::placeholder { color: rgba(253,250,245,0.4); }
-        @media (max-width: 1024px) { .merch-grid { grid-template-columns: repeat(2, 1fr); } .merch-notify { grid-template-columns: 1fr; } }
-        @media (max-width: 768px) {
-          .merch-hero { padding: 7rem 0 3rem; }
-          .merch-shell { width: calc(100% - 2rem); padding: 3rem 0 4rem; }
-          .merch-grid { gap: 1.25rem; }
-          .merch-placeholder-name { font-size: 1.15rem; }
-          .merch-notify { padding: 1.75rem; margin-top: 3.5rem; }
-          .merch-form { flex-direction: column; }
+        .mp { background: #e8e2d6; color: #26304a; min-height: 100vh; font-family: 'Jost', 'Inter', sans-serif; }
+        .mp-hero { background: #1f261c url('/images/malibu/fence-dusk.webp') center 58% / cover; position: relative; padding: 11rem 0 5rem; color: #f2ecdf; }
+        .mp-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(20,22,16,0.85), rgba(20,22,16,0.35)); }
+        .mp-wrap { width: min(1180px, calc(100% - 3rem)); margin: 0 auto; position: relative; z-index: 1; }
+        .mp-script { font-family: 'Pinyon Script', 'Caveat', cursive; font-size: clamp(2rem, 4vw, 3rem); color: #c9a26a; margin: 0; }
+        .mp-title { font-family: 'Jost', sans-serif; font-weight: 600; font-size: clamp(3rem, 8vw, 6rem); letter-spacing: 0.06em; line-height: 1; margin: 0 0 1rem; }
+        .mp-sub { font-size: 1.1rem; max-width: 46ch; color: rgba(242,236,223,0.8); margin: 0; }
+        .mp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4rem 3rem; padding: 5rem 0; }
+        .mc-tile { position: relative; aspect-ratio: 1.15; transform: rotate(var(--tilt)); transition: transform 0.4s ease;
+          clip-path: polygon(0% 2%, 4% 0%, 9% 1.5%, 15% 0.3%, 22% 1.8%, 30% 0.2%, 38% 1.4%, 47% 0%, 55% 1.6%, 63% 0.4%, 71% 1.9%, 80% 0.3%, 88% 1.5%, 95% 0%, 100% 1.8%, 99% 9%, 100% 18%, 98.6% 28%, 100% 38%, 98.8% 50%, 100% 61%, 98.7% 72%, 100% 83%, 98.9% 92%, 100% 98%, 95% 100%, 87% 98.5%, 79% 100%, 70% 98.4%, 61% 99.8%, 52% 98.3%, 43% 100%, 34% 98.6%, 25% 100%, 16% 98.4%, 8% 99.8%, 0% 98%, 1.2% 88%, 0% 77%, 1.4% 66%, 0% 55%, 1.2% 44%, 0% 33%, 1.5% 22%, 0% 12%);
+          box-shadow: inset 0 0 60px rgba(0,0,0,0.06); }
+        .mc-tile::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.35; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.4 0 0 0 0 0.4 0 0 0 0.35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E"); }
+        .mc:hover .mc-tile { transform: rotate(0deg) scale(1.01); }
+        .mc-mock { position: absolute; inset: 10% 12%; display: flex; align-items: center; justify-content: center; }
+        .mc-mock svg { width: 100%; height: 100%; filter: drop-shadow(0 14px 18px rgba(0,0,0,0.18)); }
+        .mc-soon { position: absolute; top: 1.4rem; right: 1.4rem; z-index: 2; font-family: 'Caveat', cursive; font-size: 1.5rem; color: #1c1a15; background: #f2ecdf; padding: 0.15rem 0.8rem; transform: rotate(4deg); box-shadow: 0 4px 10px rgba(0,0,0,0.12); }
+        .mc-name { font-family: 'Jost', 'Inter', sans-serif; font-weight: 600; font-size: 1.05rem; letter-spacing: 0.26em; margin: 1.75rem 0 0.35rem; }
+        .mc-meta { font-weight: 600; font-size: 0.9rem; letter-spacing: 0.26em; margin: 0 0 0.6rem; opacity: 0.8; }
+        .mc-desc { font-size: 1rem; line-height: 1.6; color: #4a4f60; margin: 0; max-width: 46ch; }
+        .mc-buy { display: inline-block; margin-top: 1rem; background: #26304a; color: #f2ecdf; text-decoration: none; padding: 0.7rem 2rem; font-weight: 500; }
+        .mp-notify { border-top: 1px solid rgba(38,48,74,0.18); padding: 4rem 0 6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+        .mp-notify h2 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.05; margin: 0; }
+        .mp-form { display: flex; gap: 0.5rem; }
+        .mp-input { flex: 1; min-width: 0; border: 1px solid #26304a; background: transparent; padding: 0.95rem 1.1rem; font-family: inherit; font-size: 0.95rem; letter-spacing: 0.08em; color: #26304a; }
+        .mp-btn { border: none; background: #26304a; color: #f2ecdf; padding: 0 1.6rem; font-family: inherit; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; }
+        @media (max-width: 900px) {
+          .mp-hero { padding: 8.5rem 0 3.5rem; }
+          .mp-wrap { width: calc(100% - 2.5rem); }
+          .mp-grid { grid-template-columns: 1fr; gap: 3.5rem; padding: 3.5rem 0; }
+          .mp-notify { grid-template-columns: 1fr; padding: 3rem 0 4.5rem; }
+          .mp-form { flex-direction: column; }
+          .mp-btn { padding: 0.95rem; }
         }
-        @media (max-width: 480px) { .merch-grid { grid-template-columns: 1fr; } }
       `}</style>
 
-      <main className="merch-page">
-        <div className="merch-hero">
-          <div className="container">
-            <p style={{ fontSize: '0.7rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem' }}>
-              Merch
-            </p>
-            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: '600', color: '#fdfaf5', lineHeight: '1.1', marginBottom: '1rem' }}>
-              {anyComingSoon ? 'Coming Soon' : 'Shop'}
-            </h1>
-            <p style={{ color: 'rgba(253,250,245,0.55)', fontFamily: 'Cormorant Garamond, serif', fontStyle: 'italic', fontSize: '1.2rem', maxWidth: '560px' }}>
-              The first Ethan Hoffman collection, made for the fans who have been here from day one.
-            </p>
+      <main className="mp">
+        <header className="mp-hero">
+          <div className="mp-wrap">
+            <p className="mp-script">the first collection</p>
+            <h1 className="mp-title">merch</h1>
+            <p className="mp-sub">Made for the fans who were here first. Everything below is coming soon.</p>
           </div>
-        </div>
+        </header>
 
-        <div className="merch-shell">
-          <div className="merch-grid">
-            {merch.map((item) => <MerchCard key={item.name} item={item} />)}
+        <div className="mp-wrap">
+          <div className="mp-grid">
+            {merch.map((item, i) => <MerchCard key={item.name} item={item} i={i} />)}
           </div>
 
           {anyComingSoon && (
-            <div className="merch-notify">
+            <section className="mp-notify">
+              <h2>Be first in line when it drops.</h2>
               <div>
-                <p style={{ fontSize: '0.65rem', fontWeight: '600', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.75rem' }}>
-                  Be First in Line
-                </p>
-                <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.4rem, 3vw, 2rem)', color: '#fdfaf5', lineHeight: '1.2', margin: 0 }}>
-                  Get a note the moment merch drops.
-                </p>
+                {status === 'done' ? (
+                  <p style={{ fontFamily: 'Caveat, cursive', fontSize: '1.8rem', margin: 0 }}>you&apos;re on the list ♡</p>
+                ) : (
+                  <form className="mp-form" onSubmit={notify}>
+                    <input className="mp-input" type="email" required placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} aria-label="Email address" />
+                    <button className="mp-btn" type="submit" disabled={status === 'sending'}>{status === 'sending' ? '…' : 'Notify me'}</button>
+                  </form>
+                )}
+                {status === 'error' && <p style={{ margin: '0.75rem 0 0' }}>That didn&apos;t go through. Try again?</p>}
               </div>
-              {status === 'done' ? (
-                <p style={{ color: 'rgba(253,250,245,0.8)', fontSize: '0.95rem', margin: 0 }}>You&apos;re on the list. Ethan will let you know.</p>
-              ) : (
-                <form className="merch-form" onSubmit={notify}>
-                  <input
-                    type="email" required placeholder="Your email" value={email}
-                    onChange={(e) => setEmail(e.target.value)} className="merch-input" aria-label="Email address"
-                  />
-                  <button type="submit" className="btn-primary" disabled={status === 'sending'}>
-                    {status === 'sending' ? 'Sending…' : 'Notify Me'}
-                  </button>
-                  {status === 'error' && <p style={{ color: '#e8a07c', fontSize: '0.8rem', margin: 0 }}>Something went wrong. Try again?</p>}
-                </form>
-              )}
-            </div>
+            </section>
           )}
         </div>
       </main>
