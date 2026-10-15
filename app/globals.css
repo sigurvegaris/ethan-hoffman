@@ -33,6 +33,16 @@ html {
   --cream-dim: rgba(242,236,223,0.72);
   --amber: #e2a75a;
   --rust: #d2703a;
+  /* Forest tones pulled from the Malibu photos: oak canopy, sage brush,
+     overcast haze, dusk sky and studio tungsten. */
+  --canopy: #141a12;
+  --olive: #3a4430;
+  --sage: #9aa585;
+  --haze: #e6e1d2;
+  --dusk: #a7aec0;
+  --tungsten: #d39a5b;
+  --glass: rgba(230,225,210,0.08);
+  --glass-line: rgba(230,225,210,0.18);
 }
 
 body {
@@ -696,3 +706,9 @@ p {
     scroll-behavior: auto !important;
   }
 }
+/* Glass buttons, shared across pages: lowercase, quiet, a little frosted. */
+.glass-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.85rem 1.75rem; min-height: 48px; font-family: var(--f-body); font-size: 1.02rem; font-weight: 500; color: var(--haze); text-decoration: none; background: var(--glass); border: 1px solid var(--glass-line); border-radius: 2px; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); cursor: pointer; transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, border-color 0.25s ease; }
+.glass-btn:hover { background: rgba(230,225,210,0.16); border-color: rgba(230,225,210,0.4); transform: translateY(-1px); }
+.glass-btn-solid { background: var(--haze); color: var(--canopy); border-color: var(--haze); }
+.glass-btn-solid:hover { background: #fff8e8; color: var(--canopy); }
+.glass-btn:disabled { opacity: 0.6; cursor: default; transform: none; }

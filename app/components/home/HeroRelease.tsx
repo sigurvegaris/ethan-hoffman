@@ -38,26 +38,27 @@ const youtube = listenLinks.find((l) => l.label === 'YouTube')!
 
 export default function HeroRelease() {
   const out = useReleased(featuredSingle.releaseDate)
-  const day = formatReleaseDate(featuredSingle.releaseDate).replace(/, \d{4}$/, '').replace('November', 'nov.')
+  const day = formatReleaseDate(featuredSingle.releaseDate).replace(/, \d{4}$/, '').toLowerCase().replace('november', 'nov.')
 
   return (
-    <section className="hr nb-grain nb-dust">
+    <section className="hr">
       <div className="hr-photo">
-        <Image src="/images/malibu/bench.webp" alt="Ethan Hoffman on a bench under an oak tree" fill priority sizes="(max-width: 1024px) 100vw, 58vw" style={{ objectFit: 'cover', objectPosition: 'center 62%' }} />
-        <div className="hr-leak" />
+        <Image src="/images/malibu/oak-walk.webp" alt="Ethan Hoffman walking down a path under the oak trees" fill priority sizes="100vw" style={{ objectFit: 'cover', objectPosition: 'center 58%' }} />
       </div>
-      <div className="hr-shade" />
+      <div className="hr-haze" aria-hidden="true" />
 
       <div className="hr-lockup">
-        <p className="hr-script">{out ? 'the new single' : 'the first single'}</p>
+        <p className="hr-kicker">{out ? 'the new single · out now' : `the first single · out ${day}`}</p>
         <h1 className="hr-title">{featuredSingle.title}</h1>
-        <p className="hr-when">{out ? <>out <span>now</span></> : <>out <span>{day} 1st</span></>}</p>
-        {!out && <Countdown to={featuredSingle.releaseDate} />}
-        <div className="hr-buttons">
-          <a className="hr-btn" href={spotify.url} target="_blank" rel="noopener noreferrer">{out ? 'listen now' : 'follow on spotify'}</a>
-          <a className="hr-btn" href={out ? youtube.url : '#notebook'} {...(out ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{out ? 'watch the session' : 'get notified'}</a>
+        <div className="hr-row">
+          {!out && <Countdown to={featuredSingle.releaseDate} />}
+          <div className="hr-buttons">
+            <a className="glass-btn glass-btn-solid" href={spotify.url} target="_blank" rel="noopener noreferrer">{out ? 'listen now' : 'follow on spotify'}</a>
+            <a className="glass-btn" href={out ? youtube.url : '#day-one'} {...(out ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{out ? 'watch the session' : 'get notified'}</a>
+          </div>
         </div>
       </div>
+      <p className="hr-scroll" aria-hidden="true">scroll</p>
     </section>
   )
 }

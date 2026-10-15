@@ -58,7 +58,7 @@ function ReleaseSlide({ r }: { r: (typeof releases)[number] }) {
       {out ? (
         <a className="mu-btn" href={spotify.url} target="_blank" rel="noopener noreferrer">listen now</a>
       ) : (
-        <Link className="mu-btn mu-btn-ghost" href="/#notebook">get notified</Link>
+        <Link className="mu-btn mu-btn-ghost" href="/#day-one">get notified</Link>
       )}
     </div>
   )

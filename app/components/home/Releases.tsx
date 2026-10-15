@@ -42,10 +42,10 @@ export default function Releases() {
   ]
   return (
     <section className="rl" id="music">
-      <div className="nb-wrap">
+      <div className="fh-wrap">
         <div className="rl-head">
           <h2 className="rl-heading">music</h2>
-          <p className="rl-script">one song a month, then the whole thing</p>
+          <p className="fh-label rl-sub">one song a month, then the whole thing</p>
         </div>
         <div className="rl-grid">
           {items.map((r) => <Sleeve key={r.key} r={r} />)}

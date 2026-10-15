@@ -41,8 +41,8 @@ export default function Navbar() {
   return (
     <>
       <style>{`
-        .eh-nav { position: fixed; inset: 0 0 auto 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1.25rem 2.5rem; transition: background 0.35s ease, padding 0.35s ease, backdrop-filter 0.35s ease; background: linear-gradient(to bottom, rgba(16,18,12,0.55), rgba(16,18,12,0)); }
-        .eh-nav.scrolled { background: rgba(24,26,20,0.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding-top: 0.85rem; padding-bottom: 0.85rem; }
+        .eh-nav { position: fixed; inset: 0 0 auto 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1.25rem 2.5rem; transition: background 0.35s ease, padding 0.35s ease, backdrop-filter 0.35s ease; background: linear-gradient(to bottom, rgba(14,18,12,0.5), rgba(14,18,12,0)); }
+        .eh-nav.scrolled { background: rgba(20,26,18,0.55); backdrop-filter: blur(16px) saturate(1.1); -webkit-backdrop-filter: blur(16px) saturate(1.1); padding-top: 0.85rem; padding-bottom: 0.85rem; }
         .eh-wordmark { font-family: var(--f-display); font-size: 1.75rem; line-height: 1; color: #f2ecdf; text-decoration: none; letter-spacing: -0.01em; white-space: nowrap; }
         .eh-wordmark em { font-style: italic; }
         .eh-links { display: flex; align-items: center; gap: 2rem; }
@@ -82,7 +82,7 @@ export default function Navbar() {
           {mainLinks.map((l) => (
             <Link key={l.href} href={l.href} className={`eh-link ${pathname === l.href ? 'active' : ''}`}>{l.label}</Link>
           ))}
-          <Link href="/#notebook" className="eh-signup">sign up</Link>
+          <Link href="/#day-one" className="eh-signup">sign up</Link>
         </div>
 
         <button type="button" className={`eh-burger ${open ? 'open' : ''}`} aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen((o) => !o)}>
@@ -102,7 +102,7 @@ export default function Navbar() {
             <Link key={l.href} href={l.href} onClick={close} tabIndex={open ? 0 : -1}>{l.label}</Link>
           ))}
         </div>
-        <Link href="/#notebook" onClick={close} className="eh-sheet-note" tabIndex={open ? 0 : -1}>sign the notebook →</Link>
+        <Link href="/#day-one" onClick={close} className="eh-sheet-note" tabIndex={open ? 0 : -1}>join day one →</Link>
       </div>
     </>
   )
