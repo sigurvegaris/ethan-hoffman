@@ -392,6 +392,18 @@ export default function Navbar() {
               )}
             </div>
 
+            <Link href="/music" style={linkStyle}
+  onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
+  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.8)')}>
+  Music
+</Link>
+
+<Link href="/merch" style={linkStyle}
+  onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
+  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.8)')}>
+  Merch
+</Link>
+
             <Link href="/shows" style={linkStyle}
   onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
   onMouseLeave={e => (e.currentTarget.style.color = 'rgba(253,250,245,0.8)')}>
@@ -456,6 +468,16 @@ export default function Navbar() {
   </div>
 )}
             </div>
+            <div className="eh-mobile-section">
+  <Link href="/music" className="eh-mobile-top-link" onClick={closeAllMenus}>
+    <span>Music</span>
+  </Link>
+</div>
+            <div className="eh-mobile-section">
+  <Link href="/merch" className="eh-mobile-top-link" onClick={closeAllMenus}>
+    <span>Merch</span>
+  </Link>
+</div>
             <div className="eh-mobile-section">
   <Link href="/shows" className="eh-mobile-top-link" onClick={closeAllMenus}>
     <span>Shows</span>
