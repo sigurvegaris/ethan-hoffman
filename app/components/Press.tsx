@@ -1,32 +1,48 @@
 import { articles } from '../lib/press'
 
+// Pull quotes from articles about Ethan, laid out as clippings on the
+// homepage's paper background. Hidden until app/lib/press.ts has an article.
 export default function Press() {
   if (!articles.length) return null
   return (
-    <section style={{ backgroundColor: '#1a1814', padding: '7rem 0' }}>
+    <section className="ps" id="press">
       <style>{`
-        .press-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2px; }
-        .press-card { padding: 2.5rem; background: rgba(196,168,130,0.06); border-top: 2px solid #c4622d; display: flex; flex-direction: column; gap: 1.25rem; }
-        @media (max-width: 768px) { .press-card { padding: 1.75rem; } }
+        .ps { padding: 6.5rem 0; }
+        .ps-label { font-family: 'Jost', 'Inter', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.28em; color: var(--rust); margin: 0 0 1.5rem; }
+        .ps-article + .ps-article { margin-top: 5rem; }
+        .ps-headline { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(2rem, 4.2vw, 3.4rem); line-height: 1.08; color: var(--ink); margin: 0; max-width: 26ch; text-wrap: balance; }
+        .ps-headline::before { content: '“'; color: var(--rust); }
+        .ps-headline::after { content: '”'; color: var(--rust); }
+        .ps-byline { font-family: 'Caveat', cursive; font-size: 1.5rem; color: #6b6355; margin: 1.25rem 0 0; }
+        .ps-byline a { color: inherit; }
+        .ps-clips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem; }
+        .ps-clip { position: relative; background: #fbf8f1; padding: 2rem 1.6rem 1.6rem; box-shadow: 0 10px 24px rgba(28,26,21,0.1); transform: rotate(var(--r)); }
+        .ps-clip::before { content: ''; position: absolute; top: -12px; left: 50%; width: 90px; height: 24px; transform: translateX(-50%) rotate(-3deg); background: rgba(226,167,90,0.45); }
+        .ps-clip p { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 1.3rem; line-height: 1.45; color: var(--ink); margin: 0; }
+        .ps-clip span { display: block; margin-top: 1rem; font-family: 'Jost', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; color: #8a8173; }
+        @media (max-width: 900px) {
+          .ps { padding: 4.5rem 0; }
+          .ps-clips { grid-template-columns: 1fr; gap: 2.25rem; }
+        }
       `}</style>
-      <div className="container">
-        <p style={{ fontSize: '0.6rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', textAlign: 'center', margin: '0 0 1rem' }}>Press</p>
-        <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.9rem, 4vw, 3rem)', fontWeight: '600', color: '#fdfaf5', textAlign: 'center', margin: '0 0 3.5rem' }}>In their words</h2>
-        <div className="press-grid">
-          {articles.map((a) => (
-            <article key={a.url} className="press-card">
+      <div className="nb-wrap">
+        <p className="ps-label">in the press</p>
+        {articles.map((a) => (
+          <article key={a.title} className="ps-article">
+            <h2 className="ps-headline">{a.headline}</h2>
+            <p className="ps-byline">
+              from {a.url ? <a href={a.url} target="_blank" rel="noopener noreferrer">“{a.title}”</a> : <>“{a.title}”</>}, by {a.author}{a.outlet ? `, ${a.outlet}` : ''}
+            </p>
+            <div className="ps-clips">
               {a.quotes.map((q, i) => (
-                <p key={i} style={{ fontFamily: 'Cormorant Garamond, serif', fontStyle: 'italic', fontSize: 'clamp(1.15rem, 2vw, 1.45rem)', lineHeight: '1.6', color: 'rgba(253,250,245,0.85)', margin: 0 }}>&ldquo;{q}&rdquo;</p>
+                <figure key={i} className="ps-clip" style={{ ['--r' as string]: `${[-1.5, 1, -0.5][i % 3]}deg`, margin: 0 }}>
+                  <p>“{q}”</p>
+                  <span>ethan, to {a.author.split(' ')[0].toLowerCase()}</span>
+                </figure>
               ))}
-              <div style={{ marginTop: 'auto', paddingTop: '1.25rem', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-                <p style={{ fontSize: '0.75rem', fontWeight: '700', color: '#fdfaf5', margin: '0 0 0.25rem' }}>{a.outlet}{a.author ? ` · ${a.author}` : ''}</p>
-                <a href={a.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.65rem', fontWeight: '700', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#c4622d', textDecoration: 'none' }}>
-                  Read “{a.title}” →
-                </a>
-              </div>
-            </article>
-          ))}
-        </div>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   )
