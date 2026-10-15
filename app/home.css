@@ -1,0 +1,208 @@
+/* Homepage: "Ethan's notebook". Paper, ink, handwriting and film photos. */
+
+.nb {
+  --paper: #f2ecdf;
+  --paper-deep: #e7dfcc;
+  --ink: #1c1a15;
+  --ink-soft: #4a453b;
+  --moss: #1f261c;
+  --rust: #c4622d;
+  --amber: #e2a75a;
+  --line: rgba(60, 90, 140, 0.18);
+  --serif: 'Instrument Serif', 'Playfair Display', Georgia, serif;
+  --hand: 'Caveat', 'Segoe Print', cursive;
+  --sans: 'Inter', 'DM Sans', system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  overflow-x: hidden;
+}
+
+.nb-wrap { width: min(1180px, calc(100% - 3rem)); margin: 0 auto; }
+.nb-hand { font-family: var(--hand); }
+.nb-label { font-family: var(--sans); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; }
+
+/* Film grain laid over photos and paper */
+.nb-grain { position: relative; }
+.nb-grain::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.22; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Hero ───────────────────────────────────────────── */
+.nb-hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; color: var(--paper); background: var(--moss); }
+.nb-hero-media { position: absolute; inset: 0; z-index: 0; }
+.nb-hero-shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(16,18,12,0.92) 0%, rgba(16,18,12,0.35) 45%, rgba(16,18,12,0.15) 70%, rgba(16,18,12,0.45) 100%); }
+.nb-hero-inner { position: relative; z-index: 2; width: min(1180px, calc(100% - 3rem)); margin: 0 auto; padding: 0 0 3.5rem; }
+.nb-hero-kicker { color: rgba(242,236,223,0.75); margin-bottom: 1rem; }
+.nb-hero-name { font-family: var(--serif); font-weight: 400; font-size: clamp(4.2rem, 15vw, 13.5rem); line-height: 0.82; letter-spacing: -0.035em; margin: 0; }
+.nb-hero-name em { font-style: italic; }
+.nb-hero-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
+.nb-hero-line { font-family: var(--serif); font-style: italic; font-size: clamp(1.25rem, 2.4vw, 1.75rem); color: rgba(242,236,223,0.85); max-width: 28ch; margin: 0; }
+.nb-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.nb-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.95rem 1.5rem; font-family: var(--sans); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease; border: 1px solid transparent; cursor: pointer; }
+.nb-btn:hover { transform: translateY(-2px); }
+.nb-btn-light { background: var(--paper); color: var(--ink); }
+.nb-btn-ghost { border-color: rgba(242,236,223,0.55); color: var(--paper); }
+.nb-btn-ghost:hover { background: rgba(242,236,223,0.12); }
+.nb-btn-ink { background: var(--ink); color: var(--paper); }
+.nb-btn-rust { background: var(--rust); color: var(--paper); }
+
+.nb-note { text-shadow: 0 2px 14px rgba(0,0,0,0.55); position: absolute; z-index: 3; top: 22%; right: 6%; transform: rotate(-6deg); color: var(--paper); text-decoration: none; text-align: right; }
+.nb-note-text { font-family: var(--hand); font-size: clamp(1.7rem, 3vw, 2.6rem); line-height: 1; display: block; }
+.nb-note-sub { font-family: var(--hand); font-size: clamp(1.2rem, 2vw, 1.6rem); color: var(--amber); display: block; margin-top: 0.3rem; }
+.nb-note svg { width: 110px; height: 70px; margin: 0.35rem 0 0 auto; display: block; }
+.nb-note:hover .nb-note-text { text-decoration: underline wavy rgba(226,167,90,0.8); text-underline-offset: 6px; }
+
+/* ── Polaroids + tape ───────────────────────────────── */
+.nb-polaroid { background: #fbf8f1; padding: 0.8rem 0.8rem 0; box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 18px 40px rgba(28,26,21,0.18); position: relative; }
+.nb-polaroid img { display: block; width: 100%; height: auto; }
+.nb-polaroid figcaption { font-family: var(--hand); font-size: 1.45rem; color: var(--ink-soft); padding: 0.55rem 0.2rem 0.75rem; line-height: 1.1; }
+.nb-tape::before { content: ''; position: absolute; top: -14px; left: 50%; width: 96px; height: 28px; transform: translateX(-50%) rotate(-3deg); background: rgba(233, 222, 190, 0.78); box-shadow: 0 1px 2px rgba(0,0,0,0.08); z-index: 2; }
+
+/* ── India / chapter one ────────────────────────────── */
+.nb-india { padding: 8rem 0 7rem; }
+.nb-india-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 5rem; align-items: center; }
+.nb-india-photo { transform: rotate(-2.5deg); max-width: 520px; }
+.nb-chapter { color: var(--rust); margin-bottom: 1.25rem; }
+.nb-big { font-family: var(--serif); font-weight: 400; font-size: clamp(4.5rem, 11vw, 9rem); line-height: 0.85; letter-spacing: -0.03em; margin: 0 0 1.5rem; }
+.nb-big em { font-style: italic; }
+.nb-lede { font-size: 1.05rem; line-height: 1.8; color: var(--ink-soft); max-width: 46ch; margin: 0 0 2rem; }
+.nb-count { display: flex; gap: 1.75rem; margin: 0 0 2.25rem; }
+.nb-count-cell { min-width: 3.5rem; }
+.nb-count-num { font-family: var(--serif); font-size: clamp(2.6rem, 5vw, 3.6rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.nb-count-unit { font-family: var(--hand); font-size: 1.3rem; color: var(--ink-soft); }
+.nb-out { font-family: var(--hand); font-size: 2.4rem; color: var(--rust); margin: 0 0 1.5rem; transform: rotate(-2deg); display: inline-block; }
+.nb-links { display: flex; flex-wrap: wrap; gap: 0.6rem 1.6rem; align-items: center; }
+.nb-link { font-family: var(--serif); font-size: 1.45rem; color: var(--ink); text-decoration: none; background-image: linear-gradient(var(--rust), var(--rust)); background-size: 0% 2px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size 0.3s ease; padding-bottom: 2px; }
+.nb-link:hover { background-size: 100% 2px; }
+.nb-link-merch { font-style: italic; color: var(--rust); }
+
+/* ── EP page (ruled paper) ──────────────────────────── */
+.nb-ep { padding: 2rem 0 8rem; }
+.nb-page {
+  position: relative; background-color: #fbf8f1; padding: 3.5rem 3.5rem 3rem 5.5rem;
+  background-image: linear-gradient(to right, transparent 4rem, rgba(196,98,45,0.35) 4rem, rgba(196,98,45,0.35) calc(4rem + 1px), transparent calc(4rem + 1px)), repeating-linear-gradient(to bottom, transparent 0, transparent 2.55rem, var(--line) 2.55rem, var(--line) calc(2.55rem + 1px));
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 30px 60px rgba(28,26,21,0.12);
+}
+.nb-ep-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 3rem; align-items: start; }
+.nb-ep-title { font-family: var(--hand); font-size: clamp(2.4rem, 5vw, 3.6rem); line-height: 1; margin: 0 0 0.4rem; }
+.nb-ep-sub { font-family: var(--hand); font-size: 1.5rem; color: var(--ink-soft); margin: 0 0 2rem; }
+.nb-tracks { list-style: none; margin: 0; padding: 0; }
+.nb-track { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-family: var(--hand); font-size: clamp(1.6rem, 3vw, 2.1rem); line-height: 2.55rem; }
+.nb-track-n { color: var(--rust); margin-right: 0.75rem; }
+.nb-track-date { font-size: 1.3rem; color: var(--ink-soft); white-space: nowrap; }
+.nb-track.is-secret .nb-track-name { color: var(--ink-soft); letter-spacing: 0.15em; }
+.nb-secret-note { font-family: var(--hand); font-size: 1.35rem; line-height: 2.55rem; color: var(--rust); margin: 0 0 0 2rem; transform: rotate(-1.5deg); }
+.nb-track.is-out .nb-track-date { color: var(--rust); }
+.nb-ep-facts { list-style: none; margin: 2rem 0 0; padding: 0; }
+.nb-ep-facts li { font-family: var(--hand); font-size: 1.45rem; line-height: 2.55rem; color: var(--ink-soft); }
+.nb-ep-photo { transform: rotate(3deg); margin-top: 1rem; }
+
+/* ── Sessions film strip ────────────────────────────── */
+.nb-sessions { background: var(--moss); color: var(--paper); padding: 7rem 0 6rem; }
+.nb-sessions-head { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: end; margin-bottom: 3rem; }
+.nb-sessions-title { font-family: var(--serif); font-weight: 400; font-size: clamp(2.6rem, 6vw, 5rem); line-height: 0.95; letter-spacing: -0.02em; margin: 0; }
+.nb-sessions-title em { color: var(--amber); }
+.nb-strip { display: flex; gap: 0; overflow-x: auto; scroll-snap-type: x mandatory; background: #0d0f0b; padding: 1.6rem 0; scrollbar-width: none; position: relative; }
+.nb-strip::-webkit-scrollbar { display: none; }
+.nb-strip::before, .nb-strip::after { content: ''; position: absolute; left: 0; width: max(100%, 2600px); height: 10px; background-image: repeating-linear-gradient(to right, transparent 0 14px, rgba(242,236,223,0.85) 14px 26px, transparent 26px 40px); }
+.nb-strip::before { top: 0.45rem; }
+.nb-strip::after { bottom: 0.45rem; }
+.nb-frame { flex: 0 0 auto; scroll-snap-align: start; margin: 0 0.6rem; position: relative; }
+.nb-frame:first-child { margin-left: 1.5rem; }
+.nb-frame:last-child { margin-right: 1.5rem; }
+.nb-frame img { height: clamp(220px, 38vw, 420px); width: auto; display: block; }
+.nb-frame-num { position: absolute; bottom: -1.35rem; left: 0.2rem; font-family: var(--sans); font-size: 0.6rem; letter-spacing: 0.2em; color: var(--amber); }
+.nb-sessions-foot { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 2.75rem; flex-wrap: wrap; }
+.nb-sessions-foot p { font-family: var(--hand); font-size: 1.6rem; color: rgba(242,236,223,0.8); margin: 0; }
+
+/* ── Fan notebook ───────────────────────────────────── */
+.nb-fans { padding: 8rem 0; }
+.nb-fans-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 4.5rem; align-items: center; }
+.nb-fans-title { font-family: var(--serif); font-weight: 400; font-size: clamp(2.8rem, 6vw, 4.8rem); line-height: 0.95; letter-spacing: -0.02em; margin: 0 0 1.5rem; }
+.nb-fans-title em { color: var(--rust); }
+.nb-places { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; margin-top: 1.75rem; font-family: var(--hand); font-size: 1.5rem; color: var(--ink-soft); }
+.nb-places span::after { content: ' ·'; color: var(--rust); }
+.nb-places span:last-child::after { content: ''; }
+.nb-sign { transform: rotate(1deg); }
+.nb-sign-head { font-family: var(--hand); font-size: 2rem; line-height: 2.55rem; margin: 0 0 0.5rem; }
+.nb-sign-names { font-family: var(--hand); font-size: 1.65rem; line-height: 2.55rem; color: #2a3f6b; margin: 0 0 0.5rem; columns: 2; column-gap: 2rem; }
+.nb-sign-new { color: var(--rust); animation: nb-write 1.2s ease both; display: inline-block; }
+@keyframes nb-write { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.nb-field { display: block; width: 100%; border: none; border-bottom: 1px dashed rgba(28,26,21,0.35); background: transparent; font-family: var(--hand); font-size: 1.7rem; line-height: 2.55rem; height: 2.55rem; color: #2a3f6b; padding: 0; outline: none; }
+.nb-field::placeholder { color: rgba(74,69,59,0.5); }
+.nb-field:focus { border-bottom-color: var(--rust); }
+.nb-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.nb-sign-foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.25rem; flex-wrap: wrap; }
+.nb-small { font-size: 0.78rem; color: var(--ink-soft); }
+.nb-thanks { font-family: var(--hand); font-size: 2.1rem; line-height: 2.55rem; color: var(--rust); margin: 0; }
+
+/* ── Scrapbook ──────────────────────────────────────── */
+.nb-scrap { padding: 2rem 0 8rem; }
+.nb-scrap-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; align-items: start; }
+.nb-scrap-grid .nb-polaroid:nth-child(1) { transform: rotate(-3deg); margin-top: 2rem; }
+.nb-scrap-grid .nb-polaroid:nth-child(2) { transform: rotate(2deg); }
+.nb-scrap-grid .nb-polaroid:nth-child(3) { transform: rotate(-1.5deg); margin-top: 3.5rem; }
+.nb-scrap-grid .nb-polaroid:nth-child(4) { transform: rotate(2.5deg); margin-top: 0.5rem; }
+.nb-scrap-grid .nb-polaroid { transition: transform 0.35s ease; }
+.nb-scrap-grid .nb-polaroid:hover { transform: rotate(0deg) scale(1.03); z-index: 2; }
+
+/* ── Also live ──────────────────────────────────────── */
+.nb-live { background: var(--ink); color: var(--paper); padding: 6rem 0; }
+.nb-live-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.nb-live-title { font-family: var(--serif); font-weight: 400; font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1; margin: 0 0 1.25rem; }
+.nb-live-title em { color: var(--amber); }
+.nb-live p { color: rgba(242,236,223,0.7); line-height: 1.8; margin: 0 0 1.75rem; max-width: 48ch; }
+.nb-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem 1.5rem; }
+.nb-stat-num { font-family: var(--serif); font-size: clamp(2.6rem, 5vw, 3.8rem); line-height: 1; }
+.nb-stat-label { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(242,236,223,0.5); margin-top: 0.4rem; }
+.nb-quote { grid-column: 1 / -1; border-top: 1px solid rgba(242,236,223,0.12); padding-top: 2rem; font-family: var(--serif); font-style: italic; font-size: clamp(1.25rem, 2.2vw, 1.6rem); line-height: 1.5; color: rgba(242,236,223,0.85); }
+.nb-quote cite { display: block; margin-top: 0.75rem; font-family: var(--sans); font-style: normal; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); }
+.nb-venues { display: flex; flex-wrap: wrap; gap: 1.5rem 2.25rem; align-items: center; margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(242,236,223,0.12); }
+.nb-venues img { height: 34px; width: auto; filter: brightness(0) invert(1); opacity: 0.55; }
+
+/* ── Responsive ─────────────────────────────────────── */
+@media (min-width: 1025px) {
+  .nb-hero-media { left: auto; width: 60%; }
+  .nb-hero-shade { background: linear-gradient(to right, var(--moss) 0%, var(--moss) 38%, rgba(31,38,28,0.55) 52%, rgba(31,38,28,0) 70%), linear-gradient(to top, rgba(16,18,12,0.6) 0%, rgba(16,18,12,0) 35%); }
+  .nb-hero-inner { padding-bottom: 5rem; }
+  .nb-hero-row { flex-direction: column; align-items: flex-start; gap: 2rem; }
+}
+@media (max-width: 1024px) {
+  .nb-india-grid, .nb-fans-grid, .nb-live-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+  .nb-india-photo { max-width: 440px; margin: 0 auto; }
+  .nb-ep-grid { grid-template-columns: 1fr; }
+  .nb-ep-photo { max-width: 360px; }
+  .nb-scrap-grid { grid-template-columns: repeat(2, 1fr); }
+  .nb-note { top: 16%; right: 5%; }
+}
+@media (max-width: 768px) {
+  .nb-wrap, .nb-hero-inner { width: calc(100% - 2.5rem); }
+  .nb-hero-inner { padding-bottom: 2.5rem; }
+  .nb-hero-row { flex-direction: column; align-items: flex-start; gap: 1.5rem; margin-top: 1.5rem; }
+  .nb-actions { width: 100%; }
+  .nb-actions .nb-btn { flex: 1 1 0; justify-content: center; }
+  .nb-note { top: 13%; right: 1.25rem; }
+  .nb-note svg { width: 80px; height: 50px; }
+  .nb-india { padding: 5rem 0 4.5rem; }
+  .nb-count { gap: 1.1rem; }
+  .nb-ep { padding-bottom: 5rem; }
+  .nb-page { padding: 2.5rem 1.25rem 2rem 3.25rem; background-image: linear-gradient(to right, transparent 2.25rem, rgba(196,98,45,0.35) 2.25rem, rgba(196,98,45,0.35) calc(2.25rem + 1px), transparent calc(2.25rem + 1px)), repeating-linear-gradient(to bottom, transparent 0, transparent 2.55rem, var(--line) 2.55rem, var(--line) calc(2.55rem + 1px)); }
+  .nb-track { flex-wrap: wrap; gap: 0 0.75rem; }
+  .nb-sessions { padding: 5rem 0 4.5rem; }
+  .nb-sessions-head { grid-template-columns: 1fr; }
+  .nb-fans { padding: 5rem 0; }
+  .nb-sign-names { columns: 1; }
+  .nb-field-row { grid-template-columns: 1fr; gap: 0; }
+  .nb-scrap { padding-bottom: 5rem; }
+  .nb-scrap-grid { gap: 1.25rem; }
+  .nb-scrap-grid .nb-polaroid { padding: 0.5rem 0.5rem 0; }
+  .nb-scrap-grid .nb-polaroid figcaption { font-size: 1.15rem; }
+  .nb-live { padding: 4.5rem 0; }
+  .nb-venues img { height: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nb-sign-new { animation: none; }
+  .nb-btn, .nb-scrap-grid .nb-polaroid { transition: none; }
+}

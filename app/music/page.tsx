@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import { useReleased } from '../components/ReleaseBanner'
+import { useReleased } from '../lib/useReleased'
 import { singles, ep, formatReleaseDate, type Single } from '../lib/release'
 
 function VideoEmbed({ id, label, priority = false }: { id: string; label: string; priority?: boolean }) {

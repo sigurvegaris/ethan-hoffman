@@ -241,11 +241,11 @@ export default function Footer() {
                   margin: 0,
                 }}
               >
-                Soulful live music for weddings,
+                Singer-songwriter from Los Angeles.
                 <br />
-                private events & corporate functions.
+                Also playing weddings, private
                 <br />
-                Based in Los Angeles, CA.
+                & corporate events.
               </p>
 
               <div className="eh-footer-social">
