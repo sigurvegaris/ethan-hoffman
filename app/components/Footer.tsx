@@ -74,12 +74,12 @@ export default function Footer() {
   return (
     <footer className="eh-foot">
       <style>{`
-        .eh-foot { background: #1f261c; color: #f2ecdf; padding: 5.5rem 0 2rem; font-family: 'Jost', 'Inter', sans-serif; position: relative; overflow: hidden; }
+        .eh-foot { background: #1f261c; color: #f2ecdf; padding: 5.5rem 0 2rem; font-family: var(--f-body); position: relative; overflow: hidden; }
         .eh-foot-wrap { width: min(1180px, calc(100% - 3rem)); margin: 0 auto; }
         .eh-foot-top { display: grid; grid-template-columns: 1.3fr 1fr; gap: 4rem; align-items: start; }
-        .eh-foot-mark { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(3.4rem, 9vw, 7.5rem); line-height: 0.85; letter-spacing: -0.03em; margin: 0; }
+        .eh-foot-mark { font-family: var(--f-display); font-size: clamp(3.4rem, 9vw, 7.5rem); line-height: 0.85; letter-spacing: -0.03em; margin: 0; }
         .eh-foot-mark em { font-style: italic; color: #e2a75a; }
-        .eh-foot-tag { font-family: 'Caveat', cursive; font-size: 1.6rem; color: rgba(242,236,223,0.75); margin: 1rem 0 0; }
+        .eh-foot-tag { font-family: var(--f-hand); font-size: 1.6rem; color: rgba(242,236,223,0.75); margin: 1rem 0 0; }
         .eh-foot-label { font-size: 1rem; font-weight: 500; margin: 0 0 0.9rem; }
         .eh-foot-form { display: flex; gap: 0.5rem; }
         .eh-foot-input { flex: 1; min-width: 0; background: transparent; border: 1px solid rgba(242,236,223,0.7); color: #f2ecdf; padding: 0.95rem 1.1rem; font-family: inherit; font-size: 0.95rem; letter-spacing: 0.08em; }

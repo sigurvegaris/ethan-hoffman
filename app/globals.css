@@ -17,10 +17,28 @@ html {
   text-size-adjust: 100%;
 }
 
+:root {
+  /* Type: Fraunces (soft, wonky 70s soul serif) for display, Bricolage
+     Grotesque for text, a pen script standing in for Ethan's own handwriting
+     until his font is made, and Space Mono for studio-tape labels. */
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body: 'Bricolage Grotesque', system-ui, sans-serif;
+  --f-hand: 'Nanum Pen Script', 'Comic Sans MS', cursive;
+  --f-mono: 'Space Mono', ui-monospace, monospace;
+  /* Palette: the deep Malibu green everywhere, cream type, warm accents. */
+  --green: #1f261c;
+  --green-2: #283224;
+  --green-3: #161c14;
+  --cream: #f2ecdf;
+  --cream-dim: rgba(242,236,223,0.72);
+  --amber: #e2a75a;
+  --rust: #d2703a;
+}
+
 body {
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #0e0c09;
-  color: #fdfaf5;
+  font-family: var(--f-body);
+  background: var(--green);
+  color: var(--cream);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -79,7 +97,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--f-display);
   line-height: 1.05;
   letter-spacing: -0.02em;
 }
@@ -265,7 +283,7 @@ p {
 }
 
 .svc-row-num {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--f-body);
   font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -280,7 +298,7 @@ p {
 }
 
 .svc-row-word {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--f-display);
   font-size: clamp(2.8rem, 8vw, 7rem);
   font-weight: 600;
   letter-spacing: -0.03em;
@@ -314,7 +332,7 @@ p {
 }
 
 .svc-row-tag {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--f-body);
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -323,7 +341,7 @@ p {
 }
 
 .svc-row-desc {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--f-body);
   font-size: 1rem;
   font-weight: 400;
   color: rgba(253, 250, 245, 0.7);
@@ -333,7 +351,7 @@ p {
 }
 
 .svc-row-cta {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--f-body);
   font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.14em;
@@ -386,7 +404,7 @@ p {
 }
 
 .svc-feat {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--f-body);
   font-size: 0.95rem;
   font-weight: 400;
   color: rgba(253, 250, 245, 0.65);
@@ -418,7 +436,7 @@ p {
 }
 
 .svc-ticker-item {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--f-display);
   font-size: 0.85rem;
   font-weight: 400;
   font-style: italic;
@@ -447,7 +465,7 @@ p {
   position: absolute;
   left: 0;
   right: 0;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--f-display);
   font-weight: 700;
   font-size: clamp(4rem, 16vw, 14rem);
   letter-spacing: -0.04em;
@@ -550,7 +568,7 @@ p {
 }
 
 .nav-drawer a {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--f-display);
   font-size: clamp(2rem, 8vw, 3rem);
   font-weight: 600;
   color: rgba(253, 250, 245, 0.6);
@@ -612,7 +630,7 @@ p {
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  font-family: Inter, sans-serif;
+  font-family: var(--f-body);
   transition: background-color 0.3s ease, transform 0.2s ease;
   text-align: center;
 }
@@ -633,7 +651,7 @@ p {
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  font-family: Inter, sans-serif;
+  font-family: var(--f-body);
   border: 1px solid rgba(253,250,245,0.5);
   transition: border-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
   text-align: center;

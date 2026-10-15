@@ -8,18 +8,18 @@ export default function Press() {
     <section className="ps" id="press">
       <style>{`
         .ps { padding: 6.5rem 0; }
-        .ps-label { font-family: 'Jost', 'Inter', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.28em; color: var(--rust); margin: 0 0 1.5rem; }
+        .ps-label { font-family: var(--f-mono); font-size: 0.8rem; letter-spacing: 0.2em; color: var(--amber); margin: 0 0 1.5rem; }
         .ps-article + .ps-article { margin-top: 5rem; }
-        .ps-headline { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(2rem, 4.2vw, 3.4rem); line-height: 1.08; color: var(--ink); margin: 0; max-width: 26ch; text-wrap: balance; }
-        .ps-headline::before { content: '“'; color: var(--rust); }
-        .ps-headline::after { content: '”'; color: var(--rust); }
-        .ps-byline { font-family: 'Caveat', cursive; font-size: 1.5rem; color: #6b6355; margin: 1.25rem 0 0; }
+        .ps-headline { font-family: var(--f-display); font-weight: 400; font-style: italic; font-size: clamp(2rem, 4.2vw, 3.4rem); line-height: 1.08; color: var(--cream); margin: 0; max-width: 26ch; text-wrap: balance; }
+        .ps-headline::before { content: '“'; color: var(--amber); }
+        .ps-headline::after { content: '”'; color: var(--amber); }
+        .ps-byline { font-family: var(--f-hand); font-size: 1.5rem; color: var(--cream-dim); margin: 1.25rem 0 0; }
         .ps-byline a { color: inherit; }
         .ps-clips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem; }
         .ps-clip { position: relative; background: #fbf8f1; padding: 2rem 1.6rem 1.6rem; box-shadow: 0 10px 24px rgba(28,26,21,0.1); transform: rotate(var(--r)); }
         .ps-clip::before { content: ''; position: absolute; top: -12px; left: 50%; width: 90px; height: 24px; transform: translateX(-50%) rotate(-3deg); background: rgba(226,167,90,0.45); }
-        .ps-clip p { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 1.3rem; line-height: 1.45; color: var(--ink); margin: 0; }
-        .ps-clip span { display: block; margin-top: 1rem; font-family: 'Jost', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; color: #8a8173; }
+        .ps-clip p { font-family: var(--f-display); font-style: italic; font-weight: 350; font-size: 1.2rem; line-height: 1.45; color: var(--ink); margin: 0; }
+        .ps-clip span { display: block; margin-top: 1rem; font-family: var(--f-mono); font-size: 0.75rem; letter-spacing: 0.2em; color: #8a8173; }
         @media (max-width: 900px) {
           .ps { padding: 4.5rem 0; }
           .ps-clips { grid-template-columns: 1fr; gap: 2.25rem; }

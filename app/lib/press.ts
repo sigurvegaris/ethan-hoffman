@@ -11,6 +11,18 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    title: 'SPOTLIGHT: Ethan Hoffman is Rediscovering His Instincts',
+    author: 'Sydney Merchant',
+    outlet: 'Life on Jupiter',
+    url: 'https://www.lifeonjupitermag.com/articles/spotlight-ethan-hoffman',
+    headline: 'The first thing people notice when listening to my music is that I’m free in my expression.',
+    quotes: [
+      'It is just me, the guitar, the voice, and the song.',
+      'I initially didn’t like it, but now I embrace it. To me, it means being someone who does not fit neatly into one mold.',
+      'I know there are many things I am yet to experience, and thus many songs I am yet to write.',
+    ],
+  },
+  {
     title: 'Meet Palos Verdes Singer-Songwriter Ethan Hoffman',
     author: 'Amy Bergant',
     outlet: 'Palos Verdes Pulse',

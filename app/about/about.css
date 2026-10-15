@@ -1,0 +1,74 @@
+/* About page: Ethan's story as chapters, polaroids and a unicorn. */
+
+.ab { background: var(--green); color: var(--cream); overflow-x: hidden; }
+.ab-wrap { width: min(1180px, calc(100% - 3rem)); margin: 0 auto; }
+.ab-label { font-family: var(--f-mono); font-size: 0.75rem; letter-spacing: 0.2em; color: var(--amber); margin: 0 0 1.5rem; }
+
+/* Hero */
+.ab-hero { padding: 10rem 0 6rem; position: relative; }
+.ab-hero::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(50% 60% at 85% 30%, rgba(226,167,90,0.12), transparent 70%); }
+.ab-hero-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 4rem; align-items: center; position: relative; }
+.ab-title { font-family: var(--f-display); font-weight: 600; font-size: clamp(3.6rem, 9vw, 8rem); line-height: 0.92; letter-spacing: -0.035em; margin: 0; }
+.ab-title em { font-style: italic; color: var(--amber); }
+.ab-hand { font-family: var(--f-hand); font-size: clamp(1.6rem, 2.4vw, 2.1rem); color: var(--amber); margin: 1rem 0 2rem; transform: rotate(-1.5deg); transform-origin: left; max-width: 28ch; line-height: 1.05; }
+.ab-lede { font-size: 1.15rem; line-height: 1.75; color: var(--cream-dim); max-width: 52ch; margin: 0; }
+
+/* Polaroids */
+.ab-polaroid { margin: 0; background: #fbf8f1; padding: 0.85rem 0.85rem 0; box-shadow: 0 24px 50px rgba(0,0,0,0.35); transform: rotate(var(--r, 2.5deg)); position: relative; }
+.ab-polaroid::before { content: ''; position: absolute; top: -14px; left: 50%; width: 96px; height: 28px; transform: translateX(-50%) rotate(-3deg); background: rgba(226,167,90,0.55); z-index: 1; }
+.ab-polaroid-img { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: #222; }
+.ab-morgan .ab-polaroid-img { aspect-ratio: 4 / 3; }
+.ab-polaroid figcaption { font-family: var(--f-hand); font-size: 1.6rem; color: #3b372f; padding: 0.6rem 0.25rem 0.8rem; line-height: 1.05; }
+
+/* Chapters */
+.ab-story { background: var(--green-3); padding: 6.5rem 0; }
+.ab-chapters { list-style: none; margin: 0; padding: 0; counter-reset: ch; }
+.ab-chapter { display: grid; grid-template-columns: 180px 1fr; gap: 2.5rem; padding: 2.4rem 0; border-top: 1px solid rgba(242,236,223,0.12); }
+.ab-chapter:last-child { border-bottom: 1px solid rgba(242,236,223,0.12); }
+.ab-when { font-family: var(--f-hand); font-size: 2.2rem; color: var(--amber); line-height: 1; transform: rotate(-3deg); transform-origin: left top; }
+.ab-chapter h2 { font-family: var(--f-display); font-weight: 500; font-size: clamp(1.7rem, 3vw, 2.5rem); line-height: 1.1; letter-spacing: -0.015em; margin: 0 0 0.75rem; }
+.ab-chapter p { font-size: 1.08rem; line-height: 1.75; color: var(--cream-dim); margin: 0; max-width: 62ch; }
+
+/* Morgan photos */
+.ab-morgan { padding: 6.5rem 0 5rem; }
+.ab-morgan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; max-width: 980px; }
+
+/* Unicorn */
+.ab-unicorn { padding: 4rem 0 7rem; }
+.ab-unicorn-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4.5rem; align-items: start; }
+.ab-quote { font-family: var(--f-display); font-style: italic; font-weight: 400; font-size: clamp(1.9rem, 3.6vw, 3rem); line-height: 1.15; letter-spacing: -0.015em; margin: 0; }
+.ab-cite { font-family: var(--f-mono); font-size: 0.75rem; letter-spacing: 0.18em; color: var(--cream-dim); margin: 1.5rem 0 0; }
+.ab-lists { display: grid; gap: 2.25rem; }
+.ab-lists h3 { font-family: var(--f-mono); font-weight: 400; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--amber); margin: 0 0 0.85rem; }
+.ab-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; }
+.ab-tags span { border: 1px solid rgba(242,236,223,0.3); border-radius: 999px; padding: 0.3rem 0.95rem; font-size: 0.95rem; }
+.ab-lists ul { list-style: none; margin: 0; padding: 0; font-family: var(--f-hand); font-size: 1.75rem; line-height: 1.25; display: flex; flex-wrap: wrap; gap: 0 1.1rem; }
+.ab-off { font-size: 1.02rem; line-height: 1.7; color: var(--cream-dim); margin: 0; }
+
+/* Press */
+.ab-press { background: var(--green-2); padding: 6rem 0 7rem; }
+.ab-press-list { list-style: none; margin: 0 0 3.5rem; padding: 0; }
+.ab-press-list a { display: grid; grid-template-columns: 220px 1fr auto; gap: 1.5rem; align-items: baseline; padding: 1.4rem 0; border-top: 1px solid rgba(242,236,223,0.14); color: var(--cream); text-decoration: none; transition: padding 0.25s ease, color 0.25s ease; }
+.ab-press-list li:last-child a { border-bottom: 1px solid rgba(242,236,223,0.14); }
+.ab-press-list a:hover { padding-left: 0.75rem; color: var(--amber); }
+.ab-press-outlet { font-family: var(--f-mono); font-size: 0.78rem; letter-spacing: 0.14em; color: var(--amber); }
+.ab-press-title { font-family: var(--f-display); font-size: clamp(1.2rem, 2vw, 1.55rem); line-height: 1.25; }
+.ab-press-arrow { font-size: 1.2rem; }
+.ab-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.ab-btn { display: inline-block; background: var(--cream); color: var(--green); padding: 0.85rem 2rem; font-size: 1.05rem; font-weight: 500; text-decoration: none; transition: background 0.2s ease, transform 0.2s ease; }
+.ab-btn:hover { background: var(--amber); transform: translateY(-2px); }
+.ab-btn-ghost { background: transparent; color: var(--cream); border: 1px solid rgba(242,236,223,0.5); }
+.ab-btn-ghost:hover { background: rgba(242,236,223,0.1); }
+
+@media (max-width: 900px) {
+  .ab-wrap { width: calc(100% - 2.5rem); }
+  .ab-hero { padding: 7.5rem 0 4rem; }
+  .ab-hero-grid, .ab-unicorn-grid, .ab-morgan-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .ab-hero-photo { max-width: 320px; margin: 0 auto; }
+  .ab-story { padding: 4.5rem 0; }
+  .ab-chapter { grid-template-columns: 1fr; gap: 0.75rem; padding: 2rem 0; }
+  .ab-morgan { padding: 4.5rem 0 3rem; }
+  .ab-morgan-grid { padding: 0 0.5rem; }
+  .ab-press-list a { grid-template-columns: 1fr auto; gap: 0.4rem 1rem; }
+  .ab-press-outlet { grid-column: 1 / -1; }
+}

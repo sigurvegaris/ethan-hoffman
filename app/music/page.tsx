@@ -79,48 +79,48 @@ export default function Music() {
     <>
       <Navbar />
       <style>{`
-        .mu { background: #e8e2d6; color: #26304a; font-family: 'Jost', 'Inter', sans-serif; overflow-x: hidden; }
+        .mu { background: var(--green); color: var(--cream); font-family: var(--f-body); overflow-x: hidden; }
         .mu-wrap { width: min(1180px, calc(100% - 3rem)); margin: 0 auto; }
-        .mu-top { background: #1f261c; height: 6.5rem; }
+        .mu-top { height: 6.5rem; }
         .mu-head { text-align: center; padding: 4.5rem 0 1rem; }
-        .mu-script { font-family: 'Pinyon Script', 'Caveat', cursive; font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: #b08a52; margin: 0; }
-        .mu-title { font-family: 'Jost', 'Inter', sans-serif; font-weight: 600; font-size: clamp(3rem, 8vw, 5.5rem); letter-spacing: 0.06em; line-height: 1; margin: 0; }
+        .mu-script { font-family: var(--f-hand); font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--amber); margin: 0; }
+        .mu-title { font-family: var(--f-display); font-weight: 600; font-style: italic; font-size: clamp(3.4rem, 9vw, 6.5rem); letter-spacing: -0.03em; line-height: 1; margin: 0; }
 
         .mu-carousel { position: relative; display: grid; grid-template-columns: 64px 1fr 64px; align-items: center; padding: 2.5rem 0 5rem; }
-        .mu-arrow { width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(38,48,74,0.3); background: transparent; color: #26304a; font-size: 1.4rem; cursor: pointer; transition: background 0.2s ease, color 0.2s ease; }
-        .mu-arrow:hover { background: #26304a; color: #e8e2d6; }
+        .mu-arrow { width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(242,236,223,0.3); background: transparent; color: var(--cream); font-size: 1.4rem; cursor: pointer; transition: background 0.2s ease, color 0.2s ease; }
+        .mu-arrow:hover { background: var(--cream); color: var(--green); }
         .mu-slide { display: flex; flex-direction: column; align-items: center; text-align: center; animation: muIn 0.45s ease; }
         @keyframes muIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
         .mu-cover { position: relative; width: min(420px, 78vw); aspect-ratio: 1; overflow: hidden; box-shadow: 0 24px 50px rgba(28,26,21,0.25); }
         .mu-cover::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 85% 10%, rgba(255,170,90,0.35), transparent 55%), linear-gradient(to top, rgba(0,0,0,0.45), transparent 45%); }
-        .mu-cover-title { position: absolute; left: 1.25rem; bottom: 1rem; z-index: 1; font-family: 'Abril Fatface', Georgia, serif; font-size: clamp(2rem, 5vw, 3rem); color: #f2ecdf; line-height: 1; }
+        .mu-cover-title { position: absolute; left: 1.25rem; bottom: 1rem; z-index: 1; font-family: var(--f-display); font-size: clamp(2rem, 5vw, 3rem); color: #f2ecdf; line-height: 1; }
         .mu-name { font-weight: 600; font-size: 1.1rem; letter-spacing: 0.26em; margin: 2rem 0 0.35rem; }
-        .mu-kind { font-size: 0.9rem; letter-spacing: 0.2em; opacity: 0.75; margin: 0 0 0.9rem; }
-        .mu-note { font-size: 1rem; line-height: 1.6; color: #4a4f60; max-width: 44ch; margin: 0 0 1.5rem; }
-        .mu-btn { display: inline-block; background: #26304a; color: #f2ecdf; text-decoration: none; padding: 0.8rem 2.4rem; font-weight: 500; letter-spacing: 0.04em; }
-        .mu-btn-ghost { background: transparent; color: #26304a; border: 1px solid #26304a; }
+        .mu-kind { font-family: var(--f-mono); font-size: 0.8rem; letter-spacing: 0.2em; opacity: 0.75; margin: 0 0 0.9rem; }
+        .mu-note { font-size: 1rem; line-height: 1.6; color: var(--cream-dim); max-width: 44ch; margin: 0 0 1.5rem; }
+        .mu-btn { display: inline-block; background: var(--cream); color: var(--green); text-decoration: none; padding: 0.8rem 2.4rem; font-weight: 500; letter-spacing: 0.04em; }
+        .mu-btn-ghost { background: transparent; color: var(--cream); border: 1px solid var(--cream); }
         .mu-dots { display: flex; justify-content: center; gap: 0.6rem; margin-top: 1.75rem; }
-        .mu-dot { flex: 0 0 9px; width: 9px; height: 9px; min-height: 0; min-width: 0; box-sizing: border-box; border-radius: 50%; border: 1px solid #26304a; background: transparent; padding: 0; cursor: pointer; }
-        .mu-dot.on { background: #26304a; }
+        .mu-dot { flex: 0 0 9px; width: 9px; height: 9px; min-height: 0; min-width: 0; box-sizing: border-box; border-radius: 50%; border: 1px solid var(--cream); background: transparent; padding: 0; cursor: pointer; }
+        .mu-dot.on { background: var(--cream); }
 
-        .mu-ep { border-top: 1px solid rgba(38,48,74,0.18); padding: 4.5rem 0; display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; }
-        .mu-ep h2 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.05; margin: 0 0 1rem; }
-        .mu-ep p { font-size: 1.05rem; line-height: 1.7; color: #4a4f60; margin: 0; }
+        .mu-ep { border-top: 1px solid rgba(242,236,223,0.18); padding: 4.5rem 0; display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; }
+        .mu-ep h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.05; margin: 0 0 1rem; }
+        .mu-ep p { font-size: 1.05rem; line-height: 1.7; color: var(--cream-dim); margin: 0; }
         .mu-facts { list-style: none; padding: 0; margin: 0; }
-        .mu-facts li { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(38,48,74,0.15); font-size: 1rem; }
+        .mu-facts li { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(242,236,223,0.15); font-size: 1rem; }
         .mu-facts li span:first-child { letter-spacing: 0.2em; font-size: 0.85rem; font-weight: 600; }
 
-        .mu-live { background: #1f261c; color: #f2ecdf; padding: 5rem 0 6rem; }
-        .mu-live h2 { font-family: 'Jost', 'Inter', sans-serif; font-weight: 600; font-size: clamp(2.2rem, 5vw, 3.5rem); letter-spacing: 0.06em; margin: 0; text-align: center; }
-        .mu-live-sub { font-family: 'Caveat', cursive; font-size: 1.6rem; color: #e2a75a; text-align: center; margin: 0.25rem 0 3rem; }
+        .mu-live { background: var(--green-3); color: #f2ecdf; padding: 5rem 0 6rem; }
+        .mu-live h2 { font-family: var(--f-display); font-weight: 600; font-style: italic; font-size: clamp(2.6rem, 6vw, 4rem); letter-spacing: -0.02em; margin: 0; text-align: center; }
+        .mu-live-sub { font-family: var(--f-hand); font-size: 1.6rem; color: #e2a75a; text-align: center; margin: 0.25rem 0 3rem; }
         .mu-featured { display: grid; grid-template-columns: 1.5fr 1fr; gap: 2.5rem; align-items: start; margin-bottom: 3rem; }
         .mu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-        .mu-frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #2d2926; cursor: pointer; }
+        .mu-frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--green-2); cursor: pointer; }
         .mu-frame img, .mu-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; display: block; }
         .mu-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; border-radius: 50%; background: #f2ecdf; color: #1c1a15; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(0,0,0,0.35); transition: transform 0.2s ease; }
         .mu-frame:hover .mu-play { transform: translate(-50%, -50%) scale(1.08); }
         .mu-vlabel { margin: 0.75rem 0 0; font-size: 0.85rem; letter-spacing: 0.2em; color: rgba(242,236,223,0.6); }
-        .mu-side h3 { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.24em; margin: 0 0 1rem; color: #e2a75a; }
+        .mu-side h3 { font-family: var(--f-mono); font-size: 0.78rem; font-weight: 400; letter-spacing: 0.2em; margin: 0 0 1rem; color: #e2a75a; }
         .mu-expect { list-style: none; padding: 0; margin: 2rem 0 0; }
         .mu-expect li { padding: 0.55rem 0; border-bottom: 1px solid rgba(242,236,223,0.12); color: rgba(242,236,223,0.8); }
 

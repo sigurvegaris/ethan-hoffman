@@ -16,10 +16,10 @@ export default function MerchMock({ mock }: { mock: MerchItem['mock'] }) {
             <circle cx="120" cy="82" r="11" fill="#9e8466" />
             <rect x="106" y="94" width="28" height="22" rx="10" fill="#9e8466" />
             <text x="120" y="132" textAnchor="middle" fill="#f4efe4" fontFamily="Times New Roman, serif" fontSize="9">making it up as we go</text>
-            <text x="120" y="148" textAnchor="middle" fill="#f4efe4" fontFamily="Caveat, cursive" fontSize="13">Ethan</text>
+            <text x="120" y="148" textAnchor="middle" fill="#f4efe4" fontFamily="Nanum Pen Script, cursive" fontSize="13">Ethan</text>
           </g>
         ) : (
-          <g fill="#3a3a3a" fontFamily="Caveat, cursive" fontSize="6.5" opacity="0.85">
+          <g fill="#3a3a3a" fontFamily="Nanum Pen Script, cursive" fontSize="6.5" opacity="0.85">
             <text x="120" y="56" textAnchor="middle" fontFamily="Times New Roman, serif" fontSize="8">thanks to my day one fans</text>
             {Array.from({ length: 12 }, (_, row) => (
               <text key={row} x="120" y={70 + row * 10} textAnchor="middle">
@@ -38,8 +38,8 @@ export default function MerchMock({ mock }: { mock: MerchItem['mock'] }) {
         <circle cx="150" cy="110" r="70" fill="url(#cdShine)" />
         <circle cx="150" cy="110" r="14" fill="#f4efe4" stroke="#bbb" />
         <rect x="40" y="40" width="140" height="140" fill="#1b1d18" />
-        <text x="110" y="150" textAnchor="middle" fill="#c9a26a" fontFamily="Abril Fatface, serif" fontSize="20">Ethan</text>
-        <text x="110" y="170" textAnchor="middle" fill="#c9a26a" fontFamily="Abril Fatface, serif" fontSize="20">Hoffman</text>
+        <text x="110" y="150" textAnchor="middle" fill="#c9a26a" fontFamily="Fraunces, serif" fontWeight="800" fontSize="20">Ethan</text>
+        <text x="110" y="170" textAnchor="middle" fill="#c9a26a" fontFamily="Fraunces, serif" fontWeight="800" fontSize="20">Hoffman</text>
         <defs>
           <linearGradient id="cdShine" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0" stopColor="#fff" stopOpacity="0.7" />
@@ -56,7 +56,7 @@ export default function MerchMock({ mock }: { mock: MerchItem['mock'] }) {
         const a = (i / 22) * Math.PI * 2
         return <circle key={i} cx={120 + Math.cos(a) * 62} cy={110 + Math.sin(a) * 50} r="9" fill={i % 7 === 0 ? '#c4622d' : i % 2 ? '#f4efe4' : '#2f3a28'} stroke="#00000022" />
       })}
-      <text x="120" y="116" textAnchor="middle" fill="#1c1a15" fontFamily="Caveat, cursive" fontSize="22">day one</text>
+      <text x="120" y="116" textAnchor="middle" fill="#1c1a15" fontFamily="Nanum Pen Script, cursive" fontSize="22">day one</text>
     </svg>
   )
 }

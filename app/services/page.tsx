@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Image from 'next/image'
+import './services.css'
 
 const services = [
   {
@@ -68,233 +69,70 @@ const services = [
   },
 ]
 
+const venues = ['The Wiltern', 'Magnolia Theater', 'The Hollywood Improv', 'The Lighthouse Café', 'Shade Hotel', 'Strand House', 'The Mint', 'Thompson Hotel']
+
 export default function Services() {
   const [active, setActive] = useState(0)
+  const s = services[active]
 
   return (
     <>
       <Navbar />
-
-      <style>{`
-        .services-page {
-          background-color: #f5f0e8;
-          min-height: 100vh;
-          overflow-x: hidden;
-        }
-
-        .services-hero {
-          background-color: #f5f0e8;
-          padding: 8rem 0 5rem;
-        }
-
-        .services-shell {
-          width: min(1200px, calc(100% - 3rem));
-          margin: 0 auto;
-          padding-bottom: 6rem;
-        }
-
-        .services-tabs {
-          display: grid;
-          grid-template-columns: repeat(4, minmax(0, 1fr));
-          gap: 0.5rem;
-          align-items: stretch;
-          margin-bottom: 4rem;
-          border-bottom: 1px solid rgba(196,168,130,0.4);
-          width: 100%;
-        }
-
-        .services-tab {
-          width: 100%;
-          min-width: 0;
-          background: none;
-          border: none;
-          padding: 1rem 0.75rem;
-          font-size: 0.7rem;
-          font-weight: 600;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          cursor: pointer;
-          color: #6b6460;
-          font-family: Inter, sans-serif;
-          text-align: center;
-          line-height: 1.45;
-          white-space: normal;
-          word-break: keep-all;
-          overflow-wrap: normal;
-          hyphens: none;
-          border-bottom: 2px solid transparent;
-          transition: color 0.25s ease, border-color 0.25s ease;
-        }
-
-        .services-tab:hover { color: #c4622d; }
-        .services-tab.active { color: #c4622d; border-bottom: 2px solid #c4622d; }
-
-        .services-content {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 4rem;
-          align-items: center;
-        }
-
-        .services-image-wrap {
-          width: 100%;
-          height: 480px;
-          overflow: hidden;
-          background: #ddd3c8;
-          flex-shrink: 0;
-        }
-
-        .services-image {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: opacity 0.4s ease;
-        }
-
-        .services-details { margin-bottom: 2.5rem; }
-
-        .services-detail-item {
-          display: flex;
-          align-items: flex-start;
-          gap: 0.75rem;
-          margin-bottom: 0.8rem;
-        }
-
-        @media (max-width: 1024px) {
-          .services-content { grid-template-columns: 1fr; gap: 2.5rem; }
-          .services-copy { order: 2; }
-          .services-media { order: 1; }
-        }
-
-        @media (max-width: 900px) {
-          .services-tabs {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            margin-bottom: 2.5rem;
-          }
-          .services-tab { font-size: 0.66rem; letter-spacing: 0.06em; padding: 1rem 0.75rem; }
-        }
-
-        @media (max-width: 768px) {
-          .services-hero { padding: 7rem 0 3rem; }
-          .services-shell { width: min(1200px, calc(100% - 2rem)); padding-bottom: 4rem; }
-          .services-image-wrap { height: 320px; }
-          .services-details { margin-bottom: 2rem; }
-        }
-
-        @media (max-width: 480px) {
-          .services-hero { padding: 6.5rem 0 2.5rem; }
-          .services-shell { width: min(1200px, calc(100% - 1.5rem)); }
-          .services-tab { font-size: 0.64rem; letter-spacing: 0.05em; padding: 0.9rem 0.55rem; }
-        }
-      `}</style>
-
-      <main className="services-page">
-        <div className="services-hero">
-          <div className="container">
-            <p style={{
-              fontSize: '0.7rem',
-              fontWeight: '600',
-              letterSpacing: '0.3em',
-              textTransform: 'uppercase',
-              color: '#c4622d',
-              marginBottom: '1rem',
-            }}>
-              What Ethan Offers
-            </p>
-            <h1 style={{
-              fontFamily: 'Playfair Display, serif',
-              fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-              fontWeight: '600',
-              color: '#1a1814',
-              lineHeight: '1.1',
-            }}>
-              Every Event, Elevated
-            </h1>
+      <main className="sv">
+        <header className="sv-hero">
+          <div className="sv-hero-photo">
+            <Image src="/images/ethanwithcrowd.webp" alt="Ethan performing for a crowd" fill priority sizes="100vw" style={{ objectFit: 'cover', objectPosition: 'center 30%' }} />
           </div>
-        </div>
-
-        <div className="services-shell">
-          <div className="services-tabs">
-            {services.map((s, i) => (
-              <button
-                key={s.id}
-                onClick={() => setActive(i)}
-                className={`services-tab ${active === i ? 'active' : ''}`}
-              >
-                {s.label}
-              </button>
-            ))}
+          <div className="sv-wrap sv-hero-copy">
+            <p className="sv-label">book live</p>
+            <h1 className="sv-title">Live music that <em>reads the room.</em></h1>
+            <p className="sv-hand">voice, guitar, loops and beatbox. one person, a whole band&apos;s worth.</p>
+            <div className="sv-stats">
+              <div><b>300+</b><span>events played</span></div>
+              <div><b>1 to 4</b><span>hour sets</span></div>
+              <div><b>LA</b><span>&amp; the south bay</span></div>
+            </div>
           </div>
+        </header>
 
-          <div className="services-content">
-            <div className="services-copy">
-              <h3 style={{
-                fontFamily: 'Playfair Display, serif',
-                fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
-                fontWeight: '600',
-                color: '#1a1814',
-                lineHeight: '1.3',
-                marginBottom: '1.5rem',
-              }}>
-                {services[active].headline}
-              </h3>
+        <section className="sv-body">
+          <div className="sv-wrap">
+            <div className="sv-tabs" role="tablist">
+              {services.map((x, i) => (
+                <button key={x.id} type="button" role="tab" aria-selected={i === active} className={`sv-tab ${i === active ? 'on' : ''}`} onClick={() => setActive(i)}>
+                  {x.label.toLowerCase()}
+                </button>
+              ))}
+            </div>
 
-              <p style={{
-                fontSize: '1rem',
-                lineHeight: '1.85',
-                color: '#6b6460',
-                marginBottom: '2rem',
-              }}>
-                {services[active].description}
-              </p>
-
-              <div className="services-details">
-                {services[active].details.map((d, i) => (
-                  <div key={i} className="services-detail-item">
-                    <div style={{
-                      width: '6px',
-                      height: '6px',
-                      borderRadius: '50%',
-                      backgroundColor: '#c4622d',
-                      flexShrink: 0,
-                      marginTop: '0.45rem',
-                    }} />
-                    <p style={{ fontSize: '0.9rem', color: '#2d2926', lineHeight: '1.55' }}>
-                      {d}
-                    </p>
-                  </div>
+            <div className="sv-panel">
+              <div className="sv-copy" key={s.id}>
+                <h2>{s.headline}</h2>
+                <p>{s.description}</p>
+                <ul>{s.details.map((d) => <li key={d}>{d}</li>)}</ul>
+                <Link href="/contact" className="sv-btn">book ethan</Link>
+              </div>
+              <div className="sv-photo">
+                {services.map((x, i) => (
+                  <Image key={x.id} src={x.photo} alt={x.label} fill sizes="(max-width: 900px) 100vw, 45vw" style={{ objectFit: 'cover', objectPosition: x.objectPosition, opacity: i === active ? 1 : 0, transition: 'opacity 0.4s ease' }} />
                 ))}
               </div>
-
-              <Link href="/contact" className="btn-primary">
-                Book Ethan
-              </Link>
-            </div>
-
-            <div className="services-media">
-            <div className="services-image-wrap" style={{ position: 'relative' }}>
-  {services.map((s, i) => (
-    <Image
-      key={s.id}
-      src={s.photo}
-      alt={s.label}
-      fill
-      sizes="(max-width: 1024px) 100vw, 50vw"
-      priority={i === 0}
-      style={{
-        objectFit: 'cover',
-        objectPosition: s.objectPosition,
-        opacity: i === active ? 1 : 0,
-        transition: 'opacity 0.4s ease',
-      }}
-    />
-  ))}
-</div>
             </div>
           </div>
-        </div>
-      </main>
+        </section>
 
+        <section className="sv-venues">
+          <div className="sv-wrap">
+            <p className="sv-label">rooms he&apos;s played</p>
+            <p className="sv-venue-list">{venues.map((v) => <span key={v}>{v}</span>)}</p>
+            <div className="sv-links">
+              <Link href="/repertoire">see the song list →</Link>
+              <Link href="/venues">all past venues →</Link>
+              <Link href="/testimonials">what hosts say →</Link>
+            </div>
+          </div>
+        </section>
+      </main>
       <Footer />
     </>
   )
