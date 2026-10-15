@@ -61,7 +61,7 @@ export default function Hero() {
         transition: 'all 1.2s ease',
       }}>
         <p style={{
-          fontFamily: 'Inter, sans-serif',
+          fontFamily: 'var(--f-body)',
           fontSize: '0.7rem',
           fontWeight: '600',
           letterSpacing: '0.3em',
@@ -73,7 +73,7 @@ export default function Hero() {
         </p>
 
         <h1 style={{
-          fontFamily: 'Playfair Display, serif',
+          fontFamily: 'var(--f-display)',
           fontSize: 'clamp(3rem, 8vw, 7rem)',
           fontWeight: '600',
           color: '#fdfaf5',
@@ -85,7 +85,7 @@ export default function Hero() {
         </h1>
 
         <p style={{
-          fontFamily: 'Cormorant Garamond, serif',
+          fontFamily: 'var(--f-display)',
           fontSize: 'clamp(1.1rem, 2.5vw, 1.6rem)',
           fontWeight: '300',
           fontStyle: 'italic',

@@ -36,11 +36,11 @@ export default function Testimonials() {
       <Navbar />
 
       <style>{`
-        .t-page { background: #1a1814; min-height: 100vh; overflow-x: hidden; }
+        .t-page { background: var(--green); min-height: 100vh; overflow-x: hidden; }
 
         .t-hero {
-          padding: 8rem 0 5rem;
-          background: #1a1814;
+          padding: 10rem 0 4rem;
+          background: var(--green);
         }
 
         .t-shell {
@@ -52,13 +52,14 @@ export default function Testimonials() {
         .t-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 2px;
-          background: rgba(255,255,255,0.04);
-          margin-bottom: 2px;
+          gap: 1rem;
+          background: transparent;
+          margin-bottom: 1rem;
         }
 
         .t-card {
-          background: #1f1c18;
+          background: var(--green-2);
+          border: 1px solid rgba(242,236,223,0.12);
           padding: 3rem;
           display: flex;
           flex-direction: column;
@@ -67,14 +68,15 @@ export default function Testimonials() {
         }
 
         .t-card.featured {
-          background: #c4622d;
+          background: var(--green-3);
+          border-color: rgba(226,167,90,0.35);
           grid-column: 1 / -1;
           min-height: 280px;
           padding: 4rem;
         }
 
         .t-card.photo {
-          background: #0d0b09;
+          background: var(--green-3);
           padding: 0;
           overflow: hidden;
           position: relative;
@@ -97,32 +99,31 @@ export default function Testimonials() {
           bottom: 1.5rem;
           left: 1.5rem;
           font-size: 0.6rem;
-          font-weight: 700;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: rgba(253,250,245,0.6);
-          font-family: Inter, sans-serif;
+          color: var(--cream);
+          font-family: var(--f-mono);
         }
 
         .t-quote-mark {
-          font-family: 'Playfair Display', serif;
+          font-family: var(--f-display);
           font-size: 4rem;
           line-height: 0.5;
-          color: rgba(253,250,245,0.15);
+          color: rgba(226,167,90,0.45);
           margin-bottom: 1.5rem;
           user-select: none;
         }
 
         .t-card.featured .t-quote-mark {
-          color: rgba(253,250,245,0.3);
+          color: var(--amber);
         }
 
         .t-quote {
-          font-family: 'Cormorant Garamond', serif;
+          font-family: var(--f-display);
           font-size: clamp(1rem, 1.4vw, 1.25rem);
           font-style: italic;
           font-weight: 400;
-          color: rgba(253,250,245,0.85);
+          color: var(--cream-dim);
           line-height: 1.8;
           margin: 0 0 2rem 0;
           flex: 1;
@@ -130,7 +131,7 @@ export default function Testimonials() {
 
         .t-card.featured .t-quote {
           font-size: clamp(1.1rem, 1.8vw, 1.5rem);
-          color: #fdfaf5;
+          color: var(--cream);
         }
 
         .t-attribution {
@@ -138,59 +139,61 @@ export default function Testimonials() {
           align-items: center;
           gap: 1rem;
           padding-top: 1.5rem;
-          border-top: 1px solid rgba(255,255,255,0.08);
+          border-top: 1px solid rgba(242,236,223,0.12);
         }
 
         .t-card.featured .t-attribution {
-          border-top: 1px solid rgba(255,255,255,0.2);
+          border-top: 1px solid rgba(226,167,90,0.3);
         }
 
         .t-avatar {
           width: 2.5rem;
           height: 2.5rem;
           border-radius: 50%;
-          background: rgba(196,98,45,0.25);
+          background: rgba(226,167,90,0.15);
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          font-family: 'Playfair Display', serif;
+          font-family: var(--f-display);
           font-size: 1rem;
-          color: #c4622d;
+          color: var(--amber);
         }
 
         .t-card.featured .t-avatar {
-          background: rgba(255,255,255,0.2);
-          color: #fdfaf5;
+          background: var(--amber);
+          color: var(--green-3);
         }
 
         .t-name {
-          font-family: Inter, sans-serif;
+          font-family: var(--f-body);
           font-size: 0.82rem;
-          font-weight: 700;
-          color: #fdfaf5;
+          font-weight: 600;
+          color: var(--cream);
           margin: 0 0 0.2rem 0;
         }
 
         .t-role {
-          font-family: Inter, sans-serif;
-          font-size: 0.65rem;
-          color: rgba(253,250,245,0.5);
+          font-family: var(--f-mono);
+          font-size: 0.68rem;
+          color: var(--cream-dim);
           margin: 0;
-          letter-spacing: 0.04em;
+          letter-spacing: 0.08em;
         }
 
-        .t-card.featured .t-role { color: rgba(255,255,255,0.7); }
+        .t-card.featured .t-role { color: var(--amber); }
 
         /* ── CTA ── */
         .t-cta {
           text-align: center;
           padding: 6rem 2rem;
-          background: #111009;
+          margin-top: 4rem;
+          background: var(--green-3);
+          border-top: 1px solid rgba(242,236,223,0.12);
         }
 
         @media (max-width: 768px) {
-          .t-hero { padding: 7rem 0 3rem; }
+          .t-hero { padding: 8.5rem 0 3rem; }
           .t-grid { grid-template-columns: 1fr; }
           .t-card.featured { padding: 2.5rem; }
           .t-card { padding: 2rem; min-height: 260px; }
@@ -198,7 +201,7 @@ export default function Testimonials() {
         }
 
         @media (max-width: 480px) {
-          .t-hero { padding: 6.5rem 0 2.5rem; }
+          .t-hero { padding: 8rem 0 2.5rem; }
           .t-shell { width: min(1200px, calc(100% - 1.5rem)); }
         }
       `}</style>
@@ -208,14 +211,14 @@ export default function Testimonials() {
         {/* ── HERO ── */}
         <div className="t-hero">
           <div className="t-shell">
-            <p style={{ fontSize: '0.7rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem', fontFamily: 'Inter, sans-serif' }}>
+            <p style={{ fontFamily: 'var(--f-mono)', fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--amber)', marginBottom: '1rem' }}>
               What People Say
             </p>
-            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: '600', color: '#fdfaf5', lineHeight: '1.1', marginBottom: '1rem' }}>
+            <h1 style={{ fontFamily: 'var(--f-display)', fontSize: 'clamp(2.6rem, 6vw, 4.5rem)', fontWeight: '500', color: 'var(--cream)', lineHeight: '1.05', marginBottom: '1rem' }}>
               Testimonials
             </h1>
-            <p style={{ fontSize: '0.95rem', color: 'rgba(253,250,245,0.45)', maxWidth: '480px', lineHeight: '1.8', fontFamily: 'Inter, sans-serif' }}>
-              From weddings and galas to corporate events and ticketed shows. Here's what clients and bookers have to say.
+            <p style={{ fontSize: '0.95rem', color: 'var(--cream-dim)', maxWidth: '480px', lineHeight: '1.8', fontFamily: 'var(--f-body)' }}>
+              From weddings and galas to corporate events and ticketed shows. Here&apos;s what clients and bookers have to say.
             </p>
           </div>
         </div>
@@ -226,7 +229,7 @@ export default function Testimonials() {
           {/* Row 1: Tony featured full width */}
           <div className="t-grid">
             <div className="t-card featured">
-              <div className="t-quote-mark">"</div>
+              <div className="t-quote-mark">&ldquo;</div>
               <p className="t-quote">{testimonials[0].quote}</p>
               <div className="t-attribution">
                 <div className="t-avatar">{testimonials[0].name[0]}</div>
@@ -241,7 +244,7 @@ export default function Testimonials() {
           {/* Row 2: Two quotes */}
           <div className="t-grid">
             <div className="t-card">
-              <div className="t-quote-mark">"</div>
+              <div className="t-quote-mark">&ldquo;</div>
               <p className="t-quote">{testimonials[1].quote}</p>
               <div className="t-attribution">
                 <div className="t-avatar">{testimonials[1].name[0]}</div>
@@ -252,7 +255,7 @@ export default function Testimonials() {
               </div>
             </div>
             <div className="t-card">
-              <div className="t-quote-mark">"</div>
+              <div className="t-quote-mark">&ldquo;</div>
               <p className="t-quote">{testimonials[2].quote}</p>
               <div className="t-attribution">
                 <div className="t-avatar">{testimonials[2].name[0]}</div>
@@ -267,7 +270,7 @@ export default function Testimonials() {
           {/* Row 3: One full width */}
           <div className="t-grid">
             <div className="t-card" style={{ gridColumn: '1 / -1' }}>
-              <div className="t-quote-mark">"</div>
+              <div className="t-quote-mark">&ldquo;</div>
               <p className="t-quote">{testimonials[3].quote}</p>
               <div className="t-attribution">
                 <div className="t-avatar">{testimonials[3].name[0]}</div>
@@ -283,7 +286,7 @@ export default function Testimonials() {
 
         {/* ── CTA ── */}
         <div className="t-cta">
-          <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', fontStyle: 'italic', color: 'rgba(253,250,245,0.6)', marginBottom: '1.5rem' }}>
+          <p style={{ fontFamily: 'var(--f-display)', fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', fontStyle: 'italic', color: 'var(--cream)', marginBottom: '1.5rem' }}>
             Ready to create your own moment?
           </p>
           <Link href="/contact" className="btn-primary">

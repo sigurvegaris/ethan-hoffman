@@ -623,8 +623,8 @@ p {
   align-items: center;
   justify-content: center;
   padding: 1rem 2rem;
-  background-color: #c4622d;
-  color: #fdfaf5;
+  background-color: var(--rust);
+  color: var(--cream);
   text-decoration: none;
   font-size: 0.72rem;
   font-weight: 700;
@@ -645,7 +645,7 @@ p {
   justify-content: center;
   padding: 1rem 2rem;
   background-color: transparent;
-  color: #fdfaf5;
+  color: var(--cream);
   text-decoration: none;
   font-size: 0.72rem;
   font-weight: 700;
