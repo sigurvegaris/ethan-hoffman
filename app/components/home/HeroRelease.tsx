@@ -43,7 +43,7 @@ export default function HeroRelease() {
   return (
     <section className="hr">
       <div className="hr-photo">
-        <Image src="/images/malibu/oak-walk.webp" alt="Ethan Hoffman walking down a path under the oak trees" fill priority sizes="100vw" style={{ objectFit: 'cover', objectPosition: 'center 58%' }} />
+        <Image src="/images/malibu/oak-walk.webp" alt="Ethan Hoffman walking down a path under the oak trees" fill priority sizes="100vw" style={{ objectFit: 'cover', objectPosition: 'center 72%' }} />
       </div>
       <div className="hr-haze" aria-hidden="true" />
 
