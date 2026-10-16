@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { sendFanNote } from '../lib/notify'
 import { socialLinks } from '../lib/social'
 
@@ -26,6 +27,8 @@ const quickLinks = [
 export default function Footer() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
+  // The mailing list page has the full form, so the footer doesn't repeat it there.
+  const onListPage = usePathname() === '/mailing-list'
 
   const subscribe = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -80,7 +83,7 @@ export default function Footer() {
             <p className="eh-foot-mark">Ethan<br /><em>Hoffman</em></p>
             <p className="eh-foot-tag">thanks for being here. — e</p>
           </div>
-          <div>
+          {!onListPage && <div>
             <p className="eh-foot-label">sign up for the mailing list</p>
             {status === 'done' ? (
               <p className="eh-foot-tag" style={{ marginTop: 0 }}>you&apos;re on the list ♡</p>
@@ -93,7 +96,7 @@ export default function Footer() {
             <p className="eh-foot-fine">
               {status === 'error' ? 'That didn’t go through. Try again?' : 'New music, show dates and the occasional note from Ethan. Nothing else.'}
             </p>
-          </div>
+          </div>}
         </div>
 
         <nav className="eh-foot-links" aria-label="Footer">

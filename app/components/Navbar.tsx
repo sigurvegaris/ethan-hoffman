@@ -86,7 +86,7 @@ export default function Navbar() {
           {mainLinks.map((l) => (
             <Link key={l.href} href={l.href} className={`eh-link ${pathname === l.href ? 'active' : ''}`}>{l.label}</Link>
           ))}
-          <Link href="/#day-one" className="eh-signup">sign up</Link>
+          <Link href="/mailing-list" className="eh-signup">sign up</Link>
         </div>
 
         <button type="button" className={`eh-burger ${open ? 'open' : ''}`} aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen((o) => !o)}>
@@ -106,7 +106,7 @@ export default function Navbar() {
             <Link key={l.href} href={l.href} onClick={close} tabIndex={open ? 0 : -1}>{l.label}</Link>
           ))}
         </div>
-        <Link href="/#day-one" onClick={close} className="eh-sheet-note" tabIndex={open ? 0 : -1}>join day one →</Link>
+        <Link href="/mailing-list" onClick={close} className="eh-sheet-note" tabIndex={open ? 0 : -1}>join the mailing list →</Link>
       </div>
     </>
   )
