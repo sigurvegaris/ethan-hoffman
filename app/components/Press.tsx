@@ -1,13 +1,12 @@
 import Image from 'next/image'
 import { articles } from '../lib/press'
+import FireflyJar from './home/FireflyJar'
 
-// One big quote over a green-graded photo, with the rest drifting past in a
-// slow marquee underneath. Hidden until app/lib/press.ts has an article.
+// One big quote over a green-graded photo. The shorter quotes are fireflies
+// you catch in a jar underneath. Hidden until app/lib/press.ts has an article.
 export default function Press() {
   if (!articles.length) return null
   const [lead, ...rest] = articles
-  const ticker = articles.flatMap((a) => a.quotes.map((q) => ({ q, who: a.outlet ?? a.author })))
-  const loop = [...ticker, ...ticker]
 
   return (
     <section className="pr" id="press">
@@ -33,15 +32,7 @@ export default function Press() {
           </blockquote>
         ))}
       </div>
-      <div className="pr-marquee" aria-label="More quotes from Ethan">
-        <div className="pr-marquee-track">
-          {loop.map((t, i) => (
-            <span key={i} aria-hidden={i >= ticker.length}>
-              “{t.q}” <em>{t.who}</em>
-            </span>
-          ))}
-        </div>
-      </div>
+      <FireflyJar />
     </section>
   )
 }
