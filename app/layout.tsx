@@ -2,6 +2,7 @@
 import type { Metadata, Viewport } from 'next'
 import { AnimatePresence } from 'framer-motion'
 import './globals.css'
+import Fireflies from './components/Fireflies'
 
 export const metadata: Metadata = {
   title: 'Ethan Hoffman | Singer-Songwriter',
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AnimatePresence mode="wait" initial={false}>
           {children}
         </AnimatePresence>
+        <Fireflies />
       </body>
     </html>
   )

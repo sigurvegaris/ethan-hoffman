@@ -712,3 +712,36 @@ p {
 .glass-btn-solid { background: var(--haze); color: var(--canopy); border-color: var(--haze); }
 .glass-btn-solid:hover { background: #fff8e8; color: var(--canopy); }
 .glass-btn:disabled { opacity: 0.6; cursor: default; transform: none; }
+
+/* ── Fireflies on every page ───────────────────────── */
+.ff { position: fixed; inset: 0; z-index: 60; pointer-events: none; overflow: hidden; }
+.ff-fly { position: absolute; animation-name: ff-wander; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+.ff-fly i, .ff-burst i { display: block; border-radius: 50%; background: #fbeeb0; box-shadow: 0 0 8px 2px rgba(251,238,176,0.75), 0 0 22px 8px rgba(241,220,156,0.28); }
+.ff-fly i { animation: ff-blink ease-in-out infinite; }
+@keyframes ff-wander {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(var(--x1), var(--y1)); }
+  50% { transform: translate(var(--x2), var(--y2)); }
+  75% { transform: translate(var(--x3), var(--y3)); }
+}
+@keyframes ff-blink {
+  0%, 100% { opacity: 0.08; transform: scale(0.6); }
+  35% { opacity: 0.25; }
+  50%, 60% { opacity: 1; transform: scale(1); }
+  80% { opacity: 0.2; transform: scale(0.75); }
+}
+.ff-burst { position: fixed; width: 0; height: 0; }
+.ff-burst i { position: absolute; left: -2px; top: -2px; width: 4px; height: 4px; opacity: 0; animation: ff-lift 2.4s cubic-bezier(0.2, 0.7, 0.3, 1) forwards; }
+@keyframes ff-lift {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.4); }
+  15% { opacity: 1; transform: translate(calc(var(--bx) * 0.3), -10px) scale(1); }
+  55% { opacity: 0.9; }
+  100% { opacity: 0; transform: translate(var(--bx), var(--by)) scale(0.6); }
+}
+@media (max-width: 700px) {
+  .ff-fly:nth-child(n+13) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ff-fly { animation: none; }
+  .ff-fly i { animation: none; opacity: 0.6; }
+}
