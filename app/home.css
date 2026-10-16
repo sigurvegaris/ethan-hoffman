@@ -268,3 +268,38 @@
   .hr-btn { height: 58px; font-size: 1.15rem; }
   .hr-social { padding-left: 0; }
 }
+
+/* ── Infinity: fireflies flying a figure eight in the hero ── */
+.inf { position: absolute; z-index: 1; right: 7%; top: 15%; width: 380px; height: 170px; pointer-events: none; }
+.inf-fly { position: absolute; left: 0; top: 0; offset-path: path('M190,85 C240,5 360,5 360,85 C360,165 240,165 190,85 C140,5 20,5 20,85 C20,165 140,165 190,85'); offset-rotate: 0deg; animation: inf-go 18s linear infinite; }
+.inf-fly i { display: block; width: var(--s); height: var(--s); border-radius: 50%; background: #fbeeb0; box-shadow: 0 0 8px 2px rgba(251,238,176,0.8), 0 0 24px 8px rgba(241,220,156,0.25); animation: inf-blink 2.6s ease-in-out infinite; }
+@keyframes inf-go { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+@keyframes inf-blink { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.7); } }
+@media (max-width: 700px) {
+  .inf { right: auto; left: 50%; top: 18%; transform: translateX(-50%) scale(0.55); }
+  .inf-fly i { width: calc(var(--s) * 1.6); height: calc(var(--s) * 1.6); }
+}
+@media (prefers-reduced-motion: reduce) { .inf { display: none; } }
+
+/* ── The EP as a yin yang ─────────────────────────── */
+.ep-yy { display: flex; align-items: center; gap: 1.75rem; margin-top: 3.25rem; }
+.ep-yy-svg { flex: none; width: 168px; height: 168px; overflow: visible; transform: rotate(var(--spin, 0deg)); }
+.ep-yy-svg path { stroke-width: 0.7; stroke-dasharray: 2.2 2.6; transition: fill 0.6s ease, stroke 0.6s ease, filter 0.5s ease; }
+.ep-yy-svg .yy-light { fill: rgba(231,207,152,0.13); stroke: rgba(231,207,152,0.55); }
+.ep-yy-svg .yy-dark { fill: rgba(20,26,18,0.55); stroke: rgba(154,165,133,0.55); }
+.ep-yy-svg .yy-light.is-out { fill: #e2c48a; stroke: none; }
+.ep-yy-svg .yy-dark.is-out { fill: var(--olive); stroke: none; }
+.ep-yy-svg .is-on { filter: drop-shadow(0 0 10px rgba(241,220,156,0.7)); }
+.ep-yy-svg .yy-ring { fill: none; stroke: var(--glass-line); stroke-width: 0.5; }
+.ep-yy-svg .yy-dot { fill: #fbeeb0; filter: drop-shadow(0 0 4px rgba(251,238,176,0.9)); animation: yy-glow 3.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.ep-yy-svg .yy-dot-bottom { animation-delay: -1.6s; }
+.ep-yy-svg .yy-dot.is-on { animation: none; transform: scale(1.35); }
+.ep-yy-svg .yy-dot-top.is-out { fill: var(--olive); filter: none; animation: none; }
+.ep-yy-svg .yy-dot-bottom.is-out { fill: #e2c48a; filter: none; animation: none; }
+@keyframes yy-glow { 0%, 100% { opacity: 0.35; transform: scale(0.7); } 50% { opacity: 1; transform: scale(1); } }
+.ep-yy-cap { margin: 0; max-width: 24ch; font-family: var(--f-display); font-style: italic; font-size: 1.15rem; line-height: 1.45; color: var(--cream-dim); }
+@media (max-width: 700px) {
+  .ep-yy { gap: 1.25rem; margin-top: 2.5rem; }
+  .ep-yy-svg { width: 120px; height: 120px; }
+  .ep-yy-cap { font-size: 1rem; }
+}

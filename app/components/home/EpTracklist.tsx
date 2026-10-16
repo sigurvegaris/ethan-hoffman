@@ -1,8 +1,9 @@
 'use client'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { singles, ep, formatReleaseDate } from '../../lib/release'
 import { useReleased } from '../../lib/useReleased'
+import YinYang from '../YinYang'
 
 const shortDate = (iso: string) => formatReleaseDate(iso).replace(/, \d{4}$/, '').toLowerCase()
 
@@ -22,6 +23,47 @@ function Row({ t, i, onEnter }: { t: (typeof tracks)[number]; i: number; onEnter
       <span className="ep-name">{t.name}</span>
       <span className="ep-date">{t.secret ? 'with the ep' : out ? 'out now' : shortDate(t.releaseDate)}</span>
     </li>
+  )
+}
+
+// The EP as a yin yang: India is the light half, Carefree the dark half, and
+// the two songs nobody has heard yet are the dots, glowing like fireflies
+// until January 1, when the circle closes. It turns slowly as you scroll.
+function EpYinYang({ active }: { active: number | null }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const india = useReleased(singles[0].releaseDate)
+  const carefree = useReleased(singles[1].releaseDate)
+  const whole = useReleased(ep.releaseDate)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    let frame = 0
+    const update = () => {
+      frame = 0
+      const r = el.getBoundingClientRect()
+      el.style.setProperty('--spin', `${(window.innerHeight - r.top) * 0.18}deg`)
+    }
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update) }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => { window.removeEventListener('scroll', onScroll); if (frame) cancelAnimationFrame(frame) }
+  }, [])
+
+  const cls = (out: boolean, i: number) => `${out ? 'is-out' : ''} ${active === i ? 'is-on' : ''}`
+  return (
+    <div className={`ep-yy ${whole ? 'is-whole' : ''}`} ref={ref}>
+      <YinYang
+        className="ep-yy-svg"
+        title="India and Carefree as the two halves of a yin yang, with the two unreleased songs as its dots"
+        parts={{ light: cls(india, 0), dark: cls(carefree, 1), dotTop: cls(whole, 2), dotBottom: cls(whole, 3) }}
+      />
+      <p className="ep-yy-cap">
+        {whole
+          ? 'Two halves, one record. The circle is closed.'
+          : 'India and Carefree are two halves of one record. The other two are the dots. On January 1 the circle closes.'}
+      </p>
+    </div>
   )
 }
 
@@ -46,6 +88,7 @@ export default function EpTracklist() {
             <li><b>1</b> freestyled intro</li>
             <li><b>8</b> session videos</li>
           </ul>
+          <EpYinYang active={active} />
         </div>
         <div className="ep-list" ref={box} onMouseMove={move} onMouseLeave={() => setActive(null)}>
           <ol>
