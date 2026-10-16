@@ -122,7 +122,7 @@ export default function FireflyJar() {
   const flightsRef = useRef<Flight[]>([])
   // A stopwatch for the competitive: from the first catch to the last.
   const startedAt = useRef<number | null>(null)
-  const [time, setTime] = useState<{ last: number; best: number } | null>(null)
+  const [time, setTime] = useState<{ last: number; best: number; isNew: boolean } | null>(null)
   const [round, setRound] = useState(0)
   const bugs = useRef(new Map<number, Bug>())
 
@@ -227,13 +227,13 @@ export default function FireflyJar() {
     setCaught(caughtRef.current)
     if (caughtRef.current.length === quotes.length && startedAt.current !== null) {
       const last = (e.timeStamp - startedAt.current) / 1000
-      let best = last
+      let best = last, isNew = true
       try {
         const prev = Number(localStorage.getItem('eh-firefly-best'))
-        if (prev > 0 && prev < best) best = prev
+        if (prev > 0 && prev < best) { best = prev; isNew = false }
         localStorage.setItem('eh-firefly-best', String(best))
       } catch {}
-      setTime({ last, best })
+      setTime({ last, best, isNew })
     }
   }
 
@@ -319,11 +319,11 @@ export default function FireflyJar() {
   return (
     <div className={`fj ${full ? 'is-full' : ''}`} ref={field}>
       <div className="fj-hud">
-        <p className="fj-title">{freeing ? 'There they go.' : full && time ? `All ${quotes.length} in ${time.last.toFixed(1)} seconds.` : full ? 'You caught every one.' : 'Catch what he said.'}</p>
+        <p className="fj-title">{freeing ? 'There they go.' : full ? 'You caught every one.' : 'Catch what he said.'}</p>
         <div className="fj-count" aria-label={`${caught.length} of ${quotes.length} caught`}>
           {quotes.map((_, i) => <span key={i} className={i < caught.length ? 'on' : ''} />)}
         </div>
-        <p className="fj-tip">{freeing ? 'catch them again' : full && time ? `your best ${time.best.toFixed(1)}s · tap one in the jar to hear it again` : full ? 'tap one in the jar to hear it again' : 'tap a firefly, or drag the jar to scoop one'}</p>
+        <p className="fj-tip">{freeing ? 'catch them again' : full ? 'tap one in the jar to hear it again' : 'tap a firefly, or drag the jar to scoop one'}</p>
       </div>
 
       {quotes.map((_, i) => {
@@ -409,9 +409,22 @@ export default function FireflyJar() {
         </span>
       ))}
 
-      {caught.length > 0 && !held && !flights.length && !freeing && (
+      {full && !freeing && (
+        <div className="fj-done" role="status">
+          {time && (
+            <>
+              <p className="fj-done-k">all {quotes.length} caught in</p>
+              <p className="fj-done-time">{time.last.toFixed(1)}<span>s</span></p>
+              <p className="fj-done-best">{time.isNew ? 'a new best' : `your best is ${time.best.toFixed(1)}s`}</p>
+            </>
+          )}
+          <button type="button" className="fj-free-btn" onClick={letGo}>let them be free</button>
+        </div>
+      )}
+
+      {caught.length > 0 && !full && !held && !flights.length && !freeing && (
         <button type="button" className="fj-release" onClick={letGo}>
-          let them go
+          let them be free
         </button>
       )}
     </div>

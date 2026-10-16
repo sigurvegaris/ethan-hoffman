@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { featuredSingle, listenLinks, formatReleaseDate } from '../../lib/release'
 import { useReleased } from '../../lib/useReleased'
 import { socialLinks } from '../../lib/social'
-import InfinityFlies from './InfinityFlies'
 
 function useNow() {
   const [now, setNow] = useState<number | null>(null)
@@ -48,7 +47,6 @@ export default function HeroRelease() {
         <Image src="/images/malibu/oak-walk.webp" alt="Ethan Hoffman walking down a path under the oak trees" fill priority sizes="100vw" style={{ objectFit: 'cover', objectPosition: 'center 72%' }} />
       </div>
       <div className="hr-haze" aria-hidden="true" />
-      <InfinityFlies />
 
       <div className="hr-lockup">
         <p className="hr-kicker">{out ? 'the new single · out now' : `the first single · out ${day}`}</p>

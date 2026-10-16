@@ -40,9 +40,6 @@ export default function Fireflies() {
 
   return (
     <>
-    {/* One firefly is both: it shows light over the dark forest and dark
-        over anything light, because it is drawn as the difference. */}
-    <span className="ff-yin" aria-hidden="true" />
     <div className="ff" aria-hidden="true">
       {flies.map((f, i) => (
         <span

@@ -747,13 +747,3 @@ p {
   .ff-fly i { animation: none; opacity: 0.6; }
 }
 
-/* One firefly that is light on dark and dark on light (see Fireflies.tsx). */
-.ff-yin { position: fixed; z-index: 61; left: 58%; top: 42%; width: 8px; height: 8px; border-radius: 50%; background: #fff; mix-blend-mode: difference; pointer-events: none; animation: ff-yin-roam 46s ease-in-out infinite; }
-@keyframes ff-yin-roam {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  20% { transform: translate(-34vw, -22vh) scale(0.8); }
-  40% { transform: translate(-48vw, 26vh) scale(1.1); }
-  60% { transform: translate(-12vw, 38vh) scale(0.9); }
-  80% { transform: translate(24vw, -8vh) scale(1.05); }
-}
-@media (prefers-reduced-motion: reduce) { .ff-yin { animation: none; } }

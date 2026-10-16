@@ -258,17 +258,6 @@
   .hr-social { padding-left: 0; }
 }
 
-/* ── Infinity: fireflies flying a figure eight in the hero ── */
-.inf { position: absolute; z-index: 1; right: 7%; top: 15%; width: 380px; height: 170px; pointer-events: none; }
-.inf-fly { position: absolute; left: 0; top: 0; offset-path: path('M190,85 C240,5 360,5 360,85 C360,165 240,165 190,85 C140,5 20,5 20,85 C20,165 140,165 190,85'); offset-rotate: 0deg; animation: inf-go 18s linear infinite; }
-.inf-fly i { display: block; width: var(--s); height: var(--s); border-radius: 50%; background: #fbeeb0; box-shadow: 0 0 8px 2px rgba(251,238,176,0.8), 0 0 24px 8px rgba(241,220,156,0.25); animation: inf-blink 2.6s ease-in-out infinite; }
-@keyframes inf-go { from { offset-distance: 0%; } to { offset-distance: 100%; } }
-@keyframes inf-blink { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.7); } }
-@media (max-width: 700px) {
-  .inf { right: auto; left: 50%; top: 18%; transform: translateX(-50%) scale(0.55); }
-  .inf-fly i { width: calc(var(--s) * 1.6); height: calc(var(--s) * 1.6); }
-}
-@media (prefers-reduced-motion: reduce) { .inf { display: none; } }
 
 /* ── The EP as a yin yang ─────────────────────────── */
 .ep-yy { display: flex; align-items: center; gap: 1.75rem; margin-top: 3.25rem; }
@@ -384,3 +373,13 @@
 }
 .fj-fly .fj-bug { animation: fj-appear 0.8s ease both; }
 @keyframes fj-appear { from { opacity: 0; } to { opacity: 1; } }
+/* Finishing: your time, big, and the invitation to set them free */
+.fj-done { position: absolute; z-index: 8; left: 50%; top: 18%; width: min(560px, calc(100% - 2.5rem)); transform: translateX(-50%); text-align: center; animation: fj-done-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.fj-done-k { margin: 0; font-family: var(--f-mono); font-size: 0.74rem; letter-spacing: 0.22em; color: var(--sage); }
+.fj-done-time { margin: 0.2rem 0 0.4rem; font-family: var(--f-display); font-style: italic; font-weight: 600; font-size: clamp(5rem, 13vw, 9.5rem); line-height: 0.95; letter-spacing: -0.04em; background: linear-gradient(180deg, #fbeeb0, #d8b46a); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 30px rgba(251,238,176,0.35)); }
+.fj-done-time span { font-size: 0.45em; margin-left: 0.08em; }
+.fj-done-best { margin: 0 0 1.8rem; font-family: var(--f-display); font-style: italic; font-size: 1.25rem; color: var(--haze); }
+.fj-free-btn { display: inline-flex; align-items: center; justify-content: center; height: 62px; padding: 0 2.6rem; border: none; border-radius: 2px; background: var(--haze); color: var(--canopy); font-family: var(--f-body); font-size: 1.3rem; font-weight: 600; cursor: pointer; box-shadow: 0 18px 40px rgba(0,0,0,0.3), 0 0 40px rgba(251,238,176,0.25); transition: background 0.25s ease, transform 0.25s ease; }
+.fj-free-btn:hover { background: #fff8e8; transform: translateY(-2px); }
+@keyframes fj-done-in { from { opacity: 0; transform: translate(-50%, 14px) scale(0.96); filter: blur(8px); } to { opacity: 1; transform: translate(-50%, 0); filter: none; } }
+@media (max-width: 700px) { .fj-done { top: 22%; } .fj-free-btn { width: 100%; height: 58px; } }
