@@ -1,28 +1,19 @@
 'use client'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { articles } from '../../lib/press'
+import { makeBug, step, glowOf, type Bug } from './fireflyFlight'
 
-// A little game: every short press quote is a firefly drifting over the
+// A little game: every short press quote is a firefly flying around the
 // meadow. Tap one (or scoop it by dragging the jar into it) and it stops,
 // glows and says its line, then flies into the jar wherever you have put it.
-// Tap a firefly in the jar to hear it again. Wander paths are fixed numbers,
-// not Math.random, so the server and browser render the same thing.
+// Tap a firefly in the jar to hear it again.
 const quotes = articles.flatMap((a) => a.quotes.map((q) => ({ q, who: a.outlet ?? a.author })))
 
 const SPEAK_MS = 3200
 
-const spots = quotes.map((_, i) => ({
-  left: 18 + ((i * 37) % 52),
-  top: 26 + ((i * 23) % 44),
-  dur: 7 + ((i * 3) % 4),
-  delay: -((i * 1.9) % 7),
-  // Wide loops so they roam the whole meadow, not just hover in place.
-  path: [
-    [((i * 97) % 440) - 220, ((i * 53) % 260) - 130],
-    [((i * 61) % 400) - 200, ((i * 89) % 240) - 90],
-    [((i * 131) % 360) - 180, ((i * 37) % 280) - 170],
-  ],
-}))
+// Where each firefly starts, as % of the meadow. After that they fly freely
+// (see fireflyFlight.ts).
+const spots = quotes.map((_, i) => ({ left: 14 + ((i * 37) % 72), top: 28 + ((i * 23) % 50) }))
 
 // Where caught fireflies settle inside the jar, as % of the jar box.
 const slots = [[40, 72], [60, 62], [50, 84], [33, 56], [66, 80], [47, 50], [56, 74], [36, 86]]
@@ -127,6 +118,37 @@ export default function FireflyJar() {
   const heldRef = useRef<Held | null>(null)
   const [reread, setReread] = useState<number | null>(null)
   const [round, setRound] = useState(0)
+  const bugs = useRef(new Map<number, Bug>())
+
+  // Fly the wild fireflies every frame, writing straight to their elements.
+  useEffect(() => {
+    const f = field.current
+    if (!f) return
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    let raf = 0, last = performance.now()
+    const loop = (now: number) => {
+      const t = now / 1000, dt = Math.min(0.05, (now - last) / 1000)
+      last = now
+      const w = f.clientWidth, h = f.clientHeight
+      const live: number[] = []
+      flyEls.current.forEach((el, i) => {
+        if (!el || !el.isConnected) return
+        if (!bugs.current.has(i)) bugs.current.set(i, makeBug((spots[i].left / 100) * w, (spots[i].top / 100) * h, t))
+        live.push(i)
+      })
+      if (!still) step(bugs.current, live, t, dt, w, h, w < 700 ? 0.6 : 1)
+      for (const i of live) {
+        const b = bugs.current.get(i)!, el = flyEls.current[i]!
+        const tilt = Math.max(-25, Math.min(25, Math.cos(b.h) * b.sp * 0.35))
+        el.style.transform = `translate(${b.x - 17}px, ${b.y - 17}px) rotate(${tilt}deg)`
+        el.style.setProperty('--glow', glowOf(b, t).toFixed(3))
+        el.classList.add('is-live')
+      }
+      raf = requestAnimationFrame(loop)
+    }
+    raf = requestAnimationFrame(loop)
+    return () => cancelAnimationFrame(raf)
+  }, [])
 
   useEffect(() => { caughtRef.current = caught }, [caught])
   useEffect(() => { heldRef.current = held }, [held])
@@ -140,7 +162,7 @@ export default function FireflyJar() {
       const jw = jarEl.current?.offsetWidth ?? 150, jh = jarEl.current?.offsetHeight ?? 220
       setSize({ w, h, jw, jh })
       setJar((p) => {
-        const def = w < 700 ? { x: (w - jw) / 2, y: h - jh - 24 } : { x: w - jw - Math.max(32, (w - 1240) / 2), y: h - jh - 32 }
+        const def = { x: (w - jw) / 2, y: h - jh - (w < 700 ? 24 : 32) }
         if (!p) return def
         return { x: Math.min(Math.max(0, p.x), w - jw), y: Math.min(Math.max(0, p.y), h - jh) }
       })
@@ -173,6 +195,7 @@ export default function FireflyJar() {
     const el = flyEls.current[i]
     if (!el || !field.current) return
     setReread(null)
+    bugs.current.delete(i)
     const next: Held = { i, at: rel(el.getBoundingClientRect()), phase: 'speaking' }
     heldRef.current = next
     setHeld(next)
@@ -235,7 +258,8 @@ export default function FireflyJar() {
     setFreeing(caught.map((q, n) => {
       const [sx, sy] = slots[n % slots.length]
       const from = { x: jar.x + (size.jw * sx) / 100, y: jar.y + (size.jh * sy) / 100 }
-      const to = { x: (spots[q].left / 100) * size.w, y: (spots[q].top / 100) * size.h }
+      const to = { x: size.w * (0.12 + Math.random() * 0.76), y: size.h * (0.25 + Math.random() * 0.5) }
+      bugs.current.set(q, makeBug(to.x, to.y, performance.now() / 1000))
       const side = n % 2 ? 1 : -1
       return {
         q,
@@ -278,7 +302,6 @@ export default function FireflyJar() {
 
       {quotes.map((_, i) => {
         if (caught.includes(i) || held?.i === i) return null
-        const s = spots[i]
         return (
           <button
             key={`${round}-${i}`}
@@ -287,18 +310,6 @@ export default function FireflyJar() {
             className="fj-fly"
             aria-label="Catch this firefly to hear something Ethan said"
             onClick={() => grab(i)}
-            style={{
-              left: `${s.left}%`,
-              top: `${s.top}%`,
-              animationDuration: `${s.dur}s`,
-              animationDelay: `${s.delay}s`,
-              ['--x1' as string]: `calc(${s.path[0][0]}px * var(--k, 1))`,
-              ['--y1' as string]: `calc(${s.path[0][1]}px * var(--k, 1))`,
-              ['--x2' as string]: `calc(${s.path[1][0]}px * var(--k, 1))`,
-              ['--y2' as string]: `calc(${s.path[1][1]}px * var(--k, 1))`,
-              ['--x3' as string]: `calc(${s.path[2][0]}px * var(--k, 1))`,
-              ['--y3' as string]: `calc(${s.path[2][1]}px * var(--k, 1))`,
-            }}
           >
             <Fly />
           </button>

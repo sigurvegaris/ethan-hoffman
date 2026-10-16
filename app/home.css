@@ -325,7 +325,10 @@
 @keyframes fj-pulse { 0%, 100% { opacity: 1; } 45% { opacity: 0.35; } 60% { opacity: 0.8; } }
 @keyframes fj-tailglow { 0%, 100% { fill: #fff3c4; } 45% { fill: #b9a764; } 60% { fill: #f6e7a8; } }
 
-.fj-fly { position: absolute; z-index: 3; width: 34px; height: 34px; margin: -17px 0 0 -17px; padding: 0; border: none; background: none; cursor: pointer; animation-name: ff-wander; animation-timing-function: ease-in-out; animation-iteration-count: infinite; -webkit-tap-highlight-color: transparent; }
+.fj-fly { position: absolute; z-index: 3; left: 0; top: 0; width: 34px; height: 34px; padding: 0; border: none; background: none; cursor: pointer; visibility: hidden; will-change: transform; -webkit-tap-highlight-color: transparent; }
+.fj-fly.is-live { visibility: visible; }
+.fj-fly .fj-halo { animation: none; opacity: var(--glow, 0.4); }
+.fj-fly .fj-tail { animation: none; fill: #fff3c4; opacity: calc(0.3 + 0.7 * var(--glow, 0.4)); }
 .fj-fly::before { content: ''; position: absolute; inset: -14px; border-radius: 50%; }
 .fj-fly .fj-bug { transition: transform 0.25s ease; }
 .fj-fly:hover .fj-bug, .fj-fly:focus-visible .fj-bug { transform: scale(1.25); }
@@ -366,10 +369,9 @@
   .fj { height: 92vh; min-height: 640px; margin-top: 6vh; }
   .fj-hud { left: 1.25rem; right: 1.25rem; }
   .fj-jar { width: 118px; height: 172px; }
-  .fj-fly { --k: 0.4; }
   .fj-release { right: auto; left: 1.25rem; top: auto; bottom: 1rem; }
 }
-@media (prefers-reduced-motion: reduce) { .fj-fly, .fj-in, .fj-wing, .fj-held { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .fj-in, .fj-wing, .fj-held { animation: none; } }
 /* Letting them go: the lid pops and the fireflies climb out */
 .fj-lid.is-open { transform: translate(-22px, -30px) rotate(-28deg); transition: transform 0.45s cubic-bezier(0.3, 1.5, 0.5, 1); }
 .fj-lid { transition: transform 0.6s ease; }
@@ -380,6 +382,5 @@
   55% { transform: translate(var(--ox), var(--oy)) scale(1.1); }
   100% { transform: translate(var(--tx), var(--ty)) scale(1); }
 }
-.fj-fly { animation-fill-mode: both; }
 .fj-fly .fj-bug { animation: fj-appear 0.8s ease both; }
 @keyframes fj-appear { from { opacity: 0; } to { opacity: 1; } }
