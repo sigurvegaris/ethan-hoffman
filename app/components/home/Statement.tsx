@@ -1,19 +1,14 @@
 'use client'
 import { Fragment, useEffect, useRef } from 'react'
 
-// One sentence about the EP that lights up word by word as you scroll, with
-// small photos set into the line like words of their own.
-type Piece = { text: string; em?: boolean } | { img: string; alt: string; pos?: string }
+// One sentence about the EP that lights up word by word as you scroll.
+type Piece = { text: string; em?: boolean }
 
 const pieces: Piece[] = [
-  { text: 'Just his voice' },
-  { img: '/images/malibu/studio-bw.webp', alt: 'Ethan singing in the live room', pos: '55% 60%' },
-  { text: 'his guitar,' },
+  { text: 'Just his voice, his guitar,' },
   { text: 'and songs he has lived with', em: true },
-  { img: '/images/malibu/oak-lying.webp', alt: 'Ethan lying under an oak tree', pos: 'center 70%' },
   { text: 'for four years,' },
   { text: 'recorded live over two nights in Malibu.' },
-  { img: '/images/malibu/fence-dusk.webp', alt: 'Ethan by a fence at dusk', pos: 'center 30%' },
 ]
 
 export default function Statement() {
@@ -47,17 +42,13 @@ export default function Statement() {
       <div className="fh-wrap">
         <p className="fh-label">the debut ep</p>
         <p className="st-line" ref={ref}>
-          {pieces.map((p, i) =>
-            'img' in p ? (
-              <span key={i} data-w className="st-img" role="img" aria-label={p.alt} style={{ backgroundImage: `url(${p.img})`, backgroundPosition: p.pos }} />
-            ) : (
-              <Fragment key={i}>
-                {p.text.split(' ').map((w, j) => (
-                  <span key={j} data-w className={p.em ? 'st-em' : undefined}>{w} </span>
-                ))}
-              </Fragment>
-            ),
-          )}
+          {pieces.map((p, i) => (
+            <Fragment key={i}>
+              {p.text.split(' ').map((w, j) => (
+                <span key={j} data-w className={p.em ? 'st-em' : undefined}>{w} </span>
+              ))}
+            </Fragment>
+          ))}
         </p>
       </div>
     </section>
