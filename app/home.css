@@ -252,3 +252,19 @@
   .fh::after, .fh-light span, .hr-photo, .hr-haze, .pr-marquee-track, .d1-flies span, .d1-flies em { animation: none; }
   .d1-flies em { opacity: 0.4; }
 }
+
+/* Phones: Benson Boone style. Title at the top, Ethan big in the middle,
+   stacked full-width buttons over the bottom of the photo. */
+@media (max-width: 700px) {
+  /* Taller than the screen and pulled up, so Ethan is big and his face sits
+     between the title and the buttons. */
+  .hr-photo { top: -45%; bottom: -5%; -webkit-mask-image: none; mask-image: none; }
+  .hr::before { background: linear-gradient(to bottom, rgba(20,26,18,0.75) 0%, rgba(20,26,18,0.15) 32%, rgba(20,26,18,0.05) 50%, rgba(20,26,18,0.6) 72%, var(--canopy) 100%); }
+  .hr-lockup { top: 5.25rem; bottom: 1.75rem; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .hr-kicker { margin: 0 0 0.4rem; font-size: 0.7rem; }
+  .hr-title { font-size: 28vw; margin: 0; }
+  .hr-row { margin-top: auto; width: 100%; align-items: center; gap: 1.1rem; }
+  .hr-buttons { grid-template-columns: 1fr; gap: 0.7rem; }
+  .hr-btn { height: 58px; font-size: 1.15rem; }
+  .hr-social { padding-left: 0; }
+}
