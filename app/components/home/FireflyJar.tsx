@@ -12,14 +12,15 @@ const quotes = articles.flatMap((a) => a.quotes.map((q) => ({ q, who: a.outlet ?
 const SPEAK_MS = 3200
 
 const spots = quotes.map((_, i) => ({
-  left: 12 + ((i * 37) % 56),
-  top: 22 + ((i * 23) % 50),
-  dur: 11 + ((i * 5) % 7),
-  delay: -((i * 1.9) % 9),
+  left: 18 + ((i * 37) % 52),
+  top: 26 + ((i * 23) % 44),
+  dur: 7 + ((i * 3) % 4),
+  delay: -((i * 1.9) % 7),
+  // Wide loops so they roam the whole meadow, not just hover in place.
   path: [
-    [((i * 29) % 140) - 70, ((i * 17) % 90) - 45],
-    [((i * 13) % 180) - 90, ((i * 31) % 80) - 30],
-    [((i * 41) % 120) - 60, ((i * 19) % 100) - 60],
+    [((i * 97) % 440) - 220, ((i * 53) % 260) - 130],
+    [((i * 61) % 400) - 200, ((i * 89) % 240) - 90],
+    [((i * 131) % 360) - 180, ((i * 37) % 280) - 170],
   ],
 }))
 
@@ -364,7 +365,7 @@ export default function FireflyJar() {
         </span>
       ))}
 
-      {full && !freeing && (
+      {caught.length > 0 && !held && !freeing && (
         <button type="button" className="fj-release" onClick={letGo}>
           let them go
         </button>

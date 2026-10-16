@@ -18,7 +18,6 @@ export const articles: Article[] = [
     headline: 'The first thing people notice when listening to my music is that I’m free in my expression.',
     quotes: [
       'It is just me, the guitar, the voice, and the song.',
-      'I initially didn’t like it, but now I embrace it. To me, it means being someone who does not fit neatly into one mold.',
       'I know there are many things I am yet to experience, and thus many songs I am yet to write.',
     ],
   },

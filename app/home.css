@@ -366,7 +366,7 @@
   .fj { height: 92vh; min-height: 640px; margin-top: 6vh; }
   .fj-hud { left: 1.25rem; right: 1.25rem; }
   .fj-jar { width: 118px; height: 172px; }
-  .fj-fly { --k: 0.45; }
+  .fj-fly { --k: 0.4; }
   .fj-release { right: auto; left: 1.25rem; top: auto; bottom: 1rem; }
 }
 @media (prefers-reduced-motion: reduce) { .fj-fly, .fj-in, .fj-wing, .fj-held { animation: none; } }

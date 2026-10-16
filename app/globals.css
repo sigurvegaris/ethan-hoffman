@@ -717,7 +717,7 @@ p {
 /* ── Fireflies on every page ───────────────────────── */
 .ff { position: fixed; inset: 0; z-index: 60; pointer-events: none; overflow: hidden; }
 .ff-fly { position: absolute; animation-name: ff-wander; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
-.ff-fly i, .ff-burst i { display: block; border-radius: 50%; background: #fbeeb0; box-shadow: 0 0 8px 2px rgba(251,238,176,0.75), 0 0 22px 8px rgba(241,220,156,0.28); }
+.ff-fly i, .ff-burst i { display: block; border-radius: 50%; background: #fbeeb0; box-shadow: 0 0 6px 1px rgba(251,238,176,0.7), 0 0 16px 5px rgba(241,220,156,0.22); }
 .ff-fly i { animation: ff-blink ease-in-out infinite; }
 @keyframes ff-wander {
   0%, 100% { transform: translate(0, 0); }
@@ -740,7 +740,7 @@ p {
   100% { opacity: 0; transform: translate(var(--bx), var(--by)) scale(0.6); }
 }
 @media (max-width: 700px) {
-  .ff-fly:nth-child(n+13) { display: none; }
+  .ff-fly:nth-child(n+8) { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ff-fly { animation: none; }
