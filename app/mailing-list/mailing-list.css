@@ -23,35 +23,65 @@
 .ml-title em { font-style: italic; color: var(--amber); padding-left: 0.9em; }
 .ml-lede { font-size: 1.2rem; line-height: 1.6; max-width: 34ch; color: var(--cream-dim); margin: 0 0 3rem; }
 
-.ml-form { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem 1.2rem; max-width: 560px; }
-.ml-wide { grid-column: 1 / -1; }
-.ml-field { display: flex; flex-direction: column; gap: 0.5rem; }
-.ml-field span { font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sage); }
-.ml-field input, .ml-field select {
-  font: inherit; font-size: 1.05rem; color: var(--cream); background: rgba(230,225,210,0.06);
-  border: 1px solid var(--glass-line); border-radius: 0; padding: 0.95rem 1rem; outline: none;
-  transition: border-color 0.2s ease, background 0.2s ease; appearance: none; -webkit-appearance: none;
+/* The form is a note to Ethan: fill in the blanks of a letter, then light a
+   firefly to say yes. Blanks are hand-ruled lines that glow amber in use. */
+.ml-note { max-width: 600px; }
+.ml-note-to { font-family: var(--f-hand); font-size: 2.2rem; color: var(--amber); margin: 0 0 0.6rem; transform: rotate(-2deg); transform-origin: left; }
+.ml-sentence {
+  font-family: var(--f-display); font-variation-settings: var(--display-axes); font-weight: 300;
+  font-size: clamp(1.45rem, 2.2vw, 1.9rem); line-height: 2.15; color: var(--haze); margin: 0 0 2.2rem;
 }
-.ml-field select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23e6e1d2' stroke-width='1.5'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem;
+.ml-blank { position: relative; display: inline-block; max-width: 100%; vertical-align: baseline; }
+.ml-blank[data-v] { display: inline-grid; grid-template-columns: minmax(0, max-content); }
+.ml-blank[data-v]::before { content: attr(data-v) '\00a0'; grid-area: 1 / 1; visibility: hidden; white-space: pre; font-style: italic; padding: 0 0.15em; min-width: 3.5em; overflow: hidden; }
+.ml-blank[data-v] input { grid-area: 1 / 1; width: 100%; min-width: 0; }
+.ml-blank::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0.1em; height: 2px; border-radius: 2px;
+  background: repeating-linear-gradient(90deg, rgba(230,225,210,0.45) 0 7px, transparent 7px 12px);
+  transition: background 0.25s ease, box-shadow 0.25s ease;
 }
-.ml-field select option { color: #1c1a15; }
-.ml-field input:focus, .ml-field select:focus { border-color: var(--amber); background: rgba(230,225,210,0.1); }
+.ml-blank:focus-within::after { background: var(--amber); box-shadow: 0 0 12px 1px rgba(226,167,90,0.55); }
+.ml-blank.is-miss::after { background: var(--rust); box-shadow: 0 0 12px rgba(210,112,58,0.5); }
+.ml-blank.is-miss { animation: ml-shake 0.4s ease; }
+.ml-blank input, .ml-blank select {
+  font: inherit; font-style: italic; color: var(--amber); background: transparent; border: 0; outline: none;
+  padding: 0 0.15em; max-width: 100%; border-radius: 0; caret-color: var(--amber);
+  appearance: none; -webkit-appearance: none;
+}
+.ml-blank input::placeholder { color: rgba(230,225,210,0.32); font-style: italic; }
+/* Keep autofill from painting the blanks pale blue. */
+.ml-blank input:-webkit-autofill, .ml-blank input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--amber); -webkit-box-shadow: 0 0 0 100px #1c2319 inset; transition: background-color 9999s;
+}
+.ml-blank-select select { cursor: pointer; padding-right: 1.1em; }
+.ml-blank-select::before { content: '⌄'; position: absolute; right: 0.1em; top: -0.15em; font-size: 0.8em; color: var(--sage); pointer-events: none; }
+.ml-blank select option { color: #1c1a15; font-style: normal; }
 
-.ml-check { display: flex; gap: 0.8rem; align-items: flex-start; font-size: 0.95rem; line-height: 1.5; color: var(--cream-dim); cursor: pointer; }
-.ml-check input { appearance: none; -webkit-appearance: none; flex: none; width: 1.25rem; height: 1.25rem; margin-top: 0.12rem; border: 1px solid var(--glass-line); background: rgba(230,225,210,0.06); cursor: pointer; display: grid; place-items: center; }
-.ml-check input:checked { background: var(--amber); border-color: var(--amber); }
-.ml-check input:checked::after { content: ''; width: 0.35rem; height: 0.65rem; border: solid #1c1a15; border-width: 0 2px 2px 0; transform: translateY(-1px) rotate(45deg); }
+/* Consent: a firefly that lights when tapped. */
+.ml-firefly { display: flex; gap: 1.1rem; align-items: center; cursor: pointer; padding: 1rem 1.2rem 1rem 1rem; margin: 0 0 1.6rem; border-radius: 999px; background: rgba(230,225,210,0.05); border: 1px solid transparent; transition: background 0.3s ease, border-color 0.3s ease; }
+.ml-firefly:hover { background: rgba(230,225,210,0.08); }
+.ml-firefly input { position: absolute; opacity: 0; pointer-events: none; }
+.ml-firefly:has(input:focus-visible) { border-color: var(--amber); }
+.ml-firefly.is-miss { border-color: var(--rust); animation: ml-shake 0.4s ease; }
+.ml-firefly-bug { position: relative; flex: none; width: 3rem; height: 3rem; border-radius: 50%; display: grid; place-items: center; background: rgba(20,26,18,0.6); }
+.ml-firefly-bug i { width: 0.8rem; height: 0.8rem; border-radius: 50%; background: rgba(230,225,210,0.25); transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease; animation: ml-ember 2.6s ease-in-out infinite; }
+.ml-firefly.is-on .ml-firefly-bug i { background: #fbeeb0; transform: scale(1.15); animation: none; box-shadow: 0 0 10px 3px rgba(251,238,176,0.85), 0 0 34px 12px rgba(241,220,156,0.35); }
+.ml-firefly-text { font-size: 0.92rem; line-height: 1.45; color: var(--cream-dim); }
+.ml-firefly-text b { display: block; font-family: var(--f-hand); font-weight: 400; font-size: 1.55rem; line-height: 1.1; color: var(--haze); margin-bottom: 0.15rem; }
+.ml-firefly.is-on .ml-firefly-text b { color: #fbeeb0; }
+@keyframes ml-ember { 50% { background: rgba(230,225,210,0.45); } }
+@keyframes ml-shake { 20%, 60% { transform: translateX(-5px); } 40%, 80% { transform: translateX(5px); } }
+
+.ml-nudge { font-family: var(--f-hand); font-size: 1.5rem; line-height: 1.15; color: var(--amber); margin: -0.6rem 0 1.2rem; }
+.ml-sign { font-family: var(--f-hand); font-size: 1.6rem; color: var(--cream-dim); margin: 1.2rem 0 0; text-align: right; }
 
 .ml-btn {
   display: inline-flex; align-items: center; justify-content: center; height: 64px; padding: 0 2.5rem;
-  font: inherit; font-size: 1.15rem; font-weight: 600; letter-spacing: 0.02em; text-decoration: none;
+  min-width: 240px; font: inherit; font-size: 1.15rem; font-weight: 600; letter-spacing: 0.02em; text-decoration: none;
   background: var(--cream); color: #1c1a15; border: 0; cursor: pointer; transition: background 0.2s ease;
 }
 .ml-btn:hover { background: var(--amber); }
 .ml-btn:disabled { opacity: 0.6; cursor: wait; }
-.ml-error { margin: 0; color: var(--rust); }
 
 .ml-done { max-width: 520px; }
 .ml-done-big { font-family: var(--f-display); font-variation-settings: var(--display-axes); font-style: italic; font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.05; color: var(--haze); margin: 0 0 1rem; }
@@ -81,6 +111,7 @@
   .ml-lede { font-size: 1.08rem; margin-bottom: 2.25rem; }
 }
 @media (max-width: 520px) {
-  .ml-form { grid-template-columns: 1fr; }
   .ml-btn { width: 100%; }
+  .ml-sentence { font-size: 1.35rem; line-height: 2.1; }
+  .ml-firefly { border-radius: 22px; }
 }
