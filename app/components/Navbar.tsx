@@ -44,7 +44,11 @@ export default function Navbar() {
         .eh-nav { position: fixed; inset: 0 0 auto 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1.25rem 2.5rem; transition: background 0.35s ease, padding 0.35s ease, backdrop-filter 0.35s ease; background: linear-gradient(to bottom, rgba(14,18,12,0.5), rgba(14,18,12,0)); }
         .eh-nav.scrolled { background: rgba(20,26,18,0.55); backdrop-filter: blur(16px) saturate(1.1); -webkit-backdrop-filter: blur(16px) saturate(1.1); padding-top: 0.85rem; padding-bottom: 0.85rem; }
         .eh-wordmark { font-family: var(--f-display); font-size: 1.75rem; line-height: 1; color: #f2ecdf; text-decoration: none; letter-spacing: -0.01em; white-space: nowrap; }
+        .eh-wordmark span, .eh-wordmark em { display: inline-block; transition: font-style 0s, opacity 0.35s ease; }
         .eh-wordmark em { font-style: italic; }
+        /* The two names trade styles on hover: each one becomes the other. */
+        .eh-wordmark:hover span { font-style: italic; }
+        .eh-wordmark:hover em { font-style: normal; }
         .eh-links { display: flex; align-items: center; gap: 2rem; }
         .eh-link { font-family: var(--f-body); font-size: 1.05rem; font-weight: 500; color: #f2ecdf; text-decoration: none; position: relative; padding: 0.2rem 0; }
         .eh-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 1.5px; background: #e2a75a; transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease; }
@@ -76,7 +80,7 @@ export default function Navbar() {
       `}</style>
 
       <nav className={`eh-nav ${scrolled || open ? 'scrolled' : ''}`} aria-label="Main">
-        <Link href="/" className="eh-wordmark" onClick={close}>Ethan <em>Hoffman</em></Link>
+        <Link href="/" className="eh-wordmark" onClick={close}><span>Ethan</span> <em>Hoffman</em></Link>
 
         <div className="eh-links">
           {mainLinks.map((l) => (

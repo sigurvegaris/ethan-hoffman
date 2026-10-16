@@ -604,9 +604,10 @@ p {
 }
 
 /* ── Selection color ──────────────────────────────────────── */
+/* Selecting text flips it: dark letters on light, the other half showing. */
 ::selection {
-  background: rgba(196, 98, 45, 0.3);
-  color: #fdfaf5;
+  background: var(--haze);
+  color: var(--canopy);
 }
 
 /* ── Scrollbar ────────────────────────────────────────────── */
@@ -746,13 +747,13 @@ p {
   .ff-fly i { animation: none; opacity: 0.6; }
 }
 
-/* ── Yin yang back-to-top, turns as you scroll ─────── */
-.yyt { position: fixed; left: 1.25rem; bottom: 1.25rem; z-index: 80; width: 48px; height: 48px; padding: 0; border: none; background: none; cursor: pointer; opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity 0.4s ease, transform 0.4s ease; }
-.yyt.is-shown { opacity: 0.9; transform: none; pointer-events: auto; }
-.yyt:hover { opacity: 1; }
-.yyt-svg { width: 100%; height: 100%; overflow: visible; transform: rotate(var(--spin, 0deg)); filter: drop-shadow(0 6px 16px rgba(0,0,0,0.4)); }
-.yyt-svg .yy-light { fill: var(--haze); }
-.yyt-svg .yy-dark { fill: var(--green-3); }
-.yyt-svg .yy-ring { fill: none; stroke: var(--haze); stroke-width: 2; }
-.yyt-svg .yy-dot { fill: #fbeeb0; filter: drop-shadow(0 0 3px rgba(251,238,176,0.95)); }
-.yyt-svg .yy-dot-top { fill: #c9a24e; filter: none; }
+/* One firefly that is light on dark and dark on light (see Fireflies.tsx). */
+.ff-yin { position: fixed; z-index: 61; left: 58%; top: 42%; width: 8px; height: 8px; border-radius: 50%; background: #fff; mix-blend-mode: difference; pointer-events: none; animation: ff-yin-roam 46s ease-in-out infinite; }
+@keyframes ff-yin-roam {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  20% { transform: translate(-34vw, -22vh) scale(0.8); }
+  40% { transform: translate(-48vw, 26vh) scale(1.1); }
+  60% { transform: translate(-12vw, 38vh) scale(0.9); }
+  80% { transform: translate(24vw, -8vh) scale(1.05); }
+}
+@media (prefers-reduced-motion: reduce) { .ff-yin { animation: none; } }

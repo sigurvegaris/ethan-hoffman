@@ -10,6 +10,7 @@ import FanNotebook from './components/home/FanNotebook'
 import Collage from './components/home/Collage'
 import BirthdayNudge from './components/home/BirthdayNudge'
 import Parallax from './components/home/Parallax'
+import OppositeLens from './components/home/OppositeLens'
 import './home.css'
 
 export default function Home() {
@@ -29,6 +30,7 @@ export default function Home() {
         <Collage />
       </main>
       <Parallax />
+      <OppositeLens />
       <BirthdayNudge />
       <Footer />
     </>

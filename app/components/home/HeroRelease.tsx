@@ -66,7 +66,6 @@ export default function HeroRelease() {
           </div>
         </div>
       </div>
-      <p className="hr-scroll" aria-hidden="true">scroll</p>
     </section>
   )
 }

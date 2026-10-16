@@ -17,7 +17,7 @@ export default function Collage() {
         {shots.map((s) => (
           <figure key={s.src} className={`cl-shot ${s.cls}`}>
             <div data-speed={s.speed}>
-              <div className="cl-img">
+              <div className="cl-img" data-lens>
                 <Image src={s.src} alt={s.alt} fill sizes="(max-width: 900px) 50vw, 32vw" style={{ objectFit: 'cover' }} />
               </div>
               <figcaption>{s.note}</figcaption>

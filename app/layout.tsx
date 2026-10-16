@@ -3,7 +3,6 @@ import type { Metadata, Viewport } from 'next'
 import { AnimatePresence } from 'framer-motion'
 import './globals.css'
 import Fireflies from './components/Fireflies'
-import YinYangTop from './components/YinYangTop'
 
 export const metadata: Metadata = {
   title: 'Ethan Hoffman | Singer-Songwriter',
@@ -36,7 +35,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </AnimatePresence>
         <Fireflies />
-        <YinYangTop />
       </body>
     </html>
   )

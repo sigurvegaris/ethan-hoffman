@@ -57,7 +57,7 @@ export default function Sessions() {
           </div>
           {frames.map((f, i) => (
             <figure key={f.src} className={`ss-frame ${f.h > f.w ? 'tall' : 'wide'}`} style={{ marginTop: i % 2 ? '9vh' : '0' }}>
-              <div className="ss-img">
+              <div className="ss-img" data-lens={f.src.includes('-bw') ? undefined : true}>
                 <Image src={f.src} alt={f.alt} width={f.w} height={f.h} sizes="(max-width: 900px) 80vw, 50vw" loading="eager" />
               </div>
               <figcaption><span>{String(i + 1).padStart(2, '0')}</span>{f.note}</figcaption>
