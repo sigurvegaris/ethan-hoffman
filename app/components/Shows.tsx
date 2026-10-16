@@ -11,7 +11,7 @@ export default function Shows() {
         <div style={{ backgroundColor: '#1a1814', padding: '8rem 0 5rem' }}>
           <div className="container">
             <p style={{ fontSize: '0.7rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem' }}>Catch Him Live</p>
-            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: '600', color: '#fdfaf5', lineHeight: '1.1' }}>Upcoming Shows</h1>
+            <h1 style={{ fontFamily: 'var(--f-display)', fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: '600', color: '#fdfaf5', lineHeight: '1.1' }}>Upcoming Shows</h1>
           </div>
         </div>
 
@@ -24,7 +24,7 @@ export default function Shows() {
             border: '1px solid rgba(196,168,130,0.15)',
           }}>
             <p style={{
-              fontFamily: 'Playfair Display, serif',
+              fontFamily: 'var(--f-display)',
               fontSize: '1.5rem',
               color: '#fdfaf5',
               marginBottom: '1rem',

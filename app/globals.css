@@ -17,10 +17,38 @@ html {
   text-size-adjust: 100%;
 }
 
+:root {
+  /* Type: Fraunces (soft, wonky 70s soul serif) for display, Bricolage
+     Grotesque for text, a pen script standing in for Ethan's own handwriting
+     until his font is made, and Space Mono for studio-tape labels. */
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body: 'Bricolage Grotesque', system-ui, sans-serif;
+  --f-hand: 'Nanum Pen Script', 'Comic Sans MS', cursive;
+  --f-mono: 'Space Mono', ui-monospace, monospace;
+  /* Palette: the deep Malibu green everywhere, cream type, warm accents. */
+  --green: #1f261c;
+  --green-2: #283224;
+  --green-3: #161c14;
+  --cream: #f2ecdf;
+  --cream-dim: rgba(242,236,223,0.72);
+  --amber: #e2a75a;
+  --rust: #d2703a;
+  /* Forest tones pulled from the Malibu photos: oak canopy, sage brush,
+     overcast haze, dusk sky and studio tungsten. */
+  --canopy: #141a12;
+  --olive: #3a4430;
+  --sage: #9aa585;
+  --haze: #e6e1d2;
+  --dusk: #a7aec0;
+  --tungsten: #d39a5b;
+  --glass: rgba(230,225,210,0.08);
+  --glass-line: rgba(230,225,210,0.18);
+}
+
 body {
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #0e0c09;
-  color: #fdfaf5;
+  font-family: var(--f-body);
+  background: var(--green);
+  color: var(--cream);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -79,7 +107,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--f-display);
   line-height: 1.05;
   letter-spacing: -0.02em;
 }
@@ -265,7 +293,7 @@ p {
 }
 
 .svc-row-num {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--f-body);
   font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -280,7 +308,7 @@ p {
 }
 
 .svc-row-word {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--f-display);
   font-size: clamp(2.8rem, 8vw, 7rem);
   font-weight: 600;
   letter-spacing: -0.03em;
@@ -314,7 +342,7 @@ p {
 }
 
 .svc-row-tag {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--f-body);
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -323,7 +351,7 @@ p {
 }
 
 .svc-row-desc {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--f-body);
   font-size: 1rem;
   font-weight: 400;
   color: rgba(253, 250, 245, 0.7);
@@ -333,7 +361,7 @@ p {
 }
 
 .svc-row-cta {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--f-body);
   font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.14em;
@@ -386,7 +414,7 @@ p {
 }
 
 .svc-feat {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--f-body);
   font-size: 0.95rem;
   font-weight: 400;
   color: rgba(253, 250, 245, 0.65);
@@ -418,7 +446,7 @@ p {
 }
 
 .svc-ticker-item {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--f-display);
   font-size: 0.85rem;
   font-weight: 400;
   font-style: italic;
@@ -447,7 +475,7 @@ p {
   position: absolute;
   left: 0;
   right: 0;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--f-display);
   font-weight: 700;
   font-size: clamp(4rem, 16vw, 14rem);
   letter-spacing: -0.04em;
@@ -550,7 +578,7 @@ p {
 }
 
 .nav-drawer a {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--f-display);
   font-size: clamp(2rem, 8vw, 3rem);
   font-weight: 600;
   color: rgba(253, 250, 245, 0.6);
@@ -576,9 +604,10 @@ p {
 }
 
 /* ── Selection color ──────────────────────────────────────── */
+/* Selecting text flips it: dark letters on light, the other half showing. */
 ::selection {
-  background: rgba(196, 98, 45, 0.3);
-  color: #fdfaf5;
+  background: var(--haze);
+  color: var(--canopy);
 }
 
 /* ── Scrollbar ────────────────────────────────────────────── */
@@ -605,14 +634,14 @@ p {
   align-items: center;
   justify-content: center;
   padding: 1rem 2rem;
-  background-color: #c4622d;
-  color: #fdfaf5;
+  background-color: var(--rust);
+  color: var(--cream);
   text-decoration: none;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  font-family: Inter, sans-serif;
+  font-family: var(--f-body);
   transition: background-color 0.3s ease, transform 0.2s ease;
   text-align: center;
 }
@@ -627,13 +656,13 @@ p {
   justify-content: center;
   padding: 1rem 2rem;
   background-color: transparent;
-  color: #fdfaf5;
+  color: var(--cream);
   text-decoration: none;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  font-family: Inter, sans-serif;
+  font-family: var(--f-body);
   border: 1px solid rgba(253,250,245,0.5);
   transition: border-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
   text-align: center;
@@ -678,3 +707,43 @@ p {
     scroll-behavior: auto !important;
   }
 }
+/* Glass buttons, shared across pages: lowercase, quiet, a little frosted. */
+.glass-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.85rem 1.75rem; min-height: 48px; font-family: var(--f-body); font-size: 1.02rem; font-weight: 500; color: var(--haze); text-decoration: none; background: var(--glass); border: 1px solid var(--glass-line); border-radius: 2px; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); cursor: pointer; transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, border-color 0.25s ease; }
+.glass-btn:hover { background: rgba(230,225,210,0.16); border-color: rgba(230,225,210,0.4); transform: translateY(-1px); }
+.glass-btn-solid { background: var(--haze); color: var(--canopy); border-color: var(--haze); }
+.glass-btn-solid:hover { background: #fff8e8; color: var(--canopy); }
+.glass-btn:disabled { opacity: 0.6; cursor: default; transform: none; }
+
+/* ── Fireflies on every page ───────────────────────── */
+.ff { position: fixed; inset: 0; z-index: 60; pointer-events: none; overflow: hidden; }
+.ff-fly { position: absolute; animation-name: ff-wander; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+.ff-fly i, .ff-burst i { display: block; border-radius: 50%; background: #fbeeb0; box-shadow: 0 0 6px 1px rgba(251,238,176,0.7), 0 0 16px 5px rgba(241,220,156,0.22); }
+.ff-fly i { animation: ff-blink ease-in-out infinite; }
+@keyframes ff-wander {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(var(--x1), var(--y1)); }
+  50% { transform: translate(var(--x2), var(--y2)); }
+  75% { transform: translate(var(--x3), var(--y3)); }
+}
+@keyframes ff-blink {
+  0%, 100% { opacity: 0.08; transform: scale(0.6); }
+  35% { opacity: 0.25; }
+  50%, 60% { opacity: 1; transform: scale(1); }
+  80% { opacity: 0.2; transform: scale(0.75); }
+}
+.ff-burst { position: fixed; width: 0; height: 0; }
+.ff-burst i { position: absolute; left: -2px; top: -2px; width: 4px; height: 4px; opacity: 0; animation: ff-lift 2.4s cubic-bezier(0.2, 0.7, 0.3, 1) forwards; }
+@keyframes ff-lift {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.4); }
+  15% { opacity: 1; transform: translate(calc(var(--bx) * 0.3), -10px) scale(1); }
+  55% { opacity: 0.9; }
+  100% { opacity: 0; transform: translate(var(--bx), var(--by)) scale(0.6); }
+}
+@media (max-width: 700px) {
+  .ff-fly:nth-child(n+8) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ff-fly { animation: none; }
+  .ff-fly i { animation: none; opacity: 0.6; }
+}
+
