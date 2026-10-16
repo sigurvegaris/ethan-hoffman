@@ -60,12 +60,6 @@
 .hr-social a:hover { opacity: 1; transform: translateY(-1px); }
 .hr-social svg { width: 24px; height: 24px; }
 
-/* ── Statement ─────────────────────────────────────── */
-.st { padding: 22vh 0 18vh; }
-.st-line { font-family: var(--f-display); font-weight: 400; font-size: clamp(2.1rem, 4.6vw, 4.6rem); line-height: 1.14; letter-spacing: -0.022em; margin: 0; max-width: 20ch; }
-.st-line [data-w] { opacity: 0.14; transition: opacity 0.6s ease, transform 0.6s ease; }
-.st-line [data-w].lit { opacity: 1; }
-.st-em { font-style: italic; color: #e7cf98; }
 
 /* ── Releases (record sleeves) ─────────────────────── */
 .rl { padding: 6rem 0 10rem; }
@@ -210,7 +204,6 @@
   .hr-btn { height: 56px; font-size: 1.05rem; padding: 0 0.75rem; }
   .hr-social { gap: 1.3rem; }
   .hr-social svg { width: 21px; height: 21px; }
-  .st { padding: 14vh 0 10vh; }
   .rl { padding: 3rem 0 6rem; }
   .rl-grid { grid-template-columns: 1fr; gap: 3rem; }
   .rl-item:nth-child(n) { margin-top: 0; }

@@ -2,7 +2,6 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Press from './components/Press'
 import HeroRelease from './components/home/HeroRelease'
-import Statement from './components/home/Statement'
 import Releases from './components/home/Releases'
 import EpTracklist from './components/home/EpTracklist'
 import Sessions from './components/home/Sessions'
@@ -21,7 +20,6 @@ export default function Home() {
         <div className="fh-light" aria-hidden="true"><span /><span /><span /></div>
 
         <HeroRelease />
-        <Statement />
         <Releases />
         <EpTracklist />
         <Sessions />
