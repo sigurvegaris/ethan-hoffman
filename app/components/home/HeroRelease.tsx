@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { featuredSingle, listenLinks, formatReleaseDate } from '../../lib/release'
 import { useReleased } from '../../lib/useReleased'
+import { socialLinks } from '../../lib/social'
 
 function useNow() {
   const [now, setNow] = useState<number | null>(null)
@@ -53,8 +54,13 @@ export default function HeroRelease() {
         <div className="hr-row">
           {!out && <Countdown to={featuredSingle.releaseDate} />}
           <div className="hr-buttons">
-            <a className="glass-btn glass-btn-solid" href={spotify.url} target="_blank" rel="noopener noreferrer">{out ? 'listen now' : 'follow on spotify'}</a>
-            <a className="glass-btn" href={out ? youtube.url : '#day-one'} {...(out ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{out ? 'watch the session' : 'get notified'}</a>
+            <a className="hr-btn" href={spotify.url} target="_blank" rel="noopener noreferrer">{out ? 'listen now' : 'follow on spotify'}</a>
+            <a className="hr-btn" href={out ? youtube.url : '#day-one'} {...(out ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{out ? 'watch the session' : 'get notified'}</a>
+          </div>
+          <div className="hr-social">
+            {socialLinks.map((s) => (
+              <a key={s.label} href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.label} dangerouslySetInnerHTML={{ __html: s.icon }} />
+            ))}
           </div>
         </div>
       </div>
