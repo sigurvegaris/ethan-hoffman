@@ -370,3 +370,16 @@
   .fj-release { right: auto; left: 1.25rem; top: auto; bottom: 1rem; }
 }
 @media (prefers-reduced-motion: reduce) { .fj-fly, .fj-in, .fj-wing, .fj-held { animation: none; } }
+/* Letting them go: the lid pops and the fireflies climb out */
+.fj-lid.is-open { transform: translate(-22px, -30px) rotate(-28deg); transition: transform 0.45s cubic-bezier(0.3, 1.5, 0.5, 1); }
+.fj-lid { transition: transform 0.6s ease; }
+.fj-free { position: absolute; z-index: 6; left: 0; top: 0; width: 26px; height: 26px; margin: -13px 0 0 -13px; transform: translate(var(--fx), var(--fy)); animation: fj-escape 2.4s cubic-bezier(0.4, 0, 0.3, 1) both; pointer-events: none; }
+@keyframes fj-escape {
+  0% { transform: translate(var(--fx), var(--fy)) scale(0.7); }
+  30% { transform: translate(var(--mx), var(--my)) scale(0.85); }
+  55% { transform: translate(var(--ox), var(--oy)) scale(1.1); }
+  100% { transform: translate(var(--tx), var(--ty)) scale(1); }
+}
+.fj-fly { animation-fill-mode: both; }
+.fj-fly .fj-bug { animation: fj-appear 0.8s ease both; }
+@keyframes fj-appear { from { opacity: 0; } to { opacity: 1; } }

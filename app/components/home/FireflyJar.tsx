@@ -45,7 +45,7 @@ function Fly({ className }: { className?: string }) {
   )
 }
 
-function Jar({ glow, full }: { glow: number; full: boolean }) {
+function Jar({ glow, full, open }: { glow: number; full: boolean; open: boolean }) {
   return (
     <svg className="fj-jar-svg" viewBox="0 0 140 204" aria-hidden="true">
       <defs>
@@ -97,7 +97,7 @@ function Jar({ glow, full }: { glow: number; full: boolean }) {
       <rect x="38" y="32" width="64" height="16" rx="3" fill="url(#fj-glass)" stroke="#f0ebdc" strokeOpacity="0.45" />
       <path d="M40 37 L100 35 M40 42 L100 40" stroke="#fff" strokeOpacity="0.18" />
       {/* Brass screw lid with holes poked in it */}
-      <g className={`fj-lid ${full ? 'is-tight' : ''}`}>
+      <g className={`fj-lid ${open ? 'is-open' : full ? 'is-tight' : ''}`}>
         <rect x="33" y="14" width="74" height="22" rx="3.5" fill="url(#fj-brass)" />
         {Array.from({ length: 17 }, (_, k) => (
           <line key={k} x1={37 + k * 4} y1="16" x2={37 + k * 4} y2="34" stroke="#000" strokeOpacity="0.18" strokeWidth="0.8" />
@@ -117,7 +117,8 @@ export default function FireflyJar() {
   const flyEls = useRef<(HTMLButtonElement | null)[]>([])
   const drag = useRef<{ dx: number; dy: number; sx: number; sy: number; moved: boolean } | null>(null)
   const timer = useRef<number | undefined>(undefined)
-  const [size, setSize] = useState({ w: 0, h: 0, jw: 150 })
+  const [size, setSize] = useState({ w: 0, h: 0, jw: 150, jh: 218 })
+  const [freeing, setFreeing] = useState<{ q: number; vars: Record<string, string>; delay: number }[] | null>(null)
   const [jar, setJar] = useState<Pt | null>(null)
   const [caught, setCaught] = useState<number[]>([])
   const caughtRef = useRef<number[]>([])
@@ -136,7 +137,7 @@ export default function FireflyJar() {
     const measure = () => {
       const w = f.clientWidth, h = f.clientHeight
       const jw = jarEl.current?.offsetWidth ?? 150, jh = jarEl.current?.offsetHeight ?? 220
-      setSize({ w, h, jw })
+      setSize({ w, h, jw, jh })
       setJar((p) => {
         const def = w < 700 ? { x: (w - jw) / 2, y: h - jh - 24 } : { x: w - jw - Math.max(32, (w - 1240) / 2), y: h - jh - 32 }
         if (!p) return def
@@ -224,6 +225,35 @@ export default function FireflyJar() {
     if (hit) setReread(Number((hit as HTMLElement).dataset.q))
   }
 
+  // Letting them go: the lid pops off and each firefly climbs out of the
+  // mouth of the jar, one after another, and flies back to where it was.
+  const letGo = () => {
+    if (!jar) return
+    setReread(null)
+    const mouth = { x: jar.x + size.jw / 2, y: jar.y + size.jh * 0.08 }
+    setFreeing(caught.map((q, n) => {
+      const [sx, sy] = slots[n % slots.length]
+      const from = { x: jar.x + (size.jw * sx) / 100, y: jar.y + (size.jh * sy) / 100 }
+      const to = { x: (spots[q].left / 100) * size.w, y: (spots[q].top / 100) * size.h }
+      const side = n % 2 ? 1 : -1
+      return {
+        q,
+        delay: 350 + n * 260,
+        vars: {
+          '--fx': `${from.x}px`, '--fy': `${from.y}px`,
+          '--mx': `${mouth.x}px`, '--my': `${mouth.y}px`,
+          '--ox': `${mouth.x + side * (40 + n * 12)}px`, '--oy': `${Math.max(20, mouth.y - 90 - n * 10)}px`,
+          '--tx': `${to.x}px`, '--ty': `${to.y}px`,
+        },
+      }
+    }))
+  }
+  const done = () => {
+    setFreeing(null)
+    setCaught([])
+    setRound((r) => r + 1)
+  }
+
   if (!quotes.length) return null
   const full = caught.length === quotes.length
   const glow = Math.min(1, caught.length / quotes.length)
@@ -238,11 +268,11 @@ export default function FireflyJar() {
   return (
     <div className={`fj ${full ? 'is-full' : ''}`} ref={field}>
       <div className="fj-hud">
-        <p className="fj-title">{full ? 'You caught every one.' : 'Catch what he said.'}</p>
+        <p className="fj-title">{freeing ? 'There they go.' : full ? 'You caught every one.' : 'Catch what he said.'}</p>
         <div className="fj-count" aria-label={`${caught.length} of ${quotes.length} caught`}>
           {quotes.map((_, i) => <span key={i} className={i < caught.length ? 'on' : ''} />)}
         </div>
-        <p className="fj-tip">{full ? 'tap one in the jar to hear it again' : 'tap a firefly, or drag the jar to scoop one'}</p>
+        <p className="fj-tip">{freeing ? 'catch them again' : full ? 'tap one in the jar to hear it again' : 'tap a firefly, or drag the jar to scoop one'}</p>
       </div>
 
       {quotes.map((_, i) => {
@@ -311,8 +341,8 @@ export default function FireflyJar() {
         role="img"
         aria-label={`A firefly jar with ${caught.length} fireflies in it. Drag it around to scoop fireflies.`}
       >
-        <Jar glow={glow} full={full} />
-        {caught.map((q, n) => {
+        <Jar glow={freeing ? 0 : glow} full={full} open={!!freeing} />
+        {!freeing && caught.map((q, n) => {
           const [x, y] = slots[n % slots.length]
           return (
             <span key={q} data-q={q} className={`fj-in ${reread === q ? 'is-on' : ''}`} style={{ left: `${x}%`, top: `${y}%`, animationDelay: `${-n * 0.9}s`, animationDuration: `${3.4 + (n % 3) * 0.6}s` }}>
@@ -322,8 +352,20 @@ export default function FireflyJar() {
         })}
       </div>
 
-      {full && (
-        <button type="button" className="fj-release" onClick={() => { setCaught([]); setReread(null); setRound((r) => r + 1) }}>
+      {freeing && freeing.map((f, n) => (
+        <span
+          key={f.q}
+          className="fj-free"
+          style={{ ...f.vars, animationDelay: `${f.delay}ms` }}
+          onAnimationEnd={n === freeing.length - 1 ? (e) => { if (e.target === e.currentTarget) done() } : undefined}
+          aria-hidden="true"
+        >
+          <Fly />
+        </span>
+      ))}
+
+      {full && !freeing && (
+        <button type="button" className="fj-release" onClick={letGo}>
           let them go
         </button>
       )}
