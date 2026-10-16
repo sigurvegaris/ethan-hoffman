@@ -19,7 +19,8 @@ const spots = quotes.map((_, i) => ({ left: 14 + ((i * 37) % 72), top: 28 + ((i 
 const slots = [[40, 72], [60, 62], [50, 84], [33, 56], [66, 80], [47, 50], [56, 74], [36, 86]]
 
 type Pt = { x: number; y: number }
-type Held = { i: number; at: Pt; to?: Pt; phase: 'speaking' | 'flying' }
+type Held = { i: number; at: Pt }
+type Flight = { i: number; at: Pt; to: Pt; go: boolean }
 
 function Fly({ className }: { className?: string }) {
   return (
@@ -117,6 +118,11 @@ export default function FireflyJar() {
   const [held, setHeld] = useState<Held | null>(null)
   const heldRef = useRef<Held | null>(null)
   const [reread, setReread] = useState<number | null>(null)
+  const [flights, setFlights] = useState<Flight[]>([])
+  const flightsRef = useRef<Flight[]>([])
+  // A stopwatch for the competitive: from the first catch to the last.
+  const startedAt = useRef<number | null>(null)
+  const [time, setTime] = useState<{ last: number; best: number } | null>(null)
   const [round, setRound] = useState(0)
   const bugs = useRef(new Map<number, Bug>())
 
@@ -178,38 +184,57 @@ export default function FireflyJar() {
     return { x: r.left + r.width / 2 - f.left, y: r.top + r.height / 2 - f.top }
   }
 
+  // Send the firefly that is talking into the jar. Several can be in the air
+  // at once, so a fast player never has to wait for the quote to finish.
   const send = useCallback(() => {
     const h = heldRef.current
-    if (!h || h.phase !== 'speaking' || !jarEl.current) return
+    if (!h || !jarEl.current) return
     window.clearTimeout(timer.current)
     const j = jarEl.current.getBoundingClientRect()
     const f = field.current!.getBoundingClientRect()
-    const [sx, sy] = slots[caughtRef.current.length % slots.length]
-    const next: Held = { ...h, phase: 'flying', to: { x: j.left - f.left + (j.width * sx) / 100, y: j.top - f.top + (j.height * sy) / 100 } }
-    heldRef.current = next
-    setHeld(next)
+    const [sx, sy] = slots[(caughtRef.current.length + flightsRef.current.length) % slots.length]
+    const flight: Flight = { i: h.i, at: h.at, to: { x: j.left - f.left + (j.width * sx) / 100, y: j.top - f.top + (j.height * sy) / 100 }, go: false }
+    flightsRef.current = [...flightsRef.current, flight]
+    setFlights(flightsRef.current)
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      flightsRef.current = flightsRef.current.map((x) => (x.i === h.i ? { ...x, go: true } : x))
+      setFlights(flightsRef.current)
+    }))
+    heldRef.current = null
+    setHeld(null)
   }, [])
 
   const grab = useCallback((i: number) => {
-    if (heldRef.current) { if (heldRef.current.i === i) send(); return }
+    if (heldRef.current?.i === i) { send(); return }
+    if (heldRef.current) send()
     const el = flyEls.current[i]
     if (!el || !field.current) return
+    if (startedAt.current === null) startedAt.current = performance.now()
     setReread(null)
     bugs.current.delete(i)
-    const next: Held = { i, at: rel(el.getBoundingClientRect()), phase: 'speaking' }
+    const next: Held = { i, at: rel(el.getBoundingClientRect()) }
     heldRef.current = next
     setHeld(next)
     window.clearTimeout(timer.current)
     timer.current = window.setTimeout(send, SPEAK_MS)
   }, [send])
 
-  const land = (e: React.TransitionEvent) => {
-    const h = heldRef.current
-    if (!h || h.phase !== 'flying' || e.propertyName !== 'top') return
-    caughtRef.current = [...caughtRef.current, h.i]
+  const land = (i: number, e: React.TransitionEvent) => {
+    if (e.propertyName !== 'top' || !flightsRef.current.some((x) => x.i === i && x.go)) return
+    flightsRef.current = flightsRef.current.filter((x) => x.i !== i)
+    setFlights(flightsRef.current)
+    caughtRef.current = [...caughtRef.current, i]
     setCaught(caughtRef.current)
-    heldRef.current = null
-    setHeld(null)
+    if (caughtRef.current.length === quotes.length && startedAt.current !== null) {
+      const last = (e.timeStamp - startedAt.current) / 1000
+      let best = last
+      try {
+        const prev = Number(localStorage.getItem('eh-firefly-best'))
+        if (prev > 0 && prev < best) best = prev
+        localStorage.setItem('eh-firefly-best', String(best))
+      } catch {}
+      setTime({ last, best })
+    }
   }
 
   // Dragging the jar. A press that barely moves counts as a tap, which
@@ -232,11 +257,10 @@ export default function FireflyJar() {
       y: Math.min(Math.max(0, e.clientY - f.top - d.dy), f.height - jh),
     })
     // Scoop: any wild firefly inside the jar's mouth or body gets caught.
-    if (heldRef.current) return
     const j = jarEl.current.getBoundingClientRect()
     const box = { l: j.left + j.width * 0.12, r: j.right - j.width * 0.12, t: j.top + j.height * 0.05, b: j.bottom - j.height * 0.1 }
     flyEls.current.forEach((el, i) => {
-      if (!el || heldRef.current) return
+      if (!el || heldRef.current?.i === i) return
       const r = el.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2
       if (cx > box.l && cx < box.r && cy > box.t && cy < box.b) grab(i)
     })
@@ -274,6 +298,8 @@ export default function FireflyJar() {
     }))
   }
   const done = () => {
+    startedAt.current = null
+    setTime(null)
     setFreeing(null)
     setCaught([])
     setRound((r) => r + 1)
@@ -293,15 +319,15 @@ export default function FireflyJar() {
   return (
     <div className={`fj ${full ? 'is-full' : ''}`} ref={field}>
       <div className="fj-hud">
-        <p className="fj-title">{freeing ? 'There they go.' : full ? 'You caught every one.' : 'Catch what he said.'}</p>
+        <p className="fj-title">{freeing ? 'There they go.' : full && time ? `All ${quotes.length} in ${time.last.toFixed(1)} seconds.` : full ? 'You caught every one.' : 'Catch what he said.'}</p>
         <div className="fj-count" aria-label={`${caught.length} of ${quotes.length} caught`}>
           {quotes.map((_, i) => <span key={i} className={i < caught.length ? 'on' : ''} />)}
         </div>
-        <p className="fj-tip">{freeing ? 'catch them again' : full ? 'tap one in the jar to hear it again' : 'tap a firefly, or drag the jar to scoop one'}</p>
+        <p className="fj-tip">{freeing ? 'catch them again' : full && time ? `your best ${time.best.toFixed(1)}s · tap one in the jar to hear it again` : full ? 'tap one in the jar to hear it again' : 'tap a firefly, or drag the jar to scoop one'}</p>
       </div>
 
       {quotes.map((_, i) => {
-        if (caught.includes(i) || held?.i === i) return null
+        if (caught.includes(i) || held?.i === i || flights.some((x) => x.i === i)) return null
         return (
           <button
             key={`${round}-${i}`}
@@ -317,18 +343,25 @@ export default function FireflyJar() {
       })}
 
       {held && (
-        <span
-          className={`fj-held ${held.phase === 'flying' ? 'is-flying' : ''}`}
-          style={{ left: held.phase === 'flying' ? held.to!.x : held.at.x, top: held.phase === 'flying' ? held.to!.y : held.at.y }}
-          onClick={send}
-          onTransitionEnd={land}
-        >
+        <span className="fj-held" style={{ left: held.at.x, top: held.at.y }} onClick={send}>
           <Fly />
         </span>
       )}
 
+      {flights.map((x) => (
+        <span
+          key={x.i}
+          className="fj-held is-flying"
+          style={{ left: x.go ? x.to.x : x.at.x, top: x.go ? x.to.y : x.at.y }}
+          onTransitionEnd={(e) => land(x.i, e)}
+          aria-hidden="true"
+        >
+          <Fly />
+        </span>
+      ))}
+
       {held && size.w > 0 && (
-        <div className={`fj-say ${held.phase === 'flying' ? 'is-gone' : ''}`} style={bubbleAt(held.at)} aria-live="polite" onClick={send}>
+        <div key={held.i} className="fj-say" style={bubbleAt(held.at)} aria-live="polite" onClick={send}>
           <p>“{quotes[held.i].q}”</p>
           <footer>{quotes[held.i].who}</footer>
           <span className="fj-timer" style={{ animationDuration: `${SPEAK_MS}ms` }} />
@@ -376,7 +409,7 @@ export default function FireflyJar() {
         </span>
       ))}
 
-      {caught.length > 0 && !held && !freeing && (
+      {caught.length > 0 && !held && !flights.length && !freeing && (
         <button type="button" className="fj-release" onClick={letGo}>
           let them go
         </button>
