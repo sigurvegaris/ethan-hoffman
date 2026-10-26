@@ -28,6 +28,12 @@ const testimonials = [
     role: 'Special Events Manager',
     venue: '',
   },
+  {
+    quote: "Ethan was an absolute pleasure to have perform at several of our Continental Development events. What really stood out was his ability to “read the room” and connect with his audience. He has a wonderful way of making his performance feel both polished and personal. We received numerous positive comments from our guests about how wonderful it was to have Ethan performing in our courtyards, and we look forward to having him back!",
+    name: 'Ruben Barajas',
+    role: 'Continental Development Corporation',
+    venue: '',
+  },
 ]
 
 export default function Testimonials() {
@@ -267,7 +273,22 @@ export default function Testimonials() {
             </div>
           </div>
 
-          {/* Row 3: One full width */}
+          {/* Row 3: Ruben featured full width */}
+          <div className="t-grid">
+            <div className="t-card featured">
+              <div className="t-quote-mark">&ldquo;</div>
+              <p className="t-quote">{testimonials[4].quote}</p>
+              <div className="t-attribution">
+                <div className="t-avatar">{testimonials[4].name[0]}</div>
+                <div>
+                  <p className="t-name">{testimonials[4].name}</p>
+                  <p className="t-role">{testimonials[4].role}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Row 4: One full width */}
           <div className="t-grid">
             <div className="t-card" style={{ gridColumn: '1 / -1' }}>
               <div className="t-quote-mark">&ldquo;</div>

@@ -24,6 +24,31 @@ const quickLinks = [
   { label: 'contact', href: '/contact' },
 ]
 
+// India easter egg: "los angeles" is a way out. Tap it for a one-way ticket.
+function LeavingCalifornia() {
+  const [open, setOpen] = useState(false)
+  return (
+    <span className="eh-lc">
+      <button type="button" className="eh-lc-city" onClick={() => setOpen((o) => !o)} aria-expanded={open}>
+        <span className="eh-lc-a">los angeles</span>
+        <span className="eh-lc-b" aria-hidden="true">leaving california</span>
+      </button>
+      {open && (
+        <span className="eh-lc-ticket" role="note">
+          <span className="eh-lc-row"><b>LAX</b><i>✈</i><b>DEL</b></span>
+          <span className="eh-lc-grid">
+            <span><em>passenger</em>you</span>
+            <span><em>class</em>one way</span>
+            <span><em>fare</em>no money</span>
+            <span><em>seat</em>no bed</span>
+          </span>
+          <span className="eh-lc-foot">destination: sweet india</span>
+        </span>
+      )}
+    </span>
+  )
+}
+
 export default function Footer() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
@@ -64,6 +89,26 @@ export default function Footer() {
         .eh-foot-bottom { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 2.5rem; font-size: 0.78rem; letter-spacing: 0.18em; color: rgba(242,236,223,0.5); }
         .eh-foot-bottom a { color: inherit; text-decoration: none; }
         .eh-foot-bottom a:hover { color: #f2ecdf; }
+        .eh-lc { position: relative; }
+        .eh-lc-city { font: inherit; letter-spacing: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; display: inline-grid; }
+        .eh-lc-city > span { grid-area: 1 / 1; transition: opacity 0.35s ease, transform 0.35s ease; }
+        .eh-lc-b { opacity: 0; transform: translateY(6px); color: #e2a75a; }
+        .eh-lc-city:hover .eh-lc-a, .eh-lc-city[aria-expanded='true'] .eh-lc-a { opacity: 0; transform: translateY(-6px); }
+        .eh-lc-city:hover .eh-lc-b, .eh-lc-city[aria-expanded='true'] .eh-lc-b { opacity: 1; transform: none; }
+        .eh-lc-ticket {
+          position: absolute; left: 0; bottom: calc(100% + 14px); z-index: 5; width: 250px; padding: 1rem 1.1rem 0.9rem;
+          background: #f2ecdf; color: #1c1a15; letter-spacing: 0.08em; border-radius: 10px; box-shadow: 0 18px 40px rgba(0,0,0,0.4);
+          -webkit-mask: radial-gradient(circle 8px at 0 68%, transparent 98%, #000) , radial-gradient(circle 8px at 100% 68%, transparent 98%, #000);
+          -webkit-mask-composite: source-in; mask: radial-gradient(circle 8px at 0 68%, transparent 98%, #000), radial-gradient(circle 8px at 100% 68%, transparent 98%, #000);
+          mask-composite: intersect; animation: eh-lc-in 0.35s ease;
+        }
+        .eh-lc-row { display: flex; align-items: center; justify-content: space-between; font-family: var(--f-display); font-size: 1.9rem; letter-spacing: 0.02em; }
+        .eh-lc-row i { font-style: normal; font-size: 1rem; color: #d2703a; }
+        .eh-lc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 1rem; margin: 0.7rem 0 0.9rem; font-size: 0.72rem; }
+        .eh-lc-grid span { display: flex; flex-direction: column; }
+        .eh-lc-grid em { font-style: normal; font-size: 0.58rem; opacity: 0.55; text-transform: uppercase; }
+        .eh-lc-foot { display: block; padding-top: 0.7rem; border-top: 1px dashed rgba(28,26,21,0.35); font-family: var(--f-hand); font-size: 1.35rem; letter-spacing: 0; color: #d2703a; }
+        @keyframes eh-lc-in { from { opacity: 0; transform: translateY(8px) rotate(-2deg); } }
         .eh-foot-contact { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
         .eh-foot-social { display: flex; gap: 1rem; }
         .eh-foot-social a { color: rgba(242,236,223,0.8); display: flex; }
@@ -104,7 +149,7 @@ export default function Footer() {
         </nav>
 
         <div className="eh-foot-bottom">
-          <span>© {new Date().getFullYear()} ethan hoffman · los angeles</span>
+          <span>© {new Date().getFullYear()} ethan hoffman · <LeavingCalifornia /></span>
           <span className="eh-foot-contact">
             {contactItems.filter((c) => c.url && c.label === 'Email').map((c) => <a key={c.label} href={c.url!}>{c.value}</a>)}
           </span>

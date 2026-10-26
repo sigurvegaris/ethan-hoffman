@@ -39,6 +39,10 @@ const youtube = listenLinks.find((l) => l.label === 'YouTube')!
 
 export default function HeroRelease() {
   const out = useReleased(featuredSingle.releaseDate)
+  // India easter egg: dither between the two buttons long enough and the
+  // song answers. "I've dealt with indecision too many times to count."
+  const [dither, setDither] = useState({ last: -1, n: 0 })
+  const hover = (i: number) => () => setDither((d) => (d.last === i ? d : { last: i, n: d.n + 1 }))
   const day = formatReleaseDate(featuredSingle.releaseDate).replace(/, \d{4}$/, '').toLowerCase().replace('november', 'nov.')
 
   return (
@@ -54,8 +58,9 @@ export default function HeroRelease() {
         <div className="hr-row">
           {!out && <Countdown to={featuredSingle.releaseDate} />}
           <div className="hr-buttons">
-            <a className="hr-btn" href={spotify.url} target="_blank" rel="noopener noreferrer">{out ? 'listen now' : 'follow on spotify'}</a>
-            <a className="hr-btn" href={out ? youtube.url : '#day-one'} {...(out ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{out ? 'watch the session' : 'get notified'}</a>
+            <a className="hr-btn" onPointerEnter={hover(0)} href={spotify.url} target="_blank" rel="noopener noreferrer">{out ? 'listen now' : 'follow on spotify'}</a>
+            <a className="hr-btn" onPointerEnter={hover(1)} href={out ? youtube.url : '#day-one'} {...(out ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{out ? 'watch the session' : 'get notified'}</a>
+            <p className={`hr-indecision${dither.n >= 7 ? ' is-on' : ''}`} aria-hidden="true">too many times to count</p>
           </div>
           <div className="hr-social">
             {socialLinks.map((s) => (
