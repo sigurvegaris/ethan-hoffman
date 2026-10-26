@@ -17,6 +17,11 @@ const featuredVenues = [
   { name: 'The Lighthouse Cafe', logo: '/images/lighthousecafelogo.png', size: 120, white: false },
   { name: 'Torrance Memorial', logo: '/images/torrancememoriallogo.png', size: 130, white: false },
   { name: 'USC', logo: '/images/usclogo.png', size: 110, white: false },
+  { name: 'Terranea Resort', logo: '/images/terranealogo.png', size: 92, white: false },
+  { name: 'The Portofino Hotel & Marina', logo: '/images/portofinologo.png', size: 64, white: false },
+  { name: 'Rolling Hills Country Club', logo: '/images/rollinghillslogo.png', size: 88, white: false },
+  { name: 'The Strand House', logo: '/images/strandhouselogo.png', size: 30, white: false },
+  { name: 'The Rockefeller', logo: '/images/rockefellerlogo.png', size: 40, white: false },
 ]
 
 const otherVenues = [
@@ -147,6 +152,16 @@ export default function Venues() {
           transition: background-color 0.3s ease;
         }
 
+        .venue-more {
+          grid-column: span 3;
+          display: flex; align-items: center; justify-content: center; gap: 0.8rem; min-height: 160px;
+          background-color: var(--green-2); color: var(--cream-dim); text-decoration: none;
+          font-family: var(--f-display); font-style: italic; font-size: 1.5rem; transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .venue-more i { font-style: normal; color: var(--amber); transition: transform 0.3s ease; }
+        .venue-more:hover { background-color: #323e2d; color: var(--cream); }
+        .venue-more:hover i { transform: translateY(4px); }
+
         .venue-logo-wrap {
           width: 100%;
           height: 84px;
@@ -192,6 +207,7 @@ export default function Venues() {
 
         @media (max-width: 1024px) {
           .featured-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+          .venue-more { grid-column: span 1; }
           .other-venues-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
 
@@ -200,7 +216,17 @@ export default function Venues() {
           .venues-hero { padding: 8.5rem 0 3rem !important; }
           .featured-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 3.5rem; }
           .venue-tile { min-height: 120px; padding: 0.75rem; }
-          .venue-logo-wrap { height: 54px; }
+          .venue-more {
+          grid-column: span 3;
+          display: flex; align-items: center; justify-content: center; gap: 0.8rem; min-height: 160px;
+          background-color: var(--green-2); color: var(--cream-dim); text-decoration: none;
+          font-family: var(--f-display); font-style: italic; font-size: 1.5rem; transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .venue-more i { font-style: normal; color: var(--amber); transition: transform 0.3s ease; }
+        .venue-more:hover { background-color: #323e2d; color: var(--cream); }
+        .venue-more:hover i { transform: translateY(4px); }
+
+        .venue-logo-wrap { height: 54px; }
           .venue-logo { max-width: 76%; }
           .other-venues-grid { grid-template-columns: 1fr; }
         }
@@ -208,14 +234,34 @@ export default function Venues() {
         @media (max-width: 480px) {
           .venues-shell { width: min(1200px, calc(100% - 1.5rem)); }
           .venue-tile { min-height: 104px; padding: 0.6rem; }
-          .venue-logo-wrap { height: 42px; }
+          .venue-more {
+          grid-column: span 3;
+          display: flex; align-items: center; justify-content: center; gap: 0.8rem; min-height: 160px;
+          background-color: var(--green-2); color: var(--cream-dim); text-decoration: none;
+          font-family: var(--f-display); font-style: italic; font-size: 1.5rem; transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .venue-more i { font-style: normal; color: var(--amber); transition: transform 0.3s ease; }
+        .venue-more:hover { background-color: #323e2d; color: var(--cream); }
+        .venue-more:hover i { transform: translateY(4px); }
+
+        .venue-logo-wrap { height: 42px; }
           .venue-logo { max-width: 72%; }
           .venue-hover-overlay p { font-size: 0.68rem !important; letter-spacing: 0.08em !important; }
         }
 
         @media (hover: none) and (pointer: coarse) {
           .venue-hover-overlay { display: none; }
-          .venue-logo-wrap { opacity: 1 !important; transform: none !important; }
+          .venue-more {
+          grid-column: span 3;
+          display: flex; align-items: center; justify-content: center; gap: 0.8rem; min-height: 160px;
+          background-color: var(--green-2); color: var(--cream-dim); text-decoration: none;
+          font-family: var(--f-display); font-style: italic; font-size: 1.5rem; transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .venue-more i { font-style: normal; color: var(--amber); transition: transform 0.3s ease; }
+        .venue-more:hover { background-color: #323e2d; color: var(--cream); }
+        .venue-more:hover i { transform: translateY(4px); }
+
+        .venue-logo-wrap { opacity: 1 !important; transform: none !important; }
         }
       `}</style>
 
@@ -246,9 +292,14 @@ export default function Venues() {
             {featuredVenues.map((venue, i) => (
               <VenueTile key={i} venue={venue} />
             ))}
+            {/* Rounds out the last row and points to the full list below. */}
+            <a href="#more-venues" className="venue-more">
+              <span>and {otherVenues.length} more</span>
+              <i aria-hidden="true">↓</i>
+            </a>
           </div>
 
-          <div style={{ borderTop: '1px solid rgba(242,236,223,0.12)', paddingTop: '3rem' }}>
+          <div id="more-venues" style={{ scrollMarginTop: '6rem', borderTop: '1px solid rgba(242,236,223,0.12)', paddingTop: '3rem' }}>
             <p style={{ fontFamily: 'var(--f-mono)', fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--amber)', marginBottom: '0.75rem', textAlign: 'center' }}>
               More Venues
             </p>
