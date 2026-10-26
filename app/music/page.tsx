@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useReleased } from '../lib/useReleased'
 import { singles, ep, listenLinks, formatReleaseDate } from '../lib/release'
+import IndiaStory from './IndiaStory'
 
 const spotify = listenLinks.find((l) => l.label === 'Spotify')!
 
@@ -155,6 +156,8 @@ export default function Music() {
               <button key={r.title} type="button" className={`mu-dot ${i === index ? 'on' : ''}`} onClick={() => setIndex(i)} aria-label={`Show ${r.title}`} />
             ))}
           </div>
+
+          <IndiaStory />
 
           <div className="mu-ep">
             <div>

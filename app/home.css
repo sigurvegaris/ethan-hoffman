@@ -405,3 +405,4 @@
 @media (max-width: 700px) { .nf-copy { width: calc(100% - 2.5rem); padding-bottom: 4rem; } }
 
 @media (prefers-reduced-motion: reduce) { .hr-title { animation: none; } }
+.rl-listen + .rl-story { margin-left: 1.2rem; }
