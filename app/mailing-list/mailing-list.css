@@ -63,13 +63,24 @@
 .ml-firefly input { position: absolute; opacity: 0; pointer-events: none; }
 .ml-firefly:has(input:focus-visible) { border-color: var(--amber); }
 .ml-firefly.is-miss { border-color: var(--rust); animation: ml-shake 0.4s ease; }
-.ml-firefly-bug { position: relative; flex: none; width: 3rem; height: 3rem; border-radius: 50%; display: grid; place-items: center; background: rgba(20,26,18,0.6); }
-.ml-firefly-bug i { width: 0.8rem; height: 0.8rem; border-radius: 50%; background: rgba(230,225,210,0.25); transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease; animation: ml-ember 2.6s ease-in-out infinite; }
-.ml-firefly.is-on .ml-firefly-bug i { background: #fbeeb0; transform: scale(1.15); animation: none; box-shadow: 0 0 10px 3px rgba(251,238,176,0.85), 0 0 34px 12px rgba(241,220,156,0.35); }
+.ml-firefly-bug { position: relative; flex: none; width: 3.6rem; height: 3.6rem; border-radius: 50%; display: grid; place-items: center; background: rgba(20,26,18,0.6); }
+.ml-ff { width: 3rem; height: 3rem; overflow: visible; }
+.ml-ff-wing { fill: rgba(230,225,210,0.16); stroke: rgba(230,225,210,0.45); stroke-width: 0.8; transform-box: fill-box; transform-origin: 50% 85%; }
+.ml-ff-ant { fill: none; stroke: rgba(230,225,210,0.55); stroke-width: 1; stroke-linecap: round; }
+.ml-ff-body { fill: #3b3324; stroke: rgba(230,225,210,0.35); stroke-width: 0.6; }
+.ml-ff-head { fill: #c4622d; }
+.ml-ff-tail { fill: #6d6a52; transition: fill 0.4s ease; }
+.ml-ff-glow { fill: #fbeeb0; opacity: 0; filter: blur(4px); transition: opacity 0.4s ease; }
+.ml-firefly:not(.is-on) .ml-ff-tail { animation: ml-ember 2.6s ease-in-out infinite; }
+.ml-firefly:hover .ml-ff-wing { animation: ml-flutter 0.18s ease-in-out infinite alternate; }
+.ml-firefly.is-on .ml-ff-tail { fill: #fdf3c4; }
+.ml-firefly.is-on .ml-ff-glow { opacity: 0.75; }
+.ml-firefly.is-on .ml-firefly-bug { box-shadow: 0 0 30px 6px rgba(241,220,156,0.25); }
+@keyframes ml-flutter { to { transform: rotate(10deg) scaleX(0.8); } }
 .ml-firefly-text { font-size: 0.92rem; line-height: 1.45; color: var(--cream-dim); }
 .ml-firefly-text b { display: block; font-family: var(--f-hand); font-weight: 400; font-size: 1.55rem; line-height: 1.1; color: var(--haze); margin-bottom: 0.15rem; }
 .ml-firefly.is-on .ml-firefly-text b { color: #fbeeb0; }
-@keyframes ml-ember { 50% { background: rgba(230,225,210,0.45); } }
+@keyframes ml-ember { 50% { fill: #a9a274; } }
 @keyframes ml-shake { 20%, 60% { transform: translateX(-5px); } 40%, 80% { transform: translateX(5px); } }
 
 .ml-nudge { font-family: var(--f-hand); font-size: 1.5rem; line-height: 1.15; color: var(--amber); margin: -0.6rem 0 1.2rem; }

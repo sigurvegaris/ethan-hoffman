@@ -717,7 +717,7 @@ p {
 /* ── Fireflies on every page ───────────────────────── */
 .ff { position: fixed; inset: 0; z-index: 60; pointer-events: none; overflow: hidden; }
 .ff-fly { position: absolute; animation-name: ff-wander; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
-.ff-fly i, .ff-burst i { display: block; border-radius: 50%; background: #fbeeb0; box-shadow: 0 0 6px 1px rgba(251,238,176,0.7), 0 0 16px 5px rgba(241,220,156,0.22); }
+.ff-fly i, .ff-burst i { display: block; border-radius: 50%; background: #fdf3c4; box-shadow: 0 0 8px 2px rgba(251,238,176,0.85), 0 0 22px 7px rgba(241,220,156,0.32); }
 .ff-fly i { animation: ff-blink ease-in-out infinite; }
 @keyframes ff-wander {
   0%, 100% { transform: translate(0, 0); }
@@ -726,10 +726,10 @@ p {
   75% { transform: translate(var(--x3), var(--y3)); }
 }
 @keyframes ff-blink {
-  0%, 100% { opacity: 0.08; transform: scale(0.6); }
-  35% { opacity: 0.25; }
-  50%, 60% { opacity: 1; transform: scale(1); }
-  80% { opacity: 0.2; transform: scale(0.75); }
+  0%, 100% { opacity: 0.18; transform: scale(0.65); }
+  30% { opacity: 0.4; }
+  45%, 65% { opacity: 1; transform: scale(1); }
+  82% { opacity: 0.3; transform: scale(0.8); }
 }
 .ff-burst { position: fixed; width: 0; height: 0; }
 .ff-burst i { position: absolute; left: -2px; top: -2px; width: 4px; height: 4px; opacity: 0; animation: ff-lift 2.4s cubic-bezier(0.2, 0.7, 0.3, 1) forwards; }

@@ -24,7 +24,7 @@ export default function FanNotebook() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault()
     const n = name.trim()
-    if (!n) return
+    if (!n || !email.trim()) return
     setStatus('sending')
     try {
       await sendFanNote('Day One notebook', {
@@ -71,7 +71,7 @@ export default function FanNotebook() {
               <form onSubmit={submit} className="d1-form">
                 <input className="d1-input" required maxLength={40} placeholder="first name" value={name} onChange={(e) => setName(e.target.value)} aria-label="First name" />
                 <input className="d1-input" maxLength={60} placeholder="where you’re listening from" value={place} onChange={(e) => setPlace(e.target.value)} aria-label="Where you're listening from" />
-                <input className="d1-input" type="email" maxLength={80} placeholder="email, for new music (optional)" value={email} onChange={(e) => setEmail(e.target.value)} aria-label="Email, optional" />
+                <input className="d1-input" type="email" required maxLength={80} placeholder="email, for new music" value={email} onChange={(e) => setEmail(e.target.value)} aria-label="Email" />
                 <button type="submit" className="glass-btn glass-btn-solid d1-btn" disabled={status === 'sending'}>
                   {status === 'sending' ? 'adding you…' : 'add my name'}
                 </button>

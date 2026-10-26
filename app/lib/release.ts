@@ -21,6 +21,14 @@ export const ep = {
   runtime: '27 minutes',
 }
 
+// Every song on the EP, in order. The last two arrive with the EP itself.
+export const epTracks = [
+  { title: singles[0].title, releaseDate: singles[0].releaseDate },
+  { title: singles[1].title, releaseDate: singles[1].releaseDate },
+  { title: 'We Fell Accidentally', releaseDate: ep.releaseDate },
+  { title: 'Making It Up As We Go', releaseDate: ep.releaseDate },
+]
+
 export const featuredSingle = singles[0]
 
 // Streaming + social links shown on the release banner. Swap the India-specific

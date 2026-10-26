@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Script from 'next/script'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import Bandsintown from './Bandsintown'
 
 export default function Shows() {
   return (
@@ -56,6 +57,8 @@ export default function Shows() {
             >
               Catch Ethan live — tickets and details below
             </p>
+
+            <Link href="/contact" className="sh-book">book ethan</Link>
           </div>
         </div>
 
@@ -110,36 +113,34 @@ export default function Shows() {
               font-size: 1.5rem !important;
             }
 
+            .bit-event, .bit-event *, .bit-no-events-title { color: #ffffff !important; }
+            .bit-date { color: var(--amber) !important; }
+
+            /* Book Ethan up top, the same big cream button as the homepage hero. */
+            .sh-book {
+              display: inline-flex; align-items: center; justify-content: center; margin-top: 2rem;
+              height: 64px; width: min(330px, 100%); background: var(--haze); color: var(--canopy);
+              font-family: var(--f-body); font-size: 1.35rem; font-weight: 600; text-decoration: none;
+              border-radius: 2px; box-shadow: 0 18px 40px rgba(0,0,0,0.28); transition: background 0.25s ease, transform 0.25s ease;
+            }
+            .sh-book:hover { background: #fff8e8; transform: translateY(-2px); }
+
+            /* "Want Ethan at your event?": white type to match the rest of the site. */
+            .sh-event h2, .sh-event p { color: #ffffff !important; }
+            .sh-event > p:first-child { color: var(--amber) !important; }
+            .sh-event a { color: #ffffff !important; }
+
             .bit-follow-section {
               display: none !important;
             }
           `}</style>
 
-          <div id="bit-widget-container">
-          <div
-  className="bit-widget-initializer"
-  data-artist-name="Ethan Hoffman"
-  data-artist-id="15553686"
-  data-display-local-dates="false"
-  data-display-past-dates="false"
-  data-auto-style="false"
-  data-text-color="#f2ecdf"
-  data-link-color="#d2703a"
-  data-background-color="transparent"
-  data-display-limit="10"
-  data-link-text-color="#f2ecdf"
-  data-language="en"
-  data-popup-background-color="#1f261c"
-  data-display-lineup="false"
-  data-display-start-time="false"
-  data-share-on-social-media="false"
-/>
-          </div>
+          <Bandsintown />
         </div>
 
         {/* NO SHOWS FALLBACK CTA */}
         <div
-          className="container"
+          className="container sh-event"
           style={{
             padding: '0 2rem 6rem',
             textAlign: 'center',
@@ -275,10 +276,6 @@ export default function Shows() {
 
       <Footer />
 
-      <Script
-        src="https://widget.bandsintown.com/main.min.js"
-        strategy="afterInteractive"
-      />
     </>
   )
 }

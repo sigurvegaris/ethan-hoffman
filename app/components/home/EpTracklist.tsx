@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import { singles, ep, formatReleaseDate } from '../../lib/release'
+import { singles, ep, epTracks, formatReleaseDate } from '../../lib/release'
 import { useReleased } from '../../lib/useReleased'
 import YinYang from '../YinYang'
 
@@ -9,10 +9,10 @@ const shortDate = (iso: string) => formatReleaseDate(iso).replace(/, \d{4}$/, ''
 
 // Hovering a song shows a photo from the session that floats with the cursor.
 const tracks = [
-  { name: singles[0].title, releaseDate: singles[0].releaseDate, img: '/images/malibu/studio-color.webp', secret: false },
-  { name: singles[1].title, releaseDate: singles[1].releaseDate, img: '/images/malibu/oak-lying.webp', secret: false },
-  { name: 'untitled', releaseDate: ep.releaseDate, img: '/images/malibu/studio-bw.webp', secret: true },
-  { name: 'untitled', releaseDate: ep.releaseDate, img: '/images/malibu/fence-dusk.webp', secret: true },
+  { name: epTracks[0].title, releaseDate: epTracks[0].releaseDate, img: '/images/malibu/studio-color.webp', secret: false },
+  { name: epTracks[1].title, releaseDate: epTracks[1].releaseDate, img: '/images/malibu/oak-lying.webp', secret: false },
+  { name: epTracks[2].title, releaseDate: epTracks[2].releaseDate, img: '/images/malibu/studio-bw.webp', secret: true },
+  { name: epTracks[3].title, releaseDate: epTracks[3].releaseDate, img: '/images/malibu/fence-dusk.webp', secret: true },
 ]
 
 function Row({ t, i, onEnter }: { t: (typeof tracks)[number]; i: number; onEnter: (i: number) => void }) {
@@ -61,7 +61,7 @@ function EpYinYang({ active }: { active: number | null }) {
       <p className="ep-yy-cap">
         {whole
           ? 'Two halves, one record. The circle is closed.'
-          : 'India and Carefree are two halves of one record. The other two are the dots. On January 1 the circle closes.'}
+          : 'India and Carefree are two halves of one record. We Fell Accidentally and Making It Up As We Go are the dots. On January 1 the circle closes.'}
       </p>
     </div>
   )

@@ -19,7 +19,6 @@ export default function Press() {
           <p>“{lead.headline}”</p>
           <footer>
             {lead.url ? <a href={lead.url} target="_blank" rel="noopener noreferrer">{lead.outlet ?? lead.author}</a> : lead.outlet ?? lead.author}
-            <span> · words by {lead.author}</span>
           </footer>
         </blockquote>
         {rest.map((a) => (
@@ -27,7 +26,6 @@ export default function Press() {
             <p>“{a.headline}”</p>
             <footer>
               {a.url ? <a href={a.url} target="_blank" rel="noopener noreferrer">{a.outlet ?? a.author}</a> : a.outlet ?? a.author}
-              <span> · words by {a.author}</span>
             </footer>
           </blockquote>
         ))}

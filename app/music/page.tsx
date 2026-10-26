@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useReleased } from '../lib/useReleased'
-import { singles, ep, listenLinks, formatReleaseDate } from '../lib/release'
+import { ep, epTracks, listenLinks, formatReleaseDate } from '../lib/release'
 import IndiaStory from './IndiaStory'
 
 const spotify = listenLinks.find((l) => l.label === 'Spotify')!
@@ -13,9 +13,10 @@ const spotify = listenLinks.find((l) => l.label === 'Spotify')!
 // Placeholder covers built from the Malibu photos until the real single and EP
 // art is ready. Swap `cover` for the finished artwork when it lands.
 const releases = [
-  { title: singles[0].title, kind: 'single', releaseDate: singles[0].releaseDate, note: singles[0].note, cover: '/images/malibu/studio-color.webp', pos: '30% 50%', mono: false },
-  { title: singles[1].title, kind: 'single', releaseDate: singles[1].releaseDate, note: singles[1].note, cover: '/images/malibu/oak-lying.webp', pos: 'center 60%', mono: false },
-  { title: ep.title, kind: 'the ep', releaseDate: ep.releaseDate, note: ep.note, cover: '/images/malibu/plaid-smile.webp', pos: 'center 45%', mono: true },
+  { title: epTracks[0].title, kind: 'single', releaseDate: epTracks[0].releaseDate, note: 'Single + full session video', cover: '/images/malibu/studio-color.webp', pos: '30% 50%', mono: false },
+  { title: epTracks[1].title, kind: 'single', releaseDate: epTracks[1].releaseDate, note: 'Single + session video', cover: '/images/malibu/oak-lying.webp', pos: 'center 60%', mono: false },
+  { title: epTracks[2].title, kind: 'from the ep', releaseDate: epTracks[2].releaseDate, note: 'Arrives with the EP on January 1', cover: '/images/malibu/studio-bw.webp', pos: 'center 50%', mono: true },
+  { title: epTracks[3].title, kind: 'from the ep', releaseDate: epTracks[3].releaseDate, note: 'Arrives with the EP on January 1', cover: '/images/malibu/fence-dusk.webp', pos: 'center 45%', mono: false },
 ]
 
 function VideoEmbed({ id, label, priority = false }: { id: string; label: string; priority?: boolean }) {
@@ -67,6 +68,7 @@ function ReleaseSlide({ r }: { r: (typeof releases)[number] }) {
 
 export default function Music() {
   const [index, setIndex] = useState(0)
+  const epOut = useReleased(ep.releaseDate)
   const go = (d: number) => setIndex((i) => (i + d + releases.length) % releases.length)
 
   const videos = [
@@ -99,6 +101,7 @@ export default function Music() {
         .mu-kind { font-family: var(--f-mono); font-size: 0.8rem; letter-spacing: 0.2em; opacity: 0.75; margin: 0 0 0.9rem; }
         .mu-note { font-size: 1rem; line-height: 1.6; color: var(--cream-dim); max-width: 44ch; margin: 0 0 1.5rem; }
         .mu-btn { display: inline-block; background: var(--cream); color: var(--green); text-decoration: none; padding: 0.8rem 2.4rem; font-weight: 500; letter-spacing: 0.04em; }
+        .mu-book { margin-top: 2rem; height: 64px; width: min(330px, 100%); display: inline-flex; align-items: center; justify-content: center; padding: 0; font-size: 1.35rem; font-weight: 600; letter-spacing: -0.01em; background: var(--haze); color: var(--canopy); border-radius: 2px; box-shadow: 0 18px 40px rgba(0,0,0,0.28); }
         .mu-btn-ghost { background: transparent; color: var(--cream); border: 1px solid var(--cream); }
         .mu-dots { display: flex; justify-content: center; gap: 0.6rem; margin-top: 1.75rem; }
         .mu-dot { flex: 0 0 9px; width: 9px; height: 9px; min-height: 0; min-width: 0; box-sizing: border-box; border-radius: 50%; border: 1px solid var(--cream); background: transparent; padding: 0; cursor: pointer; }
@@ -143,6 +146,7 @@ export default function Music() {
         <header className="mu-head mu-wrap">
           <p className="mu-script">new songs, one at a time</p>
           <h1 className="mu-title">music</h1>
+          <Link className="mu-btn mu-book" href="/contact">book ethan</Link>
         </header>
 
         <section className="mu-wrap" aria-label="Releases">
@@ -159,23 +163,26 @@ export default function Music() {
 
           <IndiaStory />
 
-          <div className="mu-ep">
-            <div>
-              <h2>The debut EP, <em>Ethan Hoffman</em>.</h2>
-              <p>
-                {ep.runtime} of music, opening with a freestyled intro and tied together by spoken interludes
-                before each track. Every song was filmed live over two nights in a Malibu studio, so each one
-                arrives with its own session video.
-              </p>
+          {/* EP details come back on release day (runtime etc. stay hidden until then). */}
+          {epOut && (
+            <div className="mu-ep">
+              <div>
+                <h2>The debut EP, <em>Ethan Hoffman</em>.</h2>
+                <p>
+                  {ep.runtime} of music, opening with a freestyled intro and tied together by spoken interludes
+                  before each track. Every song was filmed live over two nights in a Malibu studio, so each one
+                  arrives with its own session video.
+                </p>
+              </div>
+              <ul className="mu-facts">
+                {releases.map((r) => (
+                  <li key={r.title}><span>{r.title.toLowerCase()}</span><span>{formatReleaseDate(r.releaseDate)}</span></li>
+                ))}
+                <li><span>runtime</span><span>{ep.runtime}</span></li>
+                <li><span>sessions</span><span>8 videos, 2 nights, Malibu</span></li>
+              </ul>
             </div>
-            <ul className="mu-facts">
-              {releases.map((r) => (
-                <li key={r.title}><span>{r.title.toLowerCase()}</span><span>{formatReleaseDate(r.releaseDate)}</span></li>
-              ))}
-              <li><span>runtime</span><span>{ep.runtime}</span></li>
-              <li><span>sessions</span><span>8 videos, 2 nights, Malibu</span></li>
-            </ul>
-          </div>
+          )}
         </section>
 
         <section className="mu-live">

@@ -4,11 +4,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 const frames = [
-  { src: '/images/malibu/studio-color.webp', w: 2000, h: 1331, alt: 'A camera crew filming Ethan in the live room', note: 'night one, live room' },
-  { src: '/images/malibu/fence-dusk.webp', w: 1030, h: 1570, alt: 'Ethan outside the studio at dusk', note: 'between sessions' },
-  { src: '/images/malibu/control-room.webp', w: 2000, h: 1328, alt: 'Ethan listening back in the control room', note: 'listening back' },
-  { src: '/images/malibu/path-walk.webp', w: 1040, h: 1560, alt: 'Ethan walking down a dirt path', note: 'the walk in' },
-  { src: '/images/malibu/studio-bw.webp', w: 2000, h: 1332, alt: 'Ethan playing acoustic guitar in the live room', note: 'night two, one take' },
+  { src: '/images/malibu/studio-color.webp', w: 2000, h: 1331, alt: 'A camera crew filming Ethan in the live room', note: 'I’m breathing sweet India', song: 'india' },
+  { src: '/images/malibu/fence-dusk.webp', w: 1030, h: 1570, alt: 'Ethan outside the studio at dusk', note: 'I’m leaving California', song: 'india' },
+  { src: '/images/malibu/control-room.webp', w: 2000, h: 1328, alt: 'Ethan listening back in the control room', note: 'my mind is occupied by the thought of you', song: 'india' },
+  { src: '/images/malibu/path-walk.webp', w: 1040, h: 1560, alt: 'Ethan walking down a dirt path', note: 'getting out while I can', song: 'india' },
+  { src: '/images/malibu/studio-bw.webp', w: 2000, h: 1332, alt: 'Ethan playing acoustic guitar in the live room', note: 'take me home', song: 'india' },
 ]
 
 // On desktop the strip is pinned and slides sideways as you scroll down.
@@ -60,7 +60,7 @@ export default function Sessions() {
               <div className="ss-img" data-lens={f.src.includes('-bw') ? undefined : true}>
                 <Image src={f.src} alt={f.alt} width={f.w} height={f.h} sizes="(max-width: 900px) 80vw, 50vw" loading="eager" />
               </div>
-              <figcaption><span>{String(i + 1).padStart(2, '0')}</span>{f.note}</figcaption>
+              <figcaption><span>{String(i + 1).padStart(2, '0')}</span>{f.note}<em className="ss-song">{f.song}</em></figcaption>
             </figure>
           ))}
         </div>

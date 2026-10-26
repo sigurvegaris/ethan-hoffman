@@ -7,9 +7,17 @@ import { makeBug, step, glowOf, type Bug } from './fireflyFlight'
 // meadow. Tap one (or scoop it by dragging the jar into it) and it stops,
 // glows and says its line, then flies into the jar wherever you have put it.
 // Tap a firefly in the jar to hear it again.
-const quotes = articles.flatMap((a) => a.quotes.map((q) => ({ q, who: a.outlet ?? a.author })))
+const quotes = articles.flatMap((a) => a.quotes.map((q) => ({ q, who: a.outlet ?? a.author, url: a.url })))
 
-const SPEAK_MS = 3200
+const SPEAK_MS = 5500
+
+// The publication name, linked to the article. Clicking it opens the piece
+// instead of sending the firefly into the jar.
+function Source({ i }: { i: number }) {
+  const { who, url } = quotes[i]
+  if (!url) return <>{who}</>
+  return <a href={url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>{who}</a>
+}
 
 // Where each firefly starts, as % of the meadow. After that they fly freely
 // (see fireflyFlight.ts).
@@ -363,7 +371,7 @@ export default function FireflyJar() {
       {held && size.w > 0 && (
         <div key={held.i} className="fj-say" style={bubbleAt(held.at)} aria-live="polite" onClick={send}>
           <p>“{quotes[held.i].q}”</p>
-          <footer>{quotes[held.i].who}</footer>
+          <footer><Source i={held.i} /></footer>
           <span className="fj-timer" style={{ animationDuration: `${SPEAK_MS}ms` }} />
         </div>
       )}
@@ -371,7 +379,7 @@ export default function FireflyJar() {
       {!held && reread !== null && jarBubble && size.w > 0 && (
         <div key={reread} className="fj-say" style={bubbleAt({ x: jarBubble.x, y: jarBubble.y + 10 })} aria-live="polite" onClick={() => setReread(null)}>
           <p>“{quotes[reread].q}”</p>
-          <footer>{quotes[reread].who}</footer>
+          <footer><Source i={reread} /></footer>
         </div>
       )}
 

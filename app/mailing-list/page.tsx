@@ -13,6 +13,21 @@ const countries = [
   'Brazil', 'Philippines', 'Japan', 'South Korea', 'India', 'Somewhere else',
 ]
 
+// A little firefly seen from above: wings, head, and the tail that lights up.
+function FireflyIcon() {
+  return (
+    <svg viewBox="0 0 40 40" className="ml-ff">
+      <ellipse className="ml-ff-glow" cx="20" cy="27" rx="11" ry="11" />
+      <g transform="rotate(-24 13.5 17)"><ellipse className="ml-ff-wing" cx="13.5" cy="17" rx="5" ry="9" /></g>
+      <g transform="rotate(24 26.5 17)"><ellipse className="ml-ff-wing" cx="26.5" cy="17" rx="5" ry="9" /></g>
+      <path className="ml-ff-ant" d="M18.4 8.5 Q16 4 13 3 M21.6 8.5 Q24 4 27 3" />
+      <ellipse className="ml-ff-body" cx="20" cy="17" rx="3.6" ry="7" />
+      <circle className="ml-ff-head" cx="20" cy="9.5" r="2.9" />
+      <ellipse className="ml-ff-tail" cx="20" cy="27" rx="4" ry="5" />
+    </svg>
+  )
+}
+
 type BlankProps = React.InputHTMLAttributes<HTMLInputElement> & { label: string; invalid?: boolean; small?: boolean }
 
 // A fill-in-the-blank line that grows with what's typed.
@@ -27,7 +42,7 @@ function Blank({ label, invalid, small, placeholder = '', value, ...rest }: Blan
 }
 
 export default function MailingList() {
-  const [form, setForm] = useState({ email: '', name: '', country: 'United States', postal: '', consent: false })
+  const [form, setForm] = useState({ email: '', name: '', country: 'United States', consent: false })
   const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
   const [miss, setMiss] = useState<'email' | 'consent' | null>(null)
 
@@ -45,8 +60,8 @@ export default function MailingList() {
       await sendFanNote('Mailing list sign-up', {
         name: form.name,
         email: form.email,
-        location: [form.postal, form.country].filter(Boolean).join(', '),
-        message: `New mailing list sign-up.\n\nEmail: ${form.email}\nFirst name: ${form.name || '(not given)'}\nCountry: ${form.country}\nPostal code: ${form.postal || '(not given)'}`,
+        location: form.country,
+        message: `New mailing list sign-up.\n\nEmail: ${form.email}\nFirst name: ${form.name || '(not given)'}\nCountry: ${form.country}`,
       })
       setStatus('done')
     } catch {
@@ -77,8 +92,6 @@ export default function MailingList() {
                   {' '}and I want to hear it first. you can write to me at{' '}
                   <Blank label="Email address" type="email" placeholder="you@email.com" autoComplete="email" value={form.email} onChange={set('email')} invalid={miss === 'email'} />.
                   {' '}I&apos;m listening from{' '}
-                  <Blank label="Postal code" placeholder="zip code" autoComplete="postal-code" value={form.postal} onChange={set('postal')} small />
-                  {' '}in{' '}
                   <span className="ml-blank ml-blank-select">
                     <select aria-label="Country or region" autoComplete="country-name" value={form.country} onChange={set('country')}>
                       {countries.map((c) => <option key={c}>{c}</option>)}
@@ -88,7 +101,7 @@ export default function MailingList() {
 
                 <label className={`ml-firefly${form.consent ? ' is-on' : ''}${miss === 'consent' ? ' is-miss' : ''}`}>
                   <input type="checkbox" checked={form.consent} onChange={set('consent')} />
-                  <span className="ml-firefly-bug" aria-hidden="true"><i /></span>
+                  <span className="ml-firefly-bug" aria-hidden="true"><FireflyIcon /></span>
                   <span className="ml-firefly-text">
                     <b>{form.consent ? 'lit. you\'re in.' : 'tap the firefly to say yes'}</b>
                     emails from Ethan about new music, shows and merch. unsubscribe any time.
@@ -116,7 +129,6 @@ export default function MailingList() {
 
           <figure className="ml-photo">
             <Image src="/images/malibu/bench.webp" alt="Ethan sitting on a bench under a big oak" fill priority sizes="(max-width: 900px) 100vw, 45vw" style={{ objectFit: 'cover', objectPosition: 'center 62%' }} />
-            <figcaption>saved you a seat</figcaption>
           </figure>
         </div>
       </main>

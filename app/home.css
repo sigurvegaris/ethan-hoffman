@@ -117,8 +117,9 @@
 .ss-img img { display: block; width: auto; filter: saturate(0.88) contrast(1.04); }
 .ss-frame.wide .ss-img img { height: 56vh; }
 .ss-frame.tall .ss-img img { height: 66vh; }
-.ss-frame figcaption { font-family: var(--f-mono); font-size: 0.7rem; letter-spacing: 0.16em; color: var(--sage); margin-top: 0.9rem; }
-.ss-frame figcaption span { color: var(--tungsten); margin-right: 0.8rem; }
+.ss-frame figcaption { font-family: var(--f-display); font-style: italic; font-size: 1.15rem; line-height: 1.35; color: var(--haze); margin-top: 0.9rem; }
+.ss-frame figcaption .ss-song { display: block; margin-top: 0.35rem; font-family: var(--f-mono); font-style: normal; font-size: 0.66rem; letter-spacing: 0.18em; color: var(--sage); }
+.ss-frame figcaption span { font-family: var(--f-mono); font-style: normal; font-size: 0.7rem; letter-spacing: 0.16em; color: var(--tungsten); margin-right: 0.8rem; }
 
 /* ── Press ─────────────────────────────────────────── */
 .pr { position: relative; padding: 20vh 0 0; overflow: hidden; }
@@ -406,3 +407,5 @@
 
 @media (prefers-reduced-motion: reduce) { .hr-title { animation: none; } }
 .rl-listen + .rl-story { margin-left: 1.2rem; }
+.fj-say footer a { color: var(--amber); text-decoration: none; border-bottom: 1px solid rgba(226,167,90,0.5); }
+.fj-say footer a:hover { color: var(--haze); }

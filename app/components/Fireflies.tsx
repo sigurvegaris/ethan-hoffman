@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from 'react'
 const flies = Array.from({ length: 12 }, (_, i) => ({
   left: (i * 47 + 9) % 100,
   top: (i * 61 + 13) % 100,
-  size: 2 + (i % 3),
+  size: 3 + (i % 3),
   wander: 16 + ((i * 7) % 14),
   wanderDelay: -((i * 2.3) % 20),
   blink: 3.2 + ((i * 1.7) % 4),

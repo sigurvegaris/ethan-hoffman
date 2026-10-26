@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { featuredSingle, listenLinks, formatReleaseDate } from '../../lib/release'
 import { useReleased } from '../../lib/useReleased'
 import { socialLinks } from '../../lib/social'
@@ -35,7 +36,6 @@ function Countdown({ to }: { to: string }) {
 }
 
 const spotify = listenLinks.find((l) => l.label === 'Spotify')!
-const youtube = listenLinks.find((l) => l.label === 'YouTube')!
 
 export default function HeroRelease() {
   const out = useReleased(featuredSingle.releaseDate)
@@ -58,8 +58,8 @@ export default function HeroRelease() {
         <div className="hr-row">
           {!out && <Countdown to={featuredSingle.releaseDate} />}
           <div className="hr-buttons">
-            <a className="hr-btn" onPointerEnter={hover(0)} href={spotify.url} target="_blank" rel="noopener noreferrer">{out ? 'listen now' : 'follow on spotify'}</a>
-            <a className="hr-btn" onPointerEnter={hover(1)} href={out ? youtube.url : '#day-one'} {...(out ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{out ? 'watch the session' : 'get notified'}</a>
+            <a className="hr-btn" onPointerEnter={hover(0)} href={spotify.url} target="_blank" rel="noopener noreferrer">listen on spotify</a>
+            <Link className="hr-btn" onPointerEnter={hover(1)} href="/contact">book ethan</Link>
             <p className={`hr-indecision${dither.n >= 7 ? ' is-on' : ''}`} aria-hidden="true">too many times to count</p>
           </div>
           <div className="hr-social">
