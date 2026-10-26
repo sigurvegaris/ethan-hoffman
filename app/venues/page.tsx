@@ -18,7 +18,6 @@ const featuredVenues = [
   { name: 'Torrance Memorial', logo: '/images/torrancememoriallogo.png', size: 130, white: false },
   { name: 'USC', logo: '/images/usclogo.png', size: 110, white: false },
   { name: 'Terranea Resort', logo: '/images/terranealogo.png', size: 92, white: false },
-  { name: 'The Portofino Hotel & Marina', logo: '/images/portofinologo.png', size: 64, white: false },
   { name: 'Rolling Hills Country Club', logo: '/images/rollinghillslogo.png', size: 88, white: false },
   { name: 'The Strand House', logo: '/images/strandhouselogo.png', size: 30, white: false },
   { name: 'The Rockefeller', logo: '/images/rockefellerlogo.png', size: 40, white: false },
@@ -153,6 +152,7 @@ export default function Venues() {
         }
 
         .venue-more {
+          grid-column: span 2;
           display: flex; align-items: center; justify-content: center; gap: 0.8rem; min-height: 160px;
           background-color: var(--green-2); color: var(--cream-dim); text-decoration: none;
           font-family: var(--f-display); font-style: italic; font-size: 1.3rem; text-align: center; transition: background-color 0.3s ease, color 0.3s ease;
@@ -231,16 +231,7 @@ export default function Venues() {
 
         @media (hover: none) and (pointer: coarse) {
           .venue-hover-overlay { display: none; }
-          .venue-more {
-          display: flex; align-items: center; justify-content: center; gap: 0.8rem; min-height: 160px;
-          background-color: var(--green-2); color: var(--cream-dim); text-decoration: none;
-          font-family: var(--f-display); font-style: italic; font-size: 1.3rem; text-align: center; transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        .venue-more i { font-style: normal; color: var(--amber); transition: transform 0.3s ease; }
-        .venue-more:hover { background-color: #323e2d; color: var(--cream); }
-        .venue-more:hover i { transform: translateY(4px); }
-
-        .venue-logo-wrap { opacity: 1 !important; transform: none !important; }
+          .venue-logo-wrap { opacity: 1 !important; transform: none !important; }
         }
       `}</style>
 
@@ -271,7 +262,7 @@ export default function Venues() {
             {featuredVenues.map((venue, i) => (
               <VenueTile key={i} venue={venue} />
             ))}
-            {/* 17 logos + this tile = 18, so rows stay full at 6, 3 and 2 columns. */}
+            {/* 16 logos + this tile spanning two cells = 18, so rows stay full at 6, 3 and 2 columns. */}
             <a href="#more-venues" className="venue-more">
               <span>and {otherVenues.length} more</span>
               <i aria-hidden="true">↓</i>
