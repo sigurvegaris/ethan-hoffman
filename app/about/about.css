@@ -57,7 +57,12 @@
 .ab-center::before { display: none; }
 .ab-h2 { font-family: var(--f-display); font-variation-settings: var(--display-axes); font-weight: 300; font-size: clamp(2.2rem, 4vw, 3.2rem); letter-spacing: -0.03em; line-height: 1; text-align: center; margin: 0 0 3rem; color: var(--haze); }
 .ab-h2 em { color: var(--amber); }
-.ab-press-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+.ab-press-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1.25rem; }
+/* Rows of three; when the count doesn't divide by three, the top row takes
+   the slack (two wide cards, or one full-width) so no row is left short. */
+.ab-press-list li { grid-column: span 2; }
+.ab-press-list li:first-child:nth-last-child(3n+2), .ab-press-list li:first-child:nth-last-child(3n+2) + li { grid-column: span 3; }
+.ab-press-list li:first-child:nth-last-child(3n+1) { grid-column: 1 / -1; }
 .ab-press-list a { height: 100%; box-sizing: border-box; display: flex; flex-direction: column; gap: 0.9rem; padding: 1.75rem; border: 1px solid var(--glass-line); border-radius: 4px; background: rgba(20,26,18,0.35); color: var(--cream); text-decoration: none; transition: background 0.3s ease, border-color 0.3s ease; }
 .ab-press-list a:hover, .ab-press-list a:focus-visible { background: var(--glass); border-color: rgba(226,167,90,0.45); }
 .ab-press-outlet { font-family: var(--f-mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: lowercase; color: var(--amber); }
@@ -78,5 +83,6 @@
   .ab-stats div:nth-child(3) { border-left: 0; }
   .ab-stats div:nth-child(n+3) { border-top: 1px solid var(--glass-line); }
   .ab-press-list { grid-template-columns: 1fr; }
+  .ab-press-list li, .ab-press-list li:first-child:nth-last-child(n) + li { grid-column: auto !important; }
 }
 @media (prefers-reduced-motion: reduce) { .ab-ticker-track { animation: none; } }
