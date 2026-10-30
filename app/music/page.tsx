@@ -96,8 +96,7 @@ export default function Music() {
         .mu-featured { display: grid; grid-template-columns: 1.5fr 1fr; gap: 2.5rem; align-items: start; margin-bottom: 3rem; }
         .mu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
         .mu-side h3 { font-family: var(--f-mono); font-size: 0.78rem; font-weight: 400; letter-spacing: 0.2em; margin: 0 0 1rem; color: #e2a75a; }
-        .mu-expect { list-style: none; padding: 0; margin: 2rem 0 0; }
-        .mu-expect li { padding: 0.55rem 0; border-bottom: 1px solid rgba(242,236,223,0.12); color: rgba(242,236,223,0.8); }
+        .mu-more { font-family: var(--f-mono); font-size: 0.78rem; letter-spacing: 0.2em; color: #e2a75a; text-align: center; margin: 4rem 0 2rem; }
 
         @media (max-width: 900px) {
           .mu-wrap { width: calc(100% - 2.5rem); }
@@ -156,17 +155,15 @@ export default function Music() {
                 <h3>stream on spotify</h3>
                 <iframe
                   src="https://open.spotify.com/embed/artist/3wv3GWickdI3WcNEyV2zG6?utm_source=generator&theme=0"
-                  width="100%" height="200" frameBorder="0"
+                  width="100%" height="352" frameBorder="0"
                   allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                   loading="lazy"
                   style={{ borderRadius: '4px' }}
                   title="Ethan Hoffman on Spotify"
                 />
-                <ul className="mu-expect">
-                  {['Soulful, vocalist-led performances', 'Live looping and beatboxing', 'Crowd improvisation', 'Covers and original music'].map((x) => <li key={x}>{x}</li>)}
-                </ul>
               </div>
             </div>
+            <p className="mu-more">more performances</p>
             <div className="mu-grid">
               {videos.slice(1).map((v) => <VideoEmbed key={v.id} id={v.id} label={v.label} />)}
             </div>
