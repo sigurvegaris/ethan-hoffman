@@ -4,29 +4,30 @@ import Link from 'next/link'
 import Script from 'next/script'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import Bandsintown from './Bandsintown'
 
 export default function Shows() {
   return (
     <>
       <Navbar />
 
-      <main style={{ backgroundColor: '#1a1814', minHeight: '100vh' }}>
+      <main style={{ backgroundColor: 'var(--green)', minHeight: '100vh', overflowX: 'hidden' }}>
         {/* HEADER */}
         <div
           style={{
-            backgroundColor: '#1a1814',
-            padding: '8rem 0 4rem',
-            borderBottom: '1px solid rgba(196,168,130,0.1)',
+            backgroundColor: 'var(--green)',
+            padding: '10rem 0 4rem',
+            borderBottom: '1px solid rgba(242,236,223,0.12)',
           }}
         >
           <div className="container">
             <p
               style={{
-                fontSize: '0.7rem',
-                fontWeight: '600',
-                letterSpacing: '0.3em',
+                fontFamily: 'var(--f-mono)',
+                fontSize: '0.72rem',
+                letterSpacing: '0.2em',
                 textTransform: 'uppercase',
-                color: '#c4622d',
+                color: 'var(--amber)',
                 marginBottom: '1rem',
               }}
             >
@@ -35,27 +36,29 @@ export default function Shows() {
 
             <h1
               style={{
-                fontFamily: 'Playfair Display, serif',
-                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-                fontWeight: '600',
-                color: '#fdfaf5',
-                lineHeight: '1.1',
+                fontFamily: 'var(--f-display)',
+                fontSize: 'clamp(2.6rem, 6vw, 4.5rem)',
+                fontWeight: '500',
+                color: 'var(--cream)',
+                lineHeight: '1.05',
                 marginBottom: '1rem',
               }}
             >
-              Upcoming Shows
+              Upcoming <em style={{ fontStyle: 'italic', color: 'var(--amber)' }}>Shows</em>
             </h1>
 
             <p
               style={{
-                color: 'rgba(253,250,245,0.5)',
-                fontFamily: 'Cormorant Garamond, serif',
+                color: 'var(--cream-dim)',
+                fontFamily: 'var(--f-display)',
                 fontStyle: 'italic',
                 fontSize: '1.2rem',
               }}
             >
               Catch Ethan live — tickets and details below
             </p>
+
+            <Link href="/contact" className="sh-book">Book Ethan</Link>
           </div>
         </div>
 
@@ -67,31 +70,32 @@ export default function Shows() {
             }
 
             .bit-widget {
-              font-family: Inter, sans-serif !important;
+              font-family: var(--f-body);
               background: transparent !important;
             }
 
             .bit-event {
-              border-bottom: 1px solid rgba(196,168,130,0.12) !important;
+              border-bottom: 1px solid rgba(242,236,223,0.12) !important;
               padding: 1.5rem 0 !important;
               background: transparent !important;
             }
 
             .bit-date {
-              color: #c4622d !important;
-              font-family: 'Playfair Display', serif !important;
+              color: var(--amber) !important;
+              font-family: var(--f-display);
             }
 
             .bit-venue,
             .bit-location {
-              color: rgba(253,250,245,0.7) !important;
+              color: var(--cream-dim) !important;
             }
 
             .bit-offers a {
-              background: #c4622d !important;
+              background: var(--rust) !important;
+              color: var(--cream) !important;
               border: none !important;
               border-radius: 0 !important;
-              font-family: Inter, sans-serif !important;
+              font-family: var(--f-mono);
               font-size: 0.68rem !important;
               letter-spacing: 0.15em !important;
               text-transform: uppercase !important;
@@ -100,59 +104,57 @@ export default function Shows() {
             }
 
             .bit-offers a:hover {
-              background: #a8521f !important;
+              background: #b85e2e !important;
             }
 
             .bit-no-events-title {
-              color: rgba(253,250,245,0.5) !important;
-              font-family: 'Playfair Display', serif !important;
+              color: var(--cream-dim) !important;
+              font-family: var(--f-display);
               font-size: 1.5rem !important;
             }
+
+            .bit-event, .bit-event *, .bit-no-events-title { color: #ffffff !important; }
+            .bit-date { color: var(--amber) !important; }
+
+            /* Book Ethan up top, the same big cream button as the homepage hero. */
+            .sh-book {
+              display: inline-flex; align-items: center; justify-content: center; margin-top: 2rem;
+              height: 64px; width: min(330px, 100%); background: var(--haze); color: var(--canopy);
+              font-family: var(--f-body); font-size: 1.35rem; font-weight: 600; text-decoration: none;
+              border-radius: 2px; box-shadow: 0 18px 40px rgba(0,0,0,0.28); transition: background 0.25s ease, transform 0.25s ease;
+            }
+            .sh-book:hover { background: #fff8e8; transform: translateY(-2px); }
+
+            /* "Want Ethan at your event?": white type to match the rest of the site. */
+            .sh-event h2, .sh-event p { color: #ffffff !important; }
+            .sh-event > p:first-child { color: var(--amber) !important; }
+            .sh-event a { color: #ffffff !important; }
 
             .bit-follow-section {
               display: none !important;
             }
           `}</style>
 
-          <div id="bit-widget-container">
-          <div
-  className="bit-widget-initializer"
-  data-artist-name="Ethan Hoffman"
-  data-artist-id="15553686"
-  data-display-local-dates="false"
-  data-display-past-dates="false"
-  data-auto-style="false"
-  data-text-color="#fdfaf5"
-  data-link-color="#c4622d"
-  data-background-color="transparent"
-  data-display-limit="10"
-  data-link-text-color="#ffffff"
-  data-language="en"
-  data-popup-background-color="#1a1814"
-  data-display-lineup="false"
-  data-display-start-time="false"
-  data-share-on-social-media="false"
-/>
-          </div>
+          <Bandsintown />
         </div>
 
         {/* NO SHOWS FALLBACK CTA */}
         <div
-          className="container"
+          className="container sh-event"
           style={{
             padding: '0 2rem 6rem',
             textAlign: 'center',
-            borderTop: '1px solid rgba(196,168,130,0.1)',
+            borderTop: '1px solid rgba(242,236,223,0.12)',
             paddingTop: '4rem',
           }}
         >
           <p
             style={{
-              fontSize: '0.65rem',
-              fontWeight: '600',
-              letterSpacing: '0.3em',
+              fontFamily: 'var(--f-mono)',
+              fontSize: '0.72rem',
+              letterSpacing: '0.2em',
               textTransform: 'uppercase',
-              color: '#c4622d',
+              color: 'var(--amber)',
               marginBottom: '1rem',
             }}
           >
@@ -161,11 +163,11 @@ export default function Shows() {
 
           <h2
             style={{
-              fontFamily: 'Playfair Display, serif',
+              fontFamily: 'var(--f-display)',
               fontSize: 'clamp(1.5rem, 3vw, 2.2rem)',
               fontWeight: '400',
               fontStyle: 'italic',
-              color: '#fdfaf5',
+              color: 'var(--cream)',
               marginBottom: '1rem',
             }}
           >
@@ -175,7 +177,7 @@ export default function Shows() {
           <p
             style={{
               fontSize: '0.95rem',
-              color: 'rgba(253,250,245,0.5)',
+              color: 'var(--cream-dim)',
               maxWidth: '480px',
               margin: '0 auto 2rem',
             }}
@@ -198,22 +200,21 @@ export default function Shows() {
               rel="noopener noreferrer"
               style={{
                 padding: '0.85rem 2rem',
-                border: '1px solid rgba(196,168,130,0.3)',
-                color: '#fdfaf5',
+                border: '1px solid rgba(242,236,223,0.3)',
+                color: 'var(--cream)',
                 textDecoration: 'none',
                 fontSize: '0.7rem',
-                fontWeight: '600',
                 letterSpacing: '0.15em',
                 textTransform: 'uppercase',
-                fontFamily: 'Inter, sans-serif',
+                fontFamily: 'var(--f-mono)',
                 transition: 'border-color 0.3s ease',
               }}
               onMouseEnter={(e) =>
-                (e.currentTarget.style.borderColor = '#c4622d')
+                (e.currentTarget.style.borderColor = 'var(--amber)')
               }
               onMouseLeave={(e) =>
                 (e.currentTarget.style.borderColor =
-                  'rgba(196,168,130,0.3)')
+                  'rgba(242,236,223,0.3)')
               }
             >
               Follow on Instagram
@@ -223,21 +224,20 @@ export default function Shows() {
               href="/contact"
               style={{
                 padding: '0.85rem 2rem',
-                backgroundColor: '#c4622d',
-                color: '#fdfaf5',
+                backgroundColor: 'var(--rust)',
+                color: 'var(--cream)',
                 textDecoration: 'none',
                 fontSize: '0.7rem',
-                fontWeight: '600',
                 letterSpacing: '0.15em',
                 textTransform: 'uppercase',
-                fontFamily: 'Inter, sans-serif',
+                fontFamily: 'var(--f-mono)',
                 transition: 'background-color 0.3s ease',
               }}
               onMouseEnter={(e) =>
-                (e.currentTarget.style.backgroundColor = '#a8521f')
+                (e.currentTarget.style.backgroundColor = '#b85e2e')
               }
               onMouseLeave={(e) =>
-                (e.currentTarget.style.backgroundColor = '#c4622d')
+                (e.currentTarget.style.backgroundColor = 'var(--rust)')
               }
             >
               Book a Private Show
@@ -276,10 +276,6 @@ export default function Shows() {
 
       <Footer />
 
-      <Script
-        src="https://widget.bandsintown.com/main.min.js"
-        strategy="afterInteractive"
-      />
     </>
   )
 }

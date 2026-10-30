@@ -60,8 +60,8 @@ export default function Contact() {
       <Navbar />
 
       <style>{`
-        .contact-page { background: #f5f0e8; min-height: 100vh; }
-        .contact-hero { background: #1a1814; padding: 8rem 0 5rem; }
+        .contact-page { background: var(--green); min-height: 100vh; overflow-x: hidden; }
+        .contact-hero { background: var(--green); padding: 10rem 0 4rem; border-bottom: 1px solid rgba(242,236,223,0.12); }
 
         .contact-shell {
           width: min(1200px, calc(100% - 3rem));
@@ -82,10 +82,10 @@ export default function Contact() {
 
         .contact-detail-item {
           padding: 1.5rem 0;
-          border-bottom: 1px solid rgba(26,24,20,0.1);
+          border-bottom: 1px solid rgba(242,236,223,0.12);
         }
         .contact-detail-item:first-of-type {
-          border-top: 1px solid rgba(26,24,20,0.1);
+          border-top: 1px solid rgba(242,236,223,0.12);
         }
 
         .contact-social-links {
@@ -97,26 +97,35 @@ export default function Contact() {
 
         .contact-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 2rem; }
 
-        input, select, textarea {
+        .contact-form input, .contact-form select, .contact-form textarea {
           width: 100%;
           padding: .85rem 1rem;
           border: none;
-          border-bottom: 1px solid rgba(26,24,20,.2);
-          background: transparent;
-          font-size: .9rem;
-          color: #1a1814;
+          border-bottom: 1px solid rgba(242,236,223,.25);
+          background: rgba(242,236,223,0.04);
+          font-size: .95rem;
+          color: var(--cream);
           outline: none;
-          font-family: Inter, sans-serif;
+          font-family: var(--f-body);
+          color-scheme: dark;
+          border-radius: 0;
+          transition: border-color 0.2s ease, background 0.2s ease;
         }
-        textarea { border: 1px solid rgba(26,24,20,.15); padding: 1rem; resize: vertical; }
+        .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(242,236,223,0.4); opacity: 1; }
+        .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus {
+          border-color: var(--amber);
+          background: rgba(242,236,223,0.07);
+        }
+        .contact-form select option { background: var(--green-2); color: var(--cream); }
+        .contact-form textarea { border: 1px solid rgba(242,236,223,.15); padding: 1rem; resize: vertical; }
 
-        label {
+        .contact-form label {
           display: block;
-          font-size: .65rem;
-          font-weight: 600;
+          font-family: var(--f-mono);
+          font-size: .68rem;
           letter-spacing: .2em;
           text-transform: uppercase;
-          color: #c4622d;
+          color: var(--amber);
           margin-bottom: .4rem;
         }
 
@@ -124,44 +133,45 @@ export default function Contact() {
 
         .submit-btn {
           padding: .95rem 2.25rem;
-          background: #1a1814;
-          color: #fdfaf5;
+          background: var(--rust);
+          color: var(--cream);
           border: none;
           cursor: pointer;
-          font-size: .7rem;
-          font-weight: 600;
+          font-family: var(--f-mono);
+          font-size: .72rem;
+          font-weight: 700;
           letter-spacing: .2em;
           text-transform: uppercase;
           transition: background 0.3s ease;
         }
-        .submit-btn:hover { background: #c4622d; }
+        .submit-btn:hover { background: #b85e2e; }
         .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
         .success-banner {
           grid-column: 1/-1;
-          background: rgba(196,98,45,0.08);
-          border: 1px solid rgba(196,98,45,0.3);
+          background: rgba(226,167,90,0.08);
+          border: 1px solid rgba(226,167,90,0.35);
           padding: 1.25rem 1.5rem;
           margin-top: 1rem;
         }
         .error-banner {
           grid-column: 1/-1;
-          background: rgba(200,50,50,0.08);
-          border: 1px solid rgba(200,50,50,0.3);
+          background: rgba(230,90,80,0.1);
+          border: 1px solid rgba(230,90,80,0.4);
           padding: 1.25rem 1.5rem;
           margin-top: 1rem;
         }
 
         .mobile-contact-header { display: none; margin-bottom: 2rem; }
-        .mobile-contact-header p { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-style: italic; color: #1a1814; margin-bottom: .3rem; }
-        .mobile-contact-header span { font-size: .85rem; color: #6b6460; }
+        .mobile-contact-header p { font-family: var(--f-display); font-size: 1.8rem; font-style: italic; color: var(--cream); margin-bottom: .3rem; }
+        .mobile-contact-header span { font-size: .9rem; color: var(--cream-dim); }
 
         @media (max-width: 1024px) {
           .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
         }
 
         @media (max-width: 768px) {
-          .contact-hero { padding: 7rem 0 3rem; }
+          .contact-hero { padding: 8.5rem 0 3rem; }
           .contact-shell { width: min(1200px, calc(100% - 2rem)); padding: 3rem 0 5rem; }
           .mobile-contact-header { display: block; }
           .contact-form-intro { display: none; }
@@ -180,13 +190,13 @@ export default function Contact() {
         {/* ── HERO ── */}
         <div className="contact-hero">
           <div className="container">
-            <p style={{ fontSize: '.7rem', fontWeight: '600', letterSpacing: '.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem' }}>
+            <p style={{ fontFamily: 'var(--f-mono)', fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--amber)', marginBottom: '1rem' }}>
               Get In Touch
             </p>
-            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2.5rem,5vw,4rem)', fontWeight: '600', color: '#fdfaf5', lineHeight: '1.1', marginBottom: '1rem' }}>
-              Contact Form
+            <h1 style={{ fontFamily: 'var(--f-display)', fontSize: 'clamp(2.6rem, 6vw, 4.5rem)', fontWeight: '500', color: 'var(--cream)', lineHeight: '1.05', marginBottom: '1rem' }}>
+              Contact <em style={{ fontStyle: 'italic', color: 'var(--amber)' }}>Form</em>
             </h1>
-            <p style={{ fontSize: '.95rem', color: 'rgba(253,250,245,.5)', maxWidth: '500px', lineHeight: '1.8' }}>
+            <p style={{ fontSize: '.95rem', color: 'var(--cream-dim)', maxWidth: '500px', lineHeight: '1.8' }}>
               Ethan is known for being reliable, punctual, and deeply curated to every event. Expect a response within 24 hours.
             </p>
           </div>
@@ -197,33 +207,33 @@ export default function Contact() {
 
             {/* ── RIGHT: CONTACT DETAILS ── */}
             <div className="contact-details">
-              <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.4rem, 2vw, 1.8rem)', fontWeight: '400', fontStyle: 'italic', color: '#1a1814', lineHeight: '1.35', marginBottom: '0.75rem' }}>
+              <p style={{ fontFamily: 'var(--f-display)', fontSize: 'clamp(1.4rem, 2vw, 1.8rem)', fontWeight: '400', fontStyle: 'italic', color: 'var(--cream)', lineHeight: '1.35', marginBottom: '0.75rem' }}>
                 Let&apos;s make your event unforgettable.
               </p>
-              <p style={{ fontSize: '0.88rem', lineHeight: '1.8', color: '#6b6460', marginBottom: '2rem' }}>
+              <p style={{ fontSize: '0.88rem', lineHeight: '1.8', color: 'var(--cream-dim)', marginBottom: '2rem' }}>
                 Fill out the form and Ethan or his team will follow up within 24 hours to discuss availability, pricing, and details.
               </p>
 
               <div className="contact-detail-item">
-                <p style={{ fontSize: '0.6rem', fontWeight: '700', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.35rem' }}>Response Time</p>
-                <p style={{ fontSize: '0.95rem', color: '#1a1814', fontWeight: '500', margin: 0 }}>Within 24 hours</p>
+                <p style={{ fontFamily: 'var(--f-mono)', fontSize: '0.68rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--amber)', marginBottom: '0.35rem' }}>Response Time</p>
+                <p style={{ fontSize: '0.95rem', color: 'var(--cream)', fontWeight: '500', margin: 0 }}>Within 24 hours</p>
               </div>
 
               <div className="contact-detail-item">
-                <p style={{ fontSize: '0.6rem', fontWeight: '700', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.35rem' }}>Booking Email</p>
-                <a href="mailto:booking@ethanhoffmanofficial.com" style={{ fontSize: '0.9rem', color: '#1a1814', textDecoration: 'none', fontWeight: '500', wordBreak: 'break-all', display: 'block' }}>
+                <p style={{ fontFamily: 'var(--f-mono)', fontSize: '0.68rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--amber)', marginBottom: '0.35rem' }}>Booking Email</p>
+                <a href="mailto:booking@ethanhoffmanofficial.com" style={{ fontSize: '0.9rem', color: 'var(--amber)', textDecoration: 'none', fontWeight: '500', wordBreak: 'break-all', display: 'block' }}>
                   booking@ethanhoffmanofficial.com
                 </a>
               </div>
 
               <div className="contact-detail-item">
-                <p style={{ fontSize: '0.6rem', fontWeight: '700', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.35rem' }}>Based In</p>
-                <p style={{ fontSize: '0.95rem', color: '#1a1814', fontWeight: '500', margin: '0 0 0.2rem' }}>Los Angeles, CA</p>
-                <p style={{ fontSize: '0.8rem', color: '#6b6460', margin: 0 }}>Available for travel nationwide</p>
+                <p style={{ fontFamily: 'var(--f-mono)', fontSize: '0.68rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--amber)', marginBottom: '0.35rem' }}>Based In</p>
+                <p style={{ fontSize: '0.95rem', color: 'var(--cream)', fontWeight: '500', margin: '0 0 0.2rem' }}>Los Angeles, CA</p>
+                <p style={{ fontSize: '0.85rem', color: 'var(--cream-dim)', margin: 0 }}>Available for travel nationwide</p>
               </div>
 
               <div className="contact-detail-item">
-                <p style={{ fontSize: '0.6rem', fontWeight: '700', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '0.75rem' }}>Follow Ethan</p>
+                <p style={{ fontFamily: 'var(--f-mono)', fontSize: '0.68rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--amber)', marginBottom: '0.75rem' }}>Follow Ethan</p>
                 <div className="contact-social-links">
                   {[
                     { label: 'Instagram', href: 'https://www.instagram.com/ethanbhoffman/', icon: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>` },
@@ -238,9 +248,9 @@ export default function Contact() {
                       href={s.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', fontSize: '0.85rem', color: '#1a1814', textDecoration: 'none', fontWeight: '500', transition: 'color 0.2s ease' }}
-                      onMouseEnter={e => (e.currentTarget.style.color = '#c4622d')}
-                      onMouseLeave={e => (e.currentTarget.style.color = '#1a1814')}
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', fontSize: '0.9rem', color: 'var(--cream)', textDecoration: 'none', fontWeight: '500', transition: 'color 0.2s ease' }}
+                      onMouseEnter={e => (e.currentTarget.style.color = 'var(--amber)')}
+                      onMouseLeave={e => (e.currentTarget.style.color = 'var(--cream)')}
                     >
                       <span dangerouslySetInnerHTML={{ __html: s.icon }} style={{ display: 'flex', flexShrink: 0 }} />
                       {s.label}
@@ -259,7 +269,7 @@ export default function Contact() {
               </div>
 
               <div className="contact-form-intro" style={{ marginBottom: '3rem' }}>
-                <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.5rem,2.5vw,2rem)', fontWeight: '400', fontStyle: 'italic', color: '#1a1814', marginBottom: '.75rem' }}>
+                <h2 style={{ fontFamily: 'var(--f-display)', fontSize: 'clamp(1.5rem,2.5vw,2rem)', fontWeight: '400', fontStyle: 'italic', color: 'var(--cream)', marginBottom: '.75rem' }}>
                   Tell Ethan about your event
                 </h2>
               </div>
@@ -311,22 +321,22 @@ export default function Contact() {
                   <button className="submit-btn" onClick={handleSubmit} disabled={status === 'sending'}>
                     {status === 'sending' ? 'Sending...' : 'Submit'}
                   </button>
-                  <p style={{ fontSize: '.75rem', color: 'rgba(26,24,20,.4)' }}>
+                  <p style={{ fontSize: '.8rem', color: 'var(--cream-dim)' }}>
                     We&apos;ll get back to you within 24 hours.
                   </p>
                 </div>
 
                 {status === 'success' && (
                   <div className="success-banner">
-                    <p style={{ fontSize: '0.85rem', color: '#c4622d', fontWeight: '600', margin: '0 0 0.25rem 0' }}>Message sent!</p>
-                    <p style={{ fontSize: '0.8rem', color: '#6b6460', margin: 0 }}>Thanks for reaching out. Ethan will be in touch within 24 hours.</p>
+                    <p style={{ fontSize: '0.85rem', color: 'var(--amber)', fontWeight: '600', margin: '0 0 0.25rem 0' }}>Message sent!</p>
+                    <p style={{ fontSize: '0.85rem', color: 'var(--cream-dim)', margin: 0 }}>Thanks for reaching out. Ethan will be in touch within 24 hours.</p>
                   </div>
                 )}
 
                 {status === 'error' && (
                   <div className="error-banner">
-                    <p style={{ fontSize: '0.85rem', color: '#c43030', fontWeight: '600', margin: '0 0 0.25rem 0' }}>Something went wrong.</p>
-                    <p style={{ fontSize: '0.8rem', color: '#6b6460', margin: 0 }}>Please try again or email directly at booking@ethanhoffmanofficial.com</p>
+                    <p style={{ fontSize: '0.85rem', color: '#f08a7e', fontWeight: '600', margin: '0 0 0.25rem 0' }}>Something went wrong.</p>
+                    <p style={{ fontSize: '0.85rem', color: 'var(--cream-dim)', margin: 0 }}>Please try again or email directly at booking@ethanhoffmanofficial.com</p>
                   </div>
                 )}
 

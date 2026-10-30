@@ -29,7 +29,7 @@ export default function MailingList() {
           {/* Left */}
           <div>
             <p style={{
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'var(--f-body)',
               fontSize: '0.7rem',
               fontWeight: '600',
               letterSpacing: '0.3em',
@@ -38,7 +38,7 @@ export default function MailingList() {
               marginBottom: '1rem',
             }}>Stay Connected</p>
             <h2 style={{
-              fontFamily: 'Playfair Display, serif',
+              fontFamily: 'var(--f-display)',
               fontSize: 'clamp(1.8rem, 3vw, 2.5rem)',
               fontWeight: '600',
               color: '#fdfaf5',
@@ -65,7 +65,7 @@ export default function MailingList() {
                 textAlign: 'center',
               }}>
                 <p style={{
-                  fontFamily: 'Playfair Display, serif',
+                  fontFamily: 'var(--f-display)',
                   fontSize: '1.3rem',
                   color: '#fdfaf5',
                   marginBottom: '0.5rem',
@@ -90,7 +90,7 @@ export default function MailingList() {
                       color: '#fdfaf5',
                       fontSize: '0.9rem',
                       outline: 'none',
-                      fontFamily: 'Inter, sans-serif',
+                      fontFamily: 'var(--f-body)',
                     }}
                   />
                   <button
@@ -105,7 +105,7 @@ export default function MailingList() {
                       letterSpacing: '0.15em',
                       textTransform: 'uppercase',
                       cursor: 'pointer',
-                      fontFamily: 'Inter, sans-serif',
+                      fontFamily: 'var(--f-body)',
                       transition: 'background-color 0.3s ease',
                       whiteSpace: 'nowrap',
                     }}
