@@ -293,8 +293,20 @@
 .ls-stats b { font-family: var(--f-display); font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.4rem); line-height: 1; color: var(--haze); letter-spacing: -0.02em; }
 .ls-stats span { font-family: var(--f-mono); font-size: 0.7rem; letter-spacing: 0.16em; color: var(--sage); }
 .ls-label { margin: 0 0 1.6rem; }
-.ls-logos { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); align-items: center; gap: 1.5rem 2rem; }
+.ls-logos { padding-bottom: 2.4rem; border-bottom: 1px solid rgba(242,236,223,0.09); display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); align-items: center; gap: 1.5rem 2rem; }
 .ls-logo { display: flex; align-items: center; justify-content: center; height: 70px; }
+.ls-reel { margin-top: 2.4rem; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+.ls-reel-track { display: flex; align-items: flex-start; gap: 3.5rem; width: max-content; padding-right: 3.5rem; animation: ls-reel 45s linear infinite; }
+.ls-reel:hover .ls-reel-track, .ls-reel:active .ls-reel-track { animation-play-state: paused; }
+.ls-quote { flex: none; max-width: 30rem; margin: 0; display: flex; flex-direction: column; gap: 0.7rem; }
+.ls-quote blockquote { margin: 0; font-family: var(--f-display); font-style: italic; font-size: clamp(1.25rem, 2vw, 1.6rem); line-height: 1.35; color: var(--haze); }
+.ls-quote figcaption { font-family: var(--f-mono); font-size: 0.7rem; letter-spacing: 0.14em; color: var(--sage); }
+.ls-quote figcaption b { font-weight: 400; color: var(--amber); }
+.ls-reviews { margin-top: 1.2rem; text-align: right; }
+.ls-reviews a { font-family: var(--f-mono); font-size: 0.74rem; letter-spacing: 0.14em; color: var(--tungsten); text-decoration: none; }
+.ls-reviews a:hover { color: var(--haze); }
+@keyframes ls-reel { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .ls-reel-track { animation-duration: 160s; } }
 @media (max-width: 900px) {
   .ls { padding: 2.75rem 0 3rem; }
   .ls-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6rem 0; }
@@ -302,5 +314,8 @@
   .ls-logos { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem 1.25rem; }
   .ls-logo { height: 58px; }
   .ls-logo img { transform: scale(0.85); }
+  .ls-quote { max-width: 78vw; }
+  .ls-reel-track { gap: 2.25rem; padding-right: 2.25rem; }
+  .ls-reviews { text-align: center; }
       }
 @media (max-width: 700px) { .hr-clip { object-position: 40% 30%; } }
