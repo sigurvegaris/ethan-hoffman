@@ -312,3 +312,17 @@
   .ls-reviews { text-align: center; }
       }
 @media (max-width: 700px) { .hr-clip { object-position: 40% 30%; } }
+
+/* Wider screens: the lockup sits on the right so Ethan's face stays clear on
+   the left of the clip. Phones keep the centred stack above. */
+@media (min-width: 701px) {
+  .hr-lockup { left: 2rem; right: max(2rem, calc((100vw - 1240px) / 2)); text-align: right; }
+  .hr-kicker { margin: 0 0.4rem 0.25rem 0; }
+  .hr-title { margin: 0 -0.04em 2rem 0; transform-origin: 80% 80%; }
+  .hr-row { align-items: flex-end; }
+  .hr-buttons { justify-content: end; }
+  .hr-social { padding: 0 0.2rem 0 0; }
+  .hr::before { background:
+    linear-gradient(to top, var(--canopy) 0%, rgba(20,26,18,0.82) 22%, rgba(20,26,18,0.2) 55%, rgba(20,26,18,0.05) 75%, rgba(20,26,18,0.55) 100%),
+    linear-gradient(to left, rgba(20,26,18,0.55), transparent 55%); }
+}
