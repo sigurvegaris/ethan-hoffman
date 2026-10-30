@@ -22,7 +22,6 @@ const tabs = [
   {
     label: 'Musical Journey',
     photo: { src: '/images/ethanhandshakingguy.webp', alt: 'Ethan with Morgan Jay backstage at the Wiltern', pos: 'center', caption: 'Ethan (right) with Morgan Jay backstage before a sold-out night at the Wiltern Theater.' },
-    photo2: { src: '/images/ethan-2009.webp', alt: 'Ethan as a young kid in 2009, mid-shout in the living room', caption: 'Ethan, 2009.' },
     body: [
       'Ethan grew up in Palos Verdes, and the South Bay is still home. His vocal talent was recognized at the age of 12 when he auditioned for his first musical theater production and immediately landed a lead role. This early success led him to win the South Bay Teen Idol competition, though he remained unsure how his passion would materialize beyond adolescence.',
       'In 2021, Ethan was accepted into the Marshall School of Business at the University of Southern California. While pursuing his business degree, he formed a band and began writing music again as a source of pure enjoyment, never realizing the scale of what was to come.',
@@ -80,14 +79,6 @@ export default function About() {
                 <Image src={t.photo.src} alt={t.photo.alt} fill sizes="(max-width: 900px) 100vw, 40vw" priority={tab === 0} style={{ objectFit: 'cover', objectPosition: t.photo.pos }} />
               </div>
               {'caption' in t.photo && <figcaption>{t.photo.caption}</figcaption>}
-              {'photo2' in t && t.photo2 && (
-                <div className="ab-ph2">
-                  <div className="ab-ph2-img">
-                    <Image src={t.photo2.src} alt={t.photo2.alt} fill sizes="160px" style={{ objectFit: 'cover' }} />
-                  </div>
-                  <figcaption>{t.photo2.caption}</figcaption>
-                </div>
-              )}
             </figure>
             <div className="ab-copy">
               {t.body.map((p) => <p key={p.slice(0, 24)}>{p}</p>)}
