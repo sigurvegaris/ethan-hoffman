@@ -9,7 +9,7 @@ import './about.css'
 
 // Structure and copy follow the original site's About page: three tabs, the
 // "artists people compare him to" ticker and press. Photos are updated, and
-// the Oct 29 metrics sit under the tabs.
+// the Oct 29 "right now" update with his metrics sits under the tabs.
 const tabs = [
   {
     label: 'Meet Ethan',
@@ -95,10 +95,26 @@ export default function About() {
           </div>
         </section>
 
-        <section className="ab-wrap ab-stats" aria-label="Ethan by the numbers">
-          {stats.map((s) => (
-            <div key={s.label}><b>{s.n}</b><span>{s.label}</span></div>
-          ))}
+        <section className="ab-now" aria-labelledby="ab-now-label">
+          <div className="ab-wrap">
+            <p className="ab-label" id="ab-now-label">right now</p>
+            <div className="ab-now-grid">
+              <div className="ab-now-copy">
+                <h2>Where Ethan is <em>today</em></h2>
+                <ul>
+                  <li><b>His debut EP.</b> Recorded live over two nights in Malibu, arriving song by song before the full release on January 1.</li>
+                  <li><b>India is out.</b> The first single, with its video on the way.</li>
+                  <li><b>Writing for other artists.</b> Alongside his own record, he is writing songs for other performers.</li>
+                  <li><b>Active on social media.</b> Covers, originals and loop-pedal sessions across Instagram, TikTok and YouTube.</li>
+                </ul>
+              </div>
+              <div className="ab-now-stats">
+                {stats.filter((s) => s.label !== 'events performed').map((s) => (
+                  <div key={s.label}><b>{s.n}</b><span>{s.label}</span></div>
+                ))}
+              </div>
+            </div>
+          </div>
         </section>
 
         <section className="ab-compare" aria-label="Artists people compare him to">
