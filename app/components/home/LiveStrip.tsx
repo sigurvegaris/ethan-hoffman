@@ -1,23 +1,15 @@
 import Link from 'next/link'
 import { venueLogos } from '../../lib/venues'
-import { stats } from '../../lib/stats'
 import { testimonials } from '../../lib/testimonials'
 import { Logo } from '../VenueGrid'
 
-// Straight under the hero, like the original site: the numbers, the rooms he
-// has played and what bookers say, so his credibility lands first.
+// Straight under the hero: the rooms he has played and what bookers say, so
+// his credibility lands first.
 export default function LiveStrip() {
   const top = venueLogos.filter((v) => v.top)
-  // Reach only here; events and repertoire live on Book Live.
-  const reach = stats.filter((s) => s.label !== 'events performed' && s.label !== 'of repertoire')
   return (
     <section className="ls" aria-label="Live bookings">
       <div className="fh-wrap">
-        <div className="ls-stats">
-          {reach.map((s) => (
-            <div key={s.label}><b>{s.n}</b><span>{s.label}</span></div>
-          ))}
-        </div>
         <p className="fh-label ls-label">past clients &amp; venues include</p>
         <div className="ls-logos">
           {top.map((v) => <div key={v.name} className="ls-logo"><Logo v={v} scale={0.72} /></div>)}

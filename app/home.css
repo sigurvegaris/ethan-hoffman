@@ -287,11 +287,6 @@
 
 /* ---------- Live strip under the hero ---------- */
 .ls { position: relative; z-index: 1; background: #11160f; border-top: 1px solid rgba(242,236,223,0.08); border-bottom: 1px solid rgba(242,236,223,0.08); padding: 3.5rem 0 3.75rem; }
-.ls-stats { display: grid; grid-template-columns: repeat(2, max-content); border-bottom: 1px solid rgba(242,236,223,0.09); padding-bottom: 2.5rem; margin-bottom: 2.4rem; }
-.ls-stats div { display: flex; flex-direction: column; gap: 0.35rem; padding: 0 4rem; border-left: 1px solid rgba(242,236,223,0.09); }
-.ls-stats div:first-child { border-left: 0; padding-left: 0; }
-.ls-stats b { font-family: var(--f-display); font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.4rem); line-height: 1; color: var(--haze); letter-spacing: -0.02em; }
-.ls-stats span { font-family: var(--f-mono); font-size: 0.7rem; letter-spacing: 0.16em; color: var(--sage); }
 .ls-label { margin: 0 0 1.6rem; }
 .ls-logos { padding-bottom: 2.4rem; border-bottom: 1px solid rgba(242,236,223,0.09); display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); align-items: center; gap: 1.5rem 2rem; }
 .ls-logo { display: flex; align-items: center; justify-content: center; height: 70px; }
@@ -309,8 +304,6 @@
 @media (prefers-reduced-motion: reduce) { .ls-reel-track { animation-duration: 160s; } }
 @media (max-width: 900px) {
   .ls { padding: 2.75rem 0 3rem; }
-  .ls-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .ls-stats div { padding: 0 1.5rem; }
   .ls-logos { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem 1.25rem; }
   .ls-logo { height: 58px; }
   .ls-logo img { transform: scale(0.85); }
