@@ -1,5 +1,14 @@
 /* globals.css */
 
+/* Ethan's own handwriting, built from his letter sheets (Oct 30). Characters
+   he didn't write (& + · etc.) fall back to the pen script. */
+@font-face {
+  font-family: 'Ethan Hand';
+  src: url('/fonts/EthanHand.woff2') format('woff2');
+  font-display: swap;
+  size-adjust: 80%;
+}
+
 /* ── Reset & Base ─────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -19,11 +28,11 @@ html {
 
 :root {
   /* Type: Fraunces (soft, wonky 70s soul serif) for display, Bricolage
-     Grotesque for text, a pen script standing in for Ethan's own handwriting
-     until his font is made, and Space Mono for studio-tape labels. */
+     Grotesque for text, Ethan's own handwriting, and Space Mono for
+     studio-tape labels. */
   --f-display: 'Fraunces', Georgia, serif;
   --f-body: 'Bricolage Grotesque', system-ui, sans-serif;
-  --f-hand: 'Nanum Pen Script', 'Comic Sans MS', cursive;
+  --f-hand: 'Ethan Hand', 'Nanum Pen Script', cursive;
   --f-mono: 'Space Mono', ui-monospace, monospace;
   /* Palette: the deep Malibu green everywhere, cream type, warm accents. */
   --green: #1f261c;
