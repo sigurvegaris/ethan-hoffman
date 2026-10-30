@@ -6,7 +6,7 @@ import { useReleased } from '../../lib/useReleased'
 // Placeholder covers built from the Malibu photos until the real single and EP
 // art is ready. Swap `cover` for the finished artwork when it lands.
 const covers: Record<string, { src: string; pos: string; mono?: boolean }> = {
-  India: { src: '/images/malibu/studio-color.webp', pos: '30% 50%' },
+  India: { src: '/images/india-cover.webp', pos: 'center' },
   Carefree: { src: '/images/malibu/oak-lying.webp', pos: 'center 60%' },
   EP: { src: '/images/malibu/plaid-smile.webp', pos: 'center 45%', mono: true },
 }

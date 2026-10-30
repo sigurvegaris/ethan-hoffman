@@ -16,7 +16,7 @@ const apple = listenLinks.find((l) => l.label === 'Apple Music')!
 // Swap `cover` for the finished artwork and set `videoId` (the YouTube id)
 // when each video is live.
 const pairs: { title: string; releaseDate: string; cover: string; pos: string; videoId: string | null }[] = [
-  { title: singles[0].title, releaseDate: singles[0].releaseDate, cover: '/images/malibu/studio-color.webp', pos: '30% 50%', videoId: null },
+  { title: singles[0].title, releaseDate: singles[0].releaseDate, cover: '/images/india-cover.webp', pos: 'center', videoId: null },
   { title: singles[1].title, releaseDate: singles[1].releaseDate, cover: '/images/malibu/oak-lying.webp', pos: 'center 60%', videoId: null },
 ]
 
