@@ -1,20 +1,19 @@
 'use client'
 import { useState } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { articles } from '../lib/press'
 import { stats } from '../lib/stats'
 import './about.css'
 
-// Structure and copy follow the original site's About page (three tabs, the
-// "artists people compare him to" ticker, press), with the Malibu photos, a
-// short timeline and a "right now" update added. Mostly text by design.
+// Structure and copy follow the original site's About page: three tabs, the
+// "artists people compare him to" ticker and press. Photos are updated, and
+// the Oct 29 metrics sit under the tabs.
 const tabs = [
   {
     label: 'Meet Ethan',
-    photo: { src: '/images/malibu/oak-walk.webp', alt: 'Ethan walking under a wide oak canopy', pos: 'center 40%' },
+    photo: { src: '/images/malibu/plaid-smile.webp', alt: 'Ethan in a plaid shirt, smiling on a bench in Malibu', pos: 'center 52%' },
     body: [
       'Ethan Hoffman is a highly sought-after pop-soul vocalist who performs at destination events, luxury hotels, popular venues, high-end restaurants, and more. On stage, Ethan performs with a microphone and a radiant spirit, captivating audiences while backed by professional instrumentation that is meticulously mixed and mastered. Every performance features vocal arrangements that take hours of craftsmanship to perfect. He has a strong instinct for reading the room and pulling people into the moment, shaping a sophisticated atmosphere for every guest.',
       'His sound captures the soul-booming vocals of Stevie Wonder and the relaxed coastal vibe of Jason Mraz, offering a vocalist-heavy experience rooted in authentic connection. Ethan is an old soul brought up in a new generation; you can hear that audibly through the music, and it’s a quality that all audiences can appreciate.',
@@ -23,6 +22,7 @@ const tabs = [
   {
     label: 'Musical Journey',
     photo: { src: '/images/ethanhandshakingguy.webp', alt: 'Ethan with Morgan Jay backstage at the Wiltern', pos: 'center', caption: 'Ethan (right) with Morgan Jay backstage before a sold-out night at the Wiltern Theater.' },
+    photo2: { src: '/images/ethan-2009.webp', alt: 'Ethan as a young kid in 2009, mid-shout in the living room', caption: 'Ethan, 2009.' },
     body: [
       'Ethan grew up in Palos Verdes, and the South Bay is still home. His vocal talent was recognized at the age of 12 when he auditioned for his first musical theater production and immediately landed a lead role. This early success led him to win the South Bay Teen Idol competition, though he remained unsure how his passion would materialize beyond adolescence.',
       'In 2021, Ethan was accepted into the Marshall School of Business at the University of Southern California. While pursuing his business degree, he formed a band and began writing music again as a source of pure enjoyment, never realizing the scale of what was to come.',
@@ -39,17 +39,6 @@ const tabs = [
       'Ethan is deeply committed to his craft, ensuring he brings 100% of his effort to every single performance. In an increasing digital age with shortened attention spans, people are yearning for ways to feel human again. Ethan’s music provides just that.',
     ],
   },
-]
-
-// Timeline. More childhood photos can slot in by setting `photo` on an entry.
-const timeline: { when: string; text: string; photo?: { src: string; alt: string } }[] = [
-  { when: '2009', text: 'Before the stage, there was the living room.', photo: { src: '/images/ethan-2009.webp', alt: 'Ethan as a young kid in 2009, mid-shout in the living room' } },
-  { when: 'age 12', text: 'A flyer in a Starbucks window for Bring It On: The Musical. He showed up to the audition in a Carolina Panthers jersey and blue flip-flops, and landed Twig, the lead.' },
-  { when: '12 to 14', text: 'Blue mohawk, golden shoes. Bring It On, 13 the Musical, Fame, Peter Pan, Grease. He won South Bay Teen Idol and started writing his own songs.' },
-  { when: 'high school', text: 'A guitar class in his senior year at the Army and Navy Academy in Carlsbad. For the first time he could accompany himself.' },
-  { when: 'usc', text: 'Two rock bands, his first originals and a business degree from the Marshall School, class of 2025.' },
-  { when: '2023', text: '“What’s your name, bro?” The Morgan Jay clip passes 5 million views in three hours.' },
-  { when: 'now', text: 'His debut EP, recorded live at Dragonfly Creek Studios in Malibu.' },
 ]
 
 const comparisons = ['Billy Joel', 'Ed Sheeran', 'Frank Sinatra', 'Jack Johnson', 'John Mayer', 'Justin Timberlake', 'Marvin Gaye', 'Mac Ayres', 'Stevie Wonder']
@@ -91,6 +80,14 @@ export default function About() {
                 <Image src={t.photo.src} alt={t.photo.alt} fill sizes="(max-width: 900px) 100vw, 40vw" priority={tab === 0} style={{ objectFit: 'cover', objectPosition: t.photo.pos }} />
               </div>
               {'caption' in t.photo && <figcaption>{t.photo.caption}</figcaption>}
+              {'photo2' in t && t.photo2 && (
+                <div className="ab-ph2">
+                  <div className="ab-ph2-img">
+                    <Image src={t.photo2.src} alt={t.photo2.alt} fill sizes="160px" style={{ objectFit: 'cover' }} />
+                  </div>
+                  <figcaption>{t.photo2.caption}</figcaption>
+                </div>
+              )}
             </figure>
             <div className="ab-copy">
               {t.body.map((p) => <p key={p.slice(0, 24)}>{p}</p>)}
@@ -98,43 +95,10 @@ export default function About() {
           </div>
         </section>
 
-        <section className="ab-wrap ab-timeline" aria-labelledby="ab-tl">
-          <p className="ab-label" id="ab-tl">how he got here</p>
-          <ol>
-            {timeline.map((x) => (
-              <li key={x.when} className={x.photo ? 'has-photo' : ''}>
-                <span className="ab-when">{x.when}</span>
-                <p>{x.text}</p>
-                {x.photo && (
-                  <div className="ab-tl-ph">
-                    <Image src={x.photo.src} alt={x.photo.alt} fill sizes="200px" style={{ objectFit: 'cover' }} />
-                  </div>
-                )}
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        <section className="ab-now" aria-labelledby="ab-now-label">
-          <div className="ab-wrap">
-            <p className="ab-label" id="ab-now-label">right now</p>
-            <div className="ab-now-grid">
-              <div className="ab-now-copy">
-                <h2>Where Ethan is <em>today</em></h2>
-                <ul>
-                  <li><b>His debut EP.</b> Recorded live over two nights in Malibu, arriving song by song before the full release on January 1.</li>
-                  <li><b>India is out.</b> The first single, with its video on the way.</li>
-                  <li><b>Writing for other artists.</b> Alongside his own record, he is writing songs for other performers.</li>
-                  <li><b>Active on social media.</b> Covers, originals and loop-pedal sessions across Instagram, TikTok and YouTube.</li>
-                </ul>
-              </div>
-              <div className="ab-now-stats">
-                {stats.filter((s) => s.label !== 'events performed').map((s) => (
-                  <div key={s.label}><b>{s.n}</b><span>{s.label}</span></div>
-                ))}
-              </div>
-            </div>
-          </div>
+        <section className="ab-wrap ab-stats" aria-label="Ethan by the numbers">
+          {stats.map((s) => (
+            <div key={s.label}><b>{s.n}</b><span>{s.label}</span></div>
+          ))}
         </section>
 
         <section className="ab-compare" aria-label="Artists people compare him to">
@@ -147,22 +111,19 @@ export default function About() {
         </section>
 
         <section className="ab-wrap ab-press" aria-labelledby="ab-press-label">
-          <p className="ab-label" id="ab-press-label">press</p>
+          <p className="ab-label ab-center" id="ab-press-label">press</p>
+          <h2 className="ab-h2">As seen <em>in</em></h2>
           <ul className="ab-press-list">
             {press.map((p) => (
               <li key={p.url}>
                 <a href={p.url} target="_blank" rel="noopener noreferrer">
                   <span className="ab-press-outlet">{p.outlet}</span>
                   <span className="ab-press-title">{p.title}</span>
-                  <span className="ab-press-arrow" aria-hidden="true">↗</span>
+                  <span className="ab-press-read">read article <i aria-hidden="true">→</i></span>
                 </a>
               </li>
             ))}
           </ul>
-          <div className="ab-cta">
-            <Link href="/music" className="ab-btn">hear the new music</Link>
-            <Link href="/services" className="ab-btn ab-btn-ghost">book him live</Link>
-          </div>
         </section>
       </main>
       <Footer />
