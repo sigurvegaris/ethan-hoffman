@@ -1,82 +1,59 @@
 'use client'
-import { useState } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useReleased } from '../lib/useReleased'
-import { ep, epTracks, listenLinks, formatReleaseDate } from '../lib/release'
-import IndiaStory from './IndiaStory'
+import { liveVideos } from '../lib/videos'
+import VideoEmbed from '../components/VideoEmbed'
+import { ep, epTracks, singles, listenLinks, formatReleaseDate } from '../lib/release'
 
 const spotify = listenLinks.find((l) => l.label === 'Spotify')!
 
-// Placeholder covers built from the Malibu photos until the real single and EP
-// art is ready. Swap `cover` for the finished artwork when it lands.
-const releases = [
-  { title: epTracks[0].title, kind: 'single', releaseDate: epTracks[0].releaseDate, note: 'Single + full session video', cover: '/images/malibu/studio-color.webp', pos: '30% 50%', mono: false },
-  { title: epTracks[1].title, kind: 'single', releaseDate: epTracks[1].releaseDate, note: 'Single + session video', cover: '/images/malibu/oak-lying.webp', pos: 'center 60%', mono: false },
-  { title: epTracks[2].title, kind: 'from the ep', releaseDate: epTracks[2].releaseDate, note: 'Arrives with the EP on January 1', cover: '/images/malibu/studio-bw.webp', pos: 'center 50%', mono: true },
-  { title: epTracks[3].title, kind: 'from the ep', releaseDate: epTracks[3].releaseDate, note: 'Arrives with the EP on January 1', cover: '/images/malibu/fence-dusk.webp', pos: 'center 45%', mono: false },
+const apple = listenLinks.find((l) => l.label === 'Apple Music')!
+
+// Each released single gets a pair: its cover on the left, its video on the
+// right. India is up now; Carefree's pair appears by itself on December 1.
+// Swap `cover` for the finished artwork and set `videoId` (the YouTube id)
+// when each video is live.
+const pairs: { title: string; releaseDate: string; cover: string; pos: string; videoId: string | null }[] = [
+  { title: singles[0].title, releaseDate: singles[0].releaseDate, cover: '/images/malibu/studio-color.webp', pos: '30% 50%', videoId: null },
+  { title: singles[1].title, releaseDate: singles[1].releaseDate, cover: '/images/malibu/oak-lying.webp', pos: 'center 60%', videoId: null },
 ]
 
-function VideoEmbed({ id, label, priority = false }: { id: string; label: string; priority?: boolean }) {
-  const [playing, setPlaying] = useState(false)
+
+function ReleasePair({ p }: { p: (typeof pairs)[number] }) {
+  const out = useReleased(p.releaseDate)
+  if (!out) return null
   return (
-    <div>
-      <div className="mu-frame" onClick={() => setPlaying(true)}>
-        {playing ? (
-          <iframe
-            src={`https://www.youtube.com/embed/${id}?autoplay=1`}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            title={label}
-          />
+    <article className="mu-pair">
+      <div className="mu-pair-cover">
+        <div className="mu-cover">
+          <Image src={p.cover} alt={`${p.title} cover`} fill sizes="(max-width: 900px) 90vw, 560px" style={{ objectFit: 'cover', objectPosition: p.pos }} />
+          <span className="mu-cover-title">{p.title}</span>
+        </div>
+        <div className="mu-pair-links">
+          <a className="mu-btn" href={spotify.url} target="_blank" rel="noopener noreferrer">spotify</a>
+          <a className="mu-btn mu-btn-ghost" href={apple.url} target="_blank" rel="noopener noreferrer">apple music</a>
+        </div>
+      </div>
+      <div className="mu-pair-video">
+        {p.videoId ? (
+          <VideoEmbed id={p.videoId} label={`${p.title}, official video`} priority />
         ) : (
-          <>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt={label} loading={priority ? 'eager' : 'lazy'} />
-            <span className="mu-play" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
-            </span>
-          </>
+          <div className="mu-soon">
+            <Image src="/images/malibu/studio-bw.webp" alt="" fill sizes="(max-width: 900px) 90vw, 640px" style={{ objectFit: 'cover' }} />
+            <span>the {p.title.toLowerCase()} video<br />premieres soon</span>
+          </div>
         )}
       </div>
-      <p className="mu-vlabel">{label.toLowerCase()}</p>
-    </div>
-  )
-}
-
-function ReleaseSlide({ r }: { r: (typeof releases)[number] }) {
-  const out = useReleased(r.releaseDate)
-  return (
-    <div className="mu-slide">
-      <div className="mu-cover">
-        <Image src={r.cover} alt="" fill sizes="(max-width: 768px) 80vw, 420px" style={{ objectFit: 'cover', objectPosition: r.pos, filter: r.mono ? 'grayscale(1) contrast(1.08)' : undefined }} />
-        <span className="mu-cover-title">{r.title}</span>
-      </div>
-      <p className="mu-name">{r.title.toLowerCase()}</p>
-      <p className="mu-kind">{r.kind} · {out ? 'out now' : formatReleaseDate(r.releaseDate).toLowerCase()}</p>
-      <p className="mu-note">{r.note}</p>
-      {out ? (
-        <a className="mu-btn" href={spotify.url} target="_blank" rel="noopener noreferrer">listen now</a>
-      ) : (
-        <Link className="mu-btn mu-btn-ghost" href="/#day-one">get notified</Link>
-      )}
-    </div>
+    </article>
   )
 }
 
 export default function Music() {
-  const [index, setIndex] = useState(0)
   const epOut = useReleased(ep.releaseDate)
-  const go = (d: number) => setIndex((i) => (i + d + releases.length) % releases.length)
 
-  const videos = [
-    { id: 'Uu51n-4IRKU', label: 'Live Performance' },
-    { id: 'DBc9dzliZ-w', label: 'Live Performance' },
-    { id: 'iCRmtLvbcdw', label: 'Live Performance, Los Angeles' },
-    { id: 'BtW2ebXZt1o', label: 'Live Performance' },
-  ]
+  const videos = liveVideos
 
   return (
     <>
@@ -86,14 +63,9 @@ export default function Music() {
         .mu-wrap { width: min(1180px, calc(100% - 3rem)); margin: 0 auto; }
         .mu-top { height: 6.5rem; }
         .mu-head { text-align: center; padding: 4.5rem 0 1rem; }
-        .mu-script { font-family: var(--f-hand); font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--amber); margin: 0; }
+        .mu-script { font-family: var(--f-hand); font-size: clamp(2.4rem, 5vw, 3.6rem); line-height: 1; color: var(--amber); margin: 0 0 0.4rem; }
         .mu-title { font-family: var(--f-display); font-weight: 600; font-style: italic; font-size: clamp(3.4rem, 9vw, 6.5rem); letter-spacing: -0.03em; line-height: 1; margin: 0; }
 
-        .mu-carousel { position: relative; display: grid; grid-template-columns: 64px 1fr 64px; align-items: center; padding: 2.5rem 0 5rem; }
-        .mu-arrow { width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(242,236,223,0.3); background: transparent; color: var(--cream); font-size: 1.4rem; cursor: pointer; transition: background 0.2s ease, color 0.2s ease; }
-        .mu-arrow:hover { background: var(--cream); color: var(--green); }
-        .mu-slide { display: flex; flex-direction: column; align-items: center; text-align: center; animation: muIn 0.45s ease; }
-        @keyframes muIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
         .mu-cover { position: relative; width: min(420px, 78vw); aspect-ratio: 1; overflow: hidden; box-shadow: 0 24px 50px rgba(28,26,21,0.25); }
         .mu-cover::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 85% 10%, rgba(255,170,90,0.35), transparent 55%), linear-gradient(to top, rgba(0,0,0,0.45), transparent 45%); }
         .mu-cover-title { position: absolute; left: 1.25rem; bottom: 1rem; z-index: 1; font-family: var(--f-display); font-size: clamp(2rem, 5vw, 3rem); color: #f2ecdf; line-height: 1; }
@@ -101,11 +73,15 @@ export default function Music() {
         .mu-kind { font-family: var(--f-mono); font-size: 0.8rem; letter-spacing: 0.2em; opacity: 0.75; margin: 0 0 0.9rem; }
         .mu-note { font-size: 1rem; line-height: 1.6; color: var(--cream-dim); max-width: 44ch; margin: 0 0 1.5rem; }
         .mu-btn { display: inline-block; background: var(--cream); color: var(--green); text-decoration: none; padding: 0.8rem 2.4rem; font-weight: 500; letter-spacing: 0.04em; }
-        .mu-book { margin-top: 2rem; height: 64px; width: min(330px, 100%); display: inline-flex; align-items: center; justify-content: center; padding: 0; font-size: 1.35rem; font-weight: 600; letter-spacing: -0.01em; background: var(--haze); color: var(--canopy); border-radius: 2px; box-shadow: 0 18px 40px rgba(0,0,0,0.28); }
+        .mu-pairs { display: grid; gap: 4.5rem; padding: 2.5rem 0 5rem; }
+        .mu-pair { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 2.5rem; align-items: center; }
+        .mu-pair .mu-cover { width: 100%; }
+        .mu-pair-links { display: flex; gap: 0.8rem; margin-top: 1.2rem; }
+        .mu-pair-links .mu-btn { flex: 1; text-align: center; padding: 0.85rem 1rem; }
+        .mu-soon { position: relative; aspect-ratio: 16 / 9; overflow: hidden; display: grid; place-items: center; text-align: center; }
+        .mu-soon img { filter: brightness(0.45) saturate(0.6); }
+        .mu-soon span { position: relative; font-family: var(--f-hand); font-size: clamp(2rem, 3.4vw, 2.8rem); line-height: 1.1; color: var(--haze); }
         .mu-btn-ghost { background: transparent; color: var(--cream); border: 1px solid var(--cream); }
-        .mu-dots { display: flex; justify-content: center; gap: 0.6rem; margin-top: 1.75rem; }
-        .mu-dot { flex: 0 0 9px; width: 9px; height: 9px; min-height: 0; min-width: 0; box-sizing: border-box; border-radius: 50%; border: 1px solid var(--cream); background: transparent; padding: 0; cursor: pointer; }
-        .mu-dot.on { background: var(--cream); }
 
         .mu-ep { border-top: 1px solid rgba(242,236,223,0.18); padding: 4.5rem 0; display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; }
         .mu-ep h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.05; margin: 0 0 1rem; }
@@ -119,11 +95,6 @@ export default function Music() {
         .mu-live-sub { font-family: var(--f-hand); font-size: 1.6rem; color: #e2a75a; text-align: center; margin: 0.25rem 0 3rem; }
         .mu-featured { display: grid; grid-template-columns: 1.5fr 1fr; gap: 2.5rem; align-items: start; margin-bottom: 3rem; }
         .mu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-        .mu-frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--green-2); cursor: pointer; }
-        .mu-frame img, .mu-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; display: block; }
-        .mu-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; border-radius: 50%; background: #f2ecdf; color: #1c1a15; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(0,0,0,0.35); transition: transform 0.2s ease; }
-        .mu-frame:hover .mu-play { transform: translate(-50%, -50%) scale(1.08); }
-        .mu-vlabel { margin: 0.75rem 0 0; font-size: 0.85rem; letter-spacing: 0.2em; color: rgba(242,236,223,0.6); }
         .mu-side h3 { font-family: var(--f-mono); font-size: 0.78rem; font-weight: 400; letter-spacing: 0.2em; margin: 0 0 1rem; color: #e2a75a; }
         .mu-expect { list-style: none; padding: 0; margin: 2rem 0 0; }
         .mu-expect li { padding: 0.55rem 0; border-bottom: 1px solid rgba(242,236,223,0.12); color: rgba(242,236,223,0.8); }
@@ -132,8 +103,8 @@ export default function Music() {
           .mu-wrap { width: calc(100% - 2.5rem); }
           .mu-top { height: 4.75rem; }
           .mu-head { padding-top: 3rem; }
-          .mu-carousel { grid-template-columns: 1fr; padding-bottom: 3.5rem; }
-          .mu-arrow { display: none; }
+          .mu-pair { grid-template-columns: 1fr; gap: 1.5rem; }
+          .mu-pairs { gap: 3.5rem; padding-bottom: 3.5rem; }
           .mu-ep { grid-template-columns: 1fr; padding: 3.5rem 0; gap: 2rem; }
           .mu-featured { grid-template-columns: 1fr; }
           .mu-grid { grid-template-columns: 1fr; }
@@ -146,22 +117,12 @@ export default function Music() {
         <header className="mu-head mu-wrap">
           <p className="mu-script">new songs, one at a time</p>
           <h1 className="mu-title">music</h1>
-          <Link className="mu-btn mu-book" href="/contact">book ethan</Link>
         </header>
 
         <section className="mu-wrap" aria-label="Releases">
-          <div className="mu-carousel">
-            <button type="button" className="mu-arrow" onClick={() => go(-1)} aria-label="Previous release">←</button>
-            <ReleaseSlide key={index} r={releases[index]} />
-            <button type="button" className="mu-arrow" onClick={() => go(1)} aria-label="Next release">→</button>
+          <div className="mu-pairs">
+            {pairs.map((p) => <ReleasePair key={p.title} p={p} />)}
           </div>
-          <div className="mu-dots" style={{ marginTop: '-3.5rem', marginBottom: '3.5rem' }}>
-            {releases.map((r, i) => (
-              <button key={r.title} type="button" className={`mu-dot ${i === index ? 'on' : ''}`} onClick={() => setIndex(i)} aria-label={`Show ${r.title}`} />
-            ))}
-          </div>
-
-          <IndiaStory />
 
           {/* EP details come back on release day (runtime etc. stay hidden until then). */}
           {epOut && (
@@ -175,7 +136,7 @@ export default function Music() {
                 </p>
               </div>
               <ul className="mu-facts">
-                {releases.map((r) => (
+                {epTracks.map((r) => (
                   <li key={r.title}><span>{r.title.toLowerCase()}</span><span>{formatReleaseDate(r.releaseDate)}</span></li>
                 ))}
                 <li><span>runtime</span><span>{ep.runtime}</span></li>

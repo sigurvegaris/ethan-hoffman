@@ -35,11 +35,4 @@ export const merch: MerchItem[] = [
     tile: '#e8b9a0',
     description: 'The self-titled debut EP on CD.',
   },
-  {
-    name: 'Signature Bracelet',
-    kind: 'Bracelet',
-    mock: 'bracelet',
-    tile: '#d9cbb0',
-    description: 'A small everyday reminder of the music.',
-  },
 ]

@@ -1,6 +1,5 @@
 'use client'
 import Image from 'next/image'
-import Link from 'next/link'
 import { singles, ep, listenLinks, formatReleaseDate } from '../../lib/release'
 import { useReleased } from '../../lib/useReleased'
 
@@ -31,7 +30,6 @@ function Sleeve({ r }: { r: Rel }) {
       <p className="rl-name">{r.title.toLowerCase()} · {r.kind}</p>
       <p className="rl-date">{out ? 'out now' : formatReleaseDate(r.releaseDate).toLowerCase()}</p>
       {out && <a className="rl-listen" href={spotify.url} target="_blank" rel="noopener noreferrer">listen →</a>}
-      {r.key === 'India' && <Link className="rl-listen rl-story" href="/music#india-story">the story →</Link>}
     </article>
   )
 }

@@ -13,21 +13,6 @@ const countries = [
   'Brazil', 'Philippines', 'Japan', 'South Korea', 'India', 'Somewhere else',
 ]
 
-// A little firefly seen from above: wings, head, and the tail that lights up.
-function FireflyIcon() {
-  return (
-    <svg viewBox="0 0 40 40" className="ml-ff">
-      <ellipse className="ml-ff-glow" cx="20" cy="27" rx="11" ry="11" />
-      <g transform="rotate(-24 13.5 17)"><ellipse className="ml-ff-wing" cx="13.5" cy="17" rx="5" ry="9" /></g>
-      <g transform="rotate(24 26.5 17)"><ellipse className="ml-ff-wing" cx="26.5" cy="17" rx="5" ry="9" /></g>
-      <path className="ml-ff-ant" d="M18.4 8.5 Q16 4 13 3 M21.6 8.5 Q24 4 27 3" />
-      <ellipse className="ml-ff-body" cx="20" cy="17" rx="3.6" ry="7" />
-      <circle className="ml-ff-head" cx="20" cy="9.5" r="2.9" />
-      <ellipse className="ml-ff-tail" cx="20" cy="27" rx="4" ry="5" />
-    </svg>
-  )
-}
-
 type BlankProps = React.InputHTMLAttributes<HTMLInputElement> & { label: string; invalid?: boolean; small?: boolean }
 
 // A fill-in-the-blank line that grows with what's typed.
@@ -101,16 +86,16 @@ export default function MailingList() {
 
                 <label className={`ml-firefly${form.consent ? ' is-on' : ''}${miss === 'consent' ? ' is-miss' : ''}`}>
                   <input type="checkbox" checked={form.consent} onChange={set('consent')} />
-                  <span className="ml-firefly-bug" aria-hidden="true"><FireflyIcon /></span>
+                  <span className="ml-firefly-bug" aria-hidden="true"><span className="ml-sig" data-sig="EH">EH</span></span>
                   <span className="ml-firefly-text">
-                    <b>{form.consent ? 'lit. you\'re in.' : 'tap the firefly to say yes'}</b>
+                    <b>{form.consent ? 'signed. you\'re in.' : 'tap his signature to say yes'}</b>
                     emails from Ethan about new music, shows and merch. unsubscribe any time.
                   </span>
                 </label>
 
                 {miss && (
                   <p className="ml-nudge" role="alert">
-                    {miss === 'email' ? 'just need an email so he can write you back ↑' : 'light up the firefly first ↑'}
+                    {miss === 'email' ? 'just need an email so he can write you back ↑' : 'tap the signature first ↑'}
                   </p>
                 )}
                 {status === 'error' && <p className="ml-nudge" role="alert">that didn&apos;t send. try again?</p>}

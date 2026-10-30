@@ -18,7 +18,6 @@ const quickLinks = [
   { label: 'merch', href: '/merch' },
   { label: 'about', href: '/about' },
   { label: 'book live', href: '/services' },
-  { label: 'repertoire', href: '/repertoire' },
   { label: 'past venues', href: '/venues' },
   { label: 'testimonials', href: '/testimonials' },
   { label: 'contact', href: '/contact' },

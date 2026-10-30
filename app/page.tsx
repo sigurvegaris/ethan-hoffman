@@ -3,10 +3,9 @@ import Footer from './components/Footer'
 import Press from './components/Press'
 import HeroRelease from './components/home/HeroRelease'
 import Releases from './components/home/Releases'
-import EpTracklist from './components/home/EpTracklist'
+import LiveStrip from './components/home/LiveStrip'
 import Sessions from './components/home/Sessions'
 import FanNotebook from './components/home/FanNotebook'
-import Collage from './components/home/Collage'
 import BirthdayNudge from './components/home/BirthdayNudge'
 import Parallax from './components/home/Parallax'
 import OppositeLens from './components/home/OppositeLens'
@@ -20,12 +19,11 @@ export default function Home() {
         <div className="fh-light" aria-hidden="true"><span /><span /><span /></div>
 
         <HeroRelease />
+        <LiveStrip />
         <Releases />
-        <EpTracklist />
         <Sessions />
         <Press />
         <FanNotebook />
-        <Collage />
       </main>
       <Parallax />
       <OppositeLens />

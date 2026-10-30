@@ -1,78 +1,58 @@
+'use client'
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import Parallax from './Parallax'
 import { articles } from '../lib/press'
+import { stats } from '../lib/stats'
 import './about.css'
 
-type Photo = { src: string; alt: string; caption: string; pos?: string }
-
-// Ethan's story, told in chapters. Facts come from his interviews with
-// Palos Verdes Pulse and Life on Jupiter, and the earlier site bio.
-// `layout` decides how each chapter's photographs sit around the text.
-const chapters: {
-  when: string
-  title: string
-  body: string
-  layout: 'arch-right' | 'tall-left' | 'small-right' | 'pair-left' | 'backstage' | 'studio'
-  photos: Photo[]
-}[] = [
+// Structure and copy follow the original site's About page (three tabs, the
+// "artists people compare him to" ticker, press), with the Malibu photos, a
+// short timeline and a "right now" update added. Mostly text by design.
+const tabs = [
   {
-    when: 'age 12',
-    title: 'A flyer in a Starbucks window',
-    body: 'He saw a flyer for Bring It On: The Musical and thought, “I can do that.” He showed up to the audition in a Carolina Panthers jersey, soccer shorts and blue flip-flops while everyone else wore suits and dresses. He landed Twig, the lead who raps, in front of a casting director who had played the same role on Broadway.',
-    layout: 'arch-right',
-    photos: [{ src: '/images/ethanincar.webp', alt: 'Ethan in a vintage car', caption: 'palos verdes kid', pos: 'center 60%' }],
-  },
-  {
-    when: '12 to 14',
-    title: 'Blue mohawk, golden shoes',
-    body: 'Bring It On, 13 the Musical, Fame, Peter Pan, Grease. He won South Bay Teen Idol, critics called him a “unicorn” and a “sparkler,” and he started writing his own songs. By 14 he knew music was the thing.',
-    layout: 'tall-left',
-    photos: [{ src: '/images/malibu/grass-shoe.webp', alt: 'Ethan sitting in the grass beneath an oak, tying his shoe', caption: 'under the oak, malibu', pos: 'center 70%' }],
-  },
-  {
-    when: 'high school',
-    title: 'A guitar class at a military academy',
-    body: 'At the Army and Navy Academy in Carlsbad he learned structure, discipline and leadership. In his senior year a guitar class brought the music back: for the first time he could accompany himself.',
-    layout: 'small-right',
-    photos: [{ src: '/images/malibu/bench.webp', alt: 'Ethan sitting on a park bench under the trees', caption: 'the bench', pos: 'center 62%' }],
-  },
-  {
-    when: 'usc',
-    title: 'Two rock bands and a business degree',
-    body: 'At USC’s Marshall School of Business he started two rock bands, released his first originals and wrote songs for students at the Thornton School of Music. He graduated in 2025.',
-    layout: 'pair-left',
-    photos: [
-      { src: '/images/malibu/path-walk.webp', alt: 'Ethan walking down a dirt path lined with sage', caption: 'the long way round', pos: 'center 55%' },
-      { src: '/images/malibu/plaid-smile.webp', alt: 'Ethan smiling in a plaid shirt', caption: 'plaid', pos: 'center 52%' },
+    label: 'Meet Ethan',
+    photo: { src: '/images/malibu/oak-walk.webp', alt: 'Ethan walking under a wide oak canopy', pos: 'center 40%' },
+    body: [
+      'Ethan Hoffman is a highly sought-after pop-soul vocalist who performs at destination events, luxury hotels, popular venues, high-end restaurants, and more. On stage, Ethan performs with a microphone and a radiant spirit, captivating audiences while backed by professional instrumentation that is meticulously mixed and mastered. Every performance features vocal arrangements that take hours of craftsmanship to perfect. He has a strong instinct for reading the room and pulling people into the moment, shaping a sophisticated atmosphere for every guest.',
+      'His sound captures the soul-booming vocals of Stevie Wonder and the relaxed coastal vibe of Jason Mraz, offering a vocalist-heavy experience rooted in authentic connection. Ethan is an old soul brought up in a new generation; you can hear that audibly through the music, and it’s a quality that all audiences can appreciate.',
     ],
   },
   {
-    when: '2023',
-    title: '“What’s your name, bro?”',
-    body: 'Front row at a Morgan Jay show, Morgan sang him the question and Ethan sang the answer back so well the room lost it. The clip passed 5 million views in three hours. He went on to open for Morgan at the Wiltern, the Magnolia, the Comedy Store and in Berlin.',
-    layout: 'backstage',
-    photos: [
-      { src: '/images/ethanhandshakingguy.webp', alt: 'Ethan with Morgan Jay backstage at the Wiltern', caption: 'backstage at the wiltern with morgan' },
-      { src: '/images/ethanthreeguys.webp', alt: 'Ethan with Morgan Jay and Tofer', caption: 'with morgan jay and tofer, morgan’s keys player' },
+    label: 'Musical Journey',
+    photo: { src: '/images/ethanhandshakingguy.webp', alt: 'Ethan with Morgan Jay backstage at the Wiltern', pos: 'center', caption: 'Ethan (right) with Morgan Jay backstage before a sold-out night at the Wiltern Theater.' },
+    body: [
+      'Ethan grew up in Palos Verdes, and the South Bay is still home. His vocal talent was recognized at the age of 12 when he auditioned for his first musical theater production and immediately landed a lead role. This early success led him to win the South Bay Teen Idol competition, though he remained unsure how his passion would materialize beyond adolescence.',
+      'In 2021, Ethan was accepted into the Marshall School of Business at the University of Southern California. While pursuing his business degree, he formed a band and began writing music again as a source of pure enjoyment, never realizing the scale of what was to come.',
+      'The pivotal moment arrived in 2023 while sitting in the front row of a show by famous comedian Morgan Jay. When Morgan sang the question, “What’s your name, bro?” Ethan sang his response back so well that it surprised both Morgan and the crowd. The impromptu encounter was captured on video and surpassed 5 million views in just three hours. It served as the nudge Ethan needed to pursue music full time.',
+      'Since that night, both of their social media platforms have grown massively, most notably with Morgan now having over 5 million followers on Instagram and 10 million followers on TikTok. Ethan has been honored to open for Morgan at iconic sold-out venues including the Wiltern Theater, Magnolia Theater, and the Comedy Store, as well as internationally in Berlin while studying abroad.',
+      'Following the momentum of these high-profile experiences, Ethan is now consistently booked throughout the South Bay and Los Angeles for professional cover sets ranging from one to four hours. He brings years of natural talent and charisma to every stage, synthesizing a background that spans from his roots in musical theater to his global performances with Morgan Jay.',
     ],
   },
   {
-    when: 'now',
-    title: 'Just him, the guitar, the voice and the song',
-    body: 'His debut EP was recorded live over two nights at Dragonfly Creek Studios in Malibu, with songs he has lived with for nearly four years. The first single, India, is out November 1.',
-    layout: 'studio',
-    photos: [
-      { src: '/images/malibu/studio-color.webp', alt: 'Ethan recording with his guitar in a warm-lit studio', caption: 'dragonfly creek studios, malibu', pos: 'center 55%' },
-      { src: '/images/malibu/studio-bw.webp', alt: 'Ethan alone with his guitar in the live room, black and white', caption: 'take one', pos: 'center 60%' },
+    label: 'Original Artistry',
+    photo: { src: '/images/malibu/studio-color.webp', alt: 'Ethan recording with his guitar at Dragonfly Creek Studios', pos: '30% 50%' },
+    body: [
+      'Ethan performs at ticketed events where fans and listeners come to hear his originals in a high-vibe environment. His original songwriting is highly existential and contemplative, exploring themes of love, loss, impermanence, and longing. In addition to his traditional vocal performances, Ethan utilizes a looping station to build full arrangements live. By layering beatboxing, bass lines, and harmony stacks, he creates a complete band experience using only his voice. He’s performed at legendary venues such as the Lighthouse Cafe (famously featured in the film La La Land), The Mint, Project Barley Redondo Beach, Thompson Hotel, and more.',
+      'Ethan is deeply committed to his craft, ensuring he brings 100% of his effort to every single performance. In an increasing digital age with shortened attention spans, people are yearning for ways to feel human again. Ethan’s music provides just that.',
     ],
   },
 ]
 
-const sounds = ['soul', 'r&b', 'pop', 'funk', 'reggae', 'hip-hop', 'musical theater']
-const heroes = ['Michael Jackson', 'Stevie Wonder', 'Bruno Mars', 'John Mayer', 'Bob Marley', 'Eminem', 'Ed Sheeran', 'Jon Batiste', 'Freddie Mercury']
+// Timeline. Childhood photos slot in here when they arrive: set `photo` on
+// the first three entries (around 12, mid-teens, high school).
+const timeline: { when: string; text: string; photo?: { src: string; alt: string } }[] = [
+  { when: 'age 12', text: 'A flyer in a Starbucks window for Bring It On: The Musical. He showed up to the audition in a Carolina Panthers jersey and blue flip-flops, and landed Twig, the lead.' },
+  { when: '12 to 14', text: 'Blue mohawk, golden shoes. Bring It On, 13 the Musical, Fame, Peter Pan, Grease. He won South Bay Teen Idol and started writing his own songs.' },
+  { when: 'high school', text: 'A guitar class in his senior year at the Army and Navy Academy in Carlsbad. For the first time he could accompany himself.' },
+  { when: 'usc', text: 'Two rock bands, his first originals and a business degree from the Marshall School, class of 2025.' },
+  { when: '2023', text: '“What’s your name, bro?” The Morgan Jay clip passes 5 million views in three hours.' },
+  { when: 'now', text: 'His debut EP, recorded live at Dragonfly Creek Studios in Malibu.' },
+]
+
+const comparisons = ['Billy Joel', 'Ed Sheeran', 'Frank Sinatra', 'Jack Johnson', 'John Mayer', 'Justin Timberlake', 'Marvin Gaye', 'Mac Ayres', 'Stevie Wonder']
 
 const morePress = [
   { outlet: 'Canvas Rebel', title: 'Meet Ethan Hoffman', url: 'https://canvasrebel.com/meet-ethan-hoffman/' },
@@ -80,18 +60,9 @@ const morePress = [
   { outlet: 'Voyage LA', title: 'Daily Inspiration: Meet Ethan Hoffman', url: 'https://voyagela.com/interview/daily-inspiration-meet-ethan-hoffman' },
 ]
 
-function Figure({ photo, className, speed, sizes, index }: { photo: Photo; className: string; speed?: number; sizes: string; index?: string }) {
-  return (
-    <figure className={`ab-fig ${className}`} data-speed={speed}>
-      <div className="ab-ph">
-        <Image src={photo.src} alt={photo.alt} fill sizes={sizes} style={{ objectFit: 'cover', objectPosition: photo.pos ?? 'center' }} />
-      </div>
-      <figcaption>{index && <span>{index}</span>}{photo.caption}</figcaption>
-    </figure>
-  )
-}
-
 export default function About() {
+  const [tab, setTab] = useState(0)
+  const t = tabs[tab]
   const press = [
     ...articles.filter((a) => a.url).map((a) => ({ outlet: a.outlet ?? a.author, title: a.title, url: a.url! })),
     ...morePress,
@@ -101,121 +72,94 @@ export default function About() {
     <>
       <Navbar />
       <main className="ab">
-        <Parallax scope=".ab" />
-
-        <header className="ab-hero">
-          <div className="ab-hero-photo" data-speed={-0.12}>
-            <Image src="/images/malibu/oak-walk.webp" alt="Ethan walking toward the camera under a wide oak canopy" fill priority sizes="(max-width: 900px) 100vw, 64vw" style={{ objectFit: 'cover', objectPosition: 'center 46%' }} />
-          </div>
-          <div className="ab-wrap ab-hero-copy">
-            <p className="ab-label">about ethan</p>
-            <h1 className="ab-title">“I can <em>do</em> that.”</h1>
-            <p className="ab-aside">what 12-year-old ethan thought, staring at a flyer in a starbucks window</p>
-            <p className="ab-lede">
-              Ethan Hoffman is a 23-year-old singer, songwriter, guitarist and beatboxer from Palos Verdes.
-              He has played more than 300 rooms, from the Wiltern to the Lighthouse Café, and he still trusts the
-              same instinct that got him on stage the first time.
-            </p>
-          </div>
-          <p className="ab-scroll" aria-hidden="true">scroll — his story</p>
+        <header className="ab-hero ab-wrap">
+          <p className="ab-label">about ethan</p>
+          <h1 className="ab-title">Soul. Stage. Stories. Sound. <em>Live.</em></h1>
         </header>
 
-        <section className="ab-story" aria-labelledby="ab-story-label">
-          <div className="ab-wrap">
-            <p className="ab-label" id="ab-story-label">how he got here</p>
-            <ol className="ab-chapters">
-              {chapters.map((c, i) => {
-                const n = String(i + 1).padStart(2, '0')
-                const [a, b] = c.photos
-                return (
-                  <li key={c.title} className={`ab-ch ab-ch--${c.layout}`}>
-                    <div className="ab-ch-text">
-                      <p className="ab-ch-num">{n} / 06</p>
-                      <p className="ab-when">{c.when}</p>
-                      <h2>{c.title}</h2>
-                      <p className="ab-ch-body">{c.body}</p>
-                    </div>
-                    {c.layout === 'studio' ? (
-                      <>
-                        <div className="ab-studio-bleed">
-                          <div className="ab-studio-img" data-speed={-0.08}>
-                            <Image src={a.src} alt={a.alt} fill sizes="100vw" style={{ objectFit: 'cover', objectPosition: a.pos }} />
-                          </div>
-                          <p className="ab-studio-cap">{a.caption}</p>
-                        </div>
-                        <Figure photo={b} className="ab-fig--inset" speed={0.1} sizes="(max-width: 900px) 70vw, 30vw" />
-                      </>
-                    ) : (
-                      <>
-                        <Figure photo={a} className="ab-fig--a" speed={b ? -0.06 : 0.08} sizes="(max-width: 900px) 90vw, 46vw" index={`fig. ${n}`} />
-                        {b && <Figure photo={b} className="ab-fig--b" speed={0.14} sizes="(max-width: 900px) 60vw, 26vw" />}
-                      </>
-                    )}
-                  </li>
-                )
-              })}
-            </ol>
+        <section className="ab-wrap ab-tabs-wrap">
+          <div className="ab-tabs" role="tablist">
+            {tabs.map((x, i) => (
+              <button key={x.label} type="button" role="tab" aria-selected={i === tab} className={`ab-tab${i === tab ? ' on' : ''}`} onClick={() => setTab(i)}>
+                {x.label}
+              </button>
+            ))}
           </div>
-        </section>
-
-        <section className="ab-unicorn" aria-labelledby="ab-unicorn-label">
-          <div className="ab-wrap ab-unicorn-grid">
-            <figure className="ab-unicorn-photo" data-speed={-0.08}>
+          <div className="ab-panel" key={tab}>
+            <figure className="ab-photo">
               <div className="ab-ph">
-                <Image src="/images/malibu/fence-dusk.webp" alt="Ethan at dusk beside a white ranch fence" fill sizes="(max-width: 900px) 80vw, 34vw" style={{ objectFit: 'cover', objectPosition: 'center 40%' }} />
+                <Image src={t.photo.src} alt={t.photo.alt} fill sizes="(max-width: 900px) 100vw, 40vw" priority={tab === 0} style={{ objectFit: 'cover', objectPosition: t.photo.pos }} />
               </div>
+              {'caption' in t.photo && <figcaption>{t.photo.caption}</figcaption>}
             </figure>
-            <div className="ab-unicorn-copy">
-              <p className="ab-label" id="ab-unicorn-label">the unicorn</p>
-              <blockquote className="ab-quote">
-                “I initially didn’t like it, but now I <em>embrace</em> it. To me, it means being someone who does not fit
-                neatly into one mold, socially, musically, or otherwise.”
-              </blockquote>
-              <p className="ab-cite">ethan, to life on jupiter</p>
-            </div>
-          </div>
-
-          <div className="ab-wrap ab-lists">
-            <div>
-              <h3>what it sounds like</h3>
-              <p className="ab-tags">{sounds.map((s) => <span key={s}>{s}</span>)}</p>
-            </div>
-            <div>
-              <h3>who he grew up on</h3>
-              <ul className="ab-heroes">{heroes.map((h) => <li key={h}>{h}</li>)}</ul>
-            </div>
-            <div>
-              <h3>off stage</h3>
-              <p className="ab-off">
-                He runs Hoffman Home Tech, so a lot of South Bay seniors know him as the guy who comes over and fixes
-                their iPhones. He posts a 30-second tech tip on Nextdoor every week.
-              </p>
+            <div className="ab-copy">
+              {t.body.map((p) => <p key={p.slice(0, 24)}>{p}</p>)}
             </div>
           </div>
         </section>
 
-        <section className="ab-press" aria-labelledby="ab-press-label">
+        <section className="ab-wrap ab-timeline" aria-labelledby="ab-tl">
+          <p className="ab-label" id="ab-tl">how he got here</p>
+          <ol>
+            {timeline.map((x) => (
+              <li key={x.when} className={x.photo ? 'has-photo' : ''}>
+                <span className="ab-when">{x.when}</span>
+                <p>{x.text}</p>
+                {x.photo && (
+                  <div className="ab-tl-ph">
+                    <Image src={x.photo.src} alt={x.photo.alt} fill sizes="200px" style={{ objectFit: 'cover' }} />
+                  </div>
+                )}
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className="ab-now" aria-labelledby="ab-now-label">
           <div className="ab-wrap">
-            <p className="ab-label" id="ab-press-label">read more about him</p>
-            <ul className="ab-press-list">
-              {press.map((p) => (
-                <li key={p.url}>
-                  <a href={p.url} target="_blank" rel="noopener noreferrer">
-                    <span className="ab-press-outlet">{p.outlet}</span>
-                    <span className="ab-press-title">{p.title}</span>
-                    <span className="ab-press-arrow" aria-hidden="true">↗</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <p className="ab-label" id="ab-now-label">right now</p>
+            <div className="ab-now-grid">
+              <div className="ab-now-copy">
+                <h2>Where Ethan is <em>today</em></h2>
+                <ul>
+                  <li><b>His debut EP.</b> Recorded live over two nights in Malibu, arriving song by song before the full release on January 1.</li>
+                  <li><b>India is out.</b> The first single, with its video on the way.</li>
+                  <li><b>Writing for other artists.</b> Alongside his own record, he is writing songs for other performers.</li>
+                  <li><b>Active on social media.</b> Covers, originals and loop-pedal sessions across Instagram, TikTok and YouTube.</li>
+                </ul>
+              </div>
+              <div className="ab-now-stats">
+                {stats.filter((s) => s.label !== 'events performed').map((s) => (
+                  <div key={s.label}><b>{s.n}</b><span>{s.label}</span></div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
-        <section className="ab-close">
-          <div className="ab-close-photo" data-speed={-0.1}>
-            <Image src="/images/malibu/oak-lying.webp" alt="Ethan lying in the grass beneath a great oak" fill sizes="100vw" style={{ objectFit: 'cover', objectPosition: 'center 62%' }} />
+        <section className="ab-compare" aria-label="Artists people compare him to">
+          <p className="ab-label ab-wrap">artists people compare him to</p>
+          <div className="ab-ticker">
+            <div className="ab-ticker-track">
+              {[...comparisons, ...comparisons].map((n, i) => <span key={i}>{n}<i aria-hidden="true">✦</i></span>)}
+            </div>
           </div>
-          <div className="ab-wrap ab-cta">
+        </section>
+
+        <section className="ab-wrap ab-press" aria-labelledby="ab-press-label">
+          <p className="ab-label" id="ab-press-label">press</p>
+          <ul className="ab-press-list">
+            {press.map((p) => (
+              <li key={p.url}>
+                <a href={p.url} target="_blank" rel="noopener noreferrer">
+                  <span className="ab-press-outlet">{p.outlet}</span>
+                  <span className="ab-press-title">{p.title}</span>
+                  <span className="ab-press-arrow" aria-hidden="true">↗</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className="ab-cta">
             <Link href="/music" className="ab-btn">hear the new music</Link>
             <Link href="/services" className="ab-btn ab-btn-ghost">book him live</Link>
           </div>

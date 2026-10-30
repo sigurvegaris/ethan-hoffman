@@ -5,12 +5,13 @@ export type Single = {
   title: string
   releaseDate: string // ISO, Pacific time
   note: string
+  outNow?: boolean // show as released regardless of the date (India, per Ethan)
 }
 
 // Midnight Pacific on release day. November 1 is still PDT (-07:00);
 // December and January are PST (-08:00).
 export const singles: Single[] = [
-  { title: 'India', releaseDate: '2026-11-01T00:00:00-07:00', note: 'Single + full session video' },
+  { title: 'India', releaseDate: '2026-11-01T00:00:00-07:00', note: 'Single + full session video', outNow: true },
   { title: 'Carefree', releaseDate: '2026-12-01T00:00:00-08:00', note: 'Single' },
 ]
 
@@ -31,6 +32,10 @@ export const epTracks = [
 
 export const featuredSingle = singles[0]
 
+// A short clip from the India video for the homepage hero. Drop the file in
+// public/video/ and set the path here; until then the hero shows the photo.
+export const heroClip: string | null = null
+
 // Streaming + social links shown on the release banner. Swap the India-specific
 // URLs in once the single is live on each platform.
 export const listenLinks = [
@@ -41,6 +46,7 @@ export const listenLinks = [
 ]
 
 export function isReleased(isoDate: string, now: Date = new Date()) {
+  if (singles.some((s) => s.outNow && s.releaseDate === isoDate)) return true
   return now.getTime() >= new Date(isoDate).getTime()
 }
 

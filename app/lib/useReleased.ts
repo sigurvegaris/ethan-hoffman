@@ -1,6 +1,6 @@
 'use client'
 import { useSyncExternalStore } from 'react'
-import { isReleased } from './release'
+import { isReleased, singles } from './release'
 
 // Flips from "coming" to "out now" on release day. Read on the client only, so
 // the statically built page never disagrees with the visitor's clock.
@@ -14,6 +14,7 @@ export function useReleased(isoDate: string) {
       const override = new URLSearchParams(window.location.search).get('release')
       return override === 'out' ? true : override === 'soon' ? false : isReleased(isoDate)
     },
-    () => false,
+    // India is marked out now, so the static page already says so.
+    () => singles.some((s) => s.outNow && s.releaseDate === isoDate),
   )
 }

@@ -1,12 +1,25 @@
 import Image from 'next/image'
 import { articles } from '../lib/press'
-import FireflyJar from './home/FireflyJar'
 
-// One big quote over a green-graded photo. The shorter quotes are fireflies
-// you catch in a jar underneath. Hidden until app/lib/press.ts has an article.
+// Press quotes laid out like clippings on a wall: the two headline quotes
+// large, the shorter ones smaller, a few in handwriting. Each one names its
+// publication, linked to the article.
+type Clip = { q: string; outlet: string; url?: string; size: 'xl' | 'l' | 'm' | 's'; hand?: boolean }
+
 export default function Press() {
   if (!articles.length) return null
-  const [lead, ...rest] = articles
+  const src = (i: number) => ({ outlet: articles[i]?.outlet ?? articles[i]?.author ?? '', url: articles[i]?.url })
+  const [a, b] = articles
+  const raw: (Clip | null)[] = [
+    { q: a.headline, ...src(0), size: 'xl' },
+    b ? { q: b.quotes[1], ...src(1), size: 's', hand: true } : null,
+    { q: a.quotes[0], ...src(0), size: 'm' },
+    b ? { q: b.headline, ...src(1), size: 'l' } : null,
+    b ? { q: b.quotes[0], ...src(1), size: 'm', hand: true } : null,
+    { q: a.quotes[1], ...src(0), size: 's' },
+    b ? { q: b.quotes[2], ...src(1), size: 'm' } : null,
+  ]
+  const clips = raw.filter((c): c is Clip => !!c && !!c.q)
 
   return (
     <section className="pr" id="press">
@@ -15,22 +28,15 @@ export default function Press() {
       </div>
       <div className="fh-wrap pr-inner">
         <p className="fh-label">in the press</p>
-        <blockquote className="pr-quote">
-          <p>“{lead.headline}”</p>
-          <footer>
-            {lead.url ? <a href={lead.url} target="_blank" rel="noopener noreferrer">{lead.outlet ?? lead.author}</a> : lead.outlet ?? lead.author}
-          </footer>
-        </blockquote>
-        {rest.map((a) => (
-          <blockquote key={a.title} className="pr-quote pr-quote-2">
-            <p>“{a.headline}”</p>
-            <footer>
-              {a.url ? <a href={a.url} target="_blank" rel="noopener noreferrer">{a.outlet ?? a.author}</a> : a.outlet ?? a.author}
-            </footer>
-          </blockquote>
-        ))}
+        <div className="pr-wall">
+          {clips.map((c, i) => (
+            <blockquote key={i} className={`pr-clip pr-${c.size}${c.hand ? ' is-hand' : ''}`}>
+              <p>{c.hand ? c.q : <>&ldquo;{c.q}&rdquo;</>}</p>
+              <footer>{c.url ? <a href={c.url} target="_blank" rel="noopener noreferrer">{c.outlet}</a> : c.outlet}</footer>
+            </blockquote>
+          ))}
+        </div>
       </div>
-      <FireflyJar />
     </section>
   )
 }
