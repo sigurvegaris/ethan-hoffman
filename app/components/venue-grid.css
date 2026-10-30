@@ -28,11 +28,11 @@
   .vg-list ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 640px) {
-  .vg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .vg-tile, .vg-more { min-height: 112px; padding: 0.8rem; }
-  .vg-logo { transform: scale(0.78); }
-  .vg-tile:hover .vg-logo { transform: scale(0.8); }
-  .vg-word { font-size: 20px !important; }
-  .vg-more { font-size: 1.05rem; }
+  .vg-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .vg-tile, .vg-more { min-height: 84px; padding: 0.5rem; }
+  .vg-logo { transform: scale(0.56); }
+  .vg-tile:hover .vg-logo { transform: scale(0.58); }
+  .vg-word { font-size: 15px !important; }
+  .vg-more { font-size: 0.9rem; }
   .vg-list ul { grid-template-columns: 1fr; }
 }
