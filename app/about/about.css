@@ -38,7 +38,8 @@
 .ab-timeline ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--glass-line); }
 .ab-timeline li { position: relative; display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 1.5rem; padding: 1.3rem 0 1.3rem 2rem; align-items: start; }
 .ab-timeline li::before { content: ''; position: absolute; left: -4px; top: 1.75rem; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 10px rgba(226,167,90,0.6); }
-.ab-timeline li.has-photo { grid-template-columns: 9rem minmax(0, 1fr) 150px; }
+.ab-timeline li.has-photo { grid-template-columns: 9rem minmax(0, 26ch) 190px; }
+.ab-timeline li.has-photo .ab-tl-ph { margin-left: 1.5rem; }
 .ab-when { font-family: var(--f-hand); font-size: 1.7rem; line-height: 1.1; color: var(--amber); }
 .ab-timeline p { margin: 0; font-size: 1.08rem; line-height: 1.7; color: var(--cream-dim); max-width: 62ch; }
 .ab-tl-ph { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 3px; }
@@ -91,7 +92,7 @@
   .ab-ph { aspect-ratio: 4 / 3.4; }
   .ab-timeline { padding: 4.5rem 0 3rem; }
   .ab-timeline li, .ab-timeline li.has-photo { grid-template-columns: 1fr; gap: 0.4rem; padding-left: 1.4rem; }
-  .ab-tl-ph { width: 140px; }
+  .ab-tl-ph, .ab-timeline li.has-photo .ab-tl-ph { width: 140px; margin: 0.6rem 0 0; }
   .ab-now-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .ab-now-stats { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
   .ab-now-stats b { font-size: 2.2rem; }

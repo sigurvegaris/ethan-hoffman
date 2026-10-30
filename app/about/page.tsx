@@ -41,9 +41,9 @@ const tabs = [
   },
 ]
 
-// Timeline. Childhood photos slot in here when they arrive: set `photo` on
-// the first three entries (around 12, mid-teens, high school).
+// Timeline. More childhood photos can slot in by setting `photo` on an entry.
 const timeline: { when: string; text: string; photo?: { src: string; alt: string } }[] = [
+  { when: '2009', text: 'Before the stage, there was the living room.', photo: { src: '/images/ethan-2009.webp', alt: 'Ethan as a young kid in 2009, mid-shout in the living room' } },
   { when: 'age 12', text: 'A flyer in a Starbucks window for Bring It On: The Musical. He showed up to the audition in a Carolina Panthers jersey and blue flip-flops, and landed Twig, the lead.' },
   { when: '12 to 14', text: 'Blue mohawk, golden shoes. Bring It On, 13 the Musical, Fame, Peter Pan, Grease. He won South Bay Teen Idol and started writing his own songs.' },
   { when: 'high school', text: 'A guitar class in his senior year at the Army and Navy Academy in Carlsbad. For the first time he could accompany himself.' },
