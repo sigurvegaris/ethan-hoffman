@@ -19,15 +19,15 @@ function MerchCard({ item, i }: { item: MerchItem; i: number }) {
         ) : (
           <div className="mc-mock"><MerchMock mock={item.mock} /></div>
         )}
-        {!available && <span className="mc-soon">coming soon</span>}
+        {!available && <span className="mc-soon">Coming soon</span>}
         <span className="mc-index" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
       </div>
       <div className="mc-info">
-        <h3 className="mc-name">{item.name.toLowerCase()}</h3>
-        <p className="mc-meta">{item.price ?? item.kind.toLowerCase()}</p>
+        <h3 className="mc-name">{item.name}</h3>
+        <p className="mc-meta">{item.kind}{item.price ? ` · ${item.price}` : ''}</p>
       </div>
       <p className="mc-desc">{item.description}</p>
-      {available && <a className="mc-buy" href={item.buyUrl} target="_blank" rel="noopener noreferrer">buy now</a>}
+      {available && <a className="mc-buy" href={item.buyUrl} target="_blank" rel="noopener noreferrer">Buy now</a>}
     </article>
   )
 }
@@ -60,8 +60,8 @@ export default function Merch() {
             <Image src="/images/malibu/fence-dusk.webp" alt="Ethan at dusk beside a white ranch fence" fill priority sizes="(max-width: 900px) 100vw, 60vw" style={{ objectFit: 'cover', objectPosition: 'center 42%' }} />
           </div>
           <div className="mp-wrap mp-hero-copy">
-            <p className="mp-label">the first collection</p>
-            <h1 className="mp-title">merch</h1>
+            <p className="mp-label">The first collection</p>
+            <h1 className="mp-title">Merch</h1>
             <p className="mp-sub">Made for the fans who were here first. Everything below is coming soon.</p>
           </div>
         </header>
@@ -74,16 +74,16 @@ export default function Merch() {
           {anyComingSoon && (
             <section className="mp-notify">
               <div>
-                <p className="mp-label">the waitlist</p>
+                <p className="mp-label">The waitlist</p>
                 <h2>Be first in line <em>when it drops.</em></h2>
               </div>
               <div>
                 {status === 'done' ? (
-                  <p className="mp-done">you&apos;re on the list ♡</p>
+                  <p className="mp-done">You&apos;re on the list ♡</p>
                 ) : (
                   <form className="mp-form" onSubmit={notify}>
-                    <input className="mp-input" type="email" required placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} aria-label="Email address" />
-                    <button className="mp-btn" type="submit" disabled={status === 'sending'}>{status === 'sending' ? '…' : 'notify me'}</button>
+                    <input className="mp-input" type="email" required placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} aria-label="Email address" />
+                    <button className="mp-btn" type="submit" disabled={status === 'sending'}>{status === 'sending' ? '…' : 'Notify me'}</button>
                   </form>
                 )}
                 {status === 'error' && <p className="mp-error">That didn&apos;t go through. Try again?</p>}

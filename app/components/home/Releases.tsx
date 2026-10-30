@@ -27,25 +27,25 @@ function Sleeve({ r }: { r: Rel }) {
           <span className="rl-sleeve-title">{r.title}</span>
         </div>
       </div>
-      <p className="rl-name">{r.title.toLowerCase()} · {r.kind}</p>
-      <p className="rl-date">{out ? 'out now' : formatReleaseDate(r.releaseDate).toLowerCase()}</p>
-      {out && <a className="rl-listen" href={spotify.url} target="_blank" rel="noopener noreferrer">listen →</a>}
+      <p className="rl-name">{r.title} · {r.kind}</p>
+      <p className="rl-date">{out ? 'Out now' : formatReleaseDate(r.releaseDate)}</p>
+      {out && <a className="rl-listen" href={spotify.url} target="_blank" rel="noopener noreferrer">Listen →</a>}
     </article>
   )
 }
 
 export default function Releases() {
   const items: Rel[] = [
-    { key: 'India', title: singles[0].title, kind: 'single', releaseDate: singles[0].releaseDate, disc: '#c4622d' },
-    { key: 'Carefree', title: singles[1].title, kind: 'single', releaseDate: singles[1].releaseDate, disc: '#e2a75a' },
-    { key: 'EP', title: ep.title, kind: 'the ep', releaseDate: ep.releaseDate, disc: '#f2ecdf' },
+    { key: 'India', title: singles[0].title, kind: 'Single', releaseDate: singles[0].releaseDate, disc: '#c4622d' },
+    { key: 'Carefree', title: singles[1].title, kind: 'Single', releaseDate: singles[1].releaseDate, disc: '#e2a75a' },
+    { key: 'EP', title: ep.title, kind: 'The EP', releaseDate: ep.releaseDate, disc: '#f2ecdf' },
   ]
   return (
     <section className="rl" id="music">
       <div className="fh-wrap">
         <div className="rl-head">
-          <h2 className="rl-heading">music</h2>
-          <p className="fh-label rl-sub">one song a month, then the whole thing</p>
+          <h2 className="rl-heading">Music</h2>
+          <p className="fh-label rl-sub">One song a month, then the whole thing</p>
         </div>
         <div className="rl-grid">
           {items.map((r) => <Sleeve key={r.key} r={r} />)}

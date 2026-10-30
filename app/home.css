@@ -29,7 +29,7 @@
 @keyframes fh-drift { from { transform: translate(0, 0) scale(1); } to { transform: translate(6vw, -5vh) scale(1.15); } }
 
 .fh-wrap { width: min(1240px, calc(100% - 4rem)); margin: 0 auto; position: relative; }
-.fh-label { font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.18em; color: var(--sage); margin: 0 0 1.5rem; text-transform: lowercase; }
+.fh-label { font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.18em; color: var(--sage); margin: 0 0 1.5rem; }
 
 /* ── Hero ──────────────────────────────────────────── */
 .hr { position: relative; height: 100svh; min-height: 640px; overflow: hidden; color: var(--haze); }
@@ -99,12 +99,12 @@
 .ss-frame.wide .ss-img img { height: 56vh; }
 .ss-frame.tall .ss-img img { height: 66vh; }
 .ss-frame figcaption { font-family: var(--f-display); font-style: italic; font-size: 1.1rem; line-height: 1.35; color: var(--haze); margin-top: 0.9rem; }
-/* Upright lining figures: Fraunces' italic/wonky 8 read as a backwards 8. */
-.ss-num { font-style: normal; font-variation-settings: 'WONK' 0; font-feature-settings: 'lnum' 1; }
+/* Fraunces' 8 has a slanted waist that reads as backwards, so the numerals use Bricolage. */
+.ss-num { font-family: var(--f-body); font-style: normal; font-weight: 600; letter-spacing: -0.04em; }
 .ss-frame figcaption span { font-family: var(--f-mono); font-style: normal; font-size: 0.7rem; letter-spacing: 0.16em; color: var(--tungsten); margin-right: 0.8rem; }
 
 /* ── Press ─────────────────────────────────────────── */
-.pr { position: relative; padding: 14vh 0 12vh; overflow: hidden; }
+.pr { position: relative; padding: 14vh 0 6vh; overflow: hidden; }
 .pr-bg { position: absolute; inset: 0; z-index: 0; }
 .pr-bg img { filter: saturate(0.55) brightness(0.5) contrast(1.05); }
 .pr-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(var(--canopy) 0%, rgba(31,40,27,0.55) 28%, rgba(31,40,27,0.62) 72%, var(--canopy) 100%), rgba(52,66,44,0.35); }
@@ -112,21 +112,18 @@
 /* Quote wall: three loose columns, tight gaps, mixed sizes. */
 .pr-wall { columns: 3 300px; column-gap: 3rem; }
 .pr-clip { break-inside: avoid; margin: 0 0 2.2rem; }
-.pr-clip p { font-family: var(--f-display); font-style: italic; font-weight: 400; line-height: 1.12; letter-spacing: -0.02em; color: var(--haze); margin: 0 0 0.7rem; text-wrap: pretty; }
+.pr-clip p { font-family: var(--f-display); font-style: italic; font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; color: var(--haze); margin: 0 0 0.7rem; text-wrap: pretty; }
 .pr-xl p { font-size: clamp(2.2rem, 3.6vw, 3.4rem); }
 .pr-l p { font-size: clamp(1.8rem, 2.8vw, 2.6rem); }
 .pr-m p { font-size: clamp(1.35rem, 1.9vw, 1.75rem); line-height: 1.22; }
 .pr-s p { font-size: clamp(1.15rem, 1.5vw, 1.35rem); line-height: 1.3; }
-.pr-clip.is-hand p { font-family: var(--f-hand); font-style: normal; letter-spacing: 0; line-height: 1.1; color: #f3dfa8; transform: rotate(-1.5deg); }
-.pr-m.is-hand p { font-size: clamp(2rem, 2.7vw, 2.5rem); }
-.pr-s.is-hand p { font-size: clamp(1.7rem, 2.2vw, 2.1rem); }
 .pr-clip footer { font-family: var(--f-mono); font-size: 0.7rem; letter-spacing: 0.14em; color: var(--sage); }
 .pr-clip footer a { color: var(--tungsten); text-decoration: none; border-bottom: 1px solid rgba(211,154,91,0.45); padding-bottom: 1px; }
 .pr-clip footer a:hover { color: var(--haze); }
 @media (max-width: 700px) { .pr { padding: 10vh 0 8vh; } .pr-wall { columns: 1; } .pr-clip { margin-bottom: 1.8rem; } }
 
 /* ── Day One (fireflies at dusk) ───────────────────── */
-.d1 { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 18vh 0; overflow: hidden; }
+.d1 { position: relative; min-height: 90vh; display: flex; align-items: center; padding: 10vh 0 18vh; overflow: hidden; }
 .d1-bg { position: absolute; inset: 0; }
 .d1-bg img { filter: saturate(0.6) brightness(0.48) contrast(1.05); }
 .d1-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(var(--canopy) 0%, rgba(34,46,30,0.5) 25%, rgba(30,40,40,0.55) 70%, var(--canopy) 100%); }
@@ -200,7 +197,7 @@
   .ss-img img, .ss-frame.wide .ss-img img, .ss-frame.tall .ss-img img { width: 100%; height: auto; }
   .pr { padding-top: 12vh; }
   .pr-quote-2 { margin-top: 8vh; }
-  .d1 { padding: 12vh 0; }
+  .d1 { padding: 6vh 0 12vh; }
   .d1-card { padding: 2.5rem 1.5rem 2rem; }
   .bd { right: 0.75rem; left: 0.75rem; bottom: 0.75rem; width: auto; }
 }
@@ -298,7 +295,7 @@
 .ls-reel-track { display: flex; align-items: flex-start; gap: 3.5rem; width: max-content; padding-right: 3.5rem; animation: ls-reel 45s linear infinite; }
 .ls-reel:hover .ls-reel-track, .ls-reel:active .ls-reel-track { animation-play-state: paused; }
 .ls-quote { flex: none; max-width: 30rem; margin: 0; display: flex; flex-direction: column; gap: 0.7rem; }
-.ls-quote blockquote { margin: 0; font-family: var(--f-display); font-style: italic; font-size: clamp(1.25rem, 2vw, 1.6rem); line-height: 1.35; color: var(--haze); }
+.ls-quote blockquote { margin: 0; font-family: var(--f-display); font-style: italic; font-weight: 700; font-size: clamp(1.25rem, 2vw, 1.6rem); line-height: 1.3; letter-spacing: -0.01em; color: var(--haze); }
 .ls-quote figcaption { font-family: var(--f-mono); font-size: 0.7rem; letter-spacing: 0.14em; color: var(--sage); }
 .ls-quote figcaption b { font-weight: 400; color: var(--amber); }
 .ls-reviews { margin-top: 1.2rem; text-align: right; }

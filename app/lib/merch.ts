@@ -21,6 +21,7 @@ export const merch: MerchItem[] = [
     image: '/images/merch/india-tee.webp',
     mock: 'tee-dark',
     tile: '#d9b48f',
+    price: '$38',
   },
   {
     name: 'Portrait',
@@ -29,6 +30,7 @@ export const merch: MerchItem[] = [
     image: '/images/merch/photo-tee.webp',
     mock: 'tee-dark',
     tile: '#b7c2a6',
+    price: '$38',
   },
   {
     name: 'Reach for It',
@@ -37,6 +39,7 @@ export const merch: MerchItem[] = [
     image: '/images/merch/star-tee.webp',
     mock: 'tee-dark',
     tile: '#e3c48e',
+    price: '$38',
   },
   {
     name: 'Ethan Hoffman — The EP',

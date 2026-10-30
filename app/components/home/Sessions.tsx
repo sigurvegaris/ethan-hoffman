@@ -50,10 +50,10 @@ export default function Sessions() {
       <div className="ss-pin">
         <div className="ss-track" ref={track}>
           <div className="ss-intro">
-            <p className="fh-label">dragonfly creek studios, malibu</p>
+            <p className="fh-label">Dragonfly Creek Studios, Malibu</p>
             <h2 className="ss-title"><span className="ss-num">8</span> session videos,<br /><span className="ss-num">2</span> nights,<br /><em><span className="ss-num">1</span> room.</em></h2>
             <p className="ss-sub">Every song on the EP arrives with its own live video. Until then, here he is on stage.</p>
-            <Link href="/music" className="glass-btn">watch live performances</Link>
+            <Link href="/music" className="glass-btn">Watch live performances</Link>
           </div>
           {frames.map((f, i) => (
             <figure key={f.src} className={`ss-frame ${f.h > f.w ? 'tall' : 'wide'}`} style={{ marginTop: i % 2 ? '9vh' : '0' }}>

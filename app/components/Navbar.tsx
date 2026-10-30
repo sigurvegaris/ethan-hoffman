@@ -4,19 +4,26 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-const mainLinks = [
-  { href: '/music', label: 'music' },
-  { href: '/shows', label: 'shows' },
-  { href: '/merch', label: 'merch' },
-  { href: '/about', label: 'about' },
-  { href: '/services', label: 'book live' },
+type NavLink = { href: string; label: string; sub?: { href: string; label: string }[] }
+
+const mainLinks: NavLink[] = [
+  { href: '/music', label: 'Music' },
+  { href: '/shows', label: 'Shows' },
+  { href: '/merch', label: 'Merch' },
+  { href: '/about', label: 'About' },
+  {
+    href: '/services',
+    label: 'Book Live',
+    sub: [
+      { href: '/testimonials', label: 'Testimonials' },
+      { href: '/venues', label: 'Past Venues' },
+    ],
+  },
 ]
 
 const moreLinks = [
-  { href: '/repertoire', label: 'repertoire' },
-  { href: '/venues', label: 'past venues' },
-  { href: '/testimonials', label: 'testimonials' },
-  { href: '/contact', label: 'contact' },
+  { href: '/repertoire', label: 'Repertoire' },
+  { href: '/contact', label: 'Contact' },
 ]
 
 export default function Navbar() {
@@ -53,6 +60,15 @@ export default function Navbar() {
         .eh-link { font-family: var(--f-body); font-size: 1.05rem; font-weight: 500; color: #f2ecdf; text-decoration: none; position: relative; padding: 0.2rem 0; }
         .eh-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 1.5px; background: #e2a75a; transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease; }
         .eh-link:hover::after, .eh-link.active::after { transform: scaleX(1); }
+        /* Book Live opens a small menu with Testimonials and Past Venues. */
+        .eh-drop { position: relative; }
+        .eh-drop-caret { display: inline-block; margin-left: 0.35rem; font-size: 0.7em; transition: transform 0.2s ease; }
+        .eh-drop:hover .eh-drop-caret, .eh-drop:focus-within .eh-drop-caret { transform: rotate(180deg); }
+        .eh-drop-menu { position: absolute; top: 100%; left: 50%; min-width: 210px; padding-top: 0.9rem; transform: translate(-50%, -6px); opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; }
+        .eh-drop:hover .eh-drop-menu, .eh-drop:focus-within .eh-drop-menu { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
+        .eh-drop-menu div { display: flex; flex-direction: column; padding: 0.5rem; background: rgba(20,26,18,0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(242,236,223,0.14); border-radius: 4px; box-shadow: 0 18px 40px rgba(0,0,0,0.35); }
+        .eh-drop-menu a { font-family: var(--f-body); font-size: 1rem; font-weight: 500; color: #f2ecdf; text-decoration: none; padding: 0.65rem 0.9rem; border-radius: 3px; white-space: nowrap; }
+        .eh-drop-menu a:hover, .eh-drop-menu a.active { background: rgba(242,236,223,0.08); color: #e2a75a; }
         .eh-signup { font-family: var(--f-body); font-size: 1rem; font-weight: 500; background: #f2ecdf; color: #1c1a15; text-decoration: none; padding: 0.5rem 1.6rem; transition: background 0.2s ease; }
         .eh-signup:hover { background: #e2a75a; }
         .eh-burger { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; }
@@ -66,6 +82,8 @@ export default function Navbar() {
         .eh-sheet-main { display: flex; flex-direction: column; gap: 0.35rem; }
         .eh-sheet-main a { font-family: var(--f-display); font-size: clamp(2.8rem, 12vw, 4rem); line-height: 1.05; color: #f2ecdf; text-decoration: none; }
         .eh-sheet-main a:hover, .eh-sheet-main a.active { font-style: italic; color: #e2a75a; }
+        .eh-sheet-sub { display: flex; gap: 1.5rem; margin: 0.1rem 0 0.6rem 0.2rem; }
+        .eh-sheet-sub a { font-family: var(--f-body); font-size: 1.1rem; color: #e2a75a; text-decoration: none; }
         .eh-sheet-more { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; margin-top: 2.5rem; }
         .eh-sheet-more a { font-family: var(--f-body); font-size: 1rem; color: rgba(242,236,223,0.7); text-decoration: none; }
         .eh-sheet-note { font-family: var(--f-hand); font-size: 1.6rem; color: #e2a75a; margin-top: 2.5rem; text-decoration: none; transform: rotate(-2deg); display: inline-block; }
@@ -83,10 +101,21 @@ export default function Navbar() {
         <Link href="/" className="eh-wordmark" onClick={close}><span>Ethan</span> <em>Hoffman</em></Link>
 
         <div className="eh-links">
-          {mainLinks.map((l) => (
+          {mainLinks.map((l) => l.sub ? (
+            <div key={l.href} className="eh-drop">
+              <Link href={l.href} className={`eh-link ${pathname === l.href || l.sub.some((x) => x.href === pathname) ? 'active' : ''}`}>
+                {l.label}<span className="eh-drop-caret" aria-hidden="true">▾</span>
+              </Link>
+              <div className="eh-drop-menu">
+                <div>
+                  {l.sub.map((x) => <Link key={x.href} href={x.href} className={pathname === x.href ? 'active' : ''}>{x.label}</Link>)}
+                </div>
+              </div>
+            </div>
+          ) : (
             <Link key={l.href} href={l.href} className={`eh-link ${pathname === l.href ? 'active' : ''}`}>{l.label}</Link>
           ))}
-          <Link href="/mailing-list" className="eh-signup">sign up</Link>
+          <Link href="/mailing-list" className="eh-signup">Sign Up</Link>
         </div>
 
         <button type="button" className={`eh-burger ${open ? 'open' : ''}`} aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen((o) => !o)}>
@@ -96,9 +125,16 @@ export default function Navbar() {
 
       <div className={`eh-sheet ${open ? 'open' : ''}`} aria-hidden={!open}>
         <div className="eh-sheet-main">
-          <Link href="/" onClick={close} className={pathname === '/' ? 'active' : ''} tabIndex={open ? 0 : -1}>home</Link>
+          <Link href="/" onClick={close} className={pathname === '/' ? 'active' : ''} tabIndex={open ? 0 : -1}>Home</Link>
           {mainLinks.map((l) => (
-            <Link key={l.href} href={l.href} onClick={close} className={pathname === l.href ? 'active' : ''} tabIndex={open ? 0 : -1}>{l.label}</Link>
+            <div key={l.href}>
+              <Link href={l.href} onClick={close} className={pathname === l.href ? 'active' : ''} tabIndex={open ? 0 : -1}>{l.label}</Link>
+              {l.sub && (
+                <div className="eh-sheet-sub">
+                  {l.sub.map((x) => <Link key={x.href} href={x.href} onClick={close} tabIndex={open ? 0 : -1}>{x.label} →</Link>)}
+                </div>
+              )}
+            </div>
           ))}
         </div>
         <div className="eh-sheet-more">
@@ -106,7 +142,7 @@ export default function Navbar() {
             <Link key={l.href} href={l.href} onClick={close} tabIndex={open ? 0 : -1}>{l.label}</Link>
           ))}
         </div>
-        <Link href="/mailing-list" onClick={close} className="eh-sheet-note" tabIndex={open ? 0 : -1}>join the mailing list →</Link>
+        <Link href="/mailing-list" onClick={close} className="eh-sheet-note" tabIndex={open ? 0 : -1}>Join the mailing list →</Link>
       </div>
     </>
   )

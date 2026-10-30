@@ -13,14 +13,14 @@ const contactItems = [
 ]
 
 const quickLinks = [
-  { label: 'music', href: '/music' },
-  { label: 'shows', href: '/shows' },
-  { label: 'merch', href: '/merch' },
-  { label: 'about', href: '/about' },
-  { label: 'book live', href: '/services' },
-  { label: 'past venues', href: '/venues' },
-  { label: 'testimonials', href: '/testimonials' },
-  { label: 'contact', href: '/contact' },
+  { label: 'Music', href: '/music' },
+  { label: 'Shows', href: '/shows' },
+  { label: 'Merch', href: '/merch' },
+  { label: 'About', href: '/about' },
+  { label: 'Book Live', href: '/services' },
+  { label: 'Past Venues', href: '/venues' },
+  { label: 'Testimonials', href: '/testimonials' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 // India easter egg: "los angeles" is a way out. Tap it for a one-way ticket.
@@ -29,8 +29,8 @@ function LeavingCalifornia() {
   return (
     <span className="eh-lc">
       <button type="button" className="eh-lc-city" onClick={() => setOpen((o) => !o)} aria-expanded={open}>
-        <span className="eh-lc-a">los angeles</span>
-        <span className="eh-lc-b" aria-hidden="true">leaving california</span>
+        <span className="eh-lc-a">Los Angeles</span>
+        <span className="eh-lc-b" aria-hidden="true">Leaving California</span>
       </button>
       {open && (
         <span className="eh-lc-ticket" role="note">
@@ -125,15 +125,15 @@ export default function Footer() {
         <div className="eh-foot-top">
           <div>
             <p className="eh-foot-mark">Ethan<br /><em>Hoffman</em></p>
-            <p className="eh-foot-tag">thanks for being here. — e</p>
+            <p className="eh-foot-tag">Thanks for being here. — E</p>
           </div>
           {!onListPage && <div>
-            <p className="eh-foot-label">sign up for the mailing list</p>
+            <p className="eh-foot-label">Sign up for the mailing list</p>
             {status === 'done' ? (
-              <p className="eh-foot-tag" style={{ marginTop: 0 }}>you&apos;re on the list ♡</p>
+              <p className="eh-foot-tag" style={{ marginTop: 0 }}>You&apos;re on the list ♡</p>
             ) : (
               <form className="eh-foot-form" onSubmit={subscribe}>
-                <input className="eh-foot-input" type="email" required placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} aria-label="Email address" />
+                <input className="eh-foot-input" type="email" required placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} aria-label="Email address" />
                 <button className="eh-foot-btn" type="submit" disabled={status === 'sending'}>{status === 'sending' ? '…' : 'Subscribe'}</button>
               </form>
             )}
@@ -148,7 +148,7 @@ export default function Footer() {
         </nav>
 
         <div className="eh-foot-bottom">
-          <span>© {new Date().getFullYear()} ethan hoffman · <LeavingCalifornia /></span>
+          <span>© {new Date().getFullYear()} Ethan Hoffman · <LeavingCalifornia /></span>
           <span className="eh-foot-contact">
             {contactItems.filter((c) => c.url && c.label === 'Email').map((c) => <a key={c.label} href={c.url!}>{c.value}</a>)}
           </span>

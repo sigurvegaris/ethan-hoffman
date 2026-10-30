@@ -57,18 +57,18 @@ export default function BirthdayNudge() {
           <p className="bd-script">Wait! When&apos;s your birthday?</p>
           <p className="bd-sub">Ethan would love to celebrate you.</p>
           <form onSubmit={submit} className="bd-form">
-            <input className="bd-input" placeholder="first name" value={name} onChange={(e) => setName(e.target.value)} maxLength={40} required aria-label="First name" tabIndex={visible ? 0 : -1} />
+            <input className="bd-input" placeholder="First name" value={name} onChange={(e) => setName(e.target.value)} maxLength={40} required aria-label="First name" tabIndex={visible ? 0 : -1} />
             <div className="bd-row">
               <select className="bd-input" value={month} onChange={(e) => setMonth(e.target.value)} required aria-label="Birthday month" tabIndex={visible ? 0 : -1}>
-                <option value="">month</option>
+                <option value="">Month</option>
                 {months.map((m) => <option key={m} value={m}>{m}</option>)}
               </select>
               <select className="bd-input" value={day} onChange={(e) => setDay(e.target.value)} required aria-label="Birthday day" tabIndex={visible ? 0 : -1}>
-                <option value="">day</option>
+                <option value="">Day</option>
                 {Array.from({ length: 31 }, (_, i) => <option key={i + 1} value={i + 1}>{i + 1}</option>)}
               </select>
             </div>
-            <button className="bd-btn" type="submit" disabled={status === 'sending'} tabIndex={visible ? 0 : -1}>{status === 'sending' ? 'sending…' : 'celebrate me'}</button>
+            <button className="bd-btn" type="submit" disabled={status === 'sending'} tabIndex={visible ? 0 : -1}>{status === 'sending' ? 'Sending…' : 'Celebrate me'}</button>
             {status === 'error' && <p className="bd-sub" style={{ marginTop: '0.5rem' }}>That didn&apos;t go through. Try again?</p>}
           </form>
         </>

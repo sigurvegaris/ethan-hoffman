@@ -25,7 +25,7 @@ export default function VideoEmbed({ id, label, priority = false }: { id: string
           </>
         )}
       </div>
-      <p className="mu-vlabel">{label.toLowerCase()}</p>
+      <p className="mu-vlabel">{label}</p>
     </div>
   )
 }

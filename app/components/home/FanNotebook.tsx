@@ -55,7 +55,7 @@ export default function FanNotebook() {
 
       <div className="fh-wrap d1-inner">
         <div className="d1-card">
-          <p className="fh-label">day one</p>
+          <p className="fh-label">Day One</p>
           {status === 'done' ? (
             <>
               <h2 className="d1-title">You&apos;re in, <em>{name.trim()}.</em></h2>
@@ -69,11 +69,11 @@ export default function FanNotebook() {
                 Add yours, and you might end up on the back of the Day One shirt.
               </p>
               <form onSubmit={submit} className="d1-form">
-                <input className="d1-input" required maxLength={40} placeholder="first name" value={name} onChange={(e) => setName(e.target.value)} aria-label="First name" />
-                <input className="d1-input" maxLength={60} placeholder="where you’re listening from" value={place} onChange={(e) => setPlace(e.target.value)} aria-label="Where you're listening from" />
-                <input className="d1-input" type="email" required maxLength={80} placeholder="email, for new music" value={email} onChange={(e) => setEmail(e.target.value)} aria-label="Email" />
+                <input className="d1-input" required maxLength={40} placeholder="First name" value={name} onChange={(e) => setName(e.target.value)} aria-label="First name" />
+                <input className="d1-input" maxLength={60} placeholder="Where you’re listening from" value={place} onChange={(e) => setPlace(e.target.value)} aria-label="Where you're listening from" />
+                <input className="d1-input" type="email" required maxLength={80} placeholder="Email, for new music" value={email} onChange={(e) => setEmail(e.target.value)} aria-label="Email" />
                 <button type="submit" className="glass-btn glass-btn-solid d1-btn" disabled={status === 'sending'}>
-                  {status === 'sending' ? 'adding you…' : 'add my name'}
+                  {status === 'sending' ? 'Adding you…' : 'Add my name'}
                 </button>
                 {status === 'error' && <p className="d1-small">That didn&apos;t go through. Try again?</p>}
               </form>

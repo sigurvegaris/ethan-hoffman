@@ -58,7 +58,7 @@ export default function Shows() {
               Catch Ethan live — tickets and details below
             </p>
 
-            <Link href="/contact" className="sh-book">book ethan</Link>
+            <Link href="/contact" className="sh-book">Book Ethan</Link>
           </div>
         </div>
 

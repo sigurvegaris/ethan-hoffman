@@ -14,8 +14,8 @@ export default function NotFound() {
         </div>
         <div className="nf-copy">
           <p className="nf-code">404 · this page doesn&apos;t exist</p>
-          <h1 className="nf-title">what if we&apos;re all just <em>living wrong?</em></h1>
-          <Link className="hr-btn nf-btn" href="/">take me home</Link>
+          <h1 className="nf-title">What if we&apos;re all just <em>living wrong?</em></h1>
+          <Link className="hr-btn nf-btn" href="/">Take me home</Link>
         </div>
       </main>
     </>

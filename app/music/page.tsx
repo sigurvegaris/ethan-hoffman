@@ -32,8 +32,8 @@ function ReleasePair({ p }: { p: (typeof pairs)[number] }) {
           <span className="mu-cover-title">{p.title}</span>
         </div>
         <div className="mu-pair-links">
-          <a className="mu-btn" href={spotify.url} target="_blank" rel="noopener noreferrer">spotify</a>
-          <a className="mu-btn mu-btn-ghost" href={apple.url} target="_blank" rel="noopener noreferrer">apple music</a>
+          <a className="mu-btn" href={spotify.url} target="_blank" rel="noopener noreferrer">Spotify</a>
+          <a className="mu-btn mu-btn-ghost" href={apple.url} target="_blank" rel="noopener noreferrer">Apple Music</a>
         </div>
       </div>
       <div className="mu-pair-video">
@@ -42,7 +42,7 @@ function ReleasePair({ p }: { p: (typeof pairs)[number] }) {
         ) : (
           <div className="mu-soon">
             <Image src="/images/malibu/studio-bw.webp" alt="" fill sizes="(max-width: 900px) 90vw, 640px" style={{ objectFit: 'cover' }} />
-            <span>the {p.title.toLowerCase()} video<br />premieres soon</span>
+            <span>The {p.title} video<br />premieres soon</span>
           </div>
         )}
       </div>
@@ -95,7 +95,12 @@ export default function Music() {
         .mu-live-sub { font-family: var(--f-hand); font-size: 1.6rem; color: #e2a75a; text-align: center; margin: 0.25rem 0 3rem; }
         .mu-featured { display: grid; grid-template-columns: 1.5fr 1fr; gap: 2.5rem; align-items: start; margin-bottom: 3rem; }
         .mu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-        .mu-side h3 { font-family: var(--f-mono); font-size: 0.78rem; font-weight: 400; letter-spacing: 0.2em; margin: 0 0 1rem; color: #e2a75a; }
+        .mu-side h3 { font-family: var(--f-display); font-size: clamp(1.9rem, 3vw, 2.5rem); font-weight: 400; line-height: 1.05; margin: 0 0 0.5rem; color: #f2ecdf; }
+        .mu-side h3 em { color: #1ed760; }
+        .mu-side-note { font-size: 1rem; line-height: 1.55; color: var(--cream-dim); margin: 0 0 1.2rem; }
+        .mu-spotify { display: flex; align-items: center; justify-content: center; gap: 0.7rem; margin-top: 1rem; padding: 0.95rem 1.4rem; border-radius: 999px; background: #1ed760; color: #0f140d; font-weight: 600; font-size: 1.05rem; text-decoration: none; transition: transform 0.2s ease, background 0.2s ease; }
+        .mu-spotify:hover { background: #3be477; transform: translateY(-1px); }
+        .mu-spotify svg { width: 22px; height: 22px; }
         .mu-more { font-family: var(--f-mono); font-size: 0.78rem; letter-spacing: 0.2em; color: #e2a75a; text-align: center; margin: 4rem 0 2rem; }
 
         @media (max-width: 900px) {
@@ -114,8 +119,8 @@ export default function Music() {
       <main className="mu">
         <div className="mu-top" />
         <header className="mu-head mu-wrap">
-          <p className="mu-script">new songs, one at a time</p>
-          <h1 className="mu-title">music</h1>
+          <p className="mu-script">New songs, one at a time</p>
+          <h1 className="mu-title">Music</h1>
         </header>
 
         <section className="mu-wrap" aria-label="Releases">
@@ -136,10 +141,10 @@ export default function Music() {
               </div>
               <ul className="mu-facts">
                 {epTracks.map((r) => (
-                  <li key={r.title}><span>{r.title.toLowerCase()}</span><span>{formatReleaseDate(r.releaseDate)}</span></li>
+                  <li key={r.title}><span>{r.title}</span><span>{formatReleaseDate(r.releaseDate)}</span></li>
                 ))}
-                <li><span>runtime</span><span>{ep.runtime}</span></li>
-                <li><span>sessions</span><span>8 videos, 2 nights, Malibu</span></li>
+                <li><span>Runtime</span><span>{ep.runtime}</span></li>
+                <li><span>Sessions</span><span>8 videos, 2 nights, Malibu</span></li>
               </ul>
             </div>
           )}
@@ -147,12 +152,13 @@ export default function Music() {
 
         <section className="mu-live">
           <div className="mu-wrap">
-            <h2>live</h2>
-            <p className="mu-live-sub">loops, beatbox and whatever the room gives him</p>
+            <h2>Live</h2>
+            <p className="mu-live-sub">Covers, originals, freestyle rapping, looping, and more.</p>
             <div className="mu-featured">
               <VideoEmbed id={videos[0].id} label={videos[0].label} priority />
               <div className="mu-side">
-                <h3>stream on spotify</h3>
+                <h3>Listen on <em>Spotify</em></h3>
+                <p className="mu-side-note">Every single, the EP as it drops, and the songs from these videos.</p>
                 <iframe
                   src="https://open.spotify.com/embed/artist/3wv3GWickdI3WcNEyV2zG6?utm_source=generator&theme=0"
                   width="100%" height="352" frameBorder="0"
@@ -161,9 +167,13 @@ export default function Music() {
                   style={{ borderRadius: '4px' }}
                   title="Ethan Hoffman on Spotify"
                 />
+                <a className="mu-spotify" href={spotify.url} target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24Zm5.5 17.3a.75.75 0 0 1-1 .25c-2.85-1.74-6.45-2.14-10.68-1.17a.75.75 0 1 1-.33-1.46c4.63-1.06 8.6-.6 11.77 1.34.36.22.47.68.25 1.04Zm1.47-3.27a.94.94 0 0 1-1.29.31c-3.27-2-8.24-2.59-12.1-1.42a.94.94 0 1 1-.54-1.8c4.41-1.34 9.9-.69 13.62 1.6.44.27.58.85.31 1.3Zm.13-3.4C15.18 8.3 8.7 8.08 4.96 9.22a1.13 1.13 0 1 1-.65-2.16c4.3-1.3 11.44-1.05 15.95 1.63a1.13 1.13 0 0 1-1.16 1.94Z"/></svg>
+                  Open Ethan on Spotify
+                </a>
               </div>
             </div>
-            <p className="mu-more">more performances</p>
+            <p className="mu-more">More performances</p>
             <div className="mu-grid">
               {videos.slice(1).map((v) => <VideoEmbed key={v.id} id={v.id} label={v.label} />)}
             </div>

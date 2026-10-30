@@ -193,7 +193,7 @@ export default function Testimonials() {
               Testimonials
             </h1>
             <p style={{ fontSize: '0.95rem', color: 'var(--cream-dim)', maxWidth: '480px', lineHeight: '1.8', fontFamily: 'var(--f-body)' }}>
-              From weddings and galas to corporate events and ticketed shows. Here&apos;s what clients and bookers have to say.
+              From grad parties to corporate gatherings and ticketed shows, here&apos;s what clients and bookers have to say.
             </p>
           </div>
         </div>

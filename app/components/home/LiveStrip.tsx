@@ -10,7 +10,7 @@ export default function LiveStrip() {
   return (
     <section className="ls" aria-label="Live bookings">
       <div className="fh-wrap">
-        <p className="fh-label ls-label">past clients &amp; venues include</p>
+        <p className="fh-label ls-label">Past clients &amp; venues include</p>
         <div className="ls-logos">
           {top.map((v) => <div key={v.name} className="ls-logo"><Logo v={v} scale={0.72} /></div>)}
         </div>
@@ -25,7 +25,7 @@ export default function LiveStrip() {
           ))}
         </div>
       </div>
-      <div className="fh-wrap ls-reviews"><Link href="/testimonials">read all reviews →</Link></div>
+      <div className="fh-wrap ls-reviews"><Link href="/testimonials">Read all reviews →</Link></div>
     </section>
   )
 }

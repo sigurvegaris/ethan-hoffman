@@ -22,7 +22,7 @@ export default function VenueGrid() {
           </div>
         ))}
         <button type="button" className="vg-more" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
-          <span>{open ? 'show less' : `and ${otherVenues.length} more`}</span>
+          <span>{open ? 'Show less' : `And ${otherVenues.length} more`}</span>
           <i aria-hidden="true">{open ? '↑' : '↓'}</i>
         </button>
       </div>

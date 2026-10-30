@@ -8,7 +8,7 @@ import { stats } from '../lib/stats'
 import './about.css'
 
 // Structure and copy follow the original site's About page: three tabs, the
-// "artists people compare him to" ticker and press. Photos are updated, and
+// "Artists people compare him to" ticker and press. Photos are updated, and
 // the Oct 29 "right now" update with his metrics sits under the tabs.
 const tabs = [
   {
@@ -61,8 +61,11 @@ export default function About() {
       <Navbar />
       <main className="ab">
         <header className="ab-hero ab-wrap">
-          <p className="ab-label">about ethan</p>
-          <h1 className="ab-title">Soul. Stage. Stories. Sound. <em>Live.</em></h1>
+          <p className="ab-label">About Ethan</p>
+          <h1 className="ab-title">
+            &ldquo;I initially didn’t like it, but now I <em>embrace</em> it. To me, it means being someone who does not fit neatly into one mold.&rdquo;
+          </h1>
+          <p className="ab-title-cite">Ethan on being called &ldquo;the unicorn,&rdquo; <a href="https://www.lifeonjupitermag.com/articles/spotlight-ethan-hoffman" target="_blank" rel="noopener noreferrer">Life on Jupiter</a></p>
         </header>
 
         <section className="ab-wrap ab-tabs-wrap">
@@ -88,7 +91,7 @@ export default function About() {
 
         <section className="ab-now" aria-labelledby="ab-now-label">
           <div className="ab-wrap">
-            <p className="ab-label" id="ab-now-label">right now</p>
+            <p className="ab-label" id="ab-now-label">Right now</p>
             <div className="ab-now-grid">
               <div className="ab-now-copy">
                 <h2>Where Ethan is <em>today</em></h2>
@@ -109,7 +112,7 @@ export default function About() {
         </section>
 
         <section className="ab-compare" aria-label="Artists people compare him to">
-          <p className="ab-label ab-wrap">artists people compare him to</p>
+          <p className="ab-label ab-wrap">Artists people compare him to</p>
           <div className="ab-ticker">
             <div className="ab-ticker-track">
               {[...comparisons, ...comparisons].map((n, i) => <span key={i}>{n}<i aria-hidden="true">✦</i></span>)}
@@ -118,7 +121,7 @@ export default function About() {
         </section>
 
         <section className="ab-wrap ab-press" aria-labelledby="ab-press-label">
-          <p className="ab-label ab-center" id="ab-press-label">press</p>
+          <p className="ab-label ab-center" id="ab-press-label">Press</p>
           <h2 className="ab-h2">As seen <em>in</em></h2>
           <ul className="ab-press-list">
             {press.map((p) => (
@@ -126,7 +129,7 @@ export default function About() {
                 <a href={p.url} target="_blank" rel="noopener noreferrer">
                   <span className="ab-press-outlet">{p.outlet}</span>
                   <span className="ab-press-title">{p.title}</span>
-                  <span className="ab-press-read">read article <i aria-hidden="true">→</i></span>
+                  <span className="ab-press-read">Read article <i aria-hidden="true">→</i></span>
                 </a>
               </li>
             ))}

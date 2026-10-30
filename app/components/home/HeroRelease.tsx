@@ -29,12 +29,12 @@ export default function HeroRelease() {
       <div className="hr-haze" aria-hidden="true" />
 
       <div className="hr-lockup">
-        <p className="hr-kicker">{out ? 'the new single · out now' : 'the first single · coming soon'}</p>
+        <p className="hr-kicker">{out ? 'The new single · Out now' : 'The first single · Coming soon'}</p>
         <h1 className="hr-title">{featuredSingle.title}</h1>
         <div className="hr-row">
           <div className="hr-buttons">
-            <a className="hr-btn" onPointerEnter={hover(0)} href={spotify.url} target="_blank" rel="noopener noreferrer">listen on spotify</a>
-            <Link className="hr-btn" onPointerEnter={hover(1)} href="/contact">book ethan</Link>
+            <a className="hr-btn" onPointerEnter={hover(0)} href={spotify.url} target="_blank" rel="noopener noreferrer">Listen on Spotify</a>
+            <Link className="hr-btn" onPointerEnter={hover(1)} href="/contact">Book Ethan</Link>
             <p className={`hr-indecision${dither.n >= 7 ? ' is-on' : ''}`} aria-hidden="true">too many times to count</p>
           </div>
           <div className="hr-social">

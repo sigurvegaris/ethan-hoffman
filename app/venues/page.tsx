@@ -10,6 +10,7 @@ export default function Venues() {
       <style>{`
         .venues-page { background-color: var(--green); min-height: 100vh; overflow-x: hidden; }
         .venues-shell { width: min(1200px, calc(100% - 3rem)); margin: 0 auto; padding: 5rem 0; }
+        .venues-note { max-width: 46ch; margin: 2rem auto 0; text-align: center; font-family: var(--f-display); font-style: italic; font-size: 1.1rem; line-height: 1.5; color: var(--cream-dim); }
         @media (max-width: 768px) {
           .venues-shell { width: calc(100% - 2rem); padding: 3.5rem 0; }
           .venues-hero { padding: 8.5rem 0 3rem !important; }
@@ -33,6 +34,9 @@ export default function Venues() {
 
         <div className="venues-shell">
           <VenueGrid />
+          <p className="venues-note">
+            This is just a preview. Many venues aren&apos;t listed here, and it doesn&apos;t include the private and corporate events he&apos;s played, which are private by nature.
+          </p>
 
           <div style={{ textAlign: 'center', marginTop: '4rem', paddingTop: '3rem', borderTop: '1px solid rgba(242,236,223,0.12)' }}>
             <p style={{ fontFamily: 'var(--f-display)', fontSize: '1.4rem', fontStyle: 'italic', color: 'var(--cream)', marginBottom: '1.5rem' }}>

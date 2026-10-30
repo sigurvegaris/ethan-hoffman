@@ -17,7 +17,7 @@ export const articles: Article[] = [
     url: 'https://www.lifeonjupitermag.com/articles/spotlight-ethan-hoffman',
     headline: 'The first thing people notice when listening to my music is that I’m free in my expression.',
     quotes: [
-      'It is just me, the guitar, the voice, and the song.',
+      '[Being a unicorn] means being someone who does not fit neatly into one mold, socially, musically, or otherwise.',
       'I know there are many things I am yet to experience, and thus many songs I am yet to write.',
     ],
   },
