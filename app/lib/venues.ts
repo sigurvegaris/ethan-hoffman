@@ -11,8 +11,7 @@ export const venueLogos: VenueLogo[] = [
   { name: 'The Strand House', logo: '/images/logos/strandhouse.png', h: 22, top: true },
   { name: 'The Rockefeller', logo: '/images/logos/rockefeller.png', h: 30, top: true },
   { name: 'Rolling Hills Country Club', logo: '/images/logos/rollinghills.png', h: 70, top: true },
-  // Placeholder wordmark until a Tesla logo file is supplied.
-  { name: 'Tesla', h: 30, top: true },
+  { name: 'Tesla', logo: '/images/logos/tesla.png', h: 66, top: true },
   { name: 'The Wiltern', logo: '/images/logos/thewiltern.png', h: 58, top: true },
   { name: 'Hollywood Improv', logo: '/images/logos/hollywoodimprov.png', h: 30 },
   { name: 'The Magnolia', logo: '/images/logos/themagnolia.png', h: 32 },

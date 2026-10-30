@@ -1,19 +1,19 @@
 /* Past clients grid: a dark, near-black field so the cream logos stand out. */
-.vg { --vg-bg: #11160f; --vg-line: rgba(242,236,223,0.09); }
+.vg { --vg-bg: #0b0f0a; --vg-line: rgba(242,236,223,0.09); }
 .vg-grid {
   display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1px;
   background: var(--vg-line); border: 1px solid var(--vg-line);
 }
 .vg-tile, .vg-more { background: var(--vg-bg); min-height: 150px; display: flex; align-items: center; justify-content: center; padding: 1.2rem; }
-.vg-logo { display: block; width: auto; max-width: 84%; object-fit: contain; opacity: 0.92; transition: opacity 0.25s ease, transform 0.25s ease; }
+.vg-logo { display: block; width: auto; max-width: 84%; object-fit: contain; opacity: 1; filter: brightness(1.12); transition: opacity 0.25s ease, transform 0.25s ease; }
 .vg-tile:hover .vg-logo, .vg-tile:hover .vg-word { opacity: 1; transform: scale(1.04); }
-.vg-word { font-family: var(--f-body); font-weight: 600; letter-spacing: 0.42em; padding-left: 0.42em; color: #f6f1e6; opacity: 0.92; transition: opacity 0.25s ease, transform 0.25s ease; }
+.vg-word { font-family: var(--f-body); font-weight: 600; letter-spacing: 0.42em; padding-left: 0.42em; color: #fbf8f1; opacity: 1; transition: opacity 0.25s ease, transform 0.25s ease; }
 .vg-more {
   border: 0; cursor: pointer; gap: 0.7rem; color: var(--cream-dim);
   font-family: var(--f-display); font-style: italic; font-size: 1.25rem; transition: color 0.25s ease, background 0.25s ease;
 }
 .vg-more i { font-style: normal; color: var(--amber); }
-.vg-more:hover { color: var(--cream); background: #172015; }
+.vg-more:hover { color: var(--cream); background: #131a11; }
 .vg-list { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.45s ease; }
 .vg-list.is-open { grid-template-rows: 1fr; }
 .vg-list ul {
