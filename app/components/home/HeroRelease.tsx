@@ -19,8 +19,13 @@ export default function HeroRelease() {
     <section className="hr">
       <div className="hr-photo">
         <Image src="/images/malibu/oak-walk.webp" alt="Ethan Hoffman walking down a path under the oak trees" fill priority quality={90} sizes="100vw" style={{ objectFit: 'cover', objectPosition: 'center 72%' }} />
-        {heroClip && <video className="hr-clip" src={heroClip} autoPlay muted loop playsInline poster="/images/malibu/oak-walk.webp" aria-hidden="true" />}
       </div>
+      {heroClip && (
+        <video className="hr-clip" autoPlay muted loop playsInline preload="auto" poster="/video/india-hero-poster.jpg" aria-hidden="true">
+          <source src={heroClip} type="video/mp4" />
+          <source src={heroClip.replace('.mp4', '.webm')} type="video/webm" />
+        </video>
+      )}
       <div className="hr-haze" aria-hidden="true" />
 
       <div className="hr-lockup">

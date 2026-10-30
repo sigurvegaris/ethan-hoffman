@@ -34,7 +34,7 @@ export const featuredSingle = singles[0]
 
 // A short clip from the India video for the homepage hero. Drop the file in
 // public/video/ and set the path here; until then the hero shows the photo.
-export const heroClip: string | null = null
+export const heroClip: string | null = '/video/india-hero.mp4'
 
 // Streaming + social links shown on the release banner. Swap the India-specific
 // URLs in once the single is live on each platform.
