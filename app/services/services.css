@@ -75,6 +75,7 @@
 
 .sv-live { padding: 6rem 0; background: var(--green-3); }
 .sv-videos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+.sv-videos > :first-child:nth-last-child(odd) { grid-column: 1 / -1; }
 
 .sv-songs { padding: 6rem 0 7rem; }
 .sv-songs-sub { color: var(--cream-dim); margin: -1.5rem 0 2rem; }

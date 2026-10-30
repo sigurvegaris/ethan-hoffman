@@ -94,7 +94,7 @@ export default function Music() {
         .mu-live h2 { font-family: var(--f-display); font-weight: 600; font-style: italic; font-size: clamp(2.6rem, 6vw, 4rem); letter-spacing: -0.02em; margin: 0; text-align: center; }
         .mu-live-sub { font-family: var(--f-hand); font-size: 1.6rem; color: #e2a75a; text-align: center; margin: 0.25rem 0 3rem; }
         .mu-featured { display: grid; grid-template-columns: 1.5fr 1fr; gap: 2.5rem; align-items: start; margin-bottom: 3rem; }
-        .mu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .mu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
         .mu-side h3 { font-family: var(--f-mono); font-size: 0.78rem; font-weight: 400; letter-spacing: 0.2em; margin: 0 0 1rem; color: #e2a75a; }
         .mu-expect { list-style: none; padding: 0; margin: 2rem 0 0; }
         .mu-expect li { padding: 0.55rem 0; border-bottom: 1px solid rgba(242,236,223,0.12); color: rgba(242,236,223,0.8); }
