@@ -2,15 +2,21 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import LiveStrip from '../components/home/LiveStrip'
 import { stats } from '../lib/stats'
-import '../home.css'
+import { testimonials } from '../lib/testimonials'
 import './services.css'
 
 const email = 'booking@ethanhoffmanofficial.com'
 
-// Book Live is one screen: who he plays for, how to book him, then the
-// venues and what hosts say. Everything longer lives on About and Music.
+// Book Live is short: who he plays for and how to book him, then what a
+// night with him looks like and one host in their own words. The home page
+// already carries the logo strip and quick quotes, so this page doesn't.
+const night = [
+  { when: 'as guests arrive', text: 'Warm, easy covers that let people talk, shaped to the room and the crowd.' },
+  { when: 'through dinner', text: 'Requests, birthdays, first dances. He reads the table and builds the set around it.' },
+  { when: 'the last hour', text: 'Loops, beatbox and the songs everyone knows, until the floor is full.' },
+]
+const featured = testimonials.find((t) => t.name === 'Ruben Barajas') ?? testimonials[0]
 export default function Services() {
   return (
     <>
@@ -31,7 +37,31 @@ export default function Services() {
             <ul className="sv-facts">{stats.map((s) => <li key={s.label}><b>{s.n}</b> {s.label}</li>)}</ul>
           </div>
         </header>
-        <LiveStrip />
+        <section className="sv-night">
+          <div className="sv-wrap">
+            <p className="sv-label">a night with ethan</p>
+            <ol className="sv-steps">
+              {night.map((n, i) => (
+                <li key={n.when}>
+                  <span className="sv-step-n">{String(i + 1).padStart(2, '0')}</span>
+                  <h2>{n.when}</h2>
+                  <p>{n.text}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section className="sv-word">
+          <div className="sv-wrap">
+            <blockquote>&ldquo;{featured.quote}&rdquo;</blockquote>
+            <p className="sv-word-by"><b>{featured.name}</b> · {featured.role}</p>
+            <div className="sv-word-links">
+              <Link href="/testimonials">more reviews →</Link>
+              <Link href="/venues">every venue he&apos;s played →</Link>
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </>
