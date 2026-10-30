@@ -8,11 +8,13 @@ import { Logo } from '../VenueGrid'
 // has played and what bookers say, so his credibility lands first.
 export default function LiveStrip() {
   const top = venueLogos.filter((v) => v.top)
+  // Reach only here; events and repertoire live on Book Live.
+  const reach = stats.filter((s) => s.label !== 'events performed' && s.label !== 'of repertoire')
   return (
     <section className="ls" aria-label="Live bookings">
       <div className="fh-wrap">
         <div className="ls-stats">
-          {stats.map((s) => (
+          {reach.map((s) => (
             <div key={s.label}><b>{s.n}</b><span>{s.label}</span></div>
           ))}
         </div>
