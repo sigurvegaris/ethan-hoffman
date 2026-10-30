@@ -15,18 +15,20 @@ export type MerchItem = {
 
 export const merch: MerchItem[] = [
   {
-    name: 'Making It Up As We Go',
+    name: 'Sweet India',
     kind: 'T-Shirt',
-    description: 'Childhood photo cover art, white serif type and Ethan’s signature.',
+    description: 'Brown tee with India in white, a line from the song and Ethan’s signature.',
+    image: '/images/merch/tee-india.webp',
     mock: 'tee-dark',
-    tile: '#a9c4d8',
+    tile: '#d9b48f',
   },
   {
-    name: 'Day One Fans',
+    name: 'The Sessions',
     kind: 'T-Shirt',
-    mock: 'tee-light',
-    tile: '#c9cfa8',
-    description: 'Hundreds of real fan names from the comments, printed across the back. A thank-you to the people who were here first.',
+    description: 'Black tee with stills from the India session video, his name and his signature.',
+    image: '/images/merch/tee-strip.webp',
+    mock: 'tee-dark',
+    tile: '#b7c2a6',
   },
   {
     name: 'Ethan Hoffman — The EP',
