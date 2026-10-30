@@ -311,7 +311,12 @@
   .ls-reel-track { gap: 2.25rem; padding-right: 2.25rem; }
   .ls-reviews { text-align: center; }
       }
-@media (max-width: 700px) { .hr-clip { object-position: 40% 30%; } }
+/* Phones: start the clip below the title so "India" never sits on his face,
+   fading its top edge into the dark behind the title. */
+@media (max-width: 700px) {
+  .hr:has(.hr-clip) .hr-photo { display: none; }
+  .hr-clip { top: 17%; height: 83%; object-position: 40% 30%; -webkit-mask-image: linear-gradient(transparent, #000 14%); mask-image: linear-gradient(transparent, #000 14%); }
+}
 
 /* Wider screens: the lockup sits on the right so Ethan's face stays clear on
    the left of the clip. Phones keep the centred stack above. */
