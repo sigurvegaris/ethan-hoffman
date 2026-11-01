@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import MerchMock from '../components/MerchMock'
-import { merch, type MerchItem } from '../lib/merch'
+import { merchForSale, merchLive, type MerchItem } from '../lib/merch'
 import { sendFanNote } from '../lib/notify'
 import Parallax from '../about/Parallax'
 import './merch.css'
@@ -35,7 +35,6 @@ function MerchCard({ item, i }: { item: MerchItem; i: number }) {
 export default function Merch() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
-  const anyComingSoon = merch.some((m) => !m.buyUrl)
 
   const notify = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -62,16 +61,18 @@ export default function Merch() {
           <div className="mp-wrap mp-hero-copy">
             <p className="mp-label">The first collection</p>
             <h1 className="mp-title">Merch</h1>
-            <p className="mp-sub">Made for the fans who were here first. Everything below is coming soon.</p>
+            <p className="mp-sub">{merchLive ? 'Made for the fans who were here first.' : 'Made for the fans who were here first. The first drop is almost here.'}</p>
           </div>
         </header>
 
         <div className="mp-wrap">
-          <div className="mp-grid">
-            {merch.map((item, i) => <MerchCard key={item.name} item={item} i={i} />)}
-          </div>
+          {merchLive && (
+            <div className="mp-grid">
+              {merchForSale.map((item, i) => <MerchCard key={item.name} item={item} i={i} />)}
+            </div>
+          )}
 
-          {anyComingSoon && (
+          {!merchLive && (
             <section className="mp-notify">
               <div>
                 <p className="mp-label">The waitlist</p>

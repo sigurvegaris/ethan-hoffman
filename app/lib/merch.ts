@@ -49,3 +49,8 @@ export const merch: MerchItem[] = [
     description: 'The self-titled debut EP on CD.',
   },
 ]
+
+// Only items with a checkout link are shown. Merch stays out of the menus
+// until at least one item can be bought.
+export const merchForSale = merch.filter((m) => m.buyUrl)
+export const merchLive = merchForSale.length > 0

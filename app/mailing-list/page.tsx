@@ -66,7 +66,7 @@ export default function MailingList() {
             {status === 'done' ? (
               <div className="ml-done" role="status">
                 <p className="ml-done-big">You&apos;re on the list{form.name ? `, ${form.name}` : ''}.</p>
-                <p className="ml-done-small">Keep an eye on your inbox. India is out November 1.</p>
+                <p className="ml-done-small">Keep an eye on your inbox. India is out now.</p>
                 <Link className="ml-btn" href="/">Back home</Link>
               </div>
             ) : (

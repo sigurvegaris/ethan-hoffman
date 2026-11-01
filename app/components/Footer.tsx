@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
+import { merchLive } from '../lib/merch'
 import { usePathname } from 'next/navigation'
 import { sendFanNote } from '../lib/notify'
 import { socialLinks } from '../lib/social'
@@ -12,7 +13,7 @@ const contactItems = [
   { label: 'Location', value: 'Los Angeles, CA', url: null },
 ]
 
-const quickLinks = [
+const allQuickLinks = [
   { label: 'Music', href: '/music' },
   { label: 'Shows', href: '/shows' },
   { label: 'Merch', href: '/merch' },
@@ -22,6 +23,7 @@ const quickLinks = [
   { label: 'Testimonials', href: '/testimonials' },
   { label: 'Contact', href: '/contact' },
 ]
+const quickLinks = allQuickLinks.filter((l) => l.href !== '/merch' || merchLive)
 
 // India easter egg: "los angeles" is a way out. Tap it for a one-way ticket.
 function LeavingCalifornia() {

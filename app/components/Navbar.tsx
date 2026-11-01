@@ -3,10 +3,11 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { merchLive } from '../lib/merch'
 
 type NavLink = { href: string; label: string; sub?: { href: string; label: string }[] }
 
-const mainLinks: NavLink[] = [
+const allLinks: NavLink[] = [
   { href: '/music', label: 'Music' },
   { href: '/shows', label: 'Shows' },
   { href: '/merch', label: 'Merch' },
@@ -20,6 +21,8 @@ const mainLinks: NavLink[] = [
     ],
   },
 ]
+
+const mainLinks = allLinks.filter((l) => l.href !== '/merch' || merchLive)
 
 const moreLinks = [
   { href: '/repertoire', label: 'Repertoire' },
