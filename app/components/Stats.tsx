@@ -24,7 +24,7 @@ export default function Stats() {
                 borderLeft: i !== 0 ? '1px solid rgba(196,168,130,0.2)' : 'none',
               }}>
                 <p style={{
-                  fontFamily: 'Playfair Display, serif',
+                  fontFamily: 'var(--f-display)',
                   fontSize: 'clamp(2rem, 4vw, 3rem)',
                   fontWeight: '600',
                   color: '#c4622d',
@@ -34,7 +34,7 @@ export default function Stats() {
                   {stat.number}
                 </p>
                 <p style={{
-                  fontFamily: 'Inter, sans-serif',
+                  fontFamily: 'var(--f-body)',
                   fontSize: '0.7rem',
                   fontWeight: '500',
                   letterSpacing: '0.15em',

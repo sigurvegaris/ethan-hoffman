@@ -12,7 +12,7 @@ export default function Music() {
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <p className="section-label" style={{ marginBottom: '1rem' }}>Music & Performance</p>
           <h2 style={{
-            fontFamily: 'Playfair Display, serif',
+            fontFamily: 'var(--f-display)',
             fontSize: 'clamp(2rem, 3.5vw, 2.8rem)',
             fontWeight: '600',
             color: '#fdfaf5',

@@ -215,7 +215,7 @@ export default function Venues() {
 
               <h1
                 style={{
-                  fontFamily: 'Playfair Display, serif',
+                  fontFamily: 'var(--f-display)',
                   fontSize: 'clamp(2rem, 3.5vw, 2.8rem)',
                   fontWeight: '600',
                   color: '#fdfaf5',
@@ -233,7 +233,7 @@ export default function Venues() {
                   maxWidth: '680px',
                   margin: '0 auto',
                   lineHeight: '1.7',
-                  fontFamily: 'Cormorant Garamond, serif',
+                  fontFamily: 'var(--f-display)',
                   fontStyle: 'italic',
                 }}
               >

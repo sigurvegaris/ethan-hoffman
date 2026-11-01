@@ -69,7 +69,7 @@ export default function About() {
             <p className="section-label" style={{ marginBottom: '1rem' }}>About Ethan</p>
 
             <h2 style={{
-              fontFamily: 'Playfair Display, serif',
+              fontFamily: 'var(--f-display)',
               fontSize: 'clamp(2rem, 3.5vw, 2.8rem)',
               fontWeight: '600',
               color: '#1a1814',
@@ -81,7 +81,7 @@ export default function About() {
             </h2>
 
             <p style={{
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'var(--f-body)',
               fontSize: '1rem',
               lineHeight: '1.85',
               color: '#6b6460',
@@ -91,7 +91,7 @@ export default function About() {
             </p>
 
             <p style={{
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'var(--f-body)',
               fontSize: '1rem',
               lineHeight: '1.85',
               color: '#6b6460',
@@ -101,7 +101,7 @@ export default function About() {
             </p>
 
             <p style={{
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: 'var(--f-body)',
               fontSize: '1rem',
               lineHeight: '1.85',
               color: '#6b6460',
@@ -134,7 +134,7 @@ export default function About() {
                     border: '1px solid rgba(196,168,130,0.5)',
                     fontSize: '0.78rem',
                     color: '#2d2926',
-                    fontFamily: 'Inter, sans-serif',
+                    fontFamily: 'var(--f-body)',
                     backgroundColor: 'rgba(196,168,130,0.08)',
                   }}>{name}</span>
                 ))}

@@ -78,7 +78,7 @@ export default function Services() {
         <div style={{ backgroundColor: '#f5f0e8', padding: '8rem 0 5rem' }}>
           <div className="container">
             <p style={{ fontSize: '0.7rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem' }}>What Ethan Offers</p>
-            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: '600', color: '#1a1814', lineHeight: '1.1' }}>Every Event, Elevated</h1>
+            <h1 style={{ fontFamily: 'var(--f-display)', fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: '600', color: '#1a1814', lineHeight: '1.1' }}>Every Event, Elevated</h1>
           </div>
         </div>
 
@@ -102,7 +102,7 @@ export default function Services() {
                 borderBottom: active === i ? '2px solid #c4622d' : '2px solid transparent',
                 marginBottom: '-1px',
                 transition: 'all 0.3s ease',
-                fontFamily: 'Inter, sans-serif',
+                fontFamily: 'var(--f-body)',
               }}>{s.label}</button>
             ))}
           </div>
@@ -114,7 +114,7 @@ export default function Services() {
           }}>
             <div>
               <h3 style={{
-                fontFamily: 'Playfair Display, serif',
+                fontFamily: 'var(--f-display)',
                 fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
                 fontWeight: '600', color: '#1a1814',
                 lineHeight: '1.3', marginBottom: '1.5rem',

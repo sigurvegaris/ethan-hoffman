@@ -107,11 +107,11 @@ export default function Testimonials() {
           letter-spacing: 0.2em;
           text-transform: uppercase;
           color: rgba(253,250,245,0.6);
-          font-family: Inter, sans-serif;
+          font-family: var(--f-body);
         }
 
         .t-quote-mark {
-          font-family: 'Playfair Display', serif;
+          font-family: var(--f-display);
           font-size: 4rem;
           line-height: 0.5;
           color: rgba(253,250,245,0.15);
@@ -124,7 +124,7 @@ export default function Testimonials() {
         }
 
         .t-quote {
-          font-family: 'Cormorant Garamond', serif;
+          font-family: var(--f-display);
           font-size: clamp(1rem, 1.4vw, 1.25rem);
           font-style: italic;
           font-weight: 400;
@@ -160,7 +160,7 @@ export default function Testimonials() {
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          font-family: 'Playfair Display', serif;
+          font-family: var(--f-display);
           font-size: 1rem;
           color: #c4622d;
         }
@@ -171,7 +171,7 @@ export default function Testimonials() {
         }
 
         .t-name {
-          font-family: Inter, sans-serif;
+          font-family: var(--f-body);
           font-size: 0.82rem;
           font-weight: 700;
           color: #fdfaf5;
@@ -179,7 +179,7 @@ export default function Testimonials() {
         }
 
         .t-role {
-          font-family: Inter, sans-serif;
+          font-family: var(--f-body);
           font-size: 0.65rem;
           color: rgba(253,250,245,0.5);
           margin: 0;
@@ -214,13 +214,13 @@ export default function Testimonials() {
         {/* ── HERO ── */}
         <div className="t-hero">
           <div className="t-shell">
-            <p style={{ fontSize: '0.7rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem', fontFamily: 'Inter, sans-serif' }}>
+            <p style={{ fontSize: '0.7rem', fontWeight: '600', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#c4622d', marginBottom: '1rem', fontFamily: 'var(--f-body)' }}>
               What People Say
             </p>
-            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: '600', color: '#fdfaf5', lineHeight: '1.1', marginBottom: '1rem' }}>
+            <h1 style={{ fontFamily: 'var(--f-display)', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: '600', color: '#fdfaf5', lineHeight: '1.1', marginBottom: '1rem' }}>
               Testimonials
             </h1>
-            <p style={{ fontSize: '0.95rem', color: 'rgba(253,250,245,0.45)', maxWidth: '480px', lineHeight: '1.8', fontFamily: 'Inter, sans-serif' }}>
+            <p style={{ fontSize: '0.95rem', color: 'rgba(253,250,245,0.45)', maxWidth: '480px', lineHeight: '1.8', fontFamily: 'var(--f-body)' }}>
               From weddings and galas to corporate events and ticketed shows — here&apos;s what clients and bookers have to say.
             </p>
           </div>
@@ -312,7 +312,7 @@ export default function Testimonials() {
 
         {/* ── CTA ── */}
         <div className="t-cta">
-          <p style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', fontStyle: 'italic', color: 'rgba(253,250,245,0.6)', marginBottom: '1.5rem' }}>
+          <p style={{ fontFamily: 'var(--f-display)', fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', fontStyle: 'italic', color: 'rgba(253,250,245,0.6)', marginBottom: '1.5rem' }}>
             Ready to create your own moment?
           </p>
           <Link href="/contact" className="btn-primary">

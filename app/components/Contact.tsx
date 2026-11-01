@@ -40,7 +40,7 @@ window.location.href = `mailto:booking@ethanhoffmanofficial.com?subject=${encode
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <p className="section-label" style={{ marginBottom: '1rem' }}>Get In Touch</p>
           <h2 style={{
-            fontFamily: 'Playfair Display, serif',
+            fontFamily: 'var(--f-display)',
             fontSize: 'clamp(2rem, 3.5vw, 2.8rem)',
             fontWeight: '600',
             color: '#1a1814',
@@ -194,7 +194,7 @@ window.location.href = `mailto:booking@ethanhoffmanofficial.com?subject=${encode
                         fontSize: '0.9rem',
                         color: '#2d2926',
                         outline: 'none',
-                        fontFamily: 'Inter, sans-serif',
+                        fontFamily: 'var(--f-body)',
                       }}
                     />
                   </div>
@@ -226,7 +226,7 @@ window.location.href = `mailto:booking@ethanhoffmanofficial.com?subject=${encode
                       fontSize: '0.9rem',
                       color: '#2d2926',
                       outline: 'none',
-                      fontFamily: 'Inter, sans-serif',
+                      fontFamily: 'var(--f-body)',
                     }}
                   />
                 </div>
@@ -252,7 +252,7 @@ window.location.href = `mailto:booking@ethanhoffmanofficial.com?subject=${encode
                       fontSize: '0.9rem',
                       color: '#2d2926',
                       outline: 'none',
-                      fontFamily: 'Inter, sans-serif',
+                      fontFamily: 'var(--f-body)',
                       appearance: 'none',
                     }}
                   >
@@ -288,7 +288,7 @@ window.location.href = `mailto:booking@ethanhoffmanofficial.com?subject=${encode
                     fontSize: '0.9rem',
                     color: '#2d2926',
                     outline: 'none',
-                    fontFamily: 'Inter, sans-serif',
+                    fontFamily: 'var(--f-body)',
                   }}
                 />
               </div>
@@ -317,7 +317,7 @@ window.location.href = `mailto:booking@ethanhoffmanofficial.com?subject=${encode
                     fontSize: '0.9rem',
                     color: '#2d2926',
                     outline: 'none',
-                    fontFamily: 'Inter, sans-serif',
+                    fontFamily: 'var(--f-body)',
                     resize: 'vertical',
                   }}
                 />
