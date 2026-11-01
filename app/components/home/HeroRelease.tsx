@@ -22,8 +22,8 @@ export default function HeroRelease() {
       </div>
       {heroClip && (
         <video className="hr-clip" autoPlay muted loop playsInline preload="auto" poster="/video/india-hero-poster.jpg" aria-hidden="true">
-          <source src={heroClip} type="video/mp4" />
           <source src={heroClip.replace('.mp4', '.webm')} type="video/webm" />
+          <source src={heroClip} type="video/mp4" />
         </video>
       )}
       <div className="hr-haze" aria-hidden="true" />

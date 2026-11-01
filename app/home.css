@@ -33,6 +33,9 @@
 
 /* ── Hero ──────────────────────────────────────────── */
 .hr { position: relative; height: 100svh; min-height: 640px; overflow: hidden; color: var(--haze); }
+/* The India clip sits above the page grain so the footage stays clean. */
+.hr:has(.hr-clip) { z-index: 61; }
+.hr:has(.hr-clip) .hr-haze { opacity: 0.45; animation: none; }
 .hr-photo { position: absolute; inset: 0; animation: hr-settle 16s cubic-bezier(0.2, 0.6, 0.2, 1) both; }
 .hr-photo img { filter: saturate(0.82) contrast(1.06) brightness(0.92); }
 @keyframes hr-settle { from { transform: scale(1.12); } to { transform: scale(1); } }
@@ -283,7 +286,7 @@
 
 @media (prefers-reduced-motion: reduce) { .hr-title { animation: none; } }
 .rl-listen + .rl-story { margin-left: 1.2rem; }
-.hr-clip { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; filter: saturate(0.85) contrast(1.05) brightness(0.88); }
+.hr-clip { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; filter: contrast(1.04); }
 @media (prefers-reduced-motion: reduce) { .hr-clip { display: none; } }
 
 /* ---------- Live strip under the hero ---------- */
